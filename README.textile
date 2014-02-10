@@ -1,0 +1,3 @@
+h1. Open Educational Resources (OER) World Map
+
+For initial information about this project see our blog post: "hbz receives Hewlett Foundation grant to prototype OER world map":https://wiki1.hbz-nrw.de/display/OER/2014/02/10/hbz+receives+Hewlett+Foundation+grant+to+prototype+OER+world+map
