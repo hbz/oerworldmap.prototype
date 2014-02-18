@@ -1,0 +1,345 @@
+@prefix ap: <https://raw.github.com/acka47/vocabs/add-ap-vocab/ap.ttl#> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
+@prefix oo: <http://purl.org/openorg/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl>
+    a ore:ResourceMap ;
+    dc:rights "This Resource Map is available under the Creative Commons Public Domain Dedication (CC0)" ;
+    dct:created "2014-02-18" ;
+    dct:creator <http://lobid.org/person/ap> ;
+    dct:rights <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    ore:describes <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap>
+    a ore:Aggregation , ap:ApplicationProfile ;
+    dct:title "Application profile for OER world map prototype." ;
+    dct:creator <http://lobid.org/person/ap> ;
+    ore:aggregates (rdf:type  schema:logo  schema:name schema:alternateName schema:description schema:url schema:email oo:contact schema:address schema:streetAddress schema:postalCode schema:addressLocality schema:addressCountry dct:license schema:geo schema:latitude schema:longitude schema:sameAs schema:member schema:memberOf schema:providesService schema:provider marcrel:fnd ) .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#type>
+    a ore:Proxy , rdf:Property ;
+    rdfs:comment "In the context of this application profile the property rdf:type is used to indicate the type of a resource (person, organization, project, or service)."@en ;
+    ore:proxyFor rdf:type ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Type"@en ;
+    rdfs:label "Typ"@de ;
+    rdfs:domain foaf:Agent ;
+    rdfs:range [ 
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#logo>
+    a ore:Proxy , rdf:Property ;
+    rdfs:comment "In the context of this application profile the property schema:logo is used to link to a logo of an organization, a project, or a service."@en ;
+    ore:proxyFor schema:logo ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Logo"@en ;
+    rdfs:label "Logo"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service foaf:Project·)
+      ] ;
+    rdfs:range foaf:Image ;
+    ap:minCardinality "0" ;
+    ap:maxCardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#name>
+    a ore:Proxy , rdf:Property ;
+    rdfs:comment "In the context of this application profile the property schema:name is used to indicate the name of a person, organization, project, or service."@en ;
+    ore:proxyFor schema:name ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Name"@en ;
+    rdfs:label "Name"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    rdfs:range rdfs:Literal ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#alternateName>
+    a ore:Proxy , rdf:Property ;
+      rdfs:comment "In the context of this application profile the property schema:alternateName is used to indicate the alternate name (nick name, abbreviation etc.) of a person, organization, project, or service."@en ;
+    ore:proxyFor schema:alternateName ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Alternate Name"@en ;
+    rdfs:label "Alternativer Name"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    rdfs:range rdfs:Literal ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#description>
+    a ore:Proxy , rdf:Property ;
+    rdfs:comment "In the context of this application profile the property schema:description is used to give a description of a person, organization, project, or service."@en ;
+    ore:proxyFor schema:description ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Description"@en ;
+    rdfs:label "Beschreibung"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    rdfs:range rdfs:Literal ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#url>
+    a ore:Proxy , owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:url is used to link to a homepage of a person, organization, project, or service."@en ;
+    ore:proxyFor schema:url ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Website"@en ;
+    rdfs:label "Webseite"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    rdfs:range xsd:anyURI ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#email>
+    a ore:Proxy , rdf:Property ;
+    rdfs:comment "In the context of this application profile the property schema:email is used to indicate the email address of a person, organization, project, or service. The literal should conform to this regular expression: [A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"@en ;
+    ore:proxyFor schema:email ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Email"@en ;
+    rdfs:label "E-Mail"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project·)
+      ] ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"
+        ]
+      )
+              ] ;
+    ap:minCardinality "0" .
+
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#contact>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property oo:contact is used to link a project or service to a contact person within the OER map data."@en ;
+    ore:proxyFor oo:contact ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Contact Person"@en ;
+    rdfs:label "Kontaktperson"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Service foaf:Project·)
+      ] ;
+    rdfs:range schema:Person ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#address>
+    a ore:Proxy , owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:address is used to link to a blank node with address details of a person or an organization."@en ;
+    ore:proxyFor schema:address ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Address"@en ;
+    rdfs:label "Adresse"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Person )
+      ] ;
+    rdfs:range schema:PostalAddress ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#streetAddress>
+    a ore:Proxy , rdfs:Property ;
+    rdfs:comment "In the context of this application profile the property schema:streetAddress is used to indicate the street address of a schema:PostalAddress."@en ;
+    ore:proxyFor schema:streetAddress ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Street Address"@en ;
+    rdfs:label "Straße und Hausnummer"@de ;
+    rdfs:domain schema:PostalAddress ;
+    rdfs:range rdfs:Literal ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#postalCode>
+    a ore:Proxy , rdfs:Property ;
+    rdfs:comment "In the context of this application profile the property schema:postalCode is used to indicate the postal code of a schema:PostalAddress."@en ;
+    ore:proxyFor schema:postalCode ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Postal Code"@en ;
+    rdfs:label "Postleitzahl"@de ;
+    rdfs:domain schema:PostalAddress ;
+    rdfs:range rdfs:Literal ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#addressLocality>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:addressLocality is used to indicate the locality of a schema:PostalAddress using the respective GeoNames URI."@en ;
+    ore:proxyFor schema:addressLocality ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Locality"@en ;
+    rdfs:label "Ort"@de ;
+    rdfs:domain schema:PostalAddress ;
+    rdfs:range <http://www.geonames.org/ontology#Feature> ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#addressCountry>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:addressCountry is used to indicate the country of a schema:PostalAddress using the respective GeoNames URI."@en ;
+    ore:proxyFor schema:addressCountry ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Country"@en ;
+    rdfs:label "Ort"@de ;
+    rdfs:domain schema:PostalAddress ;
+    rdfs:range <http://www.geonames.org/ontology#Feature> ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#license>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property dct:license is used to link a service to the license the service's contents are licensed under."@en ;
+    ore:proxyFor dct:license ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "License"@en ;
+    rdfs:label "Lizenz"@de ;
+    rdfs:domain schema:Service ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#geo>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:geo is used to link an organization to its schema:GeoCoordinates."@en ;
+    ore:proxyFor schema:geo ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Geo Coordinates"@en ;
+    rdfs:label "Geokoordinaten"@de ;
+    rdfs:domain schema:Organization ;
+    rdfs:range schema:GeoCoordinates ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#latitude>
+    a ore:Proxy , owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:latitude is used to indicate the latitude of schema:GeoCoordinates. Values should conform to this regular expression: ^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$ ."@en ;
+    ore:proxyFor schema:latitude ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Latitude"@en ;
+    rdfs:label "Geographische Breite"@de ;
+    rdfs:domain schema:GeoCoordinates ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
+        ]
+      )
+              ] ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#longitude>
+    a ore:Proxy , owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:longitude is used to indicate the longitude of schema:GeoCoordinates. Values should conform to this regular expression: ^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$ ."@en ;
+    ore:proxyFor schema:longitude ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Longitude"@en ;
+    rdfs:label "Geographische Länge"@de ;
+    rdfs:domain schema:GeoCoordinates ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
+        ]
+      )
+              ] ;
+    ap:cardinality "1" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#sameAs>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:sameAs is used to link an organizatin, a person, a service or a project to other URIs for them."@en ;
+    ore:proxyFor schema:sameAs ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Same as"@en ;
+    rdfs:label "Identische Ressource"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Service schema:Person foaf:Project )
+      ] ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#member>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:member is used to link an organization or project to persons or other organizations that are members of the organization/project."@en ;
+    ore:proxyFor schema:member ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Members"@en ;
+    rdfs:label "Mitglieder"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization foaf:Project )
+      ] ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Person )
+      ] ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#memberOf>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:memberOf is used to link an organization or a person to organizations or projects they are members of."@en ;
+    ore:proxyFor schema:memberOf ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Member of"@en ;
+    rdfs:label "Mitglied von"@de ;
+    rdfs:domain [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization schema:Person )
+      ] ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( schema:Organization foaf:Project )
+      ] ; 
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#providesService>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:providesService is used to link an organization to an OER service it provides."@en ;
+    ore:proxyFor schema:providesService ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "OER services by the organization"@en ;
+    rdfs:label "OER-Angebote der Organisation"@de ;
+    rdfs:domain schema:Organization ;
+    rdfs:range schema:Service ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#provider>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:provider is used to link an OER service to an organization that provides the service."@en ;
+    ore:proxyFor schema:provider ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Provider"@en ;
+    rdfs:label "Anbieter"@de ;
+    rdfs:domain schema:Service ;
+    rdfs:range schema:Organization ;
+    ap:minCardinality "0" .
+
+<https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#funder>
+    a ore:Proxy , owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property marcrel:fnd is used to link a project to an organization that funds the project."@en ;
+    ore:proxyFor marcrel:fnd ;
+    ore:proxyIn <https://raw.github.com/acka47/oerworldmap/add-oer-ap/rm.ttl#ap> ;
+    rdfs:label "Funding Organization"@en ;
+    rdfs:label "Gefördert von"@de ;
+    rdfs:domain schema:Project ;
+    rdfs:range schema:Organization ;
+    ap:minCardinality "0" .
