@@ -1,3 +1,5 @@
+/* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
