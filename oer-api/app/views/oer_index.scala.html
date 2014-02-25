@@ -1,10 +1,13 @@
 @* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 *@
 
-@(message: String)
+@(message: String, json: String)
+
+@import play.api.libs.json.Json
 
 @oer_main("OER") {
 
     <h1>OER API</h1>
     <p>@message</p>
+    <pre>@Json.prettyPrint(Json.parse(json))</pre>
 
 }
