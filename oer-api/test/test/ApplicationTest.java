@@ -1,3 +1,4 @@
+package test;
 /* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
+        Content html = views.html.oer_index.render("Your new application is ready.");
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }

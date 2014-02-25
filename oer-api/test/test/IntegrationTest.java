@@ -1,3 +1,4 @@
+package test;
 /* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
 
 import org.junit.*;
@@ -19,10 +20,10 @@ public class IntegrationTest {
      */
     @Test
     public void test() {
-        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+        running(testServer(2222, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Your new application is ready.");
+                browser.goTo("http://localhost:2222/oer");
+                assertThat(browser.pageSource()).contains("OER API");
             }
         });
     }
