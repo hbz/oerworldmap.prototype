@@ -32,19 +32,19 @@ public class Application extends Controller {
 
 	public static Result index() {
 		MatchQueryBuilder query = QueryBuilders.matchQuery(
-				"@graph.http://purl.org/lobid/lv#isil.@value", "DE-605");
+				"@graph.description", "university");
 		SearchResponse response = search(query);
 		String jsonString = response.getHits().getAt(0).getSourceAsString();
+		/* Some sample processing, not used : */
 		JsonNode graph = Json.parse(jsonString).get("@graph");
 		List<JsonNode> nodes = new ArrayList<JsonNode>();
 		for (JsonNode entity : graph)
 			nodes.add(entity);
-		return ok(oer_index.render(client.toString(), nodes.get(2).toString()));
+		return ok(oer_index.render(query.toString(), jsonString));
 	}
 
 	private static SearchResponse search(final QueryBuilder queryBuilder) {
-		SearchRequestBuilder requestBuilder = client
-				.prepareSearch("lobid-organisations")
+		SearchRequestBuilder requestBuilder = client.prepareSearch("oer-index")
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 				.setQuery(queryBuilder);
 		SearchResponse response = requestBuilder.setFrom(0).setSize(50)

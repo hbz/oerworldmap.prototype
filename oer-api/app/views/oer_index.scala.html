@@ -7,7 +7,11 @@
 @oer_main("OER") {
 
     <h1>OER API</h1>
-    <p>@message</p>
-    <pre>@Json.prettyPrint(Json.parse(json))</pre>
+    <dl>
+    <dt>ES-Query</dt>
+    <dd><pre>@message</pre></dd>
+    <dt>Response</dt>
+    <dd><pre>@Json.prettyPrint(Json.parse(json))</pre></dd>
+    </dl>
 
 }
