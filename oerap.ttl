@@ -10,6 +10,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
 
 :ap
     a owl:Ontology , ex:ApplicationProfile ;
@@ -188,6 +189,26 @@
         owl:onProperty :longitude ;
         owl:cardinality "1" ] .
 
+:Image
+    a owl:Class ;
+    rdfs:isDefindesBy :ap ;
+    rdfs:subClassOf foaf:Image .
+
+:Locality
+    a owl:Class ;
+    rdfs:isDefindesBy :ap ;
+    rdfs:subClassOf gn:Feature ,
+    [ a owl:Restriction ;
+        owl:onProperty gn:featureClass ;
+        owl:hasValue gn:P ] .
+
+:Country
+    a owl:Class ;
+    rdfs:isDefindesBy :ap ;
+    rdfs:subClassOf gn:Feature ,
+    [ a owl:Restriction ;
+        owl:onProperty gn:featureClass ;
+        owl:hasValue gn:A ] .
 
 :type
     a owl:ObjectProperty ;
@@ -204,7 +225,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Logo"@en ;
     rdfs:label "Logo"@de ;
-    rdfs:range foaf:Image .
+    rdfs:range :Image .
 
 :name
     a owl:DatatypeProperty ;
@@ -305,7 +326,7 @@
     rdfs:label "Locality"@en ;
     rdfs:label "Ort"@de ;
     rdfs:domain :PostalAddress ;
-    rdfs:range <http://www.geonames.org/ontology#Feature> .
+    rdfs:range :Locality .
 
 :addressCountry
     a owl:ObjectProperty ;
@@ -315,7 +336,7 @@
     rdfs:label "Country"@en ;
     rdfs:label "Ort"@de ;
     rdfs:domain :PostalAddress ;
-    rdfs:range <http://www.geonames.org/ontology#Feature> .
+    rdfs:range :Country .
 
 :license
     a owl:ObjectProperty ;
