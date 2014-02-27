@@ -161,7 +161,7 @@
         owl:minCardinality "0" ] .
 
 :PostalAddress
-    a owl:CLass ;
+    a owl:Class ;
     rdfs:isDefindesBy :ap ;
     rdfs:subClassOf schema:PostalAddress ,
     [ a owl:Restriction ;
@@ -178,7 +178,7 @@
         owl:cardinality "1" ] .
 
 :GeoCoordinates
-    a owl:CLass ;
+    a owl:Class ;
     rdfs:isDefindesBy :ap ;
     rdfs:subClassOf schema:GeoCoordinates ,
     [ a owl:Restriction ;
