@@ -1,17 +1,21 @@
 @* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 *@
 
-@(message: String, json: String)
+@(queries: List[String])
 
 @import play.api.libs.json.Json
 
 @oer_main("OER") {
-
-    <h1>OER API</h1>
+    <h1>hbz OER API prototype</h1>
     <dl>
-    <dt>ES-Query</dt>
-    <dd><pre>@message</pre></dd>
-    <dt>Response</dt>
-    <dd><pre>@Json.prettyPrint(Json.parse(json))</pre></dd>
-    </dl>
-
+        <dt>Overview</dt>
+        <dd>The API supports two parameters: <code>q</code> and <code>t</code>. It serves JSON.</dd>
+        <dt><code>q</code> (required)<dt>
+        <dd>Query over all fields, supports <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"> elasticsearch query string syntax</a>.</dd>
+        <dt><code>t</code> (optional)</dt>
+        <dd>Filter results by the <code>@@type</code> field (requires exact full value).</dd>
+        <dt>Samples<dt>
+        <dd>
+        @for(query <- queries) { <a href="@query">@query</a><br/> }
+        </dd>
+    </dt>
 }
