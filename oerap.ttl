@@ -190,7 +190,7 @@
 
 
 :type
-    a rdf:Property ;
+    a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property rdf:type is used to indicate the type of a resource (person, organization, project, or service)."@en ;
     rdfs:subPropertyOf rdf:type ;
     rdfs:isDefinedBy :ap ;
@@ -198,7 +198,7 @@
     rdfs:label "Typ"@de .
 
 :logo
-    a rdf:Property ;
+    a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property schema:logo is used to link to a logo of an organization, a project, or a service."@en ;
     rdfs:subPropertyOf schema:logo ;
     rdfs:isDefinedBy :ap ;
@@ -207,7 +207,7 @@
     rdfs:range foaf:Image .
 
 :name
-    a rdf:Property ;
+    a owl:DatatypeProperty ;
     rdfs:comment "In the context of this application profile the property schema:name is used to indicate the name of a person, organization, project, or service."@en ;
     rdfs:subPropertyOf schema:name ;
     rdfs:isDefinedBy :ap ;
@@ -216,8 +216,8 @@
     rdfs:range rdfs:Literal .
 
 :alternateName
-    a rdf:Property ;
-      rdfs:comment "In the context of this application profile the property schema:alternateName is used to indicate the alternate name (nick name, abbreviation etc.) of a person, organization, project, or service."@en ;
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:alternateName is used to indicate the alternate name (nick name, abbreviation etc.) of a person, organization, project, or service."@en ;
     rdfs:subPropertyOf schema:alternateName ;
     rdfs:isDefinedBy :ap ;
     rdfs:label "Alternate Name"@en ;
@@ -225,7 +225,7 @@
     rdfs:range rdfs:Literal .
 
 :description
-    a rdf:Property ;
+    a owl:DatatypeProperty ;
     rdfs:comment "In the context of this application profile the property schema:description is used to give a description of a person, organization, project, or service."@en ;
     rdfs:subPropertyOf schema:description ;
     rdfs:isDefinedBy :ap ;
@@ -243,7 +243,7 @@
     rdfs:range xsd:anyURI .
 
 :email
-    a rdf:Property ;
+    a owl:DatatypeProperty ;
     rdfs:comment "In the context of this application profile the property schema:email is used to indicate the email address of a person, organization, project, or service. The literal should conform to this regular expression: [A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"@en ;
     rdfs:subPropertyOf schema:email ;
     rdfs:isDefinedBy :ap ;
@@ -257,7 +257,7 @@
             xsd:pattern "[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"
         ]
       )
-              ] .
+    ] .
 
 :contact
     a owl:ObjectProperty ;
@@ -269,7 +269,7 @@
     rdfs:range schema:Person .
 
 :address
-    a owl:DatatypeProperty ;
+    a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property schema:address is used to link to a blank node with address details of a person or an organization."@en ;
     rdfs:subPropertyOf schema:address ;
     rdfs:isDefinedBy :ap ;
@@ -278,7 +278,7 @@
     rdfs:range schema:PostalAddress .
 
 :streetAddress
-    a rdf:Property ;
+    a owl:DatatypeProperty ;
     rdfs:comment "In the context of this application profile the property schema:streetAddress is used to indicate the street address of a schema:PostalAddress."@en ;
     rdfs:subPropertyOf schema:streetAddress ;
     rdfs:isDefinedBy :ap ;
@@ -288,7 +288,7 @@
     rdfs:range rdfs:Literal .
 
 :postalCode
-    a rdf:Property ;
+    a owl:DatatypeProperty ;
     rdfs:comment "In the context of this application profile the property schema:postalCode is used to indicate the postal code of a schema:PostalAddress."@en ;
     rdfs:subPropertyOf schema:postalCode ;
     rdfs:isDefinedBy :ap ;
@@ -349,7 +349,7 @@
             xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
         ]
       )
-              ] .
+    ] .
 
 :longitude
     a owl:DatatypeProperty ;
@@ -366,7 +366,7 @@
             xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
         ]
       )
-              ] .
+    ] .
 
 :sameAs
     a owl:ObjectProperty ;
@@ -386,7 +386,7 @@
     rdfs:range [
       a owl:Class ;
       owl:oneOf ( schema:Organization schema:Person )
-      ] .
+    ] .
 
 :memberOf
     a owl:ObjectProperty ;
@@ -398,7 +398,7 @@
     rdfs:range [
       a owl:Class ;
       owl:oneOf ( schema:Organization foaf:Project )
-      ] .
+    ] .
 
 :providesService
     a owl:ObjectProperty ;
