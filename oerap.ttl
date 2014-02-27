@@ -157,7 +157,7 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :member ;
-        owl:allValuesFrom schema:Person ;
+        owl:allValuesFrom :Person ;
         owl:minCardinality "0" ] .
 
 :PostalAddress
@@ -266,7 +266,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Contact Person"@en ;
     rdfs:label "Kontaktperson"@de ;
-    rdfs:range schema:Person .
+    rdfs:range :Person .
 
 :address
     a owl:ObjectProperty ;
@@ -275,7 +275,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Address"@en ;
     rdfs:label "Adresse"@de ;
-    rdfs:range schema:PostalAddress .
+    rdfs:range :PostalAddress .
 
 :streetAddress
     a owl:DatatypeProperty ;
@@ -284,7 +284,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Street Address"@en ;
     rdfs:label "Straße und Hausnummer"@de ;
-    rdfs:domain schema:PostalAddress ;
+    rdfs:domain :PostalAddress ;
     rdfs:range rdfs:Literal .
 
 :postalCode
@@ -294,7 +294,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Postal Code"@en ;
     rdfs:label "Postleitzahl"@de ;
-    rdfs:domain schema:PostalAddress ;
+    rdfs:domain :PostalAddress ;
     rdfs:range rdfs:Literal .
 
 :addressLocality
@@ -304,7 +304,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Locality"@en ;
     rdfs:label "Ort"@de ;
-    rdfs:domain schema:PostalAddress ;
+    rdfs:domain :PostalAddress ;
     rdfs:range <http://www.geonames.org/ontology#Feature> .
 
 :addressCountry
@@ -314,7 +314,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Country"@en ;
     rdfs:label "Ort"@de ;
-    rdfs:domain schema:PostalAddress ;
+    rdfs:domain :PostalAddress ;
     rdfs:range <http://www.geonames.org/ontology#Feature> .
 
 :license
@@ -332,7 +332,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Geo Coordinates"@en ;
     rdfs:label "Geokoordinaten"@de ;
-    rdfs:range schema:GeoCoordinates .
+    rdfs:range :GeoCoordinates .
 
 :latitude
     a owl:DatatypeProperty ;
@@ -385,7 +385,7 @@
     rdfs:label "Mitglieder"@de ;
     rdfs:range [
       a owl:Class ;
-      owl:oneOf ( schema:Organization schema:Person )
+      owl:oneOf ( :Organization :Person )
     ] .
 
 :memberOf
@@ -397,7 +397,7 @@
     rdfs:label "Mitglied von"@de ;
     rdfs:range [
       a owl:Class ;
-      owl:oneOf ( schema:Organization foaf:Project )
+      owl:oneOf ( :Organization :Project )
     ] .
 
 :providesService
@@ -407,7 +407,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "OER services by the organization"@en ;
     rdfs:label "OER-Angebote der Organisation"@de ;
-    rdfs:range schema:Service .
+    rdfs:range :Service .
 
 :provider
     a owl:ObjectProperty ;
@@ -416,7 +416,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Provider"@en ;
     rdfs:label "Anbieter"@de ;
-    rdfs:range schema:Organization .
+    rdfs:range :Organization .
 
 :funder
     a owl:ObjectProperty ;
@@ -425,4 +425,4 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Funding Organization"@en ;
     rdfs:label "Gefördert von"@de ;
-    rdfs:range schema:Organization .
+    rdfs:range :Organization .
