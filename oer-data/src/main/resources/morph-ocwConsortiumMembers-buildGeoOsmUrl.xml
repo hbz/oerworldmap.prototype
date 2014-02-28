@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="1">
+	<rules>	<!-- geoLocation -->
+		<!-- JSONP musn't start with a number so we use a string as prefix -->
+		<combine name="url"
+			value="http://nominatim.openstreetmap.org/reverse?format=json&amp;json_callback=callbackIntegerWrap${id}&amp;lat=${latitude}&amp;lon=${longitude}&amp;addressdetails=1"
+			flushWith="record">
+			<data source="coordinates0" name="longitude"/>
+			<data source="coordinates1" name="latitude"/>
+			<data source="id" name="id"/>
+		</combine>
+		<!-- /geoLocation -->
+	</rules>
+</metamorph>

@@ -1,0 +1,3603 @@
+{
+   "features" : [
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -72.2027326,
+               7.7926166
+            ]
+         },
+         "properties" : {
+            "name" : "Universidad Nacional Experimental del Táchira"
+         },
+         "id" : 4
+      },
+      {
+         "id" : 7,
+         "properties" : {
+            "name" : "Universidad Internacional de Andalucí­a"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -4.5469705,
+               36.7222752
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -3.6000093,
+               37.1869466
+            ]
+         },
+         "id" : 8,
+         "properties" : {
+            "name" : "Universidad de Granada"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -43.1769959,
+               -22.9016188
+            ]
+         },
+         "id" : 9,
+         "properties" : {
+            "name" : "Fundação Getulio Vargas - FGV Online"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -8.5432629,
+               42.8884874
+            ],
+            "type" : "Point"
+         },
+         "id" : 10,
+         "properties" : {
+            "name" : "Universidade de Santiago de Compostela"
+         }
+      },
+      {
+         "id" : 13,
+         "properties" : {
+            "name" : "The University of Nottingham"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -1.2044401,
+               52.9405086
+            ]
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Universidad Icesi"
+         },
+         "id" : 14,
+         "geometry" : {
+            "coordinates" : [
+               -76.523992,
+               3.4447217
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               2.0878204,
+               41.5089059
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universitat Autònoma de Barcelona"
+         },
+         "id" : 15
+      },
+      {
+         "properties" : {
+            "name" : "Pontificia Universidad Catolica de Chile"
+         },
+         "id" : 21,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -70.6402646,
+               -33.4411501
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -66.0449671,
+               18.3644632
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Puerto Rico"
+         },
+         "id" : 27
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -4.4679675,
+               36.7173742
+            ],
+            "type" : "Point"
+         },
+         "id" : 29,
+         "properties" : {
+            "name" : "Universidad de Malaga"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               121.5769572,
+               25.0287024
+            ],
+            "type" : "Point"
+         },
+         "id" : 31,
+         "properties" : {
+            "name" : "Taipei Medical University"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -2.9315189,
+               43.2697898
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Deusto"
+         },
+         "id" : 32
+      },
+      {
+         "id" : 33,
+         "properties" : {
+            "name" : "Arizona State University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -111.9311939,
+               33.4183159
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -66.06473,
+               18.38298
+            ]
+         },
+         "id" : 34,
+         "properties" : {
+            "name" : "Universidad Interamericana de Puerto Rico"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -3.6539056,
+               40.5343309
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad Autónoma de Madrid"
+         },
+         "id" : 35
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -3.7866915,
+               43.4717283
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Cantabria"
+         },
+         "id" : 36
+      },
+      {
+         "properties" : {
+            "name" : "Universitat Rovira i Virgili"
+         },
+         "id" : 37,
+         "geometry" : {
+            "coordinates" : [
+               1.2602228,
+               41.1433306
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 38,
+         "properties" : {
+            "name" : "Kabul Polytechnic University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               69.1653803,
+               34.5427246
+            ]
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Pusan National University"
+         },
+         "id" : 43,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               129.0756416,
+               35.1795543
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 46,
+         "properties" : {
+            "name" : "National Cheng Kung University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.2184431,
+               22.9986009
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -71.0352036,
+               42.3125369
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Massachusetts Boston"
+         },
+         "id" : 48
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -1.6687813,
+               42.8102317
+            ]
+         },
+         "id" : 49,
+         "properties" : {
+            "name" : "Universidad de Navarra"
+         }
+      },
+      {
+         "id" : 1,
+         "properties" : {
+            "name" : "The Open University of Israel"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               34.851612,
+               31.046051
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               42.8637875,
+               25.8274886
+            ],
+            "type" : "Point"
+         },
+         "id" : 17,
+         "properties" : {
+            "name" : "Qassim university College of Medicine"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               129.3434808,
+               36.0190178
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Handong Global University"
+         },
+         "id" : 41
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               105.8503532,
+               21.0007082
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "EduNet Vietnam"
+         },
+         "id" : 50
+      },
+      {
+         "id" : 51,
+         "properties" : {
+            "name" : "Universidad Nacional de Colombia"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -75.575137,
+               6.235925
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               2.8271834,
+               41.9859435
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universitat de Girona"
+         },
+         "id" : 52
+      },
+      {
+         "id" : 53,
+         "properties" : {
+            "name" : "Universidad Politécnica de Valencia"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -0.3370412,
+               39.4839796
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Universidad de Sevilla"
+         },
+         "id" : 54,
+         "geometry" : {
+            "coordinates" : [
+               -5.9885456,
+               37.3435018
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -0.3418927,
+               39.4704139
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universitat de Valéncia"
+         },
+         "id" : 55
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               2.649966,
+               39.5695059
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universitat de les Illes Balears"
+         },
+         "id" : 57
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               121.5427093,
+               25.0261583
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Taiwan Normal University"
+         },
+         "id" : 59
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               121.515762,
+               25.046501
+            ],
+            "type" : "Point"
+         },
+         "id" : 60,
+         "properties" : {
+            "name" : "Fu Jen Catholic University"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "ESAGS -Escola Superior de Administração e Gestão"
+         },
+         "id" : 62,
+         "geometry" : {
+            "coordinates" : [
+               -46.5368711,
+               -23.643141
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               120.286883,
+               22.626737
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Sun Yat-Sen University"
+         },
+         "id" : 65
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -73.1242854,
+               7.1321954
+            ],
+            "type" : "Point"
+         },
+         "id" : 67,
+         "properties" : {
+            "name" : "Universidad Industrial de Santander"
+         }
+      },
+      {
+         "id" : 68,
+         "properties" : {
+            "name" : "Universidad de La Laguna"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -16.3154764,
+               28.4822036
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               121.5427093,
+               25.0261583
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Taiwan University of Science and Technology"
+         },
+         "id" : 69
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -3.6952896,
+               40.4411146
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Fundación Universitaria San Pablo CEU"
+         },
+         "id" : 70
+      },
+      {
+         "properties" : {
+            "name" : "Universidad Estatal a Distancia"
+         },
+         "id" : 71,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -84.0435594,
+               9.934854
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               4.835659,
+               45.764043
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Université de Lyon"
+         },
+         "id" : 72
+      },
+      {
+         "properties" : {
+            "name" : "Middle East Technical University"
+         },
+         "id" : 74,
+         "geometry" : {
+            "coordinates" : [
+               32.873462,
+               39.928159
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.57125,
+               24.9929212
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Chengchi University"
+         },
+         "id" : 75
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               126.9779692,
+               37.566535
+            ]
+         },
+         "id" : 77,
+         "properties" : {
+            "name" : "Kyung Hee Cyber University"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               131.4954941,
+               33.2889695
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Ritsumeikan Asia Pacific University"
+         },
+         "id" : 78
+      },
+      {
+         "properties" : {
+            "name" : "University of Tsukuba"
+         },
+         "id" : 79,
+         "geometry" : {
+            "coordinates" : [
+               140.1040341,
+               36.1114383
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Meiji University"
+         },
+         "id" : 80,
+         "geometry" : {
+            "coordinates" : [
+               139.7580622,
+               35.6715028
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               135.5081633,
+               34.7703594
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Kansai University"
+         },
+         "id" : 81
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               139.4111737,
+               35.9524207
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Kagawa Nutrition University"
+         },
+         "id" : 83
+      },
+      {
+         "id" : 84,
+         "properties" : {
+            "name" : "Doshisha University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               135.7614628,
+               35.0293209
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Ritsumeikan University"
+         },
+         "id" : 86,
+         "geometry" : {
+            "coordinates" : [
+               135.9626195,
+               34.9820686
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -3.7040404,
+               40.4380617
+            ]
+         },
+         "id" : 88,
+         "properties" : {
+            "name" : "Universidad Nacional de Educacion a Distancia"
+         }
+      },
+      {
+         "id" : 90,
+         "properties" : {
+            "name" : "Universidad de Murcia"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -1.1221111,
+               37.9850434
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -4.7178017,
+               41.6569498
+            ]
+         },
+         "id" : 92,
+         "properties" : {
+            "name" : "Universidad de Valladolid"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Universidad Politécnica Madrid"
+         },
+         "id" : 89,
+         "geometry" : {
+            "coordinates" : [
+               -3.74922,
+               40.463667
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Universidad de Salamanca"
+         },
+         "id" : 95,
+         "geometry" : {
+            "coordinates" : [
+               -5.6826122,
+               40.9550519
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               139.6838764,
+               35.6044669
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Tokyo Institute of Technology"
+         },
+         "id" : 98
+      },
+      {
+         "properties" : {
+            "name" : "Kyoto University"
+         },
+         "id" : 100,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               135.7808171,
+               35.0262378
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 101,
+         "properties" : {
+            "name" : "Nagoya University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               136.9645046,
+               35.156466
+            ]
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Bahá’í Institute for Higher Education"
+         },
+         "id" : 102,
+         "geometry" : {
+            "coordinates" : [
+               51.4753166,
+               35.7995066
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Kaplan University Online & Campus Learning"
+         },
+         "id" : 103,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -87.641185,
+               41.876835
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -3.685144,
+               40.4363505
+            ]
+         },
+         "id" : 105,
+         "properties" : {
+            "name" : "IE University"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "National Tsing Hua University"
+         },
+         "id" : 107,
+         "geometry" : {
+            "coordinates" : [
+               120.9653161,
+               24.7949412
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               46.7347225,
+               24.6550278
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "King Fahd University of Petroleum & Minerals"
+         },
+         "id" : 108
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -69.8538401,
+               18.4847871
+            ],
+            "type" : "Point"
+         },
+         "id" : 109,
+         "properties" : {
+            "name" : "Instituto Tecnológico de Las Américas (ITLA)"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               5.9779205,
+               50.8869901
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Open University Netherlands"
+         },
+         "id" : 112
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               151.9355527,
+               -27.6034663
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Southern Queensland"
+         },
+         "id" : 113
+      },
+      {
+         "properties" : {
+            "name" : "Tufts University"
+         },
+         "id" : 117,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -71.1061639,
+               42.4184296
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -86.2501429,
+               41.7033793
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Notre Dame"
+         },
+         "id" : 118
+      },
+      {
+         "id" : 119,
+         "properties" : {
+            "name" : "University of Tokyo"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               139.7632773,
+               35.7127036
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Johns Hopkins Bloomberg School of Public Health"
+         },
+         "id" : 120,
+         "geometry" : {
+            "coordinates" : [
+               -76.6066657,
+               39.2875055
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 121,
+         "properties" : {
+            "name" : "Universitat Oberta de Catalunya"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               2.133627,
+               41.4148569
+            ]
+         }
+      },
+      {
+         "id" : 123,
+         "properties" : {
+            "name" : "University of Michigan"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -83.7371419,
+               42.2803659
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -113.3075279,
+               54.7180174
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Athabasca University"
+         },
+         "id" : 124
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -3.9271814,
+               38.9939799
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Castilla-La Mancha"
+         },
+         "id" : 125
+      },
+      {
+         "properties" : {
+            "name" : "Universidad de Zaragoza"
+         },
+         "id" : 127,
+         "geometry" : {
+            "coordinates" : [
+               -0.8949293,
+               41.646347
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               139.7580622,
+               35.6715028
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Keio University"
+         },
+         "id" : 128
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               135.4553085,
+               34.8080793
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Osaka University"
+         },
+         "id" : 129
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -117.8347014,
+               33.6478988
+            ]
+         },
+         "id" : 132,
+         "properties" : {
+            "name" : "University of California, Irvine"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -122.307917,
+               37.861111
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "UC Berkeley"
+         },
+         "id" : 133
+      },
+      {
+         "id" : 134,
+         "properties" : {
+            "name" : "Universidad Carlos III de Madrid"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -3.7790684,
+               40.3238484
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -84.4929954,
+               42.7306909
+            ],
+            "type" : "Point"
+         },
+         "id" : 135,
+         "properties" : {
+            "name" : "Michigan State University"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -66.8891644,
+               10.4880756
+            ],
+            "type" : "Point"
+         },
+         "id" : 136,
+         "properties" : {
+            "name" : "Universidad Central de Venezuela"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Kyung Hee University"
+         },
+         "id" : 138,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               126.9779692,
+               37.566535
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -0.7097474,
+               52.0249136
+            ]
+         },
+         "id" : 139,
+         "properties" : {
+            "name" : "The Open University"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Waseda University"
+         },
+         "id" : 141,
+         "geometry" : {
+            "coordinates" : [
+               139.7217382,
+               35.7097084
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Tecnológico de Monterrey"
+         },
+         "id" : 143,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -100.309201,
+               25.6732109
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -71.084037,
+               42.362805
+            ]
+         },
+         "id" : 145,
+         "properties" : {
+            "name" : "Massachusetts Institute of Technology"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.9646866,
+               24.8039455
+            ],
+            "type" : "Point"
+         },
+         "id" : 146,
+         "properties" : {
+            "name" : "National Chiao Tung University"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               4.3694457,
+               52.0021061
+            ]
+         },
+         "id" : 147,
+         "properties" : {
+            "name" : "TU Delft"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               130.4256653,
+               33.6261318
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Kyushu University"
+         },
+         "id" : 150
+      },
+      {
+         "properties" : {
+            "name" : "Hokkaido University"
+         },
+         "id" : 151,
+         "geometry" : {
+            "coordinates" : [
+               141.3415121,
+               43.0732858
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               151.2110829,
+               -33.8452862
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "People's Open Access Education Initiative"
+         },
+         "id" : 152
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -5.7771686,
+               43.241442
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Oviedo"
+         },
+         "id" : 153
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -91.5081556,
+               44.8040799
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Wisconsin- Eau Claire"
+         },
+         "id" : 154
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               129.0756416,
+               35.1795543
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Silla University"
+         },
+         "id" : 158
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               21.469323,
+               42.4604343
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "South East European University (SEE University)"
+         },
+         "id" : 164
+      },
+      {
+         "properties" : {
+            "name" : "Indian Institute of Management Bangalore"
+         },
+         "id" : 165,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               77.5978525,
+               12.8909949
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               127.7299707,
+               37.8813153
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Hallym University"
+         },
+         "id" : 167
+      },
+      {
+         "properties" : {
+            "name" : "Ankara University"
+         },
+         "id" : 190,
+         "geometry" : {
+            "coordinates" : [
+               35.243322,
+               38.963745
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 202,
+         "properties" : {
+            "name" : "Open High School of Utah"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -111.878524,
+               40.761527
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -95.418078,
+               29.722016
+            ],
+            "type" : "Point"
+         },
+         "id" : 205,
+         "properties" : {
+            "name" : "Connexions"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -2.3101838,
+               52.0982738
+            ]
+         },
+         "id" : 209,
+         "properties" : {
+            "name" : "iBerry"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               120.9646866,
+               24.8039455
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Taiwan OpenCourseWare Consortium"
+         },
+         "id" : 213
+      },
+      {
+         "id" : 214,
+         "properties" : {
+            "name" : "Turkish OpenCourseWare Consortium"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               32.8533805,
+               39.8872523
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -3.8576327,
+               40.3929865
+            ],
+            "type" : "Point"
+         },
+         "id" : 215,
+         "properties" : {
+            "name" : "UNIVERSIA"
+         }
+      },
+      {
+         "id" : 217,
+         "properties" : {
+            "name" : "Intelligent Television"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -73.9664392,
+               40.800752
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 220,
+         "properties" : {
+            "name" : "Open Learning Exchange"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -71.084037,
+               42.362805
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.541467,
+               25.051286
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "OOPS"
+         },
+         "id" : 222
+      },
+      {
+         "properties" : {
+            "name" : "Monterey Institute for Technology and Education"
+         },
+         "id" : 224,
+         "geometry" : {
+            "coordinates" : [
+               -121.8697864,
+               36.6041151
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               22.937506,
+               -30.559482
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "OER Africa"
+         },
+         "id" : 226
+      },
+      {
+         "id" : 227,
+         "properties" : {
+            "name" : "Creative Commons"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -122.0813146,
+               37.3905676
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Commonwealth of Learning (COL)"
+         },
+         "id" : 228,
+         "geometry" : {
+            "coordinates" : [
+               -123.11863,
+               49.2877116
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -111.8521653,
+               41.6340996
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "enPraxis"
+         },
+         "id" : 232
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               5.9577929,
+               50.8785066
+            ]
+         },
+         "id" : 235,
+         "properties" : {
+            "name" : "European Association of Distance Teaching Universities (EADTU)"
+         }
+      },
+      {
+         "id" : 237,
+         "properties" : {
+            "name" : "MERLOT - Multimedia Educational Resource for Learning and Online Teaching"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -118.20132,
+               33.764004
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               51.3955319,
+               35.7929561
+            ],
+            "type" : "Point"
+         },
+         "id" : 243,
+         "properties" : {
+            "name" : "Shahid Beheshti University"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               106.8266873,
+               -6.2504213
+            ]
+         },
+         "id" : 248,
+         "properties" : {
+            "name" : "APTIKOM OCWC Indonesia"
+         }
+      },
+      {
+         "id" : 261,
+         "properties" : {
+            "name" : "Cerego"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               139.7010955,
+               35.6565612
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               129.3434808,
+               36.0190178
+            ]
+         },
+         "id" : 262,
+         "properties" : {
+            "name" : "Korea OCW Consortium"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Paris Tech"
+         },
+         "id" : 206,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               2.5834609,
+               48.8380235
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -122.33026,
+               47.5999
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Teachers Without Borders"
+         },
+         "id" : 270
+      },
+      {
+         "id" : 272,
+         "properties" : {
+            "name" : "Kenfuse.com"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               77.6416683,
+               13.0551927
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -118.1324777,
+               34.1428714
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of the People"
+         },
+         "id" : 277
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               127.0371025,
+               37.5633415
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Hanyang University"
+         },
+         "id" : 321
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -111.8157639,
+               41.7408463
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Utah State University"
+         },
+         "id" : 369
+      },
+      {
+         "properties" : {
+            "name" : "Japan OCW Consortium"
+         },
+         "id" : 370,
+         "geometry" : {
+            "coordinates" : [
+               139.7580622,
+               35.6715028
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -48.6257321,
+               -27.7527118
+            ],
+            "type" : "Point"
+         },
+         "id" : 371,
+         "properties" : {
+            "name" : "Universidade do Sul de Santa Catarina (UNISUL)"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "AGH University of Science and Technology"
+         },
+         "id" : 372,
+         "geometry" : {
+            "coordinates" : [
+               19.9449799,
+               50.0646501
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.5289383,
+               25.0188961
+            ]
+         },
+         "id" : 376,
+         "properties" : {
+            "name" : "Soochow University"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -74.183,
+               40.741
+            ]
+         },
+         "id" : 380,
+         "properties" : {
+            "name" : "New Jersey Institute of Technology"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -122.887898,
+               47.037388
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Washington State Board for Community and Technical Colleges"
+         },
+         "id" : 381
+      },
+      {
+         "id" : 386,
+         "properties" : {
+            "name" : "MEITAL- Inter-University Center for e-Learning -  Israel"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               34.777821,
+               32.066157
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               18.4652802,
+               -33.9550776
+            ]
+         },
+         "id" : 404,
+         "properties" : {
+            "name" : "University of Cape Town"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               98.6539968,
+               3.5672285
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Sumatera Utara"
+         },
+         "id" : 406
+      },
+      {
+         "id" : 407,
+         "properties" : {
+            "name" : "JISC"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -2.6074575,
+               51.4574438
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               106.8288417,
+               -6.3848747
+            ],
+            "type" : "Point"
+         },
+         "id" : 408,
+         "properties" : {
+            "name" : "Universitas Indonesia"
+         }
+      },
+      {
+         "id" : 409,
+         "properties" : {
+            "name" : "International Christian University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               139.5294701,
+               35.6860535
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               139.741332,
+               35.6954994
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Hosei University"
+         },
+         "id" : 411
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               135.241643,
+               34.8340866
+            ]
+         },
+         "id" : 412,
+         "properties" : {
+            "name" : "Kwansei Gakuin University"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "The Open University of Japan"
+         },
+         "id" : 413,
+         "geometry" : {
+            "coordinates" : [
+               140.1614524,
+               35.6190285
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -71.0500361,
+               42.3513636
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "AcrossWorld Education"
+         },
+         "id" : 416
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -76.5336495,
+               3.3717839
+            ],
+            "type" : "Point"
+         },
+         "id" : 417,
+         "properties" : {
+            "name" : "Universidad del Valle - Colombia"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -122.051306,
+               37.330006
+            ]
+         },
+         "id" : 419,
+         "properties" : {
+            "name" : "TPED - Thomas Edison Grants Program Consortium"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -6.3006788,
+               36.5355955
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Cádiz"
+         },
+         "id" : 424
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -75.992398,
+               36.748164
+            ]
+         },
+         "id" : 425,
+         "properties" : {
+            "name" : "NIXTY"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "University of Malaya"
+         },
+         "id" : 427,
+         "geometry" : {
+            "coordinates" : [
+               101.6502237,
+               3.1290339
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               73.083533,
+               33.7236258
+            ],
+            "type" : "Point"
+         },
+         "id" : 428,
+         "properties" : {
+            "name" : "Virtual University of Pakistan"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "NATIONAL OPEN UNIVERSITY OF NIGERIA"
+         },
+         "id" : 431,
+         "geometry" : {
+            "coordinates" : [
+               3.4087254,
+               6.4299078
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 432,
+         "properties" : {
+            "name" : "African Virtual University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               36.8219367,
+               -1.286577
+            ]
+         }
+      },
+      {
+         "id" : 434,
+         "properties" : {
+            "name" : "VIA University College - Denmark"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               9.2297439,
+               55.9445436
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 435,
+         "properties" : {
+            "name" : "Northeastern State University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -94.967202,
+               35.9193825
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 437,
+         "properties" : {
+            "name" : "Sophia University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               139.7322722,
+               35.6829645
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -1.0455508,
+               53.9508364
+            ],
+            "type" : "Point"
+         },
+         "id" : 438,
+         "properties" : {
+            "name" : "The Higher Education Academy (HEA)"
+         }
+      },
+      {
+         "id" : 439,
+         "properties" : {
+            "name" : "Hong Kong Cyberport Management Company Limited"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               114.109497,
+               22.396428
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 441,
+         "properties" : {
+            "name" : "Instituto Tecnológico de Sonora"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -109.9720161,
+               27.4910173
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Saint Nuno University (Foundation)"
+         },
+         "id" : 442,
+         "geometry" : {
+            "coordinates" : [
+               -9.3509623,
+               38.8040208
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -122.834305,
+               45.508407
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "The Khronos Group Inc."
+         },
+         "id" : 443
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               103.7448466,
+               1.4691003
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universiti Teknologi Malaysia"
+         },
+         "id" : 444
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               37.6232533,
+               55.7635019
+            ]
+         },
+         "id" : 445,
+         "properties" : {
+            "name" : "MOSCOW ARCHITECTURAL INSTITUTE"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               120.1928037,
+               30.1866694
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Netease Information Technology (Beijing) Co., Ltd."
+         },
+         "id" : 447
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -0.8961217,
+               37.5820311
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad Politécnica de Cartagena"
+         },
+         "id" : 451
+      },
+      {
+         "id" : 453,
+         "properties" : {
+            "name" : "Yao Rui Education Information Inc."
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -117.7256083,
+               33.959453
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -69.9193004,
+               18.4960774
+            ]
+         },
+         "id" : 418,
+         "properties" : {
+            "name" : "Comisión Internacional Asesora de Ciencia y Tecnología (CIACT)"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -84.389484,
+               33.777328
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "OpenStudy"
+         },
+         "id" : 455
+      },
+      {
+         "properties" : {
+            "name" : "The Saylor Foundation"
+         },
+         "id" : 457,
+         "geometry" : {
+            "coordinates" : [
+               -77.0627823,
+               38.9027967
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               126.9779692,
+               37.566535
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "EWHA WOMANS UNIVERSITY"
+         },
+         "id" : 458
+      },
+      {
+         "id" : 459,
+         "properties" : {
+            "name" : "Helsinki Metropolia University of Applied Sciences"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               24.9319735,
+               60.1626864
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 460,
+         "properties" : {
+            "name" : "SOOKMYUNG WOMEN\"S UNIVERSITY"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               126.9779692,
+               37.566535
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 461,
+         "properties" : {
+            "name" : "SEOULWOMENS UNIVERSITY"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               127.056793,
+               37.6541917
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 462,
+         "properties" : {
+            "name" : "YONSEI UNIVERSITY"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               126.9367789,
+               37.5791158
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               127.0987453,
+               36.1870656
+            ]
+         },
+         "id" : 463,
+         "properties" : {
+            "name" : "KONYANG UNIVERSITY"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "ULSAN UNIVERSITY"
+         },
+         "id" : 464,
+         "geometry" : {
+            "coordinates" : [
+               129.3298017,
+               35.543683
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               127.0400189,
+               37.5743682
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "UNIVERSITY OF SEOUL"
+         },
+         "id" : 465
+      },
+      {
+         "id" : 466,
+         "properties" : {
+            "name" : "CATHOLIC UNIVERSITY OF DAEGU"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               128.7415441,
+               35.8250555
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               126.9793579,
+               37.5729503
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "SUNGKYUNKWAN UNIVERSITY"
+         },
+         "id" : 467
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               126.7660309,
+               37.5034138
+            ]
+         },
+         "id" : 468,
+         "properties" : {
+            "name" : "THE CATHOLIC UNIVERSITY OF KOREA"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "SEMYUNG UNIVERSITY"
+         },
+         "id" : 469,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               128.1909481,
+               37.1325821
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -78.4699827,
+               -0.1924106
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Escuela de Empresas USFQ"
+         },
+         "id" : 471
+      },
+      {
+         "id" : 472,
+         "properties" : {
+            "name" : "9x9"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -121.974657,
+               37.381757
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               121.4230295,
+               31.2172861
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Shanghai Jiaotong University(SJTU)"
+         },
+         "id" : 474
+      },
+      {
+         "id" : 475,
+         "properties" : {
+            "name" : "Escuela Virtual de Deportes"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -74.074829,
+               4.6256402
+            ]
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Peer 2 Peer University (P2PU)"
+         },
+         "id" : 477,
+         "geometry" : {
+            "coordinates" : [
+               -0.0960274,
+               51.5178624
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "National Taiwan University"
+         },
+         "id" : 480,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.515762,
+               25.046501
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               120.6602534,
+               24.1196339
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Chung Hsing University"
+         },
+         "id" : 481
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               120.6833549,
+               24.1006141
+            ]
+         },
+         "id" : 482,
+         "properties" : {
+            "name" : "Providence University"
+         }
+      },
+      {
+         "id" : 483,
+         "properties" : {
+            "name" : "National Hsinchu University of Education"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.9646866,
+               24.8039455
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.6183264,
+               24.02529
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "National Dong Hwa University"
+         },
+         "id" : 484
+      },
+      {
+         "id" : 485,
+         "properties" : {
+            "name" : "Kaohsiung Medical University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               120.960515,
+               23.69781
+            ]
+         }
+      },
+      {
+         "id" : 486,
+         "properties" : {
+            "name" : "National Taiwan Ocean University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               121.7855556,
+               25.1922222
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 488,
+         "properties" : {
+            "name" : "Southern Taiwan University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.613205,
+               24.116479
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               120.960515,
+               23.69781
+            ]
+         },
+         "id" : 489,
+         "properties" : {
+            "name" : "Hungkuang University"
+         }
+      },
+      {
+         "id" : 490,
+         "properties" : {
+            "name" : "The  Research Council of Oman"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               58.5908333,
+               23.6141667
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.261853,
+               23.000986
+            ],
+            "type" : "Point"
+         },
+         "id" : 491,
+         "properties" : {
+            "name" : "Kun Shan University"
+         }
+      },
+      {
+         "id" : 493,
+         "properties" : {
+            "name" : "Cogi, Inc."
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -119.6935445,
+               34.4153983
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Colegio Visconde de Porto Seguro"
+         },
+         "id" : 494,
+         "geometry" : {
+            "coordinates" : [
+               -46.7197174,
+               -23.6043675
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -73.8543091,
+               40.6657654
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Queensborough Community College"
+         },
+         "id" : 496
+      },
+      {
+         "properties" : {
+            "name" : "San Diego Community College District"
+         },
+         "id" : 502,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -117.1209093,
+               32.7765064
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               116.327004,
+               39.9662445
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Hudong.com Inc."
+         },
+         "id" : 504
+      },
+      {
+         "properties" : {
+            "name" : "Universitat de Lleida"
+         },
+         "id" : 506,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               0.6867939,
+               41.5891557
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 510,
+         "properties" : {
+            "name" : "Sterling College"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -72.3755067,
+               44.6888344
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               116.3937571,
+               39.9635486
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "SASAC Education and Training Centre Education Network"
+         },
+         "id" : 511
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               120.5854674,
+               22.6531409
+            ],
+            "type" : "Point"
+         },
+         "id" : 515,
+         "properties" : {
+            "name" : "National Pingtung University of Science and Technology"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               121.5366587,
+               38.8708277
+            ]
+         },
+         "id" : 519,
+         "properties" : {
+            "name" : "Dalian University of Technology"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Anne Arundel Community College"
+         },
+         "id" : 521,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -76.5121043,
+               39.0514601
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Florida Virtual Campus"
+         },
+         "id" : 522,
+         "geometry" : {
+            "coordinates" : [
+               -84.322386,
+               30.427472
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               5.2303192,
+               52.3688544
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Crossborder Education Solutions"
+         },
+         "id" : 523
+      },
+      {
+         "id" : 524,
+         "properties" : {
+            "name" : "LearningCounts.org"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -87.6259006,
+               41.8808097
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               5.1015042,
+               52.0879288
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "SURF"
+         },
+         "id" : 528
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -99.1358172,
+               19.2878228
+            ]
+         },
+         "id" : 531,
+         "properties" : {
+            "name" : "Instituto Latinoamericano de la Comunicación Educativa (ILCE)"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "College of the Canyons"
+         },
+         "id" : 532,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -118.5682927,
+               34.4043507
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 536,
+         "properties" : {
+            "name" : "State University of New York  Empire State College"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -73.782629,
+               43.0778373
+            ]
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -99.187341,
+               19.3366948
+            ]
+         },
+         "id" : 537,
+         "properties" : {
+            "name" : "Universidad Nacional Autónoma de México"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Pasadena City College"
+         },
+         "id" : 538,
+         "geometry" : {
+            "coordinates" : [
+               -118.119168,
+               34.1439329
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 539,
+         "properties" : {
+            "name" : "Houston Community College District"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -95.3769922,
+               29.7420017
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "ABED - Brazilian Association for Distance Education"
+         },
+         "id" : 541,
+         "geometry" : {
+            "coordinates" : [
+               -46.6397497,
+               -23.5691011
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Cerritos College"
+         },
+         "id" : 544,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -118.0917513,
+               33.8840974
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               54.3666667,
+               24.4666667
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Ankabut, The UAE Advanced Network for Research & Education"
+         },
+         "id" : 546
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               33.9258832,
+               35.1311187
+            ],
+            "type" : "Point"
+         },
+         "id" : 549,
+         "properties" : {
+            "name" : "Eastern Mediterranean University"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               2.1181762,
+               41.3854518
+            ],
+            "type" : "Point"
+         },
+         "id" : 550,
+         "properties" : {
+            "name" : "Universitat Politècnica de Catalunya. BarcelonaTech (UPC)"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -122.5742751,
+               45.3230309
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Oregon Community College Distance Learning Association"
+         },
+         "id" : 552
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -87.754087,
+               43.923145
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Lakeshore Technical College"
+         },
+         "id" : 553
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -77.0381559,
+               38.9040118
+            ]
+         },
+         "id" : 554,
+         "properties" : {
+            "name" : "National Council for Science and the Environment"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               104.332644,
+               15.0859063
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Chalerm Kanchana University"
+         },
+         "id" : 556
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               4.6741715,
+               50.864086
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "University of Leuven (KU Leuven) "
+         },
+         "id" : 558
+      },
+      {
+         "properties" : {
+            "name" : "Maricopa Community Colleges"
+         },
+         "id" : 561,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -111.9734881,
+               33.4128517
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "properties" : {
+            "name" : "Cisco Systems Australia Pty Ltd"
+         },
+         "id" : 562,
+         "geometry" : {
+            "coordinates" : [
+               151.208262,
+               -33.840702
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -73.863101,
+               42.705256
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Excelsior College"
+         },
+         "id" : 564
+      },
+      {
+         "properties" : {
+            "name" : "West Coast University (WCU) Panama"
+         },
+         "id" : 565,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -80.782127,
+               8.537981
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -84.621516,
+               35.879092
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Roane State Community College"
+         },
+         "id" : 566
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               106.7656,
+               -6.3392239
+            ],
+            "type" : "Point"
+         },
+         "id" : 568,
+         "properties" : {
+            "name" : "Universitas Terbuka (Indonesian Open University)"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -77.2366532,
+               38.8341753
+            ]
+         },
+         "id" : 569,
+         "properties" : {
+            "name" : "Northern Virginia Community College - Extended Learning Institute"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "Pontifical Catholic University of Rio de Janeiro - PUC Rio"
+         },
+         "id" : 573,
+         "geometry" : {
+            "coordinates" : [
+               -43.233428,
+               -22.9782071
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -99.1758298,
+               19.3571147
+            ]
+         },
+         "id" : 574,
+         "properties" : {
+            "name" : "Universidad Itaca"
+         }
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               -80.179991,
+               25.928691
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "AIU High School"
+         },
+         "id" : 575
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               2.2929508,
+               48.8243114
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "OCWFrance"
+         },
+         "id" : 577
+      },
+      {
+         "properties" : {
+            "name" : "Università degli Studi Guglielmo Marconi"
+         },
+         "id" : 578,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               12.4646623,
+               41.9072549
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 579,
+         "properties" : {
+            "name" : "GUIDE - Global Universities in Distance Education"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               12.4237297,
+               41.8973732
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "BS Grupo SAC"
+         },
+         "id" : 588,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -77.0330813,
+               -12.0933878
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 591,
+         "properties" : {
+            "name" : "University of Maryland University College"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -76.9572463,
+               38.9855773
+            ]
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -118.140842,
+               34.147446
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Prepr Foundation"
+         },
+         "id" : 593
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               116.3211616,
+               40.0046843
+            ],
+            "type" : "Point"
+         },
+         "id" : 606,
+         "properties" : {
+            "name" : "China Education and Research Network"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "American Public University System"
+         },
+         "id" : 598,
+         "geometry" : {
+            "coordinates" : [
+               -77.86006,
+               39.287797
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -91.508763,
+               41.646039
+            ],
+            "type" : "Point"
+         },
+         "id" : 501,
+         "properties" : {
+            "name" : "Kirkwood Community College"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "BCcampus"
+         },
+         "id" : 581,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -106.346771,
+               56.130366
+            ]
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 603,
+         "properties" : {
+            "name" : "Cuyahoga Community College"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -81.690259,
+               41.495609
+            ]
+         }
+      },
+      {
+         "id" : 608,
+         "properties" : {
+            "name" : "Michigan Community College Virtual Learning Collaborative"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -81.690259,
+               41.495609
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "id" : 448,
+         "properties" : {
+            "name" : "Community College Consortium for Open Educational Resources (CCCOER)"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -122.029968,
+               37.285799
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "properties" : {
+            "name" : "iversity"
+         },
+         "id" : 609,
+         "geometry" : {
+            "coordinates" : [
+               13.5861504,
+               52.6753367
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "id" : 610,
+         "properties" : {
+            "name" : "Telecom Bretagne"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -4.6140477,
+               48.3664039
+            ]
+         }
+      },
+      {
+         "properties" : {
+            "name" : "National Central University"
+         },
+         "id" : 479,
+         "geometry" : {
+            "coordinates" : [
+               121.2168466,
+               24.9375874
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      },
+      {
+         "geometry" : {
+            "coordinates" : [
+               113.0096238,
+               23.1205841
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Neusoft Institute of Information, Nanhai"
+         },
+         "id" : 616
+      },
+      {
+         "id" : 130,
+         "properties" : {
+            "name" : "Korea University"
+         },
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               126.9779692,
+               37.566535
+            ],
+            "type" : "Point"
+         }
+      },
+      {
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -0.514744,
+               38.3821992
+            ]
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Universidad de Alicante"
+         },
+         "id" : 91
+      },
+      {
+         "properties" : {
+            "name" : "Chattanooga State Comunity College"
+         },
+         "id" : 619,
+         "geometry" : {
+            "coordinates" : [
+               -85.240303,
+               35.0965007
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature"
+      }
+   ],
+   "type" : "FeatureCollection"
+}

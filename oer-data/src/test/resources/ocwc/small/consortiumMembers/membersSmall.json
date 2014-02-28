@@ -1,0 +1,18 @@
+{
+   "Organizational Members" : [
+      {
+         "id" : 103,
+         "associate_consortium" : "",
+         "membership_status" : "Grace",
+         "membership_type" : "Institutional Members",
+         "name" : "Kaplan University Online & Campus Learning"
+      },
+      {
+         "membership_status" : "Current",
+         "name" : "MOSCOW ARCHITECTURAL INSTITUTE",
+         "membership_type" : "Institutional Members",
+         "associate_consortium" : "",
+         "id" : 445
+      }
+   ]
+}

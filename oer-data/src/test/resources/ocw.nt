@@ -1,0 +1,35 @@
+_:Ba4acf95859e85a978d79467f79ff8a74 <http://schema.org/latitude> "55.7635019" .
+_:Ba4acf95859e85a978d79467f79ff8a74 <http://schema.org/longitude> "37.6232533" .
+_:Ba4acf95859e85a978d79467f79ff8a74 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+_:Ba5fe2143e1eb31ee84713e7a2b57d2ce <http://schema.org/latitude> "41.876835" .
+_:Ba5fe2143e1eb31ee84713e7a2b57d2ce <http://schema.org/longitude> "-87.641185" .
+_:Ba5fe2143e1eb31ee84713e7a2b57d2ce <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+_:Bb3c75e4956a706524a1d3b60de48dd00 <http://schema.org/addressCountry> "United States of America" .
+_:Bb3c75e4956a706524a1d3b60de48dd00 <http://schema.org/postalCode> "60661" .
+_:Bb3c75e4956a706524a1d3b60de48dd00 <http://schema.org/streetAddress> "West Van Buren Street" .
+_:Bd3c699f6009e4f8a97f90f61857faea7 <http://schema.org/addressCountry> "\u0420\u043E\u0441\u0441\u0438\u0439\u0441\u043A\u0430\u044F \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044F" .
+_:Bd3c699f6009e4f8a97f90f61857faea7 <http://schema.org/postalCode> "127051" .
+_:Bd3c699f6009e4f8a97f90f61857faea7 <http://schema.org/streetAddress> "\u0443\u043B\u0438\u0446\u0430 \u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u0435\u043D\u043A\u0430" .
+<http://oerworldmap.org/resource/ocw103> <http://purl.org/dc/elements/1.1/identifier> "103" .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/address> _:Bb3c75e4956a706524a1d3b60de48dd00 .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/description> "Kaplan Higher Education is a group of institutions, including Kaplan University,  that offer career-oriented certificate and degree programs designed to provide students with the skills necessary to qualify them for employment in the fields of criminal justice, health care, business, education, financial planning, information technology, legal studies, fashion, design, and several others. Each of the individual schools is separately accredited by one of several national or regional accrediting agencies approved by the U.S. Department of Education." .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/geo> _:Ba5fe2143e1eb31ee84713e7a2b57d2ce .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/providesService> <http://ocw.kaplan.edu/> .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/url> <http://portal.kaplan.edu/> .
+<http://oerworldmap.org/resource/ocw103> <http://www.geonames.org/ontology#locatedIn> <http://sws.geonames.org/6252001> .
+<http://oerworldmap.org/resource/ocw103> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/resource/ocw445> <http://purl.org/dc/elements/1.1/identifier> "445" .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/address> _:Bd3c699f6009e4f8a97f90f61857faea7 .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "    Having completed the full course of studies ( 6 years)  students are qualified as architects and get the Master\u2019s Degree with the corresponding diploma. After 4 years students get the Bachelor\u2019s Degree and diploma." .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "Moscow Architectural Institute trains architects of wide-range specialization in Town- Planning, Architecture of Residental and Public Buildings, Architectural   Design,       Architecture of Industrial Buildings, Architecture of Agricultural Complexes, Theory and History of Architecture, Restoration of Architectural Monuments, Interior Architecture, Landscaping." .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "    The language of education is Russian. The full course of studies lasts 6 years. But if you don\u2019t have enough skills in Russian, Artistic and Technical Drawing, you\u2019ll have to attend to a special Preparatory Course during one academic year before being accepted as a student." .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/geo> _:Ba4acf95859e85a978d79467f79ff8a74 .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_02_26bac5aa7b867f6d9214ba43169a4649.jpg> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/providesService> <http://www.open-marhi.ru/> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/url> <http://www.marhi.ru> .
+<http://oerworldmap.org/resource/ocw445> <http://www.geonames.org/ontology#locatedIn> <http://sws.geonames.org/2017370> .
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .

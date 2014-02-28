@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="1">
+	<vars>
+		<var name="schema:" value="http://schema.org/"/>
+	</vars>
+	<rules>
+		<data source="id" name="@id"/>
+		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/ocw${subject}">
+			<data source="@id" name="subject"/>
+		</combine>
+		<data source="@id" name="http://purl.org/dc/elements/1.1/identifier"/>
+		<data source="name" name="$[schema:]name"/>
+		<data source="url" name="$[schema:]name"/>
+		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+			<regexp match="^Associate Consortium Member" format="http://www.w3.org/ns/org#OrganizationalCollaboration"/>
+		</data>
+		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+			<regexp match="^Institutional Member" format="$[schema:]CollegeOrUniversity"/>
+		</data>
+		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+			<regexp match="^Organizational Member" format="@todo Organizational Members"/>
+		</data>
+		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+			<regexp match="^Corporate Member" format="$[schema:]Corporation"/>
+		</data>
+		<data source="associate_consortium" name="http://www.w3.org/ns/org#hasMembership">
+			<regexp match="(.*)" format="http://oerworldmap.org/resource/ocw${1}"/>
+		</data>
+		<data source="main_website" name="$[schema:]url">
+			<regexp match=".+"/>
+		</data>
+		<data source="description" name="$[schema:]description">
+			<regexp match=".+"/>
+		</data>
+		<data source="logo_small_url" name="$[schema:]logo"/>
+		<data source="ocw_website" name="$[schema:]providesService">
+			<regexp match=".+"/>
+		</data>
+		<data source="membership_status" name="http://www.w3.org/ns/org#hasMembership">
+			<regexp match="[cC]urrent" format="http://www.ocwconsortium.org/"/>
+		</data>
+		<data source="associate_consortium" name="http://www.w3.org/ns/org#hasMembership">
+			<regexp match=".+"/>
+		</data>
+		<!-- geoLocation -->
+		<entity name="$[schema:]geo" flushWith="record">
+			<!--All entries already have a geo position or it will be computed -->
+			<data source="coordinates0" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+				<regexp match=".*" format="$[schema:]GeoCoordinates"/>
+			</data>
+			<data source="coordinates0" name="$[schema:]longitude"/>
+			<data source="coordinates1" name="$[schema:]latitude"/>
+		</entity>
+		<!-- /geoLocation -->
+		<!-- ####################### -->
+		<!-- ############### statistics -->
+		<!-- ####################### -->
+		<data source="_else"/>
+	</rules>
+</metamorph>

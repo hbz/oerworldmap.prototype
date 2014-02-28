@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="1">
+	<vars>
+		<var name="schema:" value="http://schema.org/"/>
+	</vars>
+	<rules>
+		<data source="json_callback" name="@id">
+			<regexp match="callbackIntegerWrap(.*)" format="${1}"/>
+		</data>
+		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/ocw${subject}">
+			<data source="@id" name="subject"/>
+		</combine>
+		<data source="@id" name="http://purl.org/dc/elements/1.1/identifier"/>
+		<!-- geoLocation -->
+		<entity name="$[schema:]address" flushWith="record">
+			<!--All entries already have a geo position or it will be computed -->
+			<data source="country" name="$[schema:]addressCountry"/>
+			<data source="road" name="$[schema:]streetAddress"/>
+			<data source="postcode" name="$[schema:]postalCode"/>
+		</entity>
+		<data source="@geonamesId" name="http://www.geonames.org/ontology#locatedIn"/>
+		<data source="country_code" name="@country2GeonamesId">
+			<case to="upper"/>
+			<lookup in="country2GeonamesIdMap"/>
+		</data>
+		<combine name="@geonamesId" value="http://sws.geonames.org/${countryId}">
+			<data source="@country2GeonamesId" name="countryId"/>
+		</combine>
+		<!-- /geoLocation -->
+	</rules>
+	<maps>
+		<!-- tsv of iso31661a country coedes to geoname ID's -->
+		<filemap name="country2GeonamesIdMap" files="countryIso31661alpha2ToGeonamesId.tsv"/>
+	</maps>
+</metamorph>
