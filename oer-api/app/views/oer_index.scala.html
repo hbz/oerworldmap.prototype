@@ -6,6 +6,7 @@
 
 @oer_main("OER") {
     <h1>hbz OER API prototype</h1>
+    <h2>Read</h2>
     <dl>
         <dt>Overview</dt>
         <dd>The API supports two parameters: <code>q</code> and <code>t</code>. It serves JSON.</dd>
@@ -16,6 +17,19 @@
         <dt>Samples<dt>
         <dd>
         @for(query <- queries) { <a href="@query">@query</a><br/> }
+        </dd>
+    </dt>
+    <h2>Write</h2>
+    <dl>
+        <dt>Overview</dt>
+        <dd>The API supports <code>PUT</code> requests with JSON bodies. Note: the write API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
+        <dt>id<dt>
+        <dd>Append the ID for your data to the request path, e.g. <code>PUT /oer/id123</code> for ID <code>id123</code>.</dd>
+        <dt>body</dt>
+        <dd>The request body is expected to be a single JSON <i>object</i> (<i>not</i> a JSON array, literal, etc).</dd>
+        <dt>Samples<dt>
+        <dd>
+        <code>curl -X PUT -H "Content-Type: application/json" http://user:pass@@staging.api.lobid.org/oer/id123 -d '{"field":["some","json"]}'</code>
         </dd>
     </dt>
 }
