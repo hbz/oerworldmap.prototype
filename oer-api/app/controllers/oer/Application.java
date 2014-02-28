@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -67,7 +68,19 @@ public class Application extends Controller {
 		return processQuery(q, t);
 	}
 
-	public static Result write(String id) {
+	public static Result get(String id) {
+		try {
+			GetResponse response = client.prepareGet(INDEX, DATA_TYPE, id)
+					.execute().actionGet();
+			String r = response.isExists() ? response.getSourceAsString() : "";
+			return ok(Json.parse("[" + r + "]"));
+		} catch (Exception x) {
+			x.printStackTrace();
+			return internalServerError(x.getMessage());
+		}
+	}
+
+	public static Result put(String id) {
 		if (!authorized())
 			return unauthorized("Not authorized to write data!\n");
 		JsonNode json = request().body().asJson();
@@ -79,6 +92,7 @@ public class Application extends Controller {
 			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
 					.setSource(json.toString()).execute().actionGet()));
 		} catch (Exception x) {
+			x.printStackTrace();
 			return internalServerError(x.getMessage());
 		}
 	}

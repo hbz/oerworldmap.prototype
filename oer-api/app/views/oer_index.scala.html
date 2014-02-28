@@ -24,10 +24,10 @@
         <dt>Overview</dt>
         <dd>The API supports <code>PUT</code> requests with JSON bodies. Note: the write API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
         <dt>id<dt>
-        <dd>Append the ID for your data to the request path, e.g. <code>PUT /oer/id123</code> for ID <code>id123</code>.</dd>
+        <dd>Append the ID for your data to the request path, e.g. <code>PUT /oer/id123</code> for ID <code>id123</code>. You can <code>GET</code> the data the same way: <a href="/oer/id123">/oer/id123</a>.</dd>
         <dt>body</dt>
         <dd>The request body is expected to be a single JSON <i>object</i> (<i>not</i> a JSON array, literal, etc).</dd>
-        <dt>Samples<dt>
+        <dt>Sample<dt>
         <dd>
         <code>curl -X PUT -H "Content-Type: application/json" http://user:pass@@staging.api.lobid.org/oer/id123 -d '{"field":["some","json"]}'</code>
         </dd>
