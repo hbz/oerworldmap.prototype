@@ -163,7 +163,7 @@
 
 :PostalAddress
     a owl:Class ;
-    rdfs:isDefindesBy :ap ;
+    rdfs:isDefinedBy :ap ;
     rdfs:subClassOf schema:PostalAddress ,
     [ a owl:Restriction ;
         owl:onProperty :streetAddress ;
@@ -180,7 +180,7 @@
 
 :GeoCoordinates
     a owl:Class ;
-    rdfs:isDefindesBy :ap ;
+    rdfs:isDefinedBy :ap ;
     rdfs:subClassOf schema:GeoCoordinates ,
     [ a owl:Restriction ;
         owl:onProperty :latitude ;
@@ -191,12 +191,12 @@
 
 :Image
     a owl:Class ;
-    rdfs:isDefindesBy :ap ;
+    rdfs:isDefinedBy :ap ;
     rdfs:subClassOf foaf:Image .
 
 :Locality
     a owl:Class ;
-    rdfs:isDefindesBy :ap ;
+    rdfs:isDefinedBy :ap ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
@@ -204,7 +204,7 @@
 
 :Country
     a owl:Class ;
-    rdfs:isDefindesBy :ap ;
+    rdfs:isDefinedBy :ap ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
