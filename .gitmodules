@@ -1,0 +1,3 @@
+[submodule "oer-drupal/lib/LibRDF"]
+	path = oer-drupal/lib/LibRDF
+	url = https://github.com/literarymachine/LibRDF.git
