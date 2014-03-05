@@ -3,22 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbz</groupId>
 	<artifactId>oer-data</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.0</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<target.jdk>1.6</target.jdk>
-		<junit.version>4.8.2</junit.version>
-    <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-    <github.global.server>github</github.global.server>
+		<target.jdk>1.7</target.jdk>
+		<junit.version>4.11</junit.version>
 	</properties>
 	<repositories>
     <repository>
-        <id>lobid-lodmill-mvn-repo</id>
-        <url>https://raw.github.com/lobid/lodmill/mvn-repo/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
+        <id>lobid-releases</id>
+        <url>http://lobid.github.io/releases</url>
     </repository>
     <repository>
         <id>jena-dev</id>
@@ -33,19 +27,12 @@
 		<dependency>
 		    <groupId>org.culturegraph</groupId>
 		    <artifactId>metafacture-core</artifactId>
-		    <version>2.0.0-SNAPSHOT</version>
+		    <version>1.2.0</version>
     </dependency>
     <dependency>
       <groupId>org.lobid</groupId>
       <artifactId>lodmill-rd</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.lobid</groupId>
-      <artifactId>lodmill-rd</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jena</groupId>
@@ -63,7 +50,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>${target.jdk}</source>
 					<target>${target.jdk}</target>
@@ -71,33 +58,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.4</version>
+				<version>2.16</version>
 				<configuration>
 					<test>org.hbz.oerworldmap.UnitTests</test>
 				</configuration>
 			</plugin>
 		</plugins>
-		<!-- Make resources from both the source and resources folders available 
-			(metamorph test definitions need to be placed in the same location as the 
-			corresponding JUnit class): -->
-		<testResources>
-			<testResource>
-				<directory>src/test/java</directory>
-			</testResource>
-			<testResource>
-				<directory>src/test/resources</directory>
-			</testResource>
-		</testResources>
 	</build>
 </project>

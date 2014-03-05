@@ -6,5 +6,5 @@ before_script:
   - wget http://downloads.typesafe.com/play/${PLAY_VERSION}/play-${PLAY_VERSION}.zip
   - unzip -q play-${PLAY_VERSION}.zip
 script:
-  - cd oer-data ; mvn clean install ; cd ..
   - cd oer-api ; ../play-${PLAY_VERSION}/play test
+  - cd oer-data ; mvn clean install ; cd ..

@@ -3,12 +3,8 @@
 package org.hbz.oerworldmap;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.antlr.runtime.RecognitionException;
-import org.apache.commons.io.FileUtils;
-import org.culturegraph.mf.Flux;
 import org.culturegraph.mf.morph.Metamorph;
 import org.culturegraph.mf.stream.converter.LiteralExtractor;
 import org.culturegraph.mf.stream.pipe.StreamTee;
@@ -46,27 +42,34 @@ public class EnrichmentViaGeoCoordinatesHttpLookupTest {
 	}
 
 	// @Test
-	public void testFlux() throws IOException, URISyntaxException, RecognitionException {
-		final File fluxFile = new File(Thread.currentThread().getContextClassLoader()
-				.getResource("xmlSplitterRdfWriter.flux").toURI());
-		Flux.main(new String[] { fluxFile.getAbsolutePath() });
-		FileUtils.deleteDirectory(new File(EnrichmentViaGeoCoordinatesHttpLookupTest.targetPath));
-	}
+	// public void testFlux() throws IOException, URISyntaxException,
+	// RecognitionException {
+	// final File fluxFile = new
+	// File(Thread.currentThread().getContextClassLoader()
+	// .getResource("xmlSplitterRdfWriter.flux").toURI());
+	// Flux.main(new String[] { fluxFile.getAbsolutePath() });
+	// FileUtils.deleteDirectory(new
+	// File(EnrichmentViaGeoCoordinatesHttpLookupTest.targetPath));
+	// }
 
-	private void transformDataInDirectory(final String pathToDirectory) throws URISyntaxException {
+	private void transformDataInDirectory(final String pathToDirectory)
+			throws URISyntaxException {
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
 		final JsonDecoder jsonDecoder1 = new JsonDecoder();
-		final Metamorph morphGeo = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource("morph-ocwConsortiumMembers-buildGeoOsmUrl.xml").getFile());
-		final Metamorph morphOSM = new Metamorph(Thread.currentThread().getContextClassLoader()
+		final Metamorph morphGeo = new Metamorph(Thread.currentThread()
+				.getContextClassLoader()
+				.getResource("morph-ocwConsortiumMembers-buildGeoOsmUrl.xml")
+				.getFile());
+		final Metamorph morphOSM = new Metamorph(Thread.currentThread()
+				.getContextClassLoader()
 				.getResource("morph-ocwConsortiumMembers-osm.xml").getFile());
 		final PipeEncodeTriples geoEncoder = new PipeEncodeTriples();
 		final Triples2RdfModel triple2modelGeo = new Triples2RdfModel();
 		final RdfModelFileWriter geoWriter = EnrichmentViaGeoCoordinatesHttpLookupTest
-				.createWriter(EnrichmentViaGeoCoordinatesHttpLookupTest.targetPath + "/geo/"
-						+ pathToDirectory);
+				.createWriter(EnrichmentViaGeoCoordinatesHttpLookupTest.targetPath
+						+ "/geo/" + pathToDirectory);
 		final StreamTee streamTee = new StreamTee();
 		final Stats stats = new Stats();
 		streamTee.addReceiver(stats);
@@ -83,8 +86,9 @@ public class EnrichmentViaGeoCoordinatesHttpLookupTest {
 		opener.setReceiver(jsonDecoder);
 		jsonDecoder.setReceiver(morphGeo).setReceiver(streamTee);
 		dirReader.setReceiver(opener);
-		dirReader.process((new File(Thread.currentThread().getContextClassLoader()
-				.getResource(pathToDirectory).toURI())).getAbsolutePath());
+		dirReader.process((new File(Thread.currentThread()
+				.getContextClassLoader().getResource(pathToDirectory).toURI()))
+				.getAbsolutePath());
 		opener.closeStream();
 
 	}
