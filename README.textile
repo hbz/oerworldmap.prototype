@@ -4,11 +4,20 @@ For initial information about this project see our blog post: "hbz receives Hewl
 
 h1. Build
 
-"!https://secure.travis-ci.org/hbz/oerworldmap.png!":https://travis-ci.org/hbz/oerworldmap
+"!https://secure.travis-ci.org/hbz/oerworldmap.png?branch=master!":https://travis-ci.org/hbz/oerworldmap
 
 See the @.travis.yml@ file for details on the CI config used by Travis.
 
 h1. Setup
+
+h2. Data
+
+Prerequisite: Java 7, Maven 3
+
+@cd oer-data@
+@mvn clean install@
+
+h2. API
 
 @wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip@
 @unzip play-2.2.1.zip@
