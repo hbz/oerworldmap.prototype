@@ -1,0 +1,18 @@
+_:B783a89c4030ca2e4b6bea4b24ddb6d1e <http://schema.org/addressLocality> "Cape Town" .
+_:B783a89c4030ca2e4b6bea4b24ddb6d1e <http://schema.org/addressLocality> "City of Cape Town" .
+_:B783a89c4030ca2e4b6bea4b24ddb6d1e <http://schema.org/schema:addressCountry> "South Africa" .
+_:B783a89c4030ca2e4b6bea4b24ddb6d1e <http://schema.org/streetAddress> "Cross-Campus Road" .
+_:B783a89c4030ca2e4b6bea4b24ddb6d1e <http://www.geonames.org/ontology#locatedIn> <http://sws.geonames.org/953987> .
+_:B85726afb710ff3f88d01a13267c3b1db <http://schema.org/latitude> "-33.9550776" .
+_:B85726afb710ff3f88d01a13267c3b1db <http://schema.org/longitude> "18.4652802" .
+_:B85726afb710ff3f88d01a13267c3b1db <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<http://oerworldmap.org/resource/ocw404> <http://purl.org/dc/elements/1.1/identifier> "404" .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/address> _:B783a89c4030ca2e4b6bea4b24ddb6d1e .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/description> "South African university" .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/geo> _:B85726afb710ff3f88d01a13267c3b1db .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/logo> "http://www.ocwconsortium.org/media/logos/UCT online logo _ low res_7f3b3be1ecbd4e31763ff9ca6d9c6242.jpg" .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/name> "University of Cape Town" .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/providesService> <http://opencontent.uct.ac.za/> .
+<http://oerworldmap.org/resource/ocw404> <http://schema.org/url> <http://www.uct.ac.za/> .
+<http://oerworldmap.org/resource/ocw404> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/resource/ocw404> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .

@@ -1,0 +1,22 @@
+{
+  "settings":{
+    "index":{
+      "analysis":{
+        "analyzer":{
+        },
+        "filter":{
+        }
+      }
+    }
+  },
+  "mappings":{
+    "oer-type":{
+      "properties":{
+        "@graph.@type":{
+          "type":"string",
+          "index":"not_analyzed"
+        }
+      }
+    }
+  }
+}
