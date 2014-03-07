@@ -80,7 +80,8 @@ public class OerJson2RdfWriterTest {
 		final PipeEncodeTriples encoder = new PipeEncodeTriples();
 		final Triples2RdfModel triple2model = new Triples2RdfModel();
 		triple2model.setInput("N-TRIPLE");
-		final RdfModelFileWriter writer = OerJson2RdfWriterTest.createWriter(pathToDirectory);
+		final RdfModelFileWriter writer = OerJson2RdfWriterTest.createWriter(TARGET_PATH
+				+ pathToDirectory);
 		final StreamTee streamTee = new StreamTee();
 		final Stats stats = new Stats();
 		streamTee.addReceiver(stats);
