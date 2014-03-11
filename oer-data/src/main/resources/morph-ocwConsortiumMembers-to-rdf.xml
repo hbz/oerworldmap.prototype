@@ -24,7 +24,7 @@
 		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
 			<regexp match="^Corporate Member" format="$[schema:]Corporation"/>
 		</data>
-		<data source="associate_consortium" name="http://www.w3.org/ns/org#hasMembership">
+		<data source="associate_consortium" name="$[schema:]memberOf">
 			<regexp match="(.*)" format="http://oerworldmap.org/resource/ocw${1}"/>
 		</data>
 		<data source="main_website" name="$[schema:]url">
