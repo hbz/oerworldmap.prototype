@@ -2,10 +2,21 @@
 
 package controllers.oer;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -22,14 +33,23 @@ import org.elasticsearch.search.SearchHit;
 import org.mindrot.jbcrypt.BCrypt;
 
 import play.Logger;
+import play.Play;
 import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
+import play.mvc.Http.RawBuffer;
 import play.mvc.Result;
 import views.html.oer_index;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.github.jsonldjava.core.JsonLdError;
+import com.github.jsonldjava.core.JsonLdOptions;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.utils.JSONUtils;
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.BaseEncoding;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class Application extends Controller {
 
@@ -41,6 +61,29 @@ public class Application extends Controller {
 			.settingsBuilder().put("cluster.name", "quaoar").build())
 			.addTransportAddress(new InetSocketTransportAddress(
 					"193.30.112.170", 9300));
+
+	@SuppressWarnings("javadoc")
+	/* no javadoc for elements */
+	public static enum Serialization {/* @formatter:off */
+			JSON_LD(Lang.JSONLD, Arrays.asList("application/json", "application/ld+json")),
+			RDF_XML(Lang.RDFXML, Arrays.asList("application/rdf+xml", "text/xml", "application/xml")),
+			N_TRIPLE(Lang.NTRIPLES, Arrays.asList("text/plain")),
+			N3(Lang.N3, Arrays.asList("text/rdf+n3", "text/n3")),
+			TURTLE(Lang.TURTLE, Arrays.asList("application/x-turtle", "text/turtle"));/* @formatter:on */
+
+		Lang format;
+		List<String> types;
+
+		/** @return The content types associated with this serialization. */
+		public List<String> getTypes() {
+			return types;
+		}
+
+		private Serialization(final Lang format, final List<String> types) {
+			this.format = format;
+			this.types = types;
+		}
+	}
 
 	/**
 	 * Create a new user account. Pass two arguments: username and password.
@@ -80,25 +123,86 @@ public class Application extends Controller {
 		}
 	}
 
-	public static Result put(String id) {
-		if (!authorized())
+	@BodyParser.Of(BodyParser.Raw.class)
+	public static Result put(String id) throws UnsupportedEncodingException {
+		RawBuffer rawBody = request().body().asRaw();
+		if (rawBody == null)
+			return badRequest("Expecting content in request body!\n");
+		String contentType = request().getHeader(CONTENT_TYPE);
+		if (contentType == null || contentType.isEmpty())
+			return badRequest("Content-Type header required!");
+		String authHeader = request().getHeader(AUTHORIZATION);
+		if (authHeader == null || authHeader.isEmpty())
+			return badRequest("Authorization required to write data!\n");
+		if (!authorized(authHeader))
 			return unauthorized("Not authorized to write data!\n");
-		JsonNode json = request().body().asJson();
-		if (json == null || !json.isObject())
-			return badRequest("Expecting single JSON object in request body!\n");
-		Logger.info("Storing under ID '{}' data from user '{}': {}", id,
-				userAndPass()[0], json);
+		String requestBody = new String(rawBody.asBytes(), Charsets.UTF_8);
+		return processRequest(id, authHeader, requestBody, contentType);
+	}
+
+	private static Result processRequest(String id, String auth,
+			String requestBody, String contentType) {
+		for (Serialization serialization : Serialization.values())
+			for (String mimeType : serialization.getTypes())
+				if (mimeType.equalsIgnoreCase(contentType)) {
+					Logger.info(
+							"Incoming Content-Type '{}' supported as format '{}'",
+							mimeType, serialization.format.getLabel());
+					return executeRequest(id, auth, serialization, requestBody);
+				}
+		return status(UNSUPPORTED_MEDIA_TYPE);
+	}
+
+	private static Result executeRequest(String id, String authHeader,
+			Serialization serialization, String requestBody) {
 		try {
+			String jsonLd = rdfToJsonLd(requestBody, serialization.format);
+			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
+					userAndPass(authHeader)[0], jsonLd);
 			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
-					.setSource(json.toString()).execute().actionGet()));
-		} catch (Exception x) {
-			x.printStackTrace();
-			return internalServerError(x.getMessage());
+					.setSource(jsonLd).execute().actionGet()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			String message = String.format(
+					"Could not process request body as format '%s': %s\n",
+					serialization.format.getLabel(), e.getMessage());
+			return internalServerError(message);
 		}
 	}
 
-	private static boolean authorized() {
-		String[] userAndPass = userAndPass();
+	private static String rdfToJsonLd(String data, Lang lang) {
+		StringWriter stringWriter = new StringWriter();
+		InputStream in = new ByteArrayInputStream(data.getBytes(Charsets.UTF_8));
+		Model model = ModelFactory.createDefaultModel();
+		RDFDataMgr.read(model, in, lang);
+		RDFDataMgr.write(stringWriter, model, Lang.JSONLD);
+		return compact(stringWriter.toString());
+	}
+
+	private static String compact(String json) {
+		try {
+			Object contextJson = JSONUtils.fromURL(context());
+			JsonLdOptions options = new JsonLdOptions();
+			options.setCompactArrays(false); // ES needs consistent data
+			Map<String, Object> compact = JsonLdProcessor.compact(
+					JSONUtils.fromString(json), contextJson, options);
+			return JSONUtils.toString(compact);
+		} catch (IOException | JsonLdError e) {
+			throw new IllegalStateException("Could not compact JSON-LD: \n"
+					+ json, e);
+		}
+	}
+
+	public static URL context() throws MalformedURLException {
+		final String path = "public/";
+		final String file = "context.json";
+		if (new File(path, file).exists())
+			return new File(path, file).toURI().toURL();
+		return Play.application().resource("/" + path + "/" + file);
+	}
+
+	private static boolean authorized(String authHeader) {
+		String[] userAndPass = userAndPass(authHeader);
 		SearchResponse search = search(QueryBuilders.idsQuery(USER_TYPE).ids(
 				userAndPass[0]));
 		return search.getHits().getTotalHits() == 1
@@ -106,10 +210,9 @@ public class Application extends Controller {
 						.getAt(0).getSource().get("pass"));
 	}
 
-	private static String[] userAndPass() {
+	private static String[] userAndPass(String authHeader) {
 		try {
-			String header = request().getHeader(AUTHORIZATION)
-					.replace("Basic", "").trim();
+			String header = authHeader.replace("Basic", "").trim();
 			return new String(BaseEncoding.base64().decode(header), "UTF-8")
 					.split(":");
 		} catch (Exception e) {
