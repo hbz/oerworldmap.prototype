@@ -1,0 +1,7 @@
+name = Linked Data Entities
+description = Provides read/write linked data entities
+package = Linked Data
+core = 7.x
+files[] = LinkedDataController.inc
+files[] = LinkedDataEntity.inc
+dependencies[] = entity
