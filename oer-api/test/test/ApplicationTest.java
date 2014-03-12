@@ -1,6 +1,6 @@
-package test;
-
 /* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
+
+package test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.mvc.Http.HeaderNames.AUTHORIZATION;
@@ -17,7 +17,6 @@ import static play.test.Helpers.status;
 
 import java.util.Arrays;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import play.mvc.Content;
@@ -34,7 +33,7 @@ import com.google.common.io.BaseEncoding;
  * interested in mocking a whole application, see the wiki for more details.
  * 
  */
-public class ApplicationTest {
+public class ApplicationTest extends IndexTestsHarness {
 
 	private static final HandlerRef PUT_HANDLER = controllers.oer.routes.ref.Application
 			.put("abc123");
@@ -53,7 +52,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_missingAuthorizationHeader() {
 		FakeRequest request = fakeRequest().withRawBody(new byte[1])
 				.withHeader(CONTENT_TYPE, "application/json");
@@ -64,7 +62,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_missingRequestBody() {
 		FakeRequest request = fakeRequest().withHeader(AUTHORIZATION,
 				authString("user", "pass")).withHeader(CONTENT_TYPE,
@@ -76,7 +73,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_notAuthorized() {
 		FakeRequest request = fakeRequest()
 				.withHeader(AUTHORIZATION, authString("the", "king"))
@@ -89,7 +85,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_unsupportedMediaType() {
 		FakeRequest request = fakeRequest()
 				.withHeader(AUTHORIZATION, authString("user", "pass"))
@@ -100,7 +95,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_successJsonLd() {
 		String body = "{\"@id\" : \"http://www.w3.org/2001/sw/RDFCore/ntriples/\", "
 				+ "\"creator\" : \"Dave Beckett\", "
@@ -115,7 +109,6 @@ public class ApplicationTest {
 	}
 
 	@Test
-	@Ignore
 	public void put_successNtriples() {
 		String body = "<http://www.w3.org/2001/sw/RDFCore/ntriples/> "
 				+ "<http://purl.org/dc/elements/1.1/creator> "

@@ -2,21 +2,12 @@
 
 package controllers.oer;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -33,7 +24,6 @@ import org.elasticsearch.search.SearchHit;
 import org.mindrot.jbcrypt.BCrypt;
 
 import play.Logger;
-import play.Play;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -41,26 +31,35 @@ import play.mvc.Http.RawBuffer;
 import play.mvc.Result;
 import views.html.oer_index;
 
-import com.github.jsonldjava.core.JsonLdError;
-import com.github.jsonldjava.core.JsonLdOptions;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.utils.JSONUtils;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.BaseEncoding;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class Application extends Controller {
 
-	private static final String INDEX = "oer-index";
+	public static final String INDEX = "oer-index";
 	private static final String DATA_TYPE = "oer-type";
 	private static final String USER_TYPE = "users";
 
-	final static Client client = new TransportClient(ImmutableSettings
-			.settingsBuilder().put("cluster.name", "quaoar").build())
+	final static Client productionClient = new TransportClient(
+			ImmutableSettings.settingsBuilder()
+					.put("cluster.name", "quaoar").build())
 			.addTransportAddress(new InetSocketTransportAddress(
 					"193.30.112.170", 9300));
+	static Client client = productionClient;
+
+	/**
+	 * @param newClient
+	 *            The new elasticsearch client to use.
+	 */
+	public static void clientSet(Client newClient) {
+		client = newClient;
+	}
+
+	/** Reset the elasticsearch client. */
+	public static void clientReset() {
+		client = productionClient;
+	}
 
 	@SuppressWarnings("javadoc")
 	/* no javadoc for elements */
@@ -88,7 +87,7 @@ public class Application extends Controller {
 	/**
 	 * Create a new user account. Pass two arguments: username and password.
 	 */
-	public static void main(String[] args) {
+	public static void main(String... args) {
 		if (args.length != 2) {
 			System.err.println("Pass two arguments: username and password");
 			System.exit(-1);
@@ -156,7 +155,8 @@ public class Application extends Controller {
 	private static Result executeRequest(String id, String authHeader,
 			Serialization serialization, String requestBody) {
 		try {
-			String jsonLd = rdfToJsonLd(requestBody, serialization.format);
+			String jsonLd = NtToEs.rdfToJsonLd(requestBody,
+					serialization.format);
 			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
 					userAndPass(authHeader)[0], jsonLd);
 			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
@@ -168,37 +168,6 @@ public class Application extends Controller {
 					serialization.format.getLabel(), e.getMessage());
 			return internalServerError(message);
 		}
-	}
-
-	private static String rdfToJsonLd(String data, Lang lang) {
-		StringWriter stringWriter = new StringWriter();
-		InputStream in = new ByteArrayInputStream(data.getBytes(Charsets.UTF_8));
-		Model model = ModelFactory.createDefaultModel();
-		RDFDataMgr.read(model, in, lang);
-		RDFDataMgr.write(stringWriter, model, Lang.JSONLD);
-		return compact(stringWriter.toString());
-	}
-
-	private static String compact(String json) {
-		try {
-			Object contextJson = JSONUtils.fromURL(context());
-			JsonLdOptions options = new JsonLdOptions();
-			options.setCompactArrays(false); // ES needs consistent data
-			Map<String, Object> compact = JsonLdProcessor.compact(
-					JSONUtils.fromString(json), contextJson, options);
-			return JSONUtils.toString(compact);
-		} catch (IOException | JsonLdError e) {
-			throw new IllegalStateException("Could not compact JSON-LD: \n"
-					+ json, e);
-		}
-	}
-
-	public static URL context() throws MalformedURLException {
-		final String path = "public/";
-		final String file = "context.json";
-		if (new File(path, file).exists())
-			return new File(path, file).toURI().toURL();
-		return Play.application().resource("/" + path + "/" + file);
 	}
 
 	private static boolean authorized(String authHeader) {
