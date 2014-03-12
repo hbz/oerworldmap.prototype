@@ -65,10 +65,13 @@ function lde_form_callback($entity, $entity_type) {
  * @return array Structured array of form to be rendered
  */
 function lde_form($form, &$form_state, $entity, $entity_type) {
-  field_attach_form($entity_type, $entity, $form, $form_state);
+  if (!isset($form['#entity'])) {
+    $form['#entity'] = $entity;
+    field_attach_form($entity_type, $entity, $form, $form_state);
+  }
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => 'Submit',
+    '#default_value' => 'Submit',
     '#weight' => '100',
   );
   return $form;
@@ -81,6 +84,7 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
 function lde_form_submit($form, &$form_state) {
   $entity = $form['#entity'];
   field_attach_submit($entity->entityType(), $entity, $form, $form_state);
+  $entity->uri = "urn:uuid:" . lde_uuid_v4();
   $form_state['redirect'] = $entity->uri();
   $entities = array($entity);
   if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
@@ -130,6 +134,9 @@ function lde_delete_multiple($entity_uris) {
   entity_delete_multiple(LDE_ENTITY_TYPE, $entity_uris);
 }
 
+/**
+* Create UUID v4
+*/
 function lde_uuid_v4() {
   return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
     mt_rand(0, 0xffff), mt_rand(0, 0xffff),

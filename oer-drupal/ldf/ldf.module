@@ -98,12 +98,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
     case 'ldf_field_widget':
 
       // The entity being edited
-      // FIXME: Why is $form['#entity'] on first call to
-      // ldf_field_widget_form() for Organization?
-      $entity = isset($form['#entity']) ? $form['#entity'] : null;
-      if (!$entity) {
-        return array();
-      }
+      $entity = $form['#entity'];
 
       // Get field configuration
       $field_name = $field['field_name'];
@@ -342,7 +337,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
  *
  */
 function ldf_field_widget_update_value($form, &$form_state) {
-  $form_state['rebuild'] = TRUE;
+  $form_state['rebuild'] = true;
 }
 
 /**
