@@ -84,17 +84,16 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
 function lde_form_submit($form, &$form_state) {
   $entity = $form['#entity'];
   field_attach_submit($entity->entityType(), $entity, $form, $form_state);
-  $entity->uri = "urn:uuid:" . lde_uuid_v4();
+  $entity->uri = lde_resource_uri();
   $form_state['redirect'] = $entity->uri();
-  $entities = array($entity);
+  $inline_entities = array();
   if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
     foreach ($form_state['values']['ldf_field_widget']['inline'] as $inline) {
-      $entities[] = entity_create(LDE_ENTITY_TYPE, $inline);
+      $inline_entities[$inline['uri']] = entity_create(LDE_ENTITY_TYPE, $inline);
     }
   }
-  foreach ($entities as $entity) {
-    entity_save($entity->entityType(), $entity);
-  }
+  $entity->setEntityCache($inline_entities);
+  entity_save($entity->entityType(), $entity);
 }
 
 /**
@@ -145,4 +144,8 @@ function lde_uuid_v4() {
     mt_rand(0, 0x3fff) | 0x8000,
     mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
   );
+}
+
+function lde_resource_uri() {
+  return "urn:uuid:" . lde_uuid_v4();
 }

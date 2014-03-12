@@ -189,6 +189,41 @@ class ApplicationProfile {
   }
 
   /**
+   * Get the main bundles of the AP, i.e. those that can be created
+   * autonomously.
+   *
+   * @return array The names of the top bundles
+   */
+  public function getTopBundles() {
+    $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+    $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
+    $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+
+    $query_string = "
+      SELECT ?list WHERE {
+        _:type {$RDFS->subPropertyOf} {$RDF->type} .
+        _:type {$RDFS->range} [
+          a {$OWL->Class} ;
+          {$OWL->oneOf} ?list ;
+        ] .
+      }
+    ";
+    $query = new LibRDF_Query($query_string, null, 'sparql');
+    $classes = $query->execute($this->applicationProfileRDF);
+
+    $top_bundles = array();
+    foreach ($classes as $class) {
+      $bundle_list = $this->applicationProfileRDF->getListAsArray($class['list']);
+      foreach ($bundle_list as $bundle) {
+        $top_bundles[] = $this->getBundleName($bundle);
+      }
+    }
+
+    return $top_bundles;
+
+  }
+
+  /**
    * Map class URI to Drupal-compliant bundle name
    *
    * @param  LibRDF_URINode  $class_uri
@@ -207,6 +242,7 @@ class ApplicationProfile {
   public function getFieldInstances() {
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $XSD = new LibRDF_NS('http://www.w3.org/2001/XMLSchema#');
 
     $instances = array();
 
@@ -247,14 +283,24 @@ class ApplicationProfile {
           $defined_instance['property'], $RDFS->range
         );
         foreach ($allowed_values as $allowed_value) {
-          // FIXME: Handle restrictions other than target classes
-          if (!$allowed_value instanceof LibRDF_URINode)
-            continue;
+          // Only allow bundles from the AP as targets
+          if ((!$allowed_value instanceof LibRDF_URINode) ||
+              (!$allowed_value->getNamespace()->isEqual(
+               $this->applicationProfileURI->getNamespace()))
+          ) continue;
           $target_bundle = $this->getBundleName($allowed_value);
-          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
-            'create' => true,
-            'lookup' => true,
-          );
+          // Non top-level bundles are embedded within their parent,
+          // top-level bundles can be linked to
+          if (!in_array($target_bundle, $this->getTopBundles())) {
+            $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array(
+              'embed' => true,
+              'create' => true,
+            );
+          } else {
+            $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
+              'lookup' => true,
+            );
+          }
         }
       } catch (LibRDF_LookupError $e) {
         // No target bundle set via rdfs:range, ignore
@@ -348,6 +394,26 @@ class ApplicationProfile {
       field_create_instance($field_instance);
     }
     // Create RDF mappings
+    foreach ($this->getRdfMappings() as $rdf_mapping) {
+      rdf_mapping_save($rdf_mapping);
+    }
+  }
+
+  /**
+   * Updates fields and field instances defined in the application
+   * profile.
+   *
+   */
+  public function update() {
+    // Update fields
+    foreach ($this->getFields() as $field) {
+      field_update_field($field);
+    }
+    // Update field instances
+    foreach ($this->getFieldInstances() as $field_instance) {
+      field_update_instance($field_instance);
+    }
+    // Update RDF mappings
     foreach ($this->getRdfMappings() as $rdf_mapping) {
       rdf_mapping_save($rdf_mapping);
     }

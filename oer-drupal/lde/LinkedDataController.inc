@@ -10,7 +10,7 @@ class LinkedDataController extends EntityAPIController {
 
   public function create(array $values = array()) {
     if (!isset($values['uri'])) {
-      $values['uri'] = "urn:uuid:" . lde_uuid_v4();
+      $values['uri'] = lde_resource_uri();
     }
     return parent::create($values);
   }
@@ -61,6 +61,7 @@ class LinkedDataController extends EntityAPIController {
 
     $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 
+    $rdf_parser = new LibRDF_Parser($format);
     $rdf_subject = new LibRDF_URINode($entity->identifier());
     $rdf_model = new LibRDF_Model(new LibRDF_Storage());
     $rdf_mapping = rdf_mapping_load(
@@ -81,6 +82,9 @@ class LinkedDataController extends EntityAPIController {
     // Add field data
     $wrapper = entity_metadata_wrapper($entity->entityType(), $entity);
     foreach ($rdf_mapping as $field_name => $field_mapping) {
+      $field_info_instance = field_info_instance(
+        $entity->entityType(), $field_name, $entity->bundle()
+      );
       try {
         $items = $wrapper->{$field_name}->value();
       } catch (EntityMetadataWrapperException $e) {
@@ -94,16 +98,29 @@ class LinkedDataController extends EntityAPIController {
       }
       if (!is_array($items)) $items = array($items);
       $is_rel = (isset($field_mapping['type']) && $field_mapping['type'] == 'rel');
-      foreach ($field_mapping['predicates'] as $predicate) {
-        $rdf_predicate = new LibRDF_URINode($predicate);
-        foreach ($items as $item) {
-          $rdf_object = $is_rel
-            ? new LibRDF_URINode($item)
-            : new LibRDF_LiteralNode($item);
+      foreach ($items as $item) {
+        $rdf_object = $is_rel
+          ? new LibRDF_URINode($item)
+          : new LibRDF_LiteralNode($item);
+        foreach ($field_mapping['predicates'] as $predicate) {
+          $rdf_predicate = new LibRDF_URINode($predicate);
+          // Add RDF of embedded entities
+          $entity_cache = $entity->getEntityCache();
           $rdf_statement = new LibRDF_Statement(
             $rdf_subject, $rdf_predicate, $rdf_object
           );
           $rdf_model->addStatement($rdf_statement);
+        }
+        if ($is_rel && isset($entity_cache[$item])) {
+          if (isset($field_info_instance['settings']
+            ['handler_settings']['target_bundles']
+            [$entity_cache[$item]->bundle()]['embed'])
+          ) {
+            $rdf_model->loadStatementsFromString(
+              $rdf_parser, $this->toRDF($entity_cache[$item], $format)
+            );
+            $entity_cache[$item]->is_new = false;
+          }
         }
       }
     }
@@ -148,30 +165,40 @@ class LinkedDataController extends EntityAPIController {
     unset($rdf_mapping['rdftype']);
 
     // Add field data
+    $embedded_entities = array();
     $wrapper = entity_metadata_wrapper($entity->entityType(), $entity);
     foreach ($rdf_mapping as $field_name => $field_mapping) {
+      $field_info_instance = field_info_instance(
+        $entity->entityType(), $field_name, $entity->bundle()
+      );
       foreach ($field_mapping['predicates'] as $predicate) {
         $rdf_predicate = new LibRDF_URINode($predicate);
+        $is_rel = (isset($field_mapping['type']) && $field_mapping['type'] == 'rel');
         foreach ($rdf_model->getTargets($rdf_subject, $rdf_predicate) as $value) {
-          if ($value instanceOf LibRDF_LiteralNode) {
-            // Fix escaped unicode characters such as \u00E4
-            $value = json_decode('"'.$value->getValue().'"');
-            if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
-              $wrapper->{$field_name} = $value;
-            } else {
-              $wrapper->{$field_name}[] = $value;
-            }
+          if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
+            $wrapper->{$field_name} = $value->getValue();
           } else {
-            $value = substr($value, 1, -1);
-            if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
-              $wrapper->{$field_name} = $value;
-            } else {
-              $wrapper->{$field_name}[] = $value;
+            $wrapper->{$field_name}[] = $value->getValue();
+          }
+          if ($is_rel && isset($field_info_instance['settings']['handler_settings']['target_bundles'])) {
+            foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {
+              $rdf_mapping = rdf_mapping_load(LDE_ENTITY_TYPE, $bundle_name);
+              foreach ($rdf_mapping['rdftype'] as $rdf_type) {
+                $rdf_type_stmt = new LibRDF_Statement($value, $RDF->type, new LibRDF_URINode($rdf_type));
+                if ($rdf_model->hasStatement($rdf_type_stmt)) {
+                  $embedded_entity = entity_create(LDE_ENTITY_TYPE,
+                    array('uri' => $value->getValue())
+                  );
+                  $this->fromRDF($embedded_entity, $rdf_string, $format);
+                  $embedded_entities[$value->getValue()] = $embedded_entity;
+                }
+              }
             }
           }
         }
       }
     }
+    $entity->setEntityCache($embedded_entities);
   }
 
 }

@@ -9,6 +9,17 @@
 :ap
   a owl:Ontology .
 
+:type
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Type"@en ;
+    rdfs:label "Typ"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Person :Document )
+    ] .
+
 :Person
   a owl:Class ;
   rdfs:isDefinedBy :ap ;

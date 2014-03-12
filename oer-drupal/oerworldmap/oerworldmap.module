@@ -23,7 +23,7 @@ function oerworldmap_menu() {
   );
 
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
-  foreach (array_keys($ap->getBundles()) as $bundle) {
+  foreach ($ap->getTopBundles() as $bundle) {
     $items["oerworldmap/add/$bundle"] = array(
       'title' => "Add new $bundle",
       'page callback' => 'oerworldmap_resource_add',
@@ -60,6 +60,7 @@ function oerworldmap_menu() {
 
 function oerworldmap() {
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
+ // $ap->update();
   var_dump($ap);
   return array();
 }

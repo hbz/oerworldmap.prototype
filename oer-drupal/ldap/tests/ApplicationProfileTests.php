@@ -17,6 +17,11 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
     $fields = ApplicationProfile::get(TEST_LDE_TYPE)->getFields();
     $expexted = array(
       array(
+        'field_name' => TEST_LDE_TYPE . '_type',
+        'type' => 'text_long',
+        'cardinality' => -1,
+      ),
+      array(
         'field_name' => TEST_LDE_TYPE . '_name',
         'type' => 'text',
         'cardinality' => 1,
@@ -195,6 +200,12 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
       ),
     );
     $this->assertEquals($expected, $mappings);
+  }
+
+  public function test_get_top_bundles() {
+    $top_bundles = ApplicationProfile::get(TEST_LDE_TYPE)->getTopBundles();
+    $expected = array('Person', 'Document');
+    $this->assertEquals($expected, $top_bundles);
   }
 
 }

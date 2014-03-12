@@ -216,7 +216,11 @@
     rdfs:subPropertyOf rdf:type ;
     rdfs:isDefinedBy :ap ;
     rdfs:label "Type"@en ;
-    rdfs:label "Typ"@de .
+    rdfs:label "Typ"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Organization :Service :Person :Project )
+    ] .
 
 :logo
     a owl:ObjectProperty ;
