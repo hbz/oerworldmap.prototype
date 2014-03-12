@@ -31,17 +31,15 @@ import com.google.common.io.CharStreams;
 @Description("Decodes a json record as literals (as key-value pairs).")
 @In(Reader.class)
 @Out(StreamReceiver.class)
-public final class JsonDecoder extends
-		DefaultObjectPipe<Reader, StreamReceiver> {
+public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver> {
 	private static final String JSON_START_CHAR = "{";
 	private static final String JSON_CALLBACK = "json_callback";
 	private JsonParser jsonParser;
-	private static final Logger LOG = LoggerFactory
-			.getLogger(JsonDecoder.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JsonDecoder.class);
 	private static boolean STARTED;
 
-	private void handleValue(final JsonToken currentToken, final String key)
-			throws IOException, JsonParseException {
+	private void handleValue(final JsonToken currentToken, final String key) throws IOException,
+			JsonParseException {
 		{
 			if (JsonToken.VALUE_STRING == currentToken
 					|| JsonToken.VALUE_NUMBER_INT == currentToken
@@ -61,7 +59,7 @@ public final class JsonDecoder extends
 		String text;
 		try {
 			text = CharStreams.toString(reader);
-			this.jsonParser = new JsonFactory().createJsonParser(text);
+			this.jsonParser = new JsonFactory().createParser(text);
 			// find start
 			JsonToken currentToken = null;
 			try {
@@ -70,16 +68,13 @@ public final class JsonDecoder extends
 				// assuming JSONP :
 				final String callbackString = text.substring(0,
 						text.indexOf(JsonDecoder.JSON_START_CHAR) - 1);
-				text = text.substring(
-						text.indexOf(JsonDecoder.JSON_START_CHAR),
-						text.length() - 1);
-				this.jsonParser = new JsonFactory().createJsonParser(text);
-				JsonDecoder.LOG.debug("key=" + JsonDecoder.JSON_CALLBACK
-						+ " value=" + callbackString);
+				text = text.substring(text.indexOf(JsonDecoder.JSON_START_CHAR), text.length() - 1);
+				this.jsonParser = new JsonFactory().createParser(text);
+				JsonDecoder.LOG.debug("key=" + JsonDecoder.JSON_CALLBACK + " value="
+						+ callbackString);
 				getReceiver().startRecord("");
 				JsonDecoder.STARTED = true;
-				getReceiver()
-						.literal(JsonDecoder.JSON_CALLBACK, callbackString);
+				getReceiver().literal(JsonDecoder.JSON_CALLBACK, callbackString);
 				JsonDecoder.LOG.debug("Text=" + text);
 				currentToken = this.jsonParser.nextToken();
 			}
@@ -111,8 +106,7 @@ public final class JsonDecoder extends
 							int i = 0;
 							while (JsonToken.END_ARRAY != currentToken) {
 								final String value = this.jsonParser.getText();
-								JsonDecoder.LOG.debug("key=" + key + i
-										+ " valueArray=" + value);
+								JsonDecoder.LOG.debug("key=" + key + i + " valueArray=" + value);
 								getReceiver().literal(key + i, value);
 								currentToken = this.jsonParser.nextToken();
 								i++;
@@ -128,8 +122,7 @@ public final class JsonDecoder extends
 						currentToken = this.jsonParser.nextToken();
 					}
 				}
-				JsonDecoder.LOG
-						.debug("############################ End Object ");
+				JsonDecoder.LOG.debug("############################ End Object ");
 				if (JsonDecoder.STARTED) {
 					getReceiver().endRecord();
 					JsonDecoder.STARTED = false;
