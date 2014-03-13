@@ -14,7 +14,7 @@
         <dt><code>q</code> (required)<dt>
         <dd>Query over all fields, supports <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"> elasticsearch query string syntax</a>.</dd>
         <dt><code>t</code> (optional)</dt>
-        <dd>Filter results by the <code>@@type</code> field (requires exact full value).</dd>
+        <dd>Filter results by the <code>@@type</code> field (pass multiple, comma-separated values for OR logic).</dd>
         <dt>Samples<dt>
         <dd>
         @for(query <- queries) { <a href="@query">@query</a><br/> }

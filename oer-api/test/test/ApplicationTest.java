@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import play.libs.Json;
 import play.mvc.Content;
 import play.mvc.HandlerRef;
 import play.mvc.Result;
@@ -39,9 +40,43 @@ public class ApplicationTest extends IndexTestsHarness {
 			.put("abc123");
 
 	@Test
-	public void simpleCheck() {
-		int a = 1 + 1;
-		assertThat(a).isEqualTo(2);
+	public void queryAll() {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*", ""),
+				fakeRequest());
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(3);
+	}
+
+	@Test
+	public void queryType0() {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*",
+						"http://schema.org/CollegeOrUniversityTest0"),
+				fakeRequest());
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(0);
+	}
+
+	@Test
+	public void queryType1() {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*",
+						"http://schema.org/CollegeOrUniversityTest1"),
+				fakeRequest());
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(1);
+	}
+
+	@Test
+	public void queryType2() {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*",
+						"http://schema.org/CollegeOrUniversityTest1,"
+								+ "http://schema.org/CollegeOrUniversityTest2"),
+				fakeRequest());
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(2);
 	}
 
 	@Test
