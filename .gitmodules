@@ -1,3 +1,6 @@
 [submodule "oer-drupal/lib/LibRDF"]
 	path = oer-drupal/lib/LibRDF
 	url = https://github.com/literarymachine/LibRDF.git
+[submodule "oer-drupal/lib/php-json-ld"]
+	path = oer-drupal/lib/php-json-ld
+	url = https://github.com/literarymachine/php-json-ld
