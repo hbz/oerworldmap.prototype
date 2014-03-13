@@ -2,10 +2,12 @@
 
 package controllers.oer;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.jena.riot.Lang;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -23,29 +25,69 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import play.Logger;
 import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
+import play.mvc.Http.RawBuffer;
 import play.mvc.Result;
 import views.html.oer_index;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.BaseEncoding;
 
 public class Application extends Controller {
 
-	private static final String INDEX = "oer-index";
+	public static final String INDEX = "oer-index";
 	private static final String DATA_TYPE = "oer-type";
 	private static final String USER_TYPE = "users";
 
-	final static Client client = new TransportClient(ImmutableSettings
-			.settingsBuilder().put("cluster.name", "quaoar").build())
+	final static Client productionClient = new TransportClient(
+			ImmutableSettings.settingsBuilder()
+					.put("cluster.name", "quaoar").build())
 			.addTransportAddress(new InetSocketTransportAddress(
 					"193.30.112.170", 9300));
+	static Client client = productionClient;
+
+	/**
+	 * @param newClient
+	 *            The new elasticsearch client to use.
+	 */
+	public static void clientSet(Client newClient) {
+		client = newClient;
+	}
+
+	/** Reset the elasticsearch client. */
+	public static void clientReset() {
+		client = productionClient;
+	}
+
+	@SuppressWarnings("javadoc")
+	/* no javadoc for elements */
+	public static enum Serialization {/* @formatter:off */
+			JSON_LD(Lang.JSONLD, Arrays.asList("application/json", "application/ld+json")),
+			RDF_XML(Lang.RDFXML, Arrays.asList("application/rdf+xml", "text/xml", "application/xml")),
+			N_TRIPLE(Lang.NTRIPLES, Arrays.asList("text/plain")),
+			N3(Lang.N3, Arrays.asList("text/rdf+n3", "text/n3")),
+			TURTLE(Lang.TURTLE, Arrays.asList("application/x-turtle", "text/turtle"));/* @formatter:on */
+
+		Lang format;
+		List<String> types;
+
+		/** @return The content types associated with this serialization. */
+		public List<String> getTypes() {
+			return types;
+		}
+
+		private Serialization(final Lang format, final List<String> types) {
+			this.format = format;
+			this.types = types;
+		}
+	}
 
 	/**
 	 * Create a new user account. Pass two arguments: username and password.
 	 */
-	public static void main(String[] args) {
+	public static void main(String... args) {
 		if (args.length != 2) {
 			System.err.println("Pass two arguments: username and password");
 			System.exit(-1);
@@ -80,25 +122,56 @@ public class Application extends Controller {
 		}
 	}
 
-	public static Result put(String id) {
-		if (!authorized())
+	@BodyParser.Of(BodyParser.Raw.class)
+	public static Result put(String id) throws UnsupportedEncodingException {
+		RawBuffer rawBody = request().body().asRaw();
+		if (rawBody == null)
+			return badRequest("Expecting content in request body!\n");
+		String contentType = request().getHeader(CONTENT_TYPE);
+		if (contentType == null || contentType.isEmpty())
+			return badRequest("Content-Type header required!");
+		String authHeader = request().getHeader(AUTHORIZATION);
+		if (authHeader == null || authHeader.isEmpty())
+			return badRequest("Authorization required to write data!\n");
+		if (!authorized(authHeader))
 			return unauthorized("Not authorized to write data!\n");
-		JsonNode json = request().body().asJson();
-		if (json == null || !json.isObject())
-			return badRequest("Expecting single JSON object in request body!\n");
-		Logger.info("Storing under ID '{}' data from user '{}': {}", id,
-				userAndPass()[0], json);
+		String requestBody = new String(rawBody.asBytes(), Charsets.UTF_8);
+		return processRequest(id, authHeader, requestBody, contentType);
+	}
+
+	private static Result processRequest(String id, String auth,
+			String requestBody, String contentType) {
+		for (Serialization serialization : Serialization.values())
+			for (String mimeType : serialization.getTypes())
+				if (mimeType.equalsIgnoreCase(contentType)) {
+					Logger.info(
+							"Incoming Content-Type '{}' supported as format '{}'",
+							mimeType, serialization.format.getLabel());
+					return executeRequest(id, auth, serialization, requestBody);
+				}
+		return status(UNSUPPORTED_MEDIA_TYPE);
+	}
+
+	private static Result executeRequest(String id, String authHeader,
+			Serialization serialization, String requestBody) {
 		try {
+			String jsonLd = NtToEs.rdfToJsonLd(requestBody,
+					serialization.format);
+			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
+					userAndPass(authHeader)[0], jsonLd);
 			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
-					.setSource(json.toString()).execute().actionGet()));
-		} catch (Exception x) {
-			x.printStackTrace();
-			return internalServerError(x.getMessage());
+					.setSource(jsonLd).execute().actionGet()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			String message = String.format(
+					"Could not process request body as format '%s': %s\n",
+					serialization.format.getLabel(), e.getMessage());
+			return internalServerError(message);
 		}
 	}
 
-	private static boolean authorized() {
-		String[] userAndPass = userAndPass();
+	private static boolean authorized(String authHeader) {
+		String[] userAndPass = userAndPass(authHeader);
 		SearchResponse search = search(QueryBuilders.idsQuery(USER_TYPE).ids(
 				userAndPass[0]));
 		return search.getHits().getTotalHits() == 1
@@ -106,10 +179,9 @@ public class Application extends Controller {
 						.getAt(0).getSource().get("pass"));
 	}
 
-	private static String[] userAndPass() {
+	private static String[] userAndPass(String authHeader) {
 		try {
-			String header = request().getHeader(AUTHORIZATION)
-					.replace("Basic", "").trim();
+			String header = authHeader.replace("Basic", "").trim();
 			return new String(BaseEncoding.base64().decode(header), "UTF-8")
 					.split(":");
 		} catch (Exception e) {

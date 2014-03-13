@@ -1,0 +1,4 @@
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .
+<http://oerworldmap.org/resource/ocw445> <http://purl.org/dc/elements/1.1/identifier> "445" .

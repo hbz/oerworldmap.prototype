@@ -1,0 +1,6 @@
+<http://oerworldmap.org/resource/ocw445> <http://purl.org/dc/elements/1.1/identifier> "445" .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/geo> _:B6a5c9e28d06d3285d4ae887017e89ede .
+_:B6a5c9e28d06d3285d4ae887017e89ede <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+_:B6a5c9e28d06d3285d4ae887017e89ede <http://schema.org/longitude> "37.6232533" .
+_:B6a5c9e28d06d3285d4ae887017e89ede <http://schema.org/latitude> "55.7635019" .
