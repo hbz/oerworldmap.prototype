@@ -244,8 +244,6 @@ class ApplicationProfile {
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
     $XSD = new LibRDF_NS('http://www.w3.org/2001/XMLSchema#');
 
-    $instances = array();
-
     $query_string = "
       SELECT DISTINCT ?property, ?class WHERE {
         {
@@ -262,7 +260,11 @@ class ApplicationProfile {
 
     $query = new LibRDF_Query($query_string, null, 'sparql');
     $defined_instances = $query->execute($this->applicationProfileRDF);
+
+    // Construct instances
+    $instances = array();
     foreach ($defined_instances as $defined_instance) {
+
       $field_name = $this->getFieldName($defined_instance['property']);
       $bundle = $this->getBundleName($defined_instance['class']);
       $instance = array(
@@ -270,6 +272,8 @@ class ApplicationProfile {
         'bundle' => $bundle,
         'entity_type' => $this->applicationProfileEntityType,
       );
+
+      // Set label
       try {
         $label = $this->applicationProfileRDF->getTarget(
           $defined_instance['property'], $RDFS->label
@@ -278,51 +282,61 @@ class ApplicationProfile {
       } catch (LibRDF_LookupError $e) {
         // No label set, ignore
       }
-      try {
-        $allowed_values = $this->applicationProfileRDF->getTargets(
-          $defined_instance['property'], $RDFS->range
+
+      // Add target_bundles defined by rdfs:range of properties
+      $ranges = $this->applicationProfileRDF->getTargets(
+        $defined_instance['property'], $RDFS->range
+      );
+      $allowed_values = array();
+      foreach ($ranges as $range) {
+        $classLists = $this->applicationProfileRDF->getTargets(
+          $range, $OWL->oneOf
         );
-        foreach ($allowed_values as $allowed_value) {
-          // Only allow bundles from the AP as targets
-          if ((!$allowed_value instanceof LibRDF_URINode) ||
-              (!$allowed_value->getNamespace()->isEqual(
-               $this->applicationProfileURI->getNamespace()))
-          ) continue;
-          $target_bundle = $this->getBundleName($allowed_value);
-          // Non top-level bundles are embedded within their parent,
-          // top-level bundles can be linked to
-          if (!in_array($target_bundle, $this->getTopBundles())) {
-            $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array(
-              'embed' => true,
-              'create' => true,
-            );
-          } else {
-            $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
-              'lookup' => true,
-            );
-          }
+        foreach ($classLists as $classList) {
+          $allowed_values += $this->applicationProfileRDF
+                                  ->getListAsArray($classList);
         }
-      } catch (LibRDF_LookupError $e) {
-        // No target bundle set via rdfs:range, ignore
+        if ($range instanceof LibRDF_URINode) {
+          $allowed_values[] = $range;
+        }
       }
-      try {
-        $restriction = $this->applicationProfileRDF->getSource(
-          $OWL->onProperty, $defined_instance['property']
-        );
-        $allowed_values = $this->applicationProfileRDF->getTargets(
+
+      // Add target_bundles defined by owl:Restrictions on classes
+      $restrictions = $this->applicationProfileRDF->getSources(
+        $OWL->onProperty, $defined_instance['property']
+      );
+      foreach ($restrictions as $restriction) {
+        $classLists = $this->applicationProfileRDF->getTargets(
           $restriction, $OWL->allValuesFrom
         );
-        foreach ($allowed_values as $allowed_value) {
-          $target_bundle = $this->getBundleName($allowed_value);
-          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
+        foreach ($classLists as $classList) {
+          $allowed_values[] = $classList;
+        }
+      }
+
+      // Set target bundles
+      foreach ($allowed_values as $allowed_value) {
+        // Only allow bundles from the AP as targets
+        if (!$allowed_value->getNamespace()->isEqual(
+             $this->applicationProfileURI->getNamespace())
+        ) continue;
+        $target_bundle = $this->getBundleName($allowed_value);
+        // Non top-level bundles are embedded within their parent,
+        // top-level bundles can be linked to
+        if (!in_array($target_bundle, $this->getTopBundles())) {
+          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array(
+            'embed' => true,
             'create' => true,
+          );
+        } else {
+          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
             'lookup' => true,
           );
         }
-      } catch (LibRDF_LookupError $e) {
-        // No target bundle set via owl:Restriction, ignore
       }
+
       $instances[] = $instance;
+
     }
 
     return $instances;

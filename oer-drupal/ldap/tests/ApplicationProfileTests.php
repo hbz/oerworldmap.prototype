@@ -106,7 +106,6 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
           'handler_settings' => array(
             'target_bundles' => array(
               'Document' => array(
-                'create' => true,
                 'lookup' => true,
               ),
             ),
@@ -134,7 +133,6 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
           'handler_settings' => array(
             'target_bundles' => array(
               'Person' => array(
-                'create' => true,
                 'lookup' => true,
               ),
             ),
