@@ -1,0 +1,7 @@
+name = OER World Map
+description = An editing interface for OER World Map data
+package = Linked Data
+core = 7.x
+dependencies[] = lde
+dependencies[] = ldap
+dependencies[] = ldf

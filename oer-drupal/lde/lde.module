@@ -1,0 +1,227 @@
+<?php
+
+define('LDE_ENTITY_TYPE', 'lde');
+
+/**
+ * Implements hook_entity_info().
+ *
+ * This is the fundamental description of a linked data entity.
+ *
+ */
+function lde_entity_info() {
+  $entity_info = array();
+  $entity_info[LDE_ENTITY_TYPE] = array(
+    'label' => t('Linked Data Entity'),
+    'entity class' => 'LinkedDataEntity',
+    'controller class' => 'LinkedDataController',
+    'base table' => null,
+    'fieldable' => true,
+    'entity keys' => array(
+      'id' => 'id',
+      'name' => 'uri',
+      'bundle' => 'type',
+      'label' => 'uri',
+    ),
+    'form callback' => 'lde_form_callback',
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+  );
+  return $entity_info;
+}
+
+/**
+ * Implement hook_menu()
+ *
+ */
+function lde_menu() {
+  $items = array();
+  $items['admin/config/lde'] = array(
+    'title' => 'Linked Data Entities',
+    'description' => 'Settings for the Linked Data Entities module',
+    'position' => 'left',
+    'weight' => -100,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/lde/storage'] = array(
+    'title' => 'Linked Data Storage',
+    'description' => 'API Authentification',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('lde_configuration_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_entity_property_info().
+ *
+ */
+function lde_entity_property_info() {
+  $property_info = array();
+  $property_info[LDE_ENTITY_TYPE]['properties'] = array(
+    'id' => array(
+      'label' => t('Linked Data Resource internal id'),
+      'type' => 'integer',
+    ),
+    'type' => array(
+      'label' => t('Linked Data Resource bundle type'),
+      'type' => 'text',
+    ),
+    'uri' => array(
+      'label' => t('Linked Data Resource URI'),
+      'type' => 'text',
+    ),
+  );
+  return $property_info;
+}
+
+/**
+ * Callback for entity form
+ */
+function lde_form_callback($entity, $entity_type) {
+  return drupal_get_form('lde_form', $entity, $entity_type);
+}
+
+/**
+ * Provides an edit form for linked data entity
+ *
+ * @return array Structured array of form to be rendered
+ */
+function lde_form($form, &$form_state, $entity, $entity_type) {
+  if (!isset($form['#entity'])) {
+    $form['#entity'] = $entity;
+    field_attach_form($entity_type, $entity, $form, $form_state);
+  }
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#default_value' => 'Submit',
+    '#weight' => '100',
+  );
+  return $form;
+}
+
+/**
+ * Handles submissions of linked data entity forms
+ *
+ */
+function lde_form_submit($form, &$form_state) {
+  $entity = $form['#entity'];
+  field_attach_submit($entity->entityType(), $entity, $form, $form_state);
+  $entity->uri = lde_resource_uri();
+  $form_state['redirect'] = $entity->uri();
+  $inline_entities = array();
+  if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
+    foreach ($form_state['values']['ldf_field_widget']['inline'] as $inline) {
+      $inline_entities[$inline['uri']] = entity_create(LDE_ENTITY_TYPE, $inline);
+    }
+  }
+  $entity->setEntityCache($inline_entities);
+  entity_save($entity->entityType(), $entity);
+}
+
+/**
+* Load a linked data entity
+*/
+function lde_load($entity_uri, $reset = false) {
+  $entities = lde_load_multiple(array($entity_uri), array(), $reset);
+  return $entities ? reset($entities) : false;
+}
+
+/**
+* Load multiple linked data entities based on certain conditions.
+*/
+function lde_load_multiple($entity_uris = array(), $conditions = array(), $reset = FALSE) {
+  $entities = entity_load(LDE_ENTITY_TYPE, $entity_uris, $conditions, $reset);
+  return $entities;
+}
+
+/**
+* Save a linked data entity.
+*/
+function lde_save($entity) {
+  entity_save(LDE_ENTITY_TYPE, $entity);
+}
+
+/**
+* Delete single linked data entity.
+*/
+function lde_delete($entity) {
+  entity_delete(LDE_ENTITY_TYPE, entity_id(LDE_ENTITY_TYPE, $entity));
+}
+
+/**
+* Delete multiple linked data entities.
+*/
+function lde_delete_multiple($entity_uris) {
+  entity_delete_multiple(LDE_ENTITY_TYPE, $entity_uris);
+}
+
+/**
+* Create UUID v4
+*/
+function lde_uuid_v4() {
+  return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+    mt_rand(0, 0xffff),
+    mt_rand(0, 0x0fff) | 0x4000,
+    mt_rand(0, 0x3fff) | 0x8000,
+    mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+  );
+}
+
+function lde_resource_uri() {
+  return "urn:uuid:" . lde_uuid_v4();
+}
+
+/**
+* Create and display the configuration settings form.
+*/
+function lde_configuration_form($form, &$form_state) {
+
+  // Text field for api host.
+  $form['lde_api_host'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get(
+      'lde_api_host',
+      'api.localhost'
+    ),
+    '#title' => t('API host'),
+    '#description' => t('The hostname or IP address of the API, without leading http://'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  // Text field for api user.
+  $form['lde_api_user'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get(
+      'lde_api_user',
+      'admin'
+    ),
+    '#title' => t('API user'),
+    '#description' => t('The username to authorize with.'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  // Password field for api password.
+  $form['lde_api_password'] = array(
+    '#type' => 'password',
+    '#default_value' => variable_get(
+      'lde_api_password',
+      'admin'
+    ),
+    '#title' => t('API password'),
+    '#description' => t('The password to authorize with.'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}

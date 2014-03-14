@@ -1,0 +1,6 @@
+name = Application Profiles
+description = Alters entities based on OWL application profiles
+package = Linked Data
+core = 7.x
+files[] = ApplicationProfile.inc
+dependencies[] = rdf

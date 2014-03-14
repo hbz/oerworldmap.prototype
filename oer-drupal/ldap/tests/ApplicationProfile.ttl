@@ -1,0 +1,83 @@
+@prefix : <#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ap
+  a owl:Ontology .
+
+:type
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Type"@en ;
+    rdfs:label "Typ"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Person :Document )
+    ] .
+
+:Person
+  a owl:Class ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Person"@de ;
+  rdfs:subClassOf foaf:Person, [
+    a owl:Restriction ;
+    owl:onProperty :email ;
+    owl:minCardinality "0" ] .
+
+:Document
+  a owl:Class ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Dokument"@de ;
+  rdfs:subClassOf foaf:Document, [
+    a owl:Restriction ;
+    owl:onProperty :partOf ;
+    owl:allValuesFrom :Document ] .
+
+:name
+  a owl:DatatypeProperty ;
+  rdfs:subPropertyOf foaf:name ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Name"@de ;
+  rdfs:domain :Person .
+
+:email
+  a owl:DatatypeProperty ;
+  rdfs:subPropertyOf foaf:email ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "E-Mail"@de ;
+  rdfs:domain :Person .
+
+:title
+  a owl:DatatypeProperty ;
+  rdfs:subPropertyOf dc:title ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Titel"@de ;
+  rdfs:domain :Document .
+
+:creator
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf dc:creator ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Autor"@de ;
+  rdfs:domain :Document ;
+  rdfs:range :Person .
+
+:partOf
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf dc:isPartOf ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:label "Teil von"@de .
+
+:propertyWithoutTitle
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy :ap ;
+  rdfs:domain :ClassWithoutLabel .
+
+:ClassWithoutLabel
+  a owl:Class ;
+  rdfs:isDefinedBy :ap .

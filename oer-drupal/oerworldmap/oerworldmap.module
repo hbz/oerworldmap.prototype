@@ -1,0 +1,98 @@
+<?php
+
+$ap_uri = 'file://' . __DIR__ .  '/../../oerap.ttl#ap';
+ApplicationProfile::add(
+  $ap_uri, 'turtle', LDE_ENTITY_TYPE, 'ldf_field_type'
+);
+
+/**
+ * Implements hook_menu().
+ */
+function oerworldmap_menu() {
+
+  $items['oerworldmap'] = array(
+    'title' => 'OER World Map',
+    'page callback' => 'oerworldmap',
+    'access callback' => true,
+  );
+
+  $items['oerworldmap/update'] = array(
+    'title' => 'Reload application profile',
+    'page callback' => 'oerworldmap_ap_update',
+    'access callback' => true,
+  );
+
+  $items['oerworldmap/add'] = array(
+    'title' => 'Contribute to the OER World Map',
+    'page callback' => 'oerworldmap',
+    'access callback' => true,
+  );
+
+  $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
+  foreach ($ap->getTopBundles() as $bundle) {
+    $items["oerworldmap/add/$bundle"] = array(
+      'title' => "Add new $bundle",
+      'page callback' => 'oerworldmap_resource_add',
+      'page arguments' => array($bundle),
+      'access callback' => true,
+    );
+  }
+
+  $items['oerworldmap/resource/%lde'] = array(
+    'title callback' => 'entity_label',
+    'title arguments' => array(LDE_ENTITY_TYPE, 2),
+    'page callback' => 'oerworldmap_resource_view',
+    'page arguments' => array(2),
+    'access callback' => true,
+  );
+
+  $items['oerworldmap/resource/%lde/view'] = array(
+    'title' => 'View',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['oerworldmap/resource/%lde/edit'] = array(
+    'title' => 'Edit',
+    'page callback' => 'oerworldmap_resource_edit',
+    'page arguments' => array(2),
+    'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+
+}
+
+function oerworldmap() {
+  return array();
+}
+
+function oerworldmap_ap_update() {
+  $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
+  $ap->update();
+  drupal_set_message("Application profile reloaded");
+  return array();
+}
+
+function oerworldmap_resource_add($type) {
+  $entity = entity_get_controller(LDE_ENTITY_TYPE)->create(
+    array('type' => $type, 'uri' => 'new')
+  );
+  return entity_form(LDE_ENTITY_TYPE, $entity);
+}
+
+function oerworldmap_resource_view($entity) {
+  return entity_view(LDE_ENTITY_TYPE, array($entity));
+}
+
+function oerworldmap_resource_edit($entity) {
+  return entity_form(LDE_ENTITY_TYPE, $entity);
+}
+
+function oerworldmap_form_lde_form_alter(&$form, &$form_state, $form_id) {
+  $form['#submit'][] = 'oerworldmap_form_submit';
+}
+
+function oerworldmap_form_submit($form, &$form_state) {
+}

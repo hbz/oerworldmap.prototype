@@ -1,0 +1,462 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function ldf_field_schema($field) {
+
+  return array(
+    'columns' => array(
+      'value' => array(
+        'type' => 'text',
+        'not null' => false,
+      ),
+    ),
+  );
+
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function ldf_field_info() {
+
+  return array(
+    'ldf_field_type' => array(
+      'label' => t('A linked data field'),
+      'description' => t('This field holds the URI of a linked data resource'),
+      'default_widget' => 'ldf_field_widget',
+      'default_formatter' => 'ldf_field_format',
+      'property_type' => 'text',
+    ),
+  );
+
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function ldf_field_widget_info() {
+
+  return array(
+    'ldf_field_widget' => array(
+      'label' => t('Linked Data Lookup'),
+      'field types' => array('ldf_field_type'),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    ),
+  );
+
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function ldf_field_formatter_info() {
+
+  return array(
+    'ldf_field_format' => array(
+      'label' => t('Linked Data Reference'),
+      'field types' => array('ldf_field_type'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+  );
+
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function ldf_field_is_empty($item, $field) {
+  if (empty($item['value']) && (string) $item['value'] !== '0') {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function ldf_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $elements = array();
+  switch ($display['type']) {
+    case 'ldf_field_format':
+      $elements = ldf_embed_entities($items, $entity->getEntityCache(), array());
+      break;
+  }
+  return $elements;
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+
+  switch ($instance['widget']['type']) {
+    case 'ldf_field_widget':
+
+      // The entity being edited
+      $entity = $form['#entity'];
+
+      // Get field configuration
+      $field_name = $field['field_name'];
+      $field_cardinality = $field['cardinality'];
+      $target_bundles = isset($instance['settings']['handler_settings']['target_bundles'])
+        ? $instance['settings']['handler_settings']['target_bundles'] : array();
+
+      // Extract action from element that triggered form submission
+      if (array_key_exists('triggering_element', $form_state)) {
+        $triggering_element = $form_state['triggering_element']['#name'];
+        $event = explode('|', $triggering_element);
+        array_shift($event);
+        $on_entity = array_shift($event);
+        $on_field = array_shift($event);
+        $action = array_shift($event);
+        $with_param = $event;
+      } else {
+        $action = false;
+        $on_field = $field_name;
+        $on_entity = $entity->identifier();
+        $with_param = null;
+      }
+
+      // Widget Fieldset
+      $element += array(
+        '#type' => 'fieldset',
+      );
+
+      $entity_cache = $entity->getEntityCache();
+      $entity_cache[$entity->identifier()] = $entity;
+      // Reload items and inline entities from form_state values
+      if (array_key_exists('values', $form_state)) {
+        $items = array();
+        if (array_key_exists($field_name, $form_state['values'])) {
+          foreach ($form_state['values'][$field_name][LANGUAGE_NONE] as $value) {
+            array_push($items, $value);
+          }
+        }
+        if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
+          foreach ($form_state['values']['ldf_field_widget']['inline'] as $uri => $inline_data) {
+            $entity_cache[$uri] = entity_create(LDE_ENTITY_TYPE, $inline_data);
+          }
+        }
+      }
+
+      $option_cache = array();
+
+      // Initialize page and term
+      $page = 0;
+      $term = '';
+
+      // Handle events
+      if ($action && ($on_field == $field_name) && ($on_entity == $entity->identifier())) {
+        $element['#prefix'] = '<a name="focus"></a>';
+        $widget_data = $form_state['values']['ldf_field_widget'][$on_entity][$on_field];
+
+        // Handle submission of search term
+        if ($action == 'search') {
+          $term = $widget_data['search'];
+          if (isset($with_param[0])) {
+            $page = $with_param[0];
+          }
+          // Build option cache here!!!
+          $matches = array_values(
+            ldf_field_lookup()
+          );
+          $option_cache[$on_entity][$on_field] = $matches;
+        }
+
+        // Handle add event
+        if ($action == 'add' && isset($with_param[0])) {
+          $added_value = $widget_data['option'][$with_param[0]];
+          if ($added_value != '') {
+            array_unshift($items, $added_value);
+          }
+        }
+
+        // Handle inline entity creation
+        if ($action == 'create_inline' && isset($with_param[0])) {
+          $inline_entity = entity_create(LDE_ENTITY_TYPE, array(
+              'type' => $with_param[0],
+            )
+          );
+          array_unshift($items, array('value' => $inline_entity->identifier()));
+          $entity_cache[$inline_entity->identifier()] = $inline_entity;
+        }
+
+        // Handle remove event - because of the way drupal works, the
+        // value needs to be empty but still present in the array, i.e.
+        // unset($items[$i]) will not work! This is why we need to track
+        // the actual count of set values separately in order to properly
+        // handle cardinality limits.
+        $value_count = 0;
+        if ($action == 'remove' && isset($with_param[0])) {
+          foreach (array_keys($items) as $i) {
+            if ($i == $with_param[0]) {
+              $form_state['values'][$field_name][LANGUAGE_NONE][$i]['value'] = '';
+              $items[$i]['value'] = '';
+            }
+            if ($items[$i]['value'] != '') {
+              $value_count++;
+            }
+          }
+        }
+
+      }
+
+      $action_button = "ldf_field_widget|{$entity->identifier()}|{$field_name}";
+
+      // Fieldset for link elements
+      $element['ldf_field_widget'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Hinzufügen'),
+        '#parents' => array(
+          'ldf_field_widget', $entity->identifier(), $field_name
+        ),
+        '#tree' => true,
+      );
+
+      $inline_mode = 'link';
+      foreach ($target_bundles as $target_bundle => $allowed_actions) {
+        if (isset($allowed_actions['embed'])) {
+          $inline_mode = 'edit';
+        }
+        if (isset($allowed_actions['lookup'])) {
+          // Textfield for search input
+          $element['ldf_field_widget']['search'] = array(
+            '#type' => 'textfield',
+          );
+
+          // Submit button for search
+          $element['ldf_field_widget']['submit'] = array(
+            '#type' => 'submit',
+            '#default_value' => t('Suchen'),
+            '#name' => "$action_button|search",
+            '#submit' => array('ldf_field_widget_update_value'),
+            '#validate' => array('ldf_field_widget_validate_value'),
+          );
+
+          // Search result listing
+          // Use option cache here!!!
+          $element['ldf_field_widget']['option'] = array();
+          if (isset($option_cache[$on_entity][$on_field])) {
+            $element['ldf_field_widget']['search']['#default_value'] = $term;
+            $options = $option_cache[$on_entity][$on_field];
+            $element['ldf_field_widget']['option'] += ldf_embed_entities(
+              $options, $entity_cache, $form_state
+            );
+            foreach ($options as $i => $option) {
+              $element['ldf_field_widget']['option'][$i]['value'] = array(
+                '#type' => 'hidden',
+                '#value' => $option->identifier(),
+              );
+              $element['ldf_field_widget']['option'][$i]['add'] = array(
+                '#type' => 'submit',
+                '#name' => "$action_button|add|$i",
+                '#default_value' => t('Hinzufügen'),
+                '#submit' => array('ldf_field_widget_update_value'),
+                '#validate' => array('ldf_field_widget_validate_value'),
+              );
+              if (($field_cardinality != FIELD_CARDINALITY_UNLIMITED)
+                  && ($value_count >= $field_cardinality)
+              ) {
+                $element['ldf_field_widget']['option'][$i]['add']['#disabled'] = TRUE;
+              }
+            }
+
+            // Paging
+            $next_page = (count($matches) < 10) ? FALSE : $page + 1;
+            $prev_page = ($page < 1) ? FALSE : $page - 1;
+
+            if ($prev_page === 0 || $prev_page) {
+              // Submit button for previous page
+              $element['ldf_field_widget']['prev_page'] = array(
+                '#type' => 'submit',
+                '#default_value' => t('<'),
+                '#name' => "$action_button|search|$prev_page",
+                '#submit' => array('ldf_field_widget_update_value'),
+                '#validate' => array('ldf_field_widget_validate_value'),
+              );
+            }
+            if ($next_page) {
+              // Submit button for next page
+              $element['ldf_field_widget']['next_page'] = array(
+                '#type' => 'submit',
+                '#default_value' => t('>'),
+                '#name' => "$action_button|search|$next_page",
+                '#submit' => array('ldf_field_widget_update_value'),
+                '#validate' => array('ldf_field_widget_validate_value'),
+              );
+            }
+          }
+        }
+        // Inline create button
+        if (isset($allowed_actions['create'])) {
+          $element['ldf_field_widget']['create_inline'][$target_bundle] = array(
+            '#type' => 'submit',
+            '#name' => "$action_button|create_inline|$target_bundle",
+            '#default_value' => t('Add new ' . $target_bundle),
+            '#submit' => array('ldf_field_widget_update_value'),
+            '#validate' => array('ldf_field_widget_validate_value'),
+          );
+        }
+      }
+
+      // List items
+      $element['data'] = array(
+        '#parents' => array(
+          'ldf_field_widget', $field_name, 'data'
+        ),
+      );
+      $element['data'] += ldf_embed_entities(
+        $items, $entity_cache, $form_state, $inline_mode
+      );
+      foreach (array_keys($items) as $i) {
+        // Hidden inputs for values
+        $element[$i]['value'] = array(
+          '#type' => 'hidden',
+          '#value' => $items[$i]['value'],
+        );
+        if (!ldf_field_is_empty($items[$i], $field)) {
+          // Submit button to remove value
+          $element['data'][$i]['remove'] = array(
+            '#type' => 'submit',
+            '#name' => "$action_button|remove|$i",
+            '#default_value' => t('Entfernen'),
+            '#submit' => array('ldf_field_widget_update_value'),
+            '#validate' => array('ldf_field_widget_validate_value'),
+          );
+        }
+      }
+
+
+      $form['#action'] = '#focus';
+
+      break;
+
+  }
+
+  return $element;
+
+}
+
+/**
+ * Dummy submit function for field widget actions.
+ *
+ */
+function ldf_field_widget_update_value($form, &$form_state) {
+  $form_state['rebuild'] = true;
+}
+
+/**
+ * Suppress validation for field widget actions.
+ *
+ */
+function ldf_field_widget_validate_value($form, &$form_state) {
+  form_clear_error();
+  drupal_get_messages('error');
+}
+
+/**
+ * Fetch results for linked data field widget.
+ *
+ * @return array Entities matching the query
+ */
+function ldf_field_lookup() {
+  return array();
+}
+
+/**
+ * Embed linked data values as nested entities.
+ *
+ * @param  array  $items        The items to embed
+ * @param  array  $entity_cache Pre-loaded entities
+ * @param  array  $form_state   The form_state of the parent form
+ * @param  string $mode         Whether to render an embedded form or
+ */
+function ldf_embed_entities($items, $entity_cache = array(), $form_state = array(), $mode = 'link') {
+
+  // Set up JS
+  drupal_add_library('system', 'drupal.collapse');
+  drupal_add_js(array('ldf' => array(
+    'basePath' => base_path() . drupal_get_path('module', 'ldf')
+  )), 'setting');
+  drupal_add_js(
+    drupal_get_path('module', 'ldf') . '/ldf.js'
+  );
+
+  // Container for all embedded entities
+  $elements = array();
+
+  foreach ($items as $delta => $item) {
+
+    if (is_array($item) && empty($item['value'])) continue;
+
+    // Fieldset for single embedded entity
+    $elements[$delta] = array(
+      '#type' => 'fieldset',
+      '#attributes' => array(
+        'class' => array('collapsible', 'collapsed'),
+      ),
+    );
+
+    // Check if fully loaded entity is available
+    if ($item instanceOf Entity) {
+      $embedded_entity = $item;
+    } else if (array_key_exists($item['value'], $entity_cache)) {
+      $embedded_entity = $entity_cache[$item['value']];
+    }
+
+    if ('link' == $mode && isset($embedded_entity)) {
+      // Render the embedded entity
+      $elements[$delta] += array(
+        '#title' => entity_label($embedded_entity->entityType(), $embedded_entity),
+        'entity' => entity_view($embedded_entity->entityType(), array($embedded_entity)),
+      );
+    } else if ('link' == $mode) {
+      // Add hidden input as preparation for rendering entity via JS
+      $elements[$delta] += array(
+        '#title' => $item['value'],
+        'entity' => array(
+          '#type' => 'hidden',
+          '#value' => $item['value'],
+        ),
+      );
+      $elements[$delta]['#attributes']['class'][] = 'ldf_field_type';
+    } else if ('edit' == $mode && isset($embedded_entity)) {
+      // Render an embedded form for the entity
+      $inline_form = array();
+      $inline_form_state = array();
+      $inline_form_state['values'] = (array) $embedded_entity;
+      $inline_form_state['values']['ldf_field_widget'] =
+        isset($form_state['values']['ldf_field_widget'])
+          ? $form_state['values']['ldf_field_widget'] : array();
+      $inline_form_state['triggering_element'] =
+        isset($form_state['triggering_element'])
+          ? $form_state['triggering_element'] : null;
+      field_attach_form(
+        $embedded_entity->entityType(), $embedded_entity, $inline_form, $inline_form_state
+      );
+      $inline_form['#parents'] = array(
+        'ldf_field_widget', 'inline', $embedded_entity->identifier()
+      );
+      $inline_form['uri'] = array(
+        '#type' => 'hidden',
+        '#value' => $embedded_entity->identifier(),
+      );
+      $inline_form['type'] = array(
+        '#type' => 'hidden',
+        '#value' => $embedded_entity->bundle(),
+      );
+      $elements[$delta] += array(
+        '#title' => entity_label($embedded_entity->entityType(), $embedded_entity),
+        'entity' => $inline_form
+      );
+    }
+    //TODO: allow editing of embedded entities load via JS
+
+  }
+  return $elements;
+}
