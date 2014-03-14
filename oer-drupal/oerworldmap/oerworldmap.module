@@ -16,6 +16,12 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
+  $items['oerworldmap/update'] = array(
+    'title' => 'Reload application profile',
+    'page callback' => 'oerworldmap_ap_update',
+    'access callback' => true,
+  );
+
   $items['oerworldmap/add'] = array(
     'title' => 'Contribute to the OER World Map',
     'page callback' => 'oerworldmap',
@@ -59,9 +65,13 @@ function oerworldmap_menu() {
 }
 
 function oerworldmap() {
+  return array();
+}
+
+function oerworldmap_ap_update() {
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
- // $ap->update();
-  var_dump($ap);
+  $ap->update();
+  drupal_set_message("Application profile reloaded");
   return array();
 }
 
