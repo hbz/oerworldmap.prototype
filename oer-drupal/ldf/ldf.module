@@ -163,7 +163,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
           }
           // Build option cache here!!!
           $matches = array_values(
-            ldf_field_lookup()
+            ldf_field_lookup(array_keys($target_bundles), $term)
           );
           $option_cache[$on_entity][$on_field] = $matches;
         }
@@ -364,8 +364,11 @@ function ldf_field_widget_validate_value($form, &$form_state) {
  *
  * @return array Entities matching the query
  */
-function ldf_field_lookup() {
-  return array();
+function ldf_field_lookup($target_bundles, $term) {
+  $query = new LinkedDataEntityFieldQuery();
+  $query->addMetadata('term', $term);
+  $query->entityCondition('bundle', $target_bundles);
+  return $query->execute();
 }
 
 /**

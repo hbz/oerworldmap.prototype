@@ -225,3 +225,75 @@ function lde_configuration_form($form, &$form_state) {
 
   return system_settings_form($form);
 }
+
+/**
+ * Constructs a new entity based on the provided RDF.
+ *
+ * @param  Entity    $entity The entity to load data into
+ * @param  resource  $rdf_string The RDF-serialized entity
+ * @param  string    $format     Optional, defaults to 'rdfxml'.
+ * @return LinkedDataEntity $entity
+ */
+function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
+
+  $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+
+  $rdf_subject = new LibRDF_URINode($entity->identifier());
+  $rdf_model = new LibRDF_Model(new LibRDF_Storage());
+  $rdf_parser = new LibRDF_Parser($format);
+  $rdf_model->loadStatementsFromString($rdf_parser, $rdf_string);
+
+  // Find bundle and corresponding mapping based on rdf:type
+  $bundles = field_info_bundles(LDE_ENTITY_TYPE);
+  foreach ($bundles as $bundle_name => $bundle) {
+    $rdf_mapping = $bundle['rdf_mapping'];
+    $rdf_types = $rdf_mapping['rdftype'];
+    foreach ($rdf_types as $rdf_type) {
+      $rdf_class = new LibRDF_URINode($rdf_type);
+      $rdf_type_stmt = $rdf_model->findStatements(
+        $rdf_subject, $RDF->type, $rdf_class
+      );
+      if ($rdf_type_stmt->current()) {
+        break 2;
+      }
+    }
+  }
+  $entity->type = $bundle_name;
+  unset($rdf_mapping['rdftype']);
+
+  // Add field data
+  $embedded_entities = array();
+  $wrapper = entity_metadata_wrapper($entity->entityType(), $entity);
+  foreach ($rdf_mapping as $field_name => $field_mapping) {
+    $field_info_instance = field_info_instance(
+      $entity->entityType(), $field_name, $entity->bundle()
+    );
+    foreach ($field_mapping['predicates'] as $predicate) {
+      $rdf_predicate = new LibRDF_URINode($predicate);
+      $is_rel = (isset($field_mapping['type']) && $field_mapping['type'] == 'rel');
+      foreach ($rdf_model->getTargets($rdf_subject, $rdf_predicate) as $value) {
+        if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
+          $wrapper->{$field_name} = $value->getValue();
+        } else {
+          $wrapper->{$field_name}[] = $value->getValue();
+        }
+        if ($is_rel && isset($field_info_instance['settings']['handler_settings']['target_bundles'])) {
+          foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {
+            $rdf_mapping = rdf_mapping_load(LDE_ENTITY_TYPE, $bundle_name);
+            foreach ($rdf_mapping['rdftype'] as $rdf_type) {
+              $rdf_type_stmt = new LibRDF_Statement($value, $RDF->type, new LibRDF_URINode($rdf_type));
+              if ($rdf_model->hasStatement($rdf_type_stmt)) {
+                $embedded_entity = entity_create(LDE_ENTITY_TYPE,
+                  array('uri' => $value->getValue())
+                );
+                lde_from_rdf($embedded_entity, $rdf_string, $format);
+                $embedded_entities[$value->getValue()] = $embedded_entity;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  $entity->setEntityCache($embedded_entities);
+}
