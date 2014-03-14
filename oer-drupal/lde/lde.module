@@ -30,6 +30,32 @@ function lde_entity_info() {
 }
 
 /**
+ * Implement hook_menu()
+ *
+ */
+function lde_menu() {
+  $items = array();
+  $items['admin/config/lde'] = array(
+    'title' => 'Linked Data Entities',
+    'description' => 'Settings for the Linked Data Entities module',
+    'position' => 'left',
+    'weight' => -100,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/lde/storage'] = array(
+    'title' => 'Linked Data Storage',
+    'description' => 'API Authentification',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('lde_configuration_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_entity_property_info().
  *
  */
@@ -148,4 +174,54 @@ function lde_uuid_v4() {
 
 function lde_resource_uri() {
   return "urn:uuid:" . lde_uuid_v4();
+}
+
+/**
+* Create and display the configuration settings form.
+*/
+function lde_configuration_form($form, &$form_state) {
+
+  // Text field for api host.
+  $form['lde_api_host'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get(
+      'lde_api_host',
+      'api.localhost'
+    ),
+    '#title' => t('API host'),
+    '#description' => t('The hostname or IP address of the API, without leading http://'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  // Text field for api user.
+  $form['lde_api_user'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get(
+      'lde_api_user',
+      'admin'
+    ),
+    '#title' => t('API user'),
+    '#description' => t('The username to authorize with.'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  // Password field for api password.
+  $form['lde_api_password'] = array(
+    '#type' => 'password',
+    '#default_value' => variable_get(
+      'lde_api_password',
+      'admin'
+    ),
+    '#title' => t('API password'),
+    '#description' => t('The password to authorize with.'),
+    '#size' => 40,
+    '#maxlength' => 120,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }

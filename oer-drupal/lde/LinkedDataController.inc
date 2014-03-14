@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../lib/LibRDF/LibRDF/LibRDF.php';
+require_once __DIR__ . '/../lib/php-json-ld/jsonld.php';
 
 /**
  * A controller for linked data entities.
@@ -8,6 +9,12 @@ require_once __DIR__ . '/../lib/LibRDF/LibRDF/LibRDF.php';
  */
 class LinkedDataController extends EntityAPIController {
 
+  /**
+   * Create a new LinkedDataEntity
+   *
+   * @param  mixed    The initial values
+   * @return LinkedDataEntity
+   */
   public function create(array $values = array()) {
     if (!isset($values['uri'])) {
       $values['uri'] = lde_resource_uri();
@@ -15,39 +22,35 @@ class LinkedDataController extends EntityAPIController {
     return parent::create($values);
   }
 
-  public function save($entity, DatabaseTransaction $transaction = NULL) {
-    $rdf = $this->toRDF($entity);
-    $file_path = drupal_realpath(file_default_scheme() . '://');
-    $file_name = "{$entity->identifier()}.rdf";
-    file_put_contents("$file_path/$file_name", $rdf);
+  /**
+   * Save a LinkedDataEntity to the API
+   *
+   * @param  mixed                $entity      The entity to save
+   * @param  DatabaseTransaction  $transaction Optional, defaults to NULL. 
+   */
+  public function save($entity, DatabaseTransaction $transaction = NULL)
+  {
+    $this->put($entity);
   }
 
-  public function load($ids = array(), $conditions = array()) {
-    $file_path = drupal_realpath(file_default_scheme() . '://');
+  /**
+   * Load LinkedDataEntities from the API
+   *
+   * @param  array  The URIs of the entities to load
+   * @return array  The LinkedDataEntities
+   */
+  public function load($uris = array(), $conditions = array()) {
+    $cached_entities = $this->cacheGet($uris, $conditions);
     $entities = array();
-    foreach ($ids as $id) {
-      $file_name = "{$id}.rdf";
-      if (file_exists("$file_path/$file_name")) {
-        $rdf = file_get_contents("$file_path/$file_name");
-        $entity = entity_create(LDE_ENTITY_TYPE, array(
-          'uri' => $id,
-        ));
-        $this->fromRDF($entity, $rdf);
-        $entities[$id] = $entity;
+    foreach ($uris as $uri) {
+      if (array_key_exists($uri, $cached_entities)) {
+        $entities[$uri] = $cached_entities[$uri];
+      } else {
+        $entities[$uri] = $this->get($uri);
+        $this->cacheSet(array($uri => $entities[$uri]));
       }
     }
     return $entities;
-  }
-
-  public function buildContent($entity, $view_mode = 'full',
-    $langcode = null, $content = array()
-  ) {
-    switch ($view_mode) {
-      case 'edit':
-        return entity_form($entity->entityType(), $entity);
-      default:
-        return parent::buildContent($entity, $view_mode, $langcode, $content);
-    }
   }
 
   /**
@@ -55,7 +58,7 @@ class LinkedDataController extends EntityAPIController {
    *
    * @param  Entity  $entity The entity to serialize
    * @param  string  $format Optional, defaults to 'rdfxml'.
-   * @return string The serialized entity
+   * @return string  The serialized entity
    */
   public function toRDF($entity, $format = 'rdfxml') {
 
@@ -200,5 +203,100 @@ class LinkedDataController extends EntityAPIController {
     }
     $entity->setEntityCache($embedded_entities);
   }
+
+  /**
+   * Send PUT request to API
+   *
+   * @param  LinkedDataEntity  $entity The entity to serialize and PUT
+   */
+  protected function put($entity) {
+    if (!$api_url = $this->getApiUrl()) {
+      return false;
+    }
+    $http_url = $api_url . $entity->identifier();
+    $rdf = $this->toRDF($entity);
+    $http_options = array(
+      'method' => 'PUT',
+      'headers' => array('Content-Type' => 'application/rdf+xml'),
+      'data' => $rdf,
+    );
+    $http_response = lde_http_request($http_url, $http_options);
+    if (200 != $http_response->code) {
+      drupal_set_message("Unable to PUT $http_url", 'error');
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send GET request to API
+   *
+   * @param  string $uri The URI of the entity
+   * @return LinkedDataEntity The unserialized entity
+   */
+  protected function get($uri) {
+    if (!$api_url = $this->getApiUrl()) {
+      return false;
+    }
+    $http_url = $api_url . $uri;
+    $http_options = array(
+      'method' => 'GET',
+      'headers' => array('Content-Type' => 'application/json'),
+    );
+    $http_response = lde_http_request($http_url, $http_options);
+    if (200 != $http_response->code) {
+      drupal_set_message("Unable to GET $http_url", 'error');
+      return false;
+    }
+    $rdf_jsonld = $http_response->data;
+    $options = array(
+      'format' => 'application/ntriples'
+    );
+    $rdf_ntriples = jsonld_to_rdf(json_decode($rdf_jsonld), $options);
+    $entity = entity_create(LDE_ENTITY_TYPE, array(
+      'uri' => $uri,
+    ));
+    $this->fromRDF($entity, $rdf_ntriples, 'ntriples');
+    return $entity;
+  }
+
+  /**
+   * Get the base URL of the API, including username and password
+   *
+   * @return string the base url of the API
+   */
+  protected function getApiUrl() {
+    $user = variable_get('lde_api_user');
+    $pass = variable_get('lde_api_password');
+    $host = variable_get('lde_api_host');
+    if (!$user || !$pass || !$host) {
+      var_dump($user, $pass, $host);die;
+      drupal_set_message(
+        l('Please configure the API first', 'admin/config/lde/storage')
+      );
+      return false;
+    }
+    return "http://$user:$pass@$host/oer/";
+  }
+
+}
+
+function lde_http_request($request_url, $http_options) {
+
+  $http_response = drupal_http_request($request_url, $http_options);
+
+  // FIXME: drupal_http_request does not follow 303s
+  if ((303 == $http_response->code) || (307 == $http_response->code)) {
+    $redirect_url = $http_response->headers['location'];
+    // Fix for relative redirect URLs
+    if ("/" == substr($redirect_url, 0, 1)) {
+      $parsed_url = parse_url($request_url);
+      $redirect_url = "{$parsed_url['scheme']}://{$parsed_url['host']}$redirect_url";
+    }
+    $request_url = $redirect_url;
+    $http_response = drupal_http_request($request_url, $http_options);
+  }
+
+  return $http_response;
 
 }
