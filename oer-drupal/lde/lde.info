@@ -4,4 +4,5 @@ package = Linked Data
 core = 7.x
 files[] = LinkedDataController.inc
 files[] = LinkedDataEntity.inc
+files[] = LinkedDataEntityFieldQuery.inc
 dependencies[] = entity
