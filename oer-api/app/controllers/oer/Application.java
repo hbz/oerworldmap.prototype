@@ -18,6 +18,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -42,8 +43,8 @@ public class Application extends Controller {
 	private static final String USER_TYPE = "users";
 
 	final static Client productionClient = new TransportClient(
-			ImmutableSettings.settingsBuilder()
-					.put("cluster.name", "quaoar").build())
+			ImmutableSettings.settingsBuilder().put("cluster.name", "quaoar")
+					.build())
 			.addTransportAddress(new InetSocketTransportAddress(
 					"193.30.112.170", 9300));
 	static Client client = productionClient;
@@ -105,7 +106,9 @@ public class Application extends Controller {
 					// @formatter:off@
 					"/oer?q=\"Cape+Town\"",
 					"/oer?q=*&t=http://schema.org/CollegeOrUniversity",
-					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity")));
+					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity",
+					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity,"
+					+ "http://www.w3.org/ns/org#OrganizationalCollaboration")));
 					// @formatter:on@
 		return processQuery(q, t);
 	}
@@ -194,13 +197,22 @@ public class Application extends Controller {
 		BoolQueryBuilder query = QueryBuilders.boolQuery().must(
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
-			query = query.must(QueryBuilders.matchQuery("@type", t));
+			query = query.must(typeQuery(t));
 		SearchResponse response = search(query);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
 			hits.add(hit.getSourceAsString());
 		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
 		return ok(Json.parse(jsonString));
+	}
+
+	private static BoolQueryBuilder typeQuery(String t) {
+		final String[] types = t.split(",");
+		BoolQueryBuilder query = QueryBuilders.boolQuery();
+		for (String type : types)
+			query = query.should(QueryBuilders.matchQuery("@type", type)
+					.operator(MatchQueryBuilder.Operator.AND));
+		return query;
 	}
 
 	private static SearchResponse search(final QueryBuilder queryBuilder) {
