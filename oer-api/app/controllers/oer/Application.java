@@ -38,6 +38,7 @@ import play.mvc.Result;
 import views.html.oer_index;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.jsonldjava.utils.JSONUtils;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
@@ -116,7 +117,8 @@ public class Application extends Controller {
 					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity",
 					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity,"
 					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
-					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6")));
+					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
+					"/oer?q=\"Cape+Town\"&callback=callbackFunction")));
 					// @formatter:on@
 		return processQuery(q, t, location);
 	}
@@ -126,7 +128,7 @@ public class Application extends Controller {
 			GetResponse response = client.prepareGet(INDEX, DATA_TYPE, id)
 					.execute().actionGet();
 			String r = response.isExists() ? response.getSourceAsString() : "";
-			return ok(Json.parse("[" + r + "]"));
+			return withCallback(Json.parse("[" + r + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -211,7 +213,16 @@ public class Application extends Controller {
 		for (SearchHit hit : response.getHits())
 			hits.add(withoutGeo(hit.getSourceAsString()));
 		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
-		return ok(Json.parse(jsonString));
+		return withCallback(Json.parse(jsonString));
+	}
+
+	private static Status withCallback(JsonNode json) {
+		/* JSONP callback support for remote server calls with JavaScript: */
+		final String[] callback = request() == null
+				|| request().queryString() == null ? null : request()
+				.queryString().get("callback");
+		return callback != null ? ok(String.format("%s(%s)", callback[0], json))
+				: ok(json);
 	}
 
 	private static String withoutGeo(String sourceAsString) {
