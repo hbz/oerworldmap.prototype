@@ -3,7 +3,7 @@
 # ~~~~
 
 # API query route
-GET     /oer                        controllers.oer.Application.query(q?="",t?="")
+GET     /oer                        controllers.oer.Application.query(q?="",t?="",location?="")
 GET     /oer/:id                    controllers.oer.Application.get(id)
 PUT     /oer/:id                    controllers.oer.Application.put(id)
 

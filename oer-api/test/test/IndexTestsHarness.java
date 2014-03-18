@@ -8,7 +8,9 @@ import static play.test.Helpers.testServer;
 import java.io.IOException;
 
 import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
+import org.elasticsearch.client.AdminClient;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.node.Node;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -40,13 +42,16 @@ public class IndexTestsHarness {
 	public static void setup() throws IOException {
 		node = nodeBuilder().local(true).node();
 		client = node.client();
-		client.admin().indices().prepareDelete().execute().actionGet();
-		client.admin().cluster().prepareHealth().setWaitForYellowStatus()
-				.execute().actionGet();
+		AdminClient admin = client.admin();
+		IndicesAdminClient indices = admin.indices();
+		if (indices.prepareExists(TEST_INDEX).execute().actionGet().isExists())
+			indices.prepareDelete(TEST_INDEX).execute().actionGet();
+		admin.cluster().prepareHealth().setWaitForYellowStatus().execute()
+				.actionGet();
 		Application.clientSet(client);
-		Application.main("user", "pass");
 		NtToEs.main(TEST_DATA);
-		client.admin().indices().refresh(new RefreshRequest()).actionGet();
+		Application.main("user", "pass");
+		indices.refresh(new RefreshRequest()).actionGet();
 		LOG.info("Local testing index done");
 	}
 
