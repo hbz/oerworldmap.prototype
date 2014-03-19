@@ -30,7 +30,7 @@ import controllers.oer.NtToEs;
 public class IndexTestsHarness {
 
 	private static final String TEST_DATA = "public/data/samples";
-	private static final String TEST_INDEX = Application.INDEX;
+	private static final String TEST_INDEX = Application.DATA_INDEX;
 	static final int TEST_SERVER_PORT = 5000;
 	static final TestServer TEST_SERVER = testServer(TEST_SERVER_PORT);
 	private static Node node;

@@ -46,9 +46,10 @@ import com.google.common.io.BaseEncoding;
 
 public class Application extends Controller {
 
-	public static final String INDEX = "oer-index";
+	public static final String DATA_INDEX = "oer-data";
 	private static final String DATA_TYPE = "oer-type";
-	private static final String USER_TYPE = "users";
+	public static final String USER_INDEX = "oer-users";
+	private static final String USER_TYPE = "user-type";
 
 	final static Client productionClient = new TransportClient(
 			ImmutableSettings.settingsBuilder()
@@ -104,7 +105,7 @@ public class Application extends Controller {
 		String user = args[0];
 		String pass = BCrypt.hashpw(args[1], BCrypt.gensalt());
 		System.out.print(responseInfo(client
-				.prepareIndex(INDEX, USER_TYPE, user)
+				.prepareIndex(USER_INDEX, USER_TYPE, user)
 				.setSource("user", user, "pass", pass).execute().actionGet()));
 	}
 
@@ -125,7 +126,7 @@ public class Application extends Controller {
 
 	public static Result get(String id) {
 		try {
-			GetResponse response = client.prepareGet(INDEX, DATA_TYPE, id)
+			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
 			String r = response.isExists() ? response.getSourceAsString() : "";
 			return withCallback(Json.parse("[" + r + "]"));
@@ -172,8 +173,9 @@ public class Application extends Controller {
 					serialization.format);
 			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
 					userAndPass(authHeader)[0], jsonLd);
-			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
-					.setSource(jsonLd).execute().actionGet()));
+			return ok(responseInfo(client
+					.prepareIndex(DATA_INDEX, DATA_TYPE, id).setSource(jsonLd)
+					.execute().actionGet()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -185,7 +187,7 @@ public class Application extends Controller {
 
 	private static boolean authorized(String authHeader) {
 		String[] userAndPass = userAndPass(authHeader);
-		SearchResponse search = search(
+		SearchResponse search = search(USER_INDEX,
 				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "");
 		return search.getHits().getTotalHits() == 1
 				&& BCrypt.checkpw(userAndPass[1], (String) search.getHits()
@@ -208,7 +210,7 @@ public class Application extends Controller {
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
 			query = query.must(typeQuery(t));
-		SearchResponse response = search(query, location);
+		SearchResponse response = search(DATA_INDEX, query, location);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
 			hits.add(withoutGeo(hit.getSourceAsString()));
@@ -250,9 +252,9 @@ public class Application extends Controller {
 		return query;
 	}
 
-	private static SearchResponse search(final QueryBuilder queryBuilder,
-			String location) {
-		SearchRequestBuilder requestBuilder = client.prepareSearch(INDEX)
+	private static SearchResponse search(String index,
+			QueryBuilder queryBuilder, String location) {
+		SearchRequestBuilder requestBuilder = client.prepareSearch(index)
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 				.setQuery(queryBuilder);
 		if (!location.trim().isEmpty())

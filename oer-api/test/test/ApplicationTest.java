@@ -45,7 +45,7 @@ public class ApplicationTest extends IndexTestsHarness {
 				controllers.oer.routes.ref.Application.query("*", "", ""),
 				fakeRequest());
 		assertThat(status(result)).isEqualTo(OK);
-		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(3);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(2);
 	}
 
 	@Test
