@@ -213,7 +213,7 @@ public class Application extends Controller {
 		SearchResponse response = search(DATA_INDEX, query, location);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
-			hits.add(withoutGeo(hit.getSourceAsString()));
+			hits.add(postprocess(hit.getSourceAsString()));
 		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
 		return withCallback(Json.parse(jsonString));
 	}
@@ -227,13 +227,15 @@ public class Application extends Controller {
 				: ok(json);
 	}
 
-	private static String withoutGeo(String sourceAsString) {
+	private static String postprocess(String sourceAsString) {
 		try {
 			// JSON-LD compact, always an object (resulting in a map)
 			@SuppressWarnings("unchecked")
 			Map<String, Object> json = (Map<String, Object>) JSONUtils
 					.fromString(sourceAsString);
 			json.remove("location");
+			json.put("@context", routes.Assets.at("data/context.json")
+					.absoluteURL(request()));
 			return JSONUtils.toString(json);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
