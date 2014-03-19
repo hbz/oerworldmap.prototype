@@ -65,7 +65,22 @@ function oerworldmap_menu() {
 }
 
 function oerworldmap() {
-  return array();
+  drupal_add_css(
+    'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css', 'external'
+  );
+  drupal_add_js(
+    'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js', 'external'
+  );
+  drupal_add_js(array('oerworldmap' => array(
+    'apiUrl' => variable_get('lde_api_host'),
+  )), 'setting');
+  drupal_add_js(
+    drupal_get_path('module', 'oerworldmap') . '/oerworldmap.js'
+  );
+  return array(
+    '#type' => 'markup',
+    '#markup' => '<div id="oerworldmap" style="height: 300px; width: 100%; border: 1px solid black;"></div>',
+  );
 }
 
 function oerworldmap_ap_update() {
