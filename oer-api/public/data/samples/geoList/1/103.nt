@@ -1,0 +1,6 @@
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
+<http://oerworldmap.org/resource/ocw103> <http://purl.org/dc/elements/1.1/identifier> "103" .
+<http://oerworldmap.org/resource/ocw103> <http://schema.org/geo> _:Bf22d0f775564eb579a8c260ca6d1a8e2 .
+_:Bf22d0f775564eb579a8c260ca6d1a8e2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+_:Bf22d0f775564eb579a8c260ca6d1a8e2 <http://schema.org/longitude> "-87.641185" .
+_:Bf22d0f775564eb579a8c260ca6d1a8e2 <http://schema.org/latitude> "41.876835" .

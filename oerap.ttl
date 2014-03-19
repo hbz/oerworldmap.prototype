@@ -1,0 +1,453 @@
+@prefix : <#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://exapmle.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
+@prefix oo: <http://purl.org/openorg/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+
+:ap
+    a owl:Ontology , ex:ApplicationProfile ;
+    dct:title "Application profile for OER world map prototype." ;
+    dct:creator <http://lobid.org/person/ap> ;
+    dct:created "2014-02-24" ;
+    dc:rights "This application profile is available under the Creative Commons Public Domain Dedication (CC0)" ;
+    dct:rights <http://creativecommons.org/publicdomain/zero/1.0/> .
+
+:Organization
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf schema:Organization ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :name ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :alternateName ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :description ;
+        owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :url ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :address ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :geo ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :sameAs ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :member ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :memberOf ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :providesService ;
+        owl:minCardinality "0" ] .
+
+:Person
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf schema:Person ,
+    [ a owl:Restriction ;
+        owl:onProperty :name ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :alternateName ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :description ;
+        owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :url ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :address ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :geo ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :sameAs ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :memberOf ;
+        owl:minCardinality "0" ] .
+
+:Service
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf schema:Service ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :name ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :alternateName ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :description ;
+        owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :url ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :contact ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :license ;
+        owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :sameAs ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :provider ;
+        owl:minCardinality "0" ] .
+
+:Project
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf foaf:Project ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :name ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :alternateName ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :description ;
+        owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :url ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :contact ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :sameAs ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :member ;
+        owl:allValuesFrom :Person ;
+        owl:minCardinality "0" ] .
+
+:PostalAddress
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf schema:PostalAddress ,
+    [ a owl:Restriction ;
+        owl:onProperty :streetAddress ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :postalCode ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :addressLocality ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :addressCountry ;
+        owl:cardinality "1" ] .
+
+:GeoCoordinates
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf schema:GeoCoordinates ,
+    [ a owl:Restriction ;
+        owl:onProperty :latitude ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :longitude ;
+        owl:cardinality "1" ] .
+
+:Image
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf foaf:Image .
+
+:Locality
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf gn:Feature ,
+    [ a owl:Restriction ;
+        owl:onProperty gn:featureClass ;
+        owl:hasValue gn:P ] .
+
+:Country
+    a owl:Class ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:subClassOf gn:Feature ,
+    [ a owl:Restriction ;
+        owl:onProperty gn:featureClass ;
+        owl:hasValue gn:A ] .
+
+:type
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property rdf:type is used to indicate the type of a resource (person, organization, project, or service)."@en ;
+    rdfs:subPropertyOf rdf:type ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Type"@en ;
+    rdfs:label "Typ"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Organization :Service :Person :Project )
+    ] .
+
+:logo
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:logo is used to link to a logo of an organization, a project, or a service."@en ;
+    rdfs:subPropertyOf schema:logo ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Logo"@en ;
+    rdfs:label "Logo"@de ;
+    rdfs:range :Image .
+
+:name
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:name is used to indicate the name of a person, organization, project, or service."@en ;
+    rdfs:subPropertyOf schema:name ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Name"@en ;
+    rdfs:label "Name"@de ;
+    rdfs:range rdfs:Literal .
+
+:alternateName
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:alternateName is used to indicate the alternate name (nick name, abbreviation etc.) of a person, organization, project, or service."@en ;
+    rdfs:subPropertyOf schema:alternateName ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Alternate Name"@en ;
+    rdfs:label "Alternativer Name"@de ;
+    rdfs:range rdfs:Literal .
+
+:description
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:description is used to give a description of a person, organization, project, or service."@en ;
+    rdfs:subPropertyOf schema:description ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Description"@en ;
+    rdfs:label "Beschreibung"@de ;
+    rdfs:range rdfs:Literal .
+
+:url
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:url is used to link to a homepage of a person, organization, project, or service."@en ;
+    rdfs:subPropertyOf schema:url ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Website"@en ;
+    rdfs:label "Webseite"@de ;
+    rdfs:range xsd:anyURI .
+
+:email
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:email is used to indicate the email address of a person, organization, project, or service. The literal should conform to this regular expression: [A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"@en ;
+    rdfs:subPropertyOf schema:email ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Email"@en ;
+    rdfs:label "E-Mail"@de ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}"
+        ]
+      )
+    ] .
+
+:contact
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property oo:contact is used to link a project or service to a contact person within the OER map data."@en ;
+    rdfs:subPropertyOf oo:contact ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Contact Person"@en ;
+    rdfs:label "Kontaktperson"@de ;
+    rdfs:range :Person .
+
+:address
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:address is used to link to a blank node with address details of a person or an organization."@en ;
+    rdfs:subPropertyOf schema:address ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Address"@en ;
+    rdfs:label "Adresse"@de ;
+    rdfs:range :PostalAddress .
+
+:streetAddress
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:streetAddress is used to indicate the street address of a schema:PostalAddress."@en ;
+    rdfs:subPropertyOf schema:streetAddress ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Street Address"@en ;
+    rdfs:label "Straße und Hausnummer"@de ;
+    rdfs:domain :PostalAddress ;
+    rdfs:range rdfs:Literal .
+
+:postalCode
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:postalCode is used to indicate the postal code of a schema:PostalAddress."@en ;
+    rdfs:subPropertyOf schema:postalCode ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Postal Code"@en ;
+    rdfs:label "Postleitzahl"@de ;
+    rdfs:domain :PostalAddress ;
+    rdfs:range rdfs:Literal .
+
+:addressLocality
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:addressLocality is used to indicate the locality of a schema:PostalAddress using the respective GeoNames URI."@en ;
+    rdfs:subPropertyOf schema:addressLocality ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Locality"@en ;
+    rdfs:label "Ort"@de ;
+    rdfs:domain :PostalAddress ;
+    rdfs:range :Locality .
+
+:addressCountry
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:addressCountry is used to indicate the country of a schema:PostalAddress using the respective GeoNames URI."@en ;
+    rdfs:subPropertyOf schema:addressCountry ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Country"@en ;
+    rdfs:label "Ort"@de ;
+    rdfs:domain :PostalAddress ;
+    rdfs:range :Country .
+
+:license
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property dct:license is used to link a service to the license the service's contents are licensed under."@en ;
+    rdfs:subPropertyOf dct:license ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "License"@en ;
+    rdfs:label "Lizenz"@de .
+
+:geo
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:geo is used to link an organization to its schema:GeoCoordinates."@en ;
+    rdfs:subPropertyOf schema:geo ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Geo Coordinates"@en ;
+    rdfs:label "Geokoordinaten"@de ;
+    rdfs:range :GeoCoordinates .
+
+:latitude
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:latitude is used to indicate the latitude of schema:GeoCoordinates. Values should conform to this regular expression: ^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$ ."@en ;
+    rdfs:subPropertyOf schema:latitude ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Latitude"@en ;
+    rdfs:label "Geographische Breite"@de ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
+        ]
+      )
+    ] .
+
+:longitude
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:longitude is used to indicate the longitude of schema:GeoCoordinates. Values should conform to this regular expression: ^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$ ."@en ;
+    rdfs:subPropertyOf schema:longitude ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Longitude"@en ;
+    rdfs:label "Geographische Länge"@de ;
+    rdfs:range [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+        [
+            xsd:pattern "^(-?[0-9]+(.[0-9]+)?), *(-?[0-9]+(.[0-9]+)?)$"
+        ]
+      )
+    ] .
+
+:sameAs
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:sameAs is used to link an organizatin, a person, a service or a project to other URIs for them."@en ;
+    rdfs:subPropertyOf schema:sameAs ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Same as"@en ;
+    rdfs:label "Identische Ressource"@de .
+
+:member
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:member is used to link an organization or project to persons or other organizations that are members of the organization/project."@en ;
+    rdfs:subPropertyOf schema:member ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Members"@en ;
+    rdfs:label "Mitglieder"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Organization :Person )
+    ] .
+
+:memberOf
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:memberOf is used to link an organization or a person to organizations or projects they are members of."@en ;
+    rdfs:subPropertyOf schema:memberOf ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Member of"@en ;
+    rdfs:label "Mitglied von"@de ;
+    rdfs:range [
+      a owl:Class ;
+      owl:oneOf ( :Organization :Project )
+    ] .
+
+:providesService
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:providesService is used to link an organization to an OER service it provides."@en ;
+    rdfs:subPropertyOf schema:providesService ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "OER services by the organization"@en ;
+    rdfs:label "OER-Angebote der Organisation"@de ;
+    rdfs:range :Service .
+
+:provider
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property schema:provider is used to link an OER service to an organization that provides the service."@en ;
+    rdfs:subPropertyOf schema:provider ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Provider"@en ;
+    rdfs:label "Anbieter"@de ;
+    rdfs:range :Organization .
+
+:funder
+    a owl:ObjectProperty ;
+    rdfs:comment "In the context of this application profile the property marcrel:fnd is used to link a project to an organization that funds the project."@en ;
+    rdfs:subPropertyOf marcrel:fnd ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Funding Organization"@en ;
+    rdfs:label "Gefördert von"@de ;
+    rdfs:range :Organization .

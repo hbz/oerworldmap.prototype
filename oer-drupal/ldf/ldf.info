@@ -1,0 +1,5 @@
+name = Linked Data Field
+description = Provides a field type, widget and formatter for linked data
+package = Linked Data
+core = 7.x
+dependencies[] = entity_js

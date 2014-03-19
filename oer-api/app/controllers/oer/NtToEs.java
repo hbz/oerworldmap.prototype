@@ -1,13 +1,16 @@
 /* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
 
-package org.hbz.oerworldmap;
+package controllers.oer;
 
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
+import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,11 +26,9 @@ import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.elasticsearch.ElasticSearchException;
 import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.IndicesAdminClient;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.ImmutableSettings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+
+import play.Play;
 
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdOptions;
@@ -45,16 +46,12 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
  */
 public class NtToEs {
 
-	static final String CONFIG = "src/main/resources/index-config.json";
-	static final String CONTEXT = "src/main/resources/context.json";
+	static final String CONFIG = "public/data/index-config.json";
+	static final String CONTEXT = "public/data/context.json";
 	static final String TYPE = "oer-type";
 	static final String INDEX = "oer-index";
-	static final Client CLIENT = new TransportClient(ImmutableSettings
-			.settingsBuilder().put("cluster.name", "quaoar").build())
-			.addTransportAddress(new InetSocketTransportAddress(
-					"193.30.112.170", 9300));
 
-	public static void main(String[] args) throws ElasticSearchException,
+	public static void main(String... args) throws ElasticSearchException,
 			FileNotFoundException, IOException {
 		if (args.length != 1) {
 			System.err
@@ -92,7 +89,7 @@ public class NtToEs {
 	}
 
 	private static void createIndex(String config) {
-		IndicesAdminClient admin = CLIENT.admin().indices();
+		IndicesAdminClient admin = Application.client.admin().indices();
 		if (!admin.prepareExists(INDEX).execute().actionGet().isExists())
 			admin.prepareCreate(INDEX).setSource(config).execute().actionGet();
 	}
@@ -100,7 +97,8 @@ public class NtToEs {
 	private static void process(Map<String, StringBuilder> map) {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			try {
-				indexData(uuid(e.getKey()), ntToJsonLd(e.getValue().toString()));
+				indexData(uuid(e.getKey()),
+						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES));
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
 						e.getKey(), x.getMessage());
@@ -110,8 +108,8 @@ public class NtToEs {
 	}
 
 	private static void indexData(String id, String data) {
-		IndexResponse r = CLIENT.prepareIndex(INDEX, TYPE, id).setSource(data)
-				.execute().actionGet();
+		IndexResponse r = Application.client.prepareIndex(INDEX, TYPE, id)
+				.setSource(data).execute().actionGet();
 		System.out.printf(
 				"Indexed into index %s, type %s, id %s, version %s: %s\n",
 				r.getIndex(), r.getType(), r.getId(), r.getVersion(), data);
@@ -121,18 +119,18 @@ public class NtToEs {
 		return UUID.nameUUIDFromBytes(id.getBytes()).toString();
 	}
 
-	private static String ntToJsonLd(String data) {
-		Model model = ModelFactory.createDefaultModel();
-		model.read(new StringReader(data), null, "N-Triples");
+	static String rdfToJsonLd(String data, Lang lang) {
 		StringWriter stringWriter = new StringWriter();
+		InputStream in = new ByteArrayInputStream(data.getBytes(Charsets.UTF_8));
+		Model model = ModelFactory.createDefaultModel();
+		RDFDataMgr.read(model, in, lang);
 		RDFDataMgr.write(stringWriter, model, Lang.JSONLD);
 		return compact(stringWriter.toString());
 	}
 
 	private static String compact(String json) {
 		try {
-			Object contextJson = JSONUtils.fromInputStream(new FileInputStream(
-					CONTEXT));
+			Object contextJson = JSONUtils.fromURL(context());
 			JsonLdOptions options = new JsonLdOptions();
 			options.setCompactArrays(false); // ES needs consistent data
 			Map<String, Object> compact = JsonLdProcessor.compact(
@@ -142,5 +140,13 @@ public class NtToEs {
 			throw new IllegalStateException("Could not compact JSON-LD: \n"
 					+ json, e);
 		}
+	}
+
+	public static URL context() throws MalformedURLException {
+		final String path = "public/data";
+		final String file = "context.json";
+		if (new File(path, file).exists())
+			return new File(path, file).toURI().toURL();
+		return Play.application().resource("/" + path + "/" + file);
 	}
 }

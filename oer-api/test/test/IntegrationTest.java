@@ -1,32 +1,33 @@
-package test;
 /* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 */
+package test;
 
-import org.junit.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.HTMLUNIT;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.running;
+import static play.test.Helpers.testServer;
 
-import play.mvc.*;
-import play.test.*;
-import play.libs.F.*;
+import org.junit.Test;
 
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
+import play.libs.F.Callback;
+import play.test.TestBrowser;
 
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+public class IntegrationTest extends IndexTestsHarness {
 
-public class IntegrationTest {
-
-    /**
-     * add your integration test here
-     * in this example we just check if the welcome page is being shown
-     */
-    @Test
-    @Ignore
-    public void test() {
-        running(testServer(2222, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
-            public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:2222/oer");
-                assertThat(browser.pageSource()).contains("OER API");
-            }
-        });
-    }
+	/**
+	 * add your integration test here in this example we just check if the
+	 * welcome page is being shown
+	 */
+	@Test
+	public void test() {
+		running(testServer(2222, fakeApplication(inMemoryDatabase())),
+				HTMLUNIT, new Callback<TestBrowser>() {
+					public void invoke(TestBrowser browser) {
+						browser.goTo("http://localhost:2222/oer");
+						assertThat(browser.pageSource()).contains("OER API");
+					}
+				});
+	}
 
 }

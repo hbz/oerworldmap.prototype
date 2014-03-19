@@ -3,6 +3,7 @@
 @(queries: List[String])
 
 @import play.api.libs.json.Json
+@import controllers.oer.Application.Serialization
 
 @oer_main("OER") {
     <h1>hbz OER API prototype</h1>
@@ -13,7 +14,7 @@
         <dt><code>q</code> (required)<dt>
         <dd>Query over all fields, supports <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"> elasticsearch query string syntax</a>.</dd>
         <dt><code>t</code> (optional)</dt>
-        <dd>Filter results by the <code>@@type</code> field (requires exact full value).</dd>
+        <dd>Filter results by the <code>@@type</code> field (pass multiple, comma-separated values for OR logic).</dd>
         <dt>Samples<dt>
         <dd>
         @for(query <- queries) { <a href="@query">@query</a><br/> }
@@ -22,14 +23,20 @@
     <h2>Write</h2>
     <dl>
         <dt>Overview</dt>
-        <dd>The API supports <code>PUT</code> requests with JSON bodies. Note: the write API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
+        <dd>The API supports <code>PUT</code> requests with RDF bodies. Note: the write API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
         <dt>id<dt>
         <dd>Append the ID for your data to the request path, e.g. <code>PUT /oer/id123</code> for ID <code>id123</code>. You can <code>GET</code> the data the same way: <a href="/oer/id123">/oer/id123</a>.</dd>
         <dt>body</dt>
-        <dd>The request body is expected to be a single JSON <i>object</i> (<i>not</i> a JSON array, literal, etc).</dd>
+        <dd>The request body is expected to be valid RDF.</dd>
+        <dt>Content-Type</dt>
+        <dd>The <code>Content-Type</code> header must specify what is sent in the body (see supported types below).</dd>
         <dt>Sample<dt>
         <dd>
-        <code>curl -X PUT -H "Content-Type: application/json" http://user:pass@@staging.api.lobid.org/oer/id123 -d '{"field":["some","json"]}'</code>
+        <code>curl -X PUT -H "Content-Type: text/plain" http://user:pass@@staging.api.lobid.org/oer/id123 -d '&lt;http://www.w3.org/2001/sw/RDFCore/ntriples/&gt; &lt;http://purl.org/dc/elements/1.1/creator&gt; "Dave Beckett" .'</code>
         </dd>
     </dt>
+    <h2>Content types</h2>
+    <dl>
+     @for(s <- Serialization.values()) { <dt>@s.name</dt> <dd>@s.getTypes</dd> }
+    </dl>
 }

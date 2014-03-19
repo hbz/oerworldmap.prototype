@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_entity_info_alter
+ *
+ * Sets the bundles for all entity types that are managed by an
+ * application profile.
+ *
+ * @param  mixed  $entity_info
+ */
+function ldap_entity_info_alter(&$entity_info) {
+  foreach (ApplicationProfile::getAll() as $entity_type => $ap) {
+    $entity_info[$entity_type]['bundles'] = $ap->getBundles();
+  }
+}
