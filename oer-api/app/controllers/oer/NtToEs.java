@@ -20,7 +20,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
+import java.util.Scanner;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -52,16 +52,20 @@ public class NtToEs {
 	static final String CONFIG = "public/data/index-config.json";
 	static final String CONTEXT = "public/data/context.json";
 	static final String TYPE = "oer-type";
-	static final String INDEX = "oer-index";
+	static final String INDEX = Application.INDEX;
+	static final Map<String, String> idMap = new HashMap<String, String>();
 
 	public static void main(String... args) throws ElasticSearchException,
 			FileNotFoundException, IOException {
-		if (args.length != 1) {
-			System.err
-					.println("Pass a single arg: the root directory to crawl. "
-							+ "Will recursively gather all content from *.nt "
-							+ "files with identical names, convert these to "
-							+ "compact JSON-LD and index it in ES.");
+		if (args.length != 1 && args.length != 2) {
+			System.err.println("Pass the root directory to crawl. "
+					+ "Will recursively gather all content from *.nt "
+					+ "files with identical names, convert these to "
+					+ "compact JSON-LD and index it in ES."
+					+ "If a second argument is passed it is processed"
+					+ "as a TSV file that maps file names (w/o"
+					+ "extensions) to IDs to be used for ES. Else the"
+					+ "file names are used (w/o extensions) are used.");
 			System.exit(-1);
 		}
 		TripleCrawler crawler = new TripleCrawler();
@@ -69,6 +73,8 @@ public class NtToEs {
 		String config = CharStreams.toString(new FileReader(CONFIG));
 		System.err.println("Config:\n" + config);
 		createIndex(config);
+		if (args.length == 2)
+			initMap(args[1]);
 		process(crawler.data);
 	}
 
@@ -102,7 +108,8 @@ public class NtToEs {
 	private static void process(Map<String, StringBuilder> map) {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			try {
-				indexData(uuid(e.getKey()),
+				String id = e.getKey().split("\\.")[0];
+				indexData(idMap.isEmpty() ? id : idMap.get(id),
 						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES));
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
@@ -112,16 +119,23 @@ public class NtToEs {
 		}
 	}
 
+	private static void initMap(String mapFile) {
+		try (Scanner s = new Scanner(new File(mapFile))) {
+			while (s.hasNextLine()) {
+				String[] keyVal = s.nextLine().split("\\s");
+				idMap.put(keyVal[0].trim(), keyVal[1].trim());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static void indexData(String id, String data) {
 		IndexResponse r = Application.client.prepareIndex(INDEX, TYPE, id)
 				.setSource(data).execute().actionGet();
 		System.out.printf(
 				"Indexed into index %s, type %s, id %s, version %s: %s\n",
 				r.getIndex(), r.getType(), r.getId(), r.getVersion(), data);
-	}
-
-	private static String uuid(String id) {
-		return UUID.nameUUIDFromBytes(id.getBytes()).toString();
 	}
 
 	static String rdfToJsonLd(String data, Lang lang) {
