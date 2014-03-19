@@ -129,7 +129,7 @@ public class Application extends Controller {
 			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
 			String r = response.isExists() ? response.getSourceAsString() : "";
-			return withCallback(Json.parse("[" + r + "]"));
+			return withCallback(Json.parse("[" + postprocess(r) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
