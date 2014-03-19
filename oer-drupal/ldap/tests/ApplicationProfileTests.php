@@ -206,4 +206,15 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($expected, $top_bundles);
   }
 
+  /**
+   * TODO: short description.
+   * 
+   * @return TODO
+   */
+  public function test_get_endpoints() {
+    $endpoints = ApplicationProfile::get(TEST_LDE_TYPE)->getEndpoints(
+    );
+    print_r($endpoints);
+  }
+
 }

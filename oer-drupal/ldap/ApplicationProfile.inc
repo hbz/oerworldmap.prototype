@@ -321,17 +321,20 @@ class ApplicationProfile {
              $this->applicationProfileURI->getNamespace())
         ) continue;
         $target_bundle = $this->getBundleName($allowed_value);
-        // Non top-level bundles are embedded within their parent,
-        // top-level bundles can be linked to
+
+        // Allow linking
+        $endpoints = $this->getEndpoints($target_bundle);
+        if (!empty($endpoints)) {
+          $instance['settings']['handler_settings']['target_bundles']
+            [$target_bundle]['lookup'] = $endpoints;
+        }
+
+        // Non top-level bundles are embedded within their parent.
         if (!in_array($target_bundle, $this->getTopBundles())) {
-          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array(
-            'embed' => true,
-            'create' => true,
-          );
-        } else {
-          $instance['settings']['handler_settings']['target_bundles'][$target_bundle] = array (
-            'lookup' => true,
-          );
+          $instance['settings']['handler_settings']['target_bundles']
+            [$target_bundle]['embed'] = true;
+          $instance['settings']['handler_settings']['target_bundles']
+            [$target_bundle]['create'] = true;
         }
       }
 
@@ -391,6 +394,63 @@ class ApplicationProfile {
       }
     }
     return $mappings;
+  }
+
+  public function getEndpoints($target_bundle = null) {
+    $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
+    $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $XSD = new LibRDF_NS('http://www.w3.org/2001/XMLSchema#');
+    $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+    $EX = new LibRDF_NS('http://example.org/');
+
+    $query_string = "
+      SELECT DISTINCT * WHERE {
+        ?endpoint a {$EX->endpoint} ;
+          {$EX->queryParam} ?queryParam ;
+          {$EX->limitParam} ?limitParam ;
+          {$EX->offsetParam} ?offsetParam ;
+          {$EX->resultFormat} ?resultFormat ;
+      }
+    ";
+
+    $query = new LibRDF_Query($query_string, null, 'sparql');
+    $defined_endpoints = $query->execute($this->applicationProfileRDF);
+
+    // Construct endpoints
+    $endpoints = array();
+    foreach ($defined_endpoints as $defined_endpoint) {
+      $endpoint = array(
+        'queryParam' => $defined_endpoint['queryParam']->getValue(),
+        'limitParam' => $defined_endpoint['limitParam']->getValue(),
+        'offsetParam' => $defined_endpoint['offsetParam']->getValue(),
+        'resultFormat' => $defined_endpoint['resultFormat']->getValue(),
+      );
+      try {
+        $type_param = $this->applicationProfileRDF->getTarget(
+          $defined_endpoint['endpoint'], $EX->typeParam
+        );
+        $endpoint['typeParam'] = $type_param->getValue();
+      } catch (LibRDF_LookupError $e) {
+        // No type param set, ignore
+      }
+      $additional_params = $this->applicationProfileRDF->getTargets(
+        $defined_endpoint['endpoint'], $EX->additionalParam
+      );
+      foreach ($additional_params as $additional_param) {
+        $endpoint['additionalParam'][] = $additional_param->getValue();
+      }
+      $available_bundles = $this->applicationProfileRDF->getTargets(
+        $defined_endpoint['endpoint'], $EX->supplies
+      );
+      foreach ($available_bundles as $available_bundle) {
+        $bundle_name = $this->getBundleName($available_bundle);
+        $endpoint['supplies'][] = $this->getBundleName($available_bundle);
+      }
+      if (!$target_bundle || in_array($target_bundle, $endpoint['supplies'])) {
+        $endpoints[$defined_endpoint['endpoint']->getValue()] = $endpoint;
+      }
+    }
+    return $endpoints;
   }
 
   /**

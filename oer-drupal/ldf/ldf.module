@@ -163,7 +163,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
           }
           // Build option cache here!!!
           $matches = array_values(
-            ldf_field_lookup(array_keys($target_bundles), $term)
+            ldf_field_lookup($target_bundles, $term)
           );
           $option_cache[$on_entity][$on_field] = $matches;
         }
@@ -220,7 +220,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
 
       $inline_mode = 'link';
       foreach ($target_bundles as $target_bundle => $allowed_actions) {
-        if (isset($allowed_actions['embed'])) {
+        if (isset($allowed_actions['embed']) && !isset($allowed_actions['lookup'])) {
           $inline_mode = 'edit';
         }
         if (isset($allowed_actions['lookup'])) {
@@ -365,10 +365,26 @@ function ldf_field_widget_validate_value($form, &$form_state) {
  * @return array Entities matching the query
  */
 function ldf_field_lookup($target_bundles, $term) {
-  $query = new LinkedDataEntityFieldQuery();
-  $query->addMetadata('term', $term);
-  $query->entityCondition('bundle', $target_bundles);
-  return $query->execute();
+  $endpoints = array();
+  foreach ($target_bundles as $target_bundle) {
+    if (!isset($target_bundle['lookup'])) continue;
+    foreach ($target_bundle['lookup'] as $endpoint_uri => $endpoint_params) {
+      $endpoints[$endpoint_uri] = $endpoint_params;
+    }
+  }
+  $hits = array();
+  foreach ($endpoints as $endpoint) {
+    $query = new LinkedDataEntityFieldQuery();
+    $query->addMetadata('endpoint', $endpoint_uri);
+    $query->addMetadata('term', $term);
+    foreach ($endpoint_params as $param => $value) {
+      $query->addMetadata($param, $value);
+    }
+    $query->entityCondition('bundle', array_keys($target_bundles));
+    $results = $query->execute();
+    $hits += $results;
+  }
+  return $hits;
 }
 
 /**

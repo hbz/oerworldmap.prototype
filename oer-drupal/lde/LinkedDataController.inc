@@ -198,7 +198,6 @@ class LinkedDataController extends EntityAPIController {
     $pass = variable_get('lde_api_password');
     $host = variable_get('lde_api_host');
     if (!$user || !$pass || !$host) {
-      var_dump($user, $pass, $host);die;
       drupal_set_message(
         l('Please configure the API first', 'admin/config/lde/storage')
       );
