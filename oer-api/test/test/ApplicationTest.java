@@ -42,7 +42,7 @@ public class ApplicationTest extends IndexTestsHarness {
 	@Test
 	public void queryAll() {
 		Result result = callAction(
-				controllers.oer.routes.ref.Application.query("*", ""),
+				controllers.oer.routes.ref.Application.query("*", "", ""),
 				fakeRequest());
 		assertThat(status(result)).isEqualTo(OK);
 		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(3);
@@ -52,7 +52,7 @@ public class ApplicationTest extends IndexTestsHarness {
 	public void queryType0() {
 		Result result = callAction(
 				controllers.oer.routes.ref.Application.query("*",
-						"http://schema.org/CollegeOrUniversityTest0"),
+						"http://schema.org/CollegeOrUniversityTest0", ""),
 				fakeRequest());
 		assertThat(status(result)).isEqualTo(OK);
 		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(0);
@@ -62,7 +62,7 @@ public class ApplicationTest extends IndexTestsHarness {
 	public void queryType1() {
 		Result result = callAction(
 				controllers.oer.routes.ref.Application.query("*",
-						"http://schema.org/CollegeOrUniversityTest1"),
+						"http://schema.org/CollegeOrUniversityTest1", ""),
 				fakeRequest());
 		assertThat(status(result)).isEqualTo(OK);
 		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(1);
@@ -73,10 +73,20 @@ public class ApplicationTest extends IndexTestsHarness {
 		Result result = callAction(
 				controllers.oer.routes.ref.Application.query("*",
 						"http://schema.org/CollegeOrUniversityTest1,"
-								+ "http://schema.org/CollegeOrUniversityTest2"),
-				fakeRequest());
+								+ "http://schema.org/CollegeOrUniversityTest2",
+						""), fakeRequest());
 		assertThat(status(result)).isEqualTo(OK);
 		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(2);
+	}
+
+	@Test
+	public void queryAllFilterLocation() {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*", "",
+						"40.8,-86.6 40.8,-88.6 42.8,-88.6 42.8,-86.6"),
+				fakeRequest());
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(1);
 	}
 
 	@Test

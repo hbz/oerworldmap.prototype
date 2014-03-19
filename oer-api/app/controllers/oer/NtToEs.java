@@ -29,7 +29,10 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.IndicesAdminClient;
 
 import play.Play;
+import play.libs.Json;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
@@ -63,7 +66,9 @@ public class NtToEs {
 		}
 		TripleCrawler crawler = new TripleCrawler();
 		Files.walkFileTree(Paths.get(args[0]), crawler);
-		createIndex(CharStreams.toString(new FileReader(CONFIG)));
+		String config = CharStreams.toString(new FileReader(CONFIG));
+		System.err.println("Config:\n" + config);
+		createIndex(config);
 		process(crawler.data);
 	}
 
@@ -135,11 +140,23 @@ public class NtToEs {
 			options.setCompactArrays(false); // ES needs consistent data
 			Map<String, Object> compact = JsonLdProcessor.compact(
 					JSONUtils.fromString(json), contextJson, options);
-			return JSONUtils.toString(compact);
+			return withGeo(compact);
 		} catch (IOException | JsonLdError e) {
 			throw new IllegalStateException("Could not compact JSON-LD: \n"
 					+ json, e);
 		}
+	}
+
+	private static String withGeo(Map<String, Object> compact) {
+		JsonNode json = Json.parse(JSONUtils.toString(compact));
+		JsonNode lat = json.findValue("latitude");
+		JsonNode lon = json.findValue("longitude");
+		if (lat != null && lon != null && lat instanceof ArrayNode
+				&& lon instanceof ArrayNode)
+			compact.put("location", ((ArrayNode) lat).get(0).textValue() + ", "
+					+ ((ArrayNode) lon).get(0).textValue());
+		System.out.println(JSONUtils.toPrettyString(compact));
+		return JSONUtils.toString(compact);
 	}
 
 	public static URL context() throws MalformedURLException {
