@@ -3,8 +3,9 @@
 	version="1">
 	<vars>
 		<var name="schema:" value="http://schema.org/"/>
+		<var name="oer:" value="http://lobid.org/oer/" />
 	</vars>
-	<rules>
+		<rules>
 		<!-- uuid and id handling for the main oer -->
 		<data source="json_callback" name="@internalId">
 			<regexp match="callbackIntegerWrap(.*)" format="ocwc${1}"/>
@@ -35,7 +36,7 @@
 			<lookup in="internalId2uuidMap"/>
 		</data>
 		<!-- set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
-		<combine name="@subjectAboutUri" value="http://oerworldmap.org/oer/${subject}">
+		<combine name="@subjectAboutUri" value="$[oer:]${subject}">
 			<data source="@id" name="subject">
 				<regexp match=".*"/>
 			</data>

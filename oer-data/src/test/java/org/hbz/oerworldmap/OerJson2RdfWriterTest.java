@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.apache.commons.io.FileUtils;
 import org.culturegraph.mf.morph.Metamorph;
 import org.culturegraph.mf.stream.pipe.StreamTee;
 import org.culturegraph.mf.stream.source.DirReader;
@@ -24,14 +25,13 @@ import org.lobid.lodmill.Triples2RdfModel;
  */
 @SuppressWarnings("javadoc")
 public class OerJson2RdfWriterTest {
-	// private static final String GEO_LIST = "small/geoList";
-	// private static final String ORGANIZATION_ID = "small/organizationId";
-	// private static final String CONSORTIUM_MEMBERS =
-	// "small/consortiumMembers";
+	private static final String GEO_LIST = "small/geoList";
+	private static final String ORGANIZATION_ID = "small/organizationId";
+	private static final String CONSORTIUM_MEMBERS = "small/consortiumMembers";
 	// uncomment for transforming the whole data
-	private static final String GEO_LIST = "geoList";
-	private static final String ORGANIZATION_ID = "organizationId";
-	private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
+	// private static final String GEO_LIST = "geoList";
+	// private static final String ORGANIZATION_ID = "organizationId";
+	// private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
 	private final String OCWC_PATH = "ocwc/";
 	private final String TARGET_PATH = "tmp/";
 	private final String TEST_FILENAME = "ocwcTestResult.nt";
@@ -59,7 +59,7 @@ public class OerJson2RdfWriterTest {
 			AbstractIngestTests.compareFilesDefaultingBNodes(testFile, new File(Thread
 					.currentThread().getContextClassLoader().getResource(OCWC_PATH + TEST_FILENAME)
 					.toURI()));
-			// FileUtils.deleteDirectory(new File(TARGET_PATH));
+			FileUtils.deleteDirectory(new File(TARGET_PATH));
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (final IOException e) {
