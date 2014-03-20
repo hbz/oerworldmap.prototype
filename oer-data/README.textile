@@ -1,0 +1,3 @@
+h1. Data transformation
+
+This file contains documentation about the data transformation. The "java unit tests":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/java shows how to transform the data.

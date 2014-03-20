@@ -7,9 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.antlr.runtime.RecognitionException;
 import org.apache.commons.io.FileUtils;
-import org.culturegraph.mf.Flux;
 import org.culturegraph.mf.morph.Metamorph;
 import org.culturegraph.mf.stream.pipe.StreamTee;
 import org.culturegraph.mf.stream.source.DirReader;
@@ -27,6 +25,13 @@ import org.lobid.lodmill.Triples2RdfModel;
  */
 @SuppressWarnings("javadoc")
 public class OerJson2RdfWriterTest {
+	private static final String GEO_LIST = "small/geoList";
+	private static final String ORGANIZATION_ID = "small/organizationId";
+	private static final String CONSORTIUM_MEMBERS = "small/consortiumMembers";
+	// uncomment for transforming the whole data
+	// private static final String GEO_LIST = "geoList";
+	// private static final String ORGANIZATION_ID = "organizationId";
+	// private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
 	private final String OCWC_PATH = "ocwc/";
 	private final String TARGET_PATH = "tmp/";
 	private final String TEST_FILENAME = "ocwcTestResult.nt";
@@ -43,41 +48,35 @@ public class OerJson2RdfWriterTest {
 	}
 
 	@Test
-	public void testFlow() throws URISyntaxException {
-		transformDataInDirectory(OCWC_PATH + "small/consortiumMembers");
-		transformDataInDirectory(OCWC_PATH + "small/organizationId");
-		transformDataInDirectory(OCWC_PATH + "small/geoList");
-		// FileUtils.deleteDirectory(new File(PATH));
-		File testFile;
+	public void testFlow() {
 		try {
+			transformDataInDirectory(OCWC_PATH + CONSORTIUM_MEMBERS);
+			transformDataInDirectory(OCWC_PATH + ORGANIZATION_ID);
+			transformDataInDirectory(OCWC_PATH + GEO_LIST);
+			File testFile;
 			testFile = AbstractIngestTests.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
 					TARGET_PATH + OCWC_PATH + TEST_FILENAME);
 			AbstractIngestTests.compareFilesDefaultingBNodes(testFile, new File(Thread
 					.currentThread().getContextClassLoader().getResource(OCWC_PATH + TEST_FILENAME)
 					.toURI()));
+			FileUtils.deleteDirectory(new File(TARGET_PATH));
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (final IOException e) {
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
-	}
-
-	// @Test
-	public void testFlux() throws IOException, URISyntaxException, RecognitionException {
-		final File fluxFile = new File(Thread.currentThread().getContextClassLoader()
-				.getResource("xmlSplitterRdfWriter.flux").toURI());
-		Flux.main(new String[] { fluxFile.getAbsolutePath() });
-		FileUtils.deleteDirectory(new File(TARGET_PATH));
 	}
 
 	private void transformDataInDirectory(final String pathToDirectory) throws URISyntaxException {
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
-
 		final Metamorph morph = new Metamorph(Thread.currentThread().getContextClassLoader()
 				.getResource("morph-ocwConsortiumMembers-to-rdf.xml").getFile());
 		final PipeEncodeTriples encoder = new PipeEncodeTriples();
+		encoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2model = new Triples2RdfModel();
 		triple2model.setInput("N-TRIPLE");
 		final RdfModelFileWriter writer = OerJson2RdfWriterTest.createWriter(TARGET_PATH
