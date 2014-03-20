@@ -252,6 +252,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
   $rdf_model->loadStatementsFromString($rdf_parser, $rdf_string);
 
   // Find bundle and corresponding mapping based on rdf:type
+  $resource_type = false;
   $bundles = field_info_bundles(LDE_ENTITY_TYPE);
   foreach ($bundles as $bundle_name => $bundle) {
     $rdf_mapping = $bundle['rdf_mapping'];
@@ -262,11 +263,16 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
         $rdf_subject, $RDF->type, $rdf_class
       );
       if ($rdf_type_stmt->current()) {
+        $resource_type = $bundle_name;
         break 2;
       }
     }
   }
-  $entity->type = $bundle_name;
+
+  // RDF could not be mapped to a bundle
+  if (!$resource_type) return;
+
+  $entity->type = $resource_type;
   unset($rdf_mapping['rdftype']);
 
   // Add field data
