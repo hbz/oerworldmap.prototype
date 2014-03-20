@@ -377,6 +377,7 @@ function ldf_field_lookup($target_bundles, $term) {
     $query = new LinkedDataEntityFieldQuery();
     $query->addMetadata('endpoint', $endpoint_uri);
     $query->addMetadata('term', $term);
+    $query->addMetadata('target_bundles', $target_bundles);
     foreach ($endpoint_params as $param => $value) {
       $query->addMetadata($param, $value);
     }

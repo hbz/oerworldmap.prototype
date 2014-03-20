@@ -242,7 +242,6 @@ class ApplicationProfile {
   public function getFieldInstances() {
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
-    $XSD = new LibRDF_NS('http://www.w3.org/2001/XMLSchema#');
 
     $query_string = "
       SELECT DISTINCT ?property, ?class WHERE {
@@ -336,6 +335,13 @@ class ApplicationProfile {
           $instance['settings']['handler_settings']['target_bundles']
             [$target_bundle]['create'] = true;
         }
+
+        // Add further constraints
+        $constraints = $this->getConstraints($target_bundle);
+        if (!empty($constraints)) {
+          $instance['settings']['handler_settings']['target_bundles']
+            [$target_bundle]['constraints'] = $constraints;
+        }
       }
 
       $instances[] = $instance;
@@ -397,10 +403,6 @@ class ApplicationProfile {
   }
 
   public function getEndpoints($target_bundle = null) {
-    $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
-    $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
-    $XSD = new LibRDF_NS('http://www.w3.org/2001/XMLSchema#');
-    $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
     $EX = new LibRDF_NS('http://example.org/');
 
     $query_string = "
@@ -451,6 +453,28 @@ class ApplicationProfile {
       }
     }
     return $endpoints;
+  }
+
+  public function getConstraints($target_bundle) {
+    $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
+    $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $class = $this->getClass($target_bundle);
+    $query_string = "
+      SELECT * WHERE {
+        {$class} {$RDFS->subClassOf} [
+          {$OWL->onProperty} ?property ;
+          {$OWL->hasValue} ?value
+        ]
+      }
+    ";
+    $query = new LibRDF_Query($query_string, null, 'sparql');
+    $defined_constraints = $query->execute($this->applicationProfileRDF);
+    $constraints = array();
+    foreach ($defined_constraints as $defined_constraint) {
+      $constraints[$defined_constraint['property']->getValue()]
+        = $defined_constraint['value']->getValue();
+    }
+    return $constraints;
   }
 
   /**

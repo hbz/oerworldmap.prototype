@@ -39,7 +39,7 @@ class LinkedDataEntityFieldQuery extends EntityFieldQuery {
     );
 
     $target_types = array();
-    if (array_key_exists('bundle', $this->entityConditions) && isset($typeParam)) {
+    if (array_key_exists('bundle', $this->entityConditions)) {
       $target_bundles = $this->entityConditions['bundle']['value'];
       if (!is_array($target_bundles)) {
         $target_bundles = array($target_bundles);
@@ -48,8 +48,16 @@ class LinkedDataEntityFieldQuery extends EntityFieldQuery {
       foreach ($target_bundles as $target_bundle) {
         $rdf_mapping = rdf_mapping_load(LDE_ENTITY_TYPE, $target_bundle);
         $target_types = array_merge($rdf_mapping['rdftype'], $target_types);
+        if (isset($this->metaData['target_bundles'][$target_bundle]['constraints'])) {
+          foreach ($this->metaData['target_bundles'][$target_bundle]['constraints'] as $property => $class) {
+            $field = new LibRDF_URINode($property);
+            $value = new LibRDF_URINode($class);
+            // TODO: find a more configurable solution
+            $http_url .= "&{$field->getLocalPart()}={$value->getLocalPart()}";
+          }
+        }
       }
-      if (!empty($target_types)) {
+      if (!empty($target_types) && isset($typeParam)) {
         $http_url .= "&$typeParam=" . implode(',', $target_types);
       }
     }
