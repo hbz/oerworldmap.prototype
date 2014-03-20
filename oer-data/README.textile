@@ -1,4 +1,3 @@
 h1. Data transformation
 
-This file contains documentation about the data transformation. The "java unit tests":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/java shows how to transform the data. Building the project will exclude any test involving online resources such as the OpenStreetMap (OSM) lookup using their nominatim-api, so you have to start them manually. However, we provide also as "snapshot of the transformed data":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/main/resources/ocwc.nt.
-.
+This file contains documentation about the data transformation. The "java unit tests":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/java shows how to transform the data.
