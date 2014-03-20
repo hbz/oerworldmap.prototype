@@ -110,7 +110,7 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
 function lde_form_submit($form, &$form_state) {
   $entity = $form['#entity'];
   field_attach_submit($entity->entityType(), $entity, $form, $form_state);
-  $entity->uri = lde_resource_uri();
+  $entity->uri = lde_resource_uri($entity);
   $form_state['redirect'] = $entity->uri();
   $inline_entities = array();
   if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
@@ -172,8 +172,16 @@ function lde_uuid_v4() {
   );
 }
 
-function lde_resource_uri() {
-  return "urn:uuid:" . lde_uuid_v4();
+function lde_resource_uri($entity = null) {
+  $top_level_bundles = ApplicationProfile::get(LDE_ENTITY_TYPE)->getTopBundles();
+  if (isset($entity) && isset($entity->type)
+      && in_array($entity->type, $top_level_bundles))
+  {
+    $uri = "http://lobid.org/oer/" . lde_uuid_v4() . '#!';
+  } else {
+    $uri = "urn:uuid:" . lde_uuid_v4();
+  }
+  return $uri;
 }
 
 /**
