@@ -54,7 +54,7 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 	@Override
 	public void process(final Reader reader) {
 		JsonDecoder.STARTED = false;
-		JsonDecoder.LOG.debug("############################ Neu Prozess ");
+		JsonDecoder.LOG.debug("############################ New");
 		// necessary if it is JSONP
 		String text;
 		try {
@@ -122,7 +122,7 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 						currentToken = this.jsonParser.nextToken();
 					}
 				}
-				JsonDecoder.LOG.debug("############################ End Object ");
+				JsonDecoder.LOG.debug("############################ End");
 				if (JsonDecoder.STARTED) {
 					getReceiver().endRecord();
 					JsonDecoder.STARTED = false;
