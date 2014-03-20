@@ -1,25 +1,49 @@
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://purl.org/dc/elements/1.1/identifier> "ocwc445" .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/description> "    Having completed the full course of studies ( 6 years)  students are qualified as architects and get the Master’s Degree with the corresponding diploma. After 4 years students get the Bachelor’s Degree and diploma." .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/description> "Moscow Architectural Institute trains architects of wide-range specialization in Town- Planning, Architecture of Residental and Public Buildings, Architectural   Design,       Architecture of Industrial Buildings, Architecture of Agricultural Complexes, Theory and History of Architecture, Restoration of Architectural Monuments, Interior Architecture, Landscaping." .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/description> "    The language of education is Russian. The full course of studies lasts 6 years. But if you don’t have enough skills in Russian, Artistic and Technical Drawing, you’ll have to attend to a special Preparatory Course during one academic year before being accepted as a student." .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/geo> "urn:uuid:94e47d14-76a6-4629-9e17-2ea49935025e" .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_02_26bac5aa7b867f6d9214ba43169a4649.jpg> .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/providesService> <http://www.open-marhi.ru/> .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/url> <http://www.marhi.ru> .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
-<http://oerworldmap.org/resource/94e47d14-76a6-4629-9e17-2ea49935025e> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/description> "Kaplan Higher Education is a group of institutions, including Kaplan University,  that offer career-oriented certificate and degree programs designed to provide students with the skills necessary to qualify them for employment in the fields of criminal justice, health care, business, education, financial planning, information technology, legal studies, fashion, design, and several others. Each of the individual schools is separately accredited by one of several national or regional accrediting agencies approved by the U.S. Department of Education." .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/geo> "urn:uuid:bdeed8fb-af65-4a81-8f44-06987d101de9" .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/providesService> <http://ocw.kaplan.edu/> .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/url> <http://portal.kaplan.edu/> .
-<http://oerworldmap.org/resource/bdeed8fb-af65-4a81-8f44-06987d101de9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
-<urn:uuid:94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/latitude> "55.7635019" .
-<urn:uuid:94e47d14-76a6-4629-9e17-2ea49935025e> <http://schema.org/longitude> "37.6232533" .
-<urn:uuid:bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/latitude> "41.876835" .
-<urn:uuid:bdeed8fb-af65-4a81-8f44-06987d101de9> <http://schema.org/longitude> "-87.641185" .
-<urn:uuid:bdeed8fb-af65-4a81-8f44-06987d101de9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/description> "Kaplan Higher Education is a group of institutions, including Kaplan University,  that offer career-oriented certificate and degree programs designed to provide students with the skills necessary to qualify them for employment in the fields of criminal justice, health care, business, education, financial planning, information technology, legal studies, fashion, design, and several others. Each of the individual schools is separately accredited by one of several national or regional accrediting agencies approved by the U.S. Department of Education." .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/geo> <urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/providesService> <http://ocw.kaplan.edu/> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/url> <http://portal.kaplan.edu/> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e> <http://xmlns.com/foaf/0.1/primaryTopic> <http://oerworldmap.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://purl.org/dc/elements/1.1/identifier> "ocwc445" .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc445" .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/description> "    Having completed the full course of studies ( 6 years)  students are qualified as architects and get the Master’s Degree with the corresponding diploma. After 4 years students get the Bachelor’s Degree and diploma." .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/description> "Moscow Architectural Institute trains architects of wide-range specialization in Town- Planning, Architecture of Residental and Public Buildings, Architectural   Design,       Architecture of Industrial Buildings, Architecture of Agricultural Complexes, Theory and History of Architecture, Restoration of Architectural Monuments, Interior Architecture, Landscaping." .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/description> "    The language of education is Russian. The full course of studies lasts 6 years. But if you don’t have enough skills in Russian, Artistic and Technical Drawing, you’ll have to attend to a special Preparatory Course during one academic year before being accepted as a student." .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/geo> <urn:uuid:597c5e89-8488-43b8-b476-846082c86c8a> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_02_26bac5aa7b867f6d9214ba43169a4649.jpg> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/providesService> <http://www.open-marhi.ru/> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/url> <http://www.marhi.ru> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .
+<http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://oerworldmap.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://purl.org/dc/elements/1.1/identifier> "ocwc67" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc67" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/description> "La Universidad Industrial de Santander es una organización que tiene como propósito la formación de personas de alta calidad ética, política y profesional; la generación y adecuación de conocimientos; la conservación y reinterpretación de la cultura y la participación activa liderando procesos de cambio por el progreso y mejor calidad de vida de la comunidad. Orientan su misió³n los principios democrá¡ticos, la reflexió³n crítica, el ejercicio libre de la cátedra, el trabajo interdisciplinario y la relación con el mundo externo. Sustenta su trabajo en las cualidades humanas de las personas que la integran, en la capacidad laboral de sus empleados, en la excelencia académica de sus profesores y en el compromiso de la comunidad universitaria con los propósitos institucionales y la construcción de una cultura de vida." .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/geo> <urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/logo_uis_72_aee2e67f89f0d93c7dd6bc77dce7dd14.jpg> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/memberOf> <http://oerworldmap.org/oer/ocwUNIVERSIA> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/memberOf> <http://oerworldmap.org/oer/ocwUNIVERSIA> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/name> "Universidad Industrial de Santander" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/name> "Universidad Industrial de Santander" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/providesService> <http://ocw.uis.edu.co> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/url> <https://www.uis.edu.co> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversity> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://www.w3.org/ns/org#hasMembership> "UNIVERSIA" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://www.w3.org/ns/org#hasMembership> "UNIVERSIA" .
+<http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://xmlns.com/foaf/0.1/primaryTopic> <http://oerworldmap.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
+<urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://schema.org/latitude> "41.876835" .
+<urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://schema.org/longitude> "-87.641185" .
+<urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<urn:uuid:597c5e89-8488-43b8-b476-846082c86c8a> <http://schema.org/latitude> "55.7635019" .
+<urn:uuid:597c5e89-8488-43b8-b476-846082c86c8a> <http://schema.org/longitude> "37.6232533" .
+<urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/latitude> "7.1321954" .
+<urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/longitude> "-73.1242854" .

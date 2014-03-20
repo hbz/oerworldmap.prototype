@@ -1,12 +1,11 @@
-package org.hbz.oerworldmap;
-
 /* Copyright 2014 Pascal Christoph. Licensed under the Eclipse Public License 1.0 */
+package org.hbz.oerworldmap;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * Main test suite for all unit tests.
+ * Main test suite for all unit tests. Excluded online tests.
  * 
  * @author Pascal Christoph (dr0i)
  */

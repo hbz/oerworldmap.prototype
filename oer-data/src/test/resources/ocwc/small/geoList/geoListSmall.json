@@ -27,6 +27,20 @@
          "properties" : {
             "name" : "MOSCOW ARCHITECTURAL INSTITUTE"
          }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -73.1242854,
+               7.1321954
+            ],
+            "type" : "Point"
+         },
+         "id" : 67,
+         "properties" : {
+            "name" : "Universidad Industrial de Santander"
+         }
       }
    ],
    "type" : "FeatureCollection"

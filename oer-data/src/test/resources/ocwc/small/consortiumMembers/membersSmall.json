@@ -13,6 +13,13 @@
          "membership_type" : "Institutional Members",
          "associate_consortium" : "",
          "id" : 445
+      },
+      {
+         "associate_consortium" : "UNIVERSIA",
+         "id" : 67,
+         "name" : "Universidad Industrial de Santander",
+         "membership_type" : "Institutional Members - DC - MRC",
+         "membership_status" : "Grace"
       }
    ]
 }

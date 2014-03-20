@@ -6,31 +6,51 @@
 	</vars>
 	<rules>
 		<!-- uuid and id handling -->
-		<combine name="@id" value="${id}">
+		<combine name="@id" value="${idGenerated}">
 			<if>
 				<none>
-					<data source="@idLookup"/>
+					<data source="@idLookup">
+						<regexp match=".+"/>
+					</data>
 				</none>
 			</if>
-			<data source="id" name="@idGenerated">
+			<data source="id" name="idGenerated">
 				<generate-uuid/>
 			</data>
 		</combine>
-		<data source="@idLookup" name="@id"/>
-		<data source="@idGenerated" name="@id"/>
-		<data source="id" name="@idLookup">
+		<data source="@idLookup" name="@id">
+			<regexp match=".+"/>
+		</data>
+		<combine name="@doIdLookup" value="${idLookup}">
+			<data source="id" name="idLookup">
+				<regexp match="(.*)" format="ocwc${1}"/>
+			</data>
+		</combine>
+		<data source="@doIdLookup" name="@idLookup">
 			<lookup in="internalId2uuidMap"/>
 		</data>
-		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/${subject}">
+		<!-- set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<combine name="@subjectAboutUri" value="http://oerworldmap.org/oer/${subject}">
 			<data source="@id" name="subject">
 				<regexp match=".*"/>
 			</data>
 		</combine>
-		<!-- /uuid and id handling -->
+		<data source="@subjectAboutUri" name="~rdf:subject"/>
+		<data source="@subjectUri" name="http://xmlns.com/foaf/0.1/primaryTopic"/>
+		<combine name="@subjectUri" value="${subjectUri}#!">
+			<data source="@subjectAboutUri" name="subjectUri"/>
+		</combine>
+		<data source="@subjectUri" name="~rdf:subject"/>
 		<combine name="http://purl.org/dc/elements/1.1/identifier" value="ocwc${id}">
 			<data source="id" name="id"/>
 		</combine>
-		<data source="name" name="$[schema:]name"/>
+		<data source="@internalId" name="http://purl.org/dc/elements/1.1/identifier"/>
+		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<!-- /uuid and id handling -->
+		<combine value="${name}" name="$[schema:]name">
+			<data source="name" name="name"/>
+			<data source="@subjectUri"/>
+		</combine>
 		<data source="url" name="$[schema:]name"/>
 		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
 			<regexp match="^Associate Consortium Member" format="http://www.w3.org/ns/org#OrganizationalCollaboration"/>
@@ -45,7 +65,7 @@
 			<regexp match="^Corporate Member" format="$[schema:]Corporation"/>
 		</data>
 		<data source="associate_consortium" name="$[schema:]memberOf">
-			<regexp match="(.*)" format="http://oerworldmap.org/resource/ocw${1}"/>
+			<regexp match="(.*)" format="http://oerworldmap.org/oer/ocw${1}"/>
 		</data>
 		<data source="main_website" name="$[schema:]url">
 			<regexp match=".+"/>
@@ -90,8 +110,8 @@
 			<data source="@id"/>
 			<data source="coordinates1" name="lat"/>
 		</combine>
-		<!-- set subject uri of resource anew -->
-		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/${subject}">
+		<!-- set subject uri of oer anew -->
+		<combine name="~rdf:subject" value="http://oerworldmap.org/oer/${subject}">
 			<data source="coordinates1"/>
 			<data source="@id" name="subject">
 			</data>

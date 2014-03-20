@@ -5,21 +5,105 @@
 		<var name="schema:" value="http://schema.org/"/>
 	</vars>
 	<rules>
-		<data source="json_callback" name="@id">
-			<regexp match="callbackIntegerWrap(.*)" format="${1}"/>
+		<!-- uuid and id handling for the main oer -->
+		<data source="json_callback" name="@internalId">
+			<regexp match="callbackIntegerWrap(.*)" format="ocwc${1}"/>
 		</data>
-		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/ocw${subject}">
-			<data source="@id" name="subject"/>
+		<!-- generated ID -->
+		<combine name="@id" value="${idGenerated}">
+			<if>
+				<none>
+					<data source="@idLookup">
+						<regexp match=".+"/>
+					</data>
+				</none>
+			</if>
+			<data source="@internalId" name="idGenerated">
+				<generate-uuid/>
+			</data>
 		</combine>
-		<data source="@id" name="http://purl.org/dc/elements/1.1/identifier"/>
-		<!-- geoLocation -->
-		<entity name="$[schema:]address" flushWith="record">
-			<!--All entries already have a geo position or it will be computed -->
-			<data source="country" name="$[schema:]addressCountry"/>
-			<data source="road" name="$[schema:]streetAddress"/>
-			<data source="postcode" name="$[schema:]postalCode"/>
-		</entity>
-		<data source="@geonamesId" name="http://www.geonames.org/ontology#locatedIn"/>
+		<!-- lookuped ID -->
+		<data source="@idLookup" name="@id">
+			<regexp match=".+"/>
+		</data>
+		<combine name="@doIdLookup" value="${idLookup}">
+			<data source="@internalId" name="idLookup">
+				<regexp match="(.*)" format="${1}"/>
+			</data>
+		</combine>
+		<data source="@doIdLookup" name="@idLookup">
+			<lookup in="internalId2uuidMap"/>
+		</data>
+		<!-- set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<combine name="@subjectAboutUri" value="http://oerworldmap.org/oer/${subject}">
+			<data source="@id" name="subject">
+				<regexp match=".*"/>
+			</data>
+		</combine>
+		<data source="@subjectAboutUri" name="~rdf:subject"/>
+		<data source="@subjectUri" name="http://xmlns.com/foaf/0.1/primaryTopic"/>
+		<combine name="@subjectUri" value="${subjectUri}#!">
+			<data source="@subjectAboutUri" name="subjectUri"/>
+		</combine>
+		<data source="@subjectUri" name="~rdf:subject"/>
+		<data source="@internalId" name="http://purl.org/dc/elements/1.1/identifier"/>
+		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<!-- /uuid and id handling for the main oer -->
+		<!-- uuid and id handling for the adress bnode -->
+		<!-- set new URI -->
+		<data source="@id" name="@internalAdressId">
+			<regexp match="(.*)" format="${1}Adress"/> <!--kann weg? -->
+		</data>
+		<!-- generated ID -->
+		<combine name="@addressId" value="urn:uuid:${idGenerated}">
+			<if>
+				<none>
+					<data source="@addressIdLookup">
+						<regexp match=".+"/>
+					</data>
+				</none>
+			</if>
+			<data source="@internalAdressId" name="idGenerated">
+				<generate-uuid/>
+			</data>
+		</combine>
+		<!-- lookuped ID -->
+		<data source="@addressIdLookup" name="@addressId">
+			<regexp match="(.*)" format="urn:uuid:${1}"/>
+		</data>
+		<combine name="@doAddressIdLookup" value="${idLookup}">
+			<data source="@internalId" name="idLookup">
+				<regexp match="(.*)" format="${1}Address"/>
+			</data>
+		</combine>
+		<data source="@doAddressIdLookup" name="@addressIdLookup">
+			<lookup in="internalId2uuidMap"/>
+		</data>
+		<data source="@addressId" name="$[schema:]address"/>
+		<!-- set the ID -->
+		<combine name="~rdf:subject" value="${subject}">
+			<data source="@addressId" name="subject">
+				<regexp match=".*"/>
+			</data>
+		</combine>
+		<!-- /uuid and id handling for the adress bnode -->
+		<!-- geoData -->
+		<combine name="$[schema:]addressCountry" value="${a}">
+			<data source="country" name="a"/>
+			<data source="@addressId"/>
+		</combine>
+		<combine name="$[schema:]streetAddress" value="${a}">
+			<data source="road" name="a"/>
+			<data source="@addressId"/>
+		</combine>
+		<combine name="$[schema:]postalCode" value="${a}">
+			<data source="postcode" name="a"/>
+			<data source="@addressId"/>
+		</combine>
+		<combine name="http://www.geonames.org/ontology#locatedIn" value="${a}">
+			<data source="@geonamesId" name="a"/>
+			<data source="@addressId"/>
+		</combine>
 		<data source="country_code" name="@country2GeonamesId">
 			<case to="upper"/>
 			<lookup in="country2GeonamesIdMap"/>
@@ -27,10 +111,12 @@
 		<combine name="@geonamesId" value="http://sws.geonames.org/${countryId}">
 			<data source="@country2GeonamesId" name="countryId"/>
 		</combine>
-		<!-- /geoLocation -->
+		<!-- /geoData -->
+		<!-- unset new URI not necessary -->
 	</rules>
 	<maps>
-		<!-- tsv of iso31661a country coedes to geoname ID's -->
+		<!-- tsv of iso31661a country codes to geoname ID's -->
 		<filemap name="country2GeonamesIdMap" files="countryIso31661alpha2ToGeonamesId.tsv"/>
+		<filemap name="internalId2uuidMap" files="internalId2uuid.tsv"/>
 	</maps>
 </metamorph>
