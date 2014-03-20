@@ -3,9 +3,9 @@
 	version="1">
 	<vars>
 		<var name="schema:" value="http://schema.org/"/>
-		<var name="oer:" value="http://lobid.org/oer/" />
+		<var name="oer:" value="http://lobid.org/oer/"/>
 	</vars>
-		<rules>
+	<rules>
 		<!-- uuid and id handling for the main oer -->
 		<data source="json_callback" name="@internalId">
 			<regexp match="callbackIntegerWrap(.*)" format="ocwc${1}"/>
@@ -86,6 +86,9 @@
 			<data source="@addressId" name="subject">
 				<regexp match=".*"/>
 			</data>
+		</combine>
+		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" value="$[schema:]PostalAddress">
+			<data source="@addressId"/>
 		</combine>
 		<!-- /uuid and id handling for the adress bnode -->
 		<!-- geoData -->
