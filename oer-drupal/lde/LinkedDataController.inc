@@ -142,22 +142,29 @@ class LinkedDataController extends EntityAPIController {
    * @param  LinkedDataEntity  $entity The entity to serialize and PUT
    */
   protected function put($entity) {
-    if (!$api_url = $this->getApiUrl()) {
-      return false;
-    }
-    $http_url = $api_url . $entity->identifier();
+
     $rdf = $this->toRDF($entity);
+    $http_user = variable_get('lde_api_user');
+    $http_pass = variable_get('lde_api_password');
+    $http_url = $entity->identifier();
+
     $http_options = array(
       'method' => 'PUT',
-      'headers' => array('Content-Type' => 'application/rdf+xml'),
+      'headers' => array(
+        'Content-Type' => 'application/rdf+xml',
+        'Authorization' => 'Basic' .  base64_encode("{$http_user}:{$http_pass}"),
+      ),
       'data' => $rdf,
     );
+
     $http_response = lde_http_request($http_url, $http_options);
     if (200 != $http_response->code) {
       drupal_set_message("Unable to PUT $http_url", 'error');
       return false;
     }
+
     return true;
+
   }
 
   /**
@@ -166,48 +173,19 @@ class LinkedDataController extends EntityAPIController {
    * @param  string $uri The URI of the entity
    * @return LinkedDataEntity The unserialized entity
    */
-  protected function get($uri) {
-    if (!$api_url = $this->getApiUrl()) {
-      return false;
-    }
-    $http_url = $api_url . $uri;
+  protected function get($entity) {
+    $http_url = $entity->identifier();
     $http_options = array(
       'method' => 'GET',
-      'headers' => array('Content-Type' => 'application/json'),
+      'headers' => array('Accept' => 'application/rdf+xml'),
     );
     $http_response = lde_http_request($http_url, $http_options);
     if (200 != $http_response->code) {
       drupal_set_message("Unable to GET $http_url", 'error');
       return false;
     }
-    $rdf_jsonld = $http_response->data;
-    $options = array(
-      'format' => 'application/ntriples'
-    );
-    $rdf_ntriples = jsonld_to_rdf(json_decode($rdf_jsonld), $options);
-    $entity = entity_create(LDE_ENTITY_TYPE, array(
-      'uri' => $uri,
-    ));
-    lde_from_rdf($entity, $rdf_ntriples, 'ntriples');
+    lde_from_rdf($entity, $http_response->data, 'rdfxml');
     return $entity;
-  }
-
-  /**
-   * Get the base URL of the API, including username and password
-   *
-   * @return string the base url of the API
-   */
-  protected function getApiUrl() {
-    $user = variable_get('lde_api_user');
-    $pass = variable_get('lde_api_password');
-    $host = variable_get('lde_api_host');
-    if (!$user || !$pass || !$host) {
-      drupal_set_message(
-        l('Please configure the API first', 'admin/config/lde/storage')
-      );
-      return false;
-    }
-    return "http://$user:$pass@$host/oer/";
   }
 
 }
