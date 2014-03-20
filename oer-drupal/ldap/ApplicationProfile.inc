@@ -505,11 +505,24 @@ class ApplicationProfile {
   public function update() {
     // Update fields
     foreach ($this->getFields() as $field) {
-      field_update_field($field);
+      $op = (null == field_info_field($field['field_name']))
+        ? 'field_create_field' : 'field_update_field';
+      try {
+        $op($field);
+      } catch (FieldException $e) {
+        drupal_set_message($e->getMessage(), 'error');
+      }
     }
     // Update field instances
     foreach ($this->getFieldInstances() as $field_instance) {
-      field_update_instance($field_instance);
+      $op = (null == field_info_instance( $field_instance['entity_type'],
+             $field_instance['field_name'], $field_instance['bundle']))
+        ? 'field_create_instance' : 'field_update_instance';
+      try {
+        $op($field_instance);
+      } catch (FieldException $e) {
+        drupal_set_message($e->getMessage(), 'error');
+      }
     }
     // Update RDF mappings
     foreach ($this->getRdfMappings() as $rdf_mapping) {
