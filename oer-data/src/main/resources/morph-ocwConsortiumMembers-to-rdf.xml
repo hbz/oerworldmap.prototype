@@ -5,11 +5,31 @@
 		<var name="schema:" value="http://schema.org/"/>
 	</vars>
 	<rules>
-		<data source="id" name="@id"/>
-		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/ocw${subject}">
-			<data source="@id" name="subject"/>
+		<!-- uuid and id handling -->
+		<combine name="@id" value="${id}">
+			<if>
+				<none>
+					<data source="@idLookup"/>
+				</none>
+			</if>
+			<data source="id" name="@idGenerated">
+				<generate-uuid/>
+			</data>
 		</combine>
-		<data source="@id" name="http://purl.org/dc/elements/1.1/identifier"/>
+		<data source="@idLookup" name="@id"/>
+		<data source="@idGenerated" name="@id"/>
+		<data source="id" name="@idLookup">
+			<lookup in="internalId2uuidMap"/>
+		</data>
+		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/${subject}">
+			<data source="@id" name="subject">
+				<regexp match=".*"/>
+			</data>
+		</combine>
+		<!-- /uuid and id handling -->
+		<combine name="http://purl.org/dc/elements/1.1/identifier" value="ocwc${id}">
+			<data source="id" name="id"/>
+		</combine>
 		<data source="name" name="$[schema:]name"/>
 		<data source="url" name="$[schema:]name"/>
 		<data source="membership_type" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
@@ -44,18 +64,46 @@
 			<regexp match=".+"/>
 		</data>
 		<!-- geoLocation -->
-		<entity name="$[schema:]geo" flushWith="record">
-			<!--All entries already have a geo position or it will be computed -->
-			<data source="coordinates0" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
-				<regexp match=".*" format="$[schema:]GeoCoordinates"/>
+		<combine name="@geoUuid" value="urn:uuid:${uuid}">
+			<if>
+				<data source="coordinates0"/>
+			</if>
+			<data source="@id" name="uuid">
 			</data>
-			<data source="coordinates0" name="$[schema:]longitude"/>
-			<data source="coordinates1" name="$[schema:]latitude"/>
-		</entity>
+		</combine>
+		<data source="@geoUuid" name="$[schema:]geo"/>
+		<!-- temporarily set new subject id -->
+		<combine name="~rdf:subject" value="${uuid}">
+			<data source="@geoUuid" name="uuid"/>
+			<data source="@id"/>
+		</combine>
+		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" value="http://schema.org/GeoCoordinates">
+			<data source="@geoUuid"/>
+		</combine>
+		<combine name="$[schema:]longitude" value="${long}">
+			<data source="@geoUuid"/>
+			<data source="@id"/>
+			<data source="coordinates0" name="long"/>
+		</combine>
+		<combine name="$[schema:]latitude" value="${lat}">
+			<data source="@geoUuid"/>
+			<data source="@id"/>
+			<data source="coordinates1" name="lat"/>
+		</combine>
+		<!-- set subject uri of resource anew -->
+		<combine name="~rdf:subject" value="http://oerworldmap.org/resource/${subject}">
+			<data source="coordinates1"/>
+			<data source="@id" name="subject">
+			</data>
+		</combine>
 		<!-- /geoLocation -->
 		<!-- ####################### -->
 		<!-- ############### statistics -->
 		<!-- ####################### -->
 		<data source="_else"/>
 	</rules>
+	<maps>
+		<!-- tsv of concordance uuid<=>internalID -->
+		<filemap name="internalId2uuidMap" files="internalId2uuid.tsv"/>
+	</maps>
 </metamorph>
