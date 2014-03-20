@@ -2,10 +2,12 @@
 
 package controllers.oer;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.jena.riot.Lang;
 import org.elasticsearch.action.get.GetResponse;
@@ -18,6 +20,9 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.FilterBuilder;
+import org.elasticsearch.index.query.FilterBuilders;
+import org.elasticsearch.index.query.GeoPolygonFilterBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -32,21 +37,25 @@ import play.mvc.Http.RawBuffer;
 import play.mvc.Result;
 import views.html.oer_index;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.github.jsonldjava.utils.JSONUtils;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.BaseEncoding;
 
 public class Application extends Controller {
 
-	public static final String INDEX = "oer-index";
+	public static final String DATA_INDEX = "oer-data";
 	private static final String DATA_TYPE = "oer-type";
-	private static final String USER_TYPE = "users";
+	public static final String USER_INDEX = "oer-users";
+	private static final String USER_TYPE = "user-type";
 
 	final static Client productionClient = new TransportClient(
-			ImmutableSettings.settingsBuilder().put("cluster.name", "quaoar")
-					.build())
+			ImmutableSettings.settingsBuilder()
+					.put("cluster.name", "quaoar-test").build())
 			.addTransportAddress(new InetSocketTransportAddress(
-					"193.30.112.170", 9300));
+					"193.30.112.171", 9300));
 	static Client client = productionClient;
 
 	/**
@@ -96,11 +105,11 @@ public class Application extends Controller {
 		String user = args[0];
 		String pass = BCrypt.hashpw(args[1], BCrypt.gensalt());
 		System.out.print(responseInfo(client
-				.prepareIndex(INDEX, USER_TYPE, user)
+				.prepareIndex(USER_INDEX, USER_TYPE, user)
 				.setSource("user", user, "pass", pass).execute().actionGet()));
 	}
 
-	public static Result query(String q, String t) {
+	public static Result query(String q, String t, String location) {
 		if (q.trim().isEmpty() && t.trim().isEmpty())
 			return ok(oer_index.render(Arrays.asList(
 					// @formatter:off@
@@ -108,17 +117,19 @@ public class Application extends Controller {
 					"/oer?q=*&t=http://schema.org/CollegeOrUniversity",
 					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity",
 					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity,"
-					+ "http://www.w3.org/ns/org#OrganizationalCollaboration")));
+					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
+					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
+					"/oer?q=\"Cape+Town\"&callback=callbackFunction")));
 					// @formatter:on@
-		return processQuery(q, t);
+		return processQuery(q, t, location);
 	}
 
 	public static Result get(String id) {
 		try {
-			GetResponse response = client.prepareGet(INDEX, DATA_TYPE, id)
+			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
 			String r = response.isExists() ? response.getSourceAsString() : "";
-			return ok(Json.parse("[" + r + "]"));
+			return withCallback(Json.parse("[" + r + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -162,8 +173,9 @@ public class Application extends Controller {
 					serialization.format);
 			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
 					userAndPass(authHeader)[0], jsonLd);
-			return ok(responseInfo(client.prepareIndex(INDEX, DATA_TYPE, id)
-					.setSource(jsonLd).execute().actionGet()));
+			return ok(responseInfo(client
+					.prepareIndex(DATA_INDEX, DATA_TYPE, id).setSource(jsonLd)
+					.execute().actionGet()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -175,8 +187,8 @@ public class Application extends Controller {
 
 	private static boolean authorized(String authHeader) {
 		String[] userAndPass = userAndPass(authHeader);
-		SearchResponse search = search(QueryBuilders.idsQuery(USER_TYPE).ids(
-				userAndPass[0]));
+		SearchResponse search = search(USER_INDEX,
+				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "");
 		return search.getHits().getTotalHits() == 1
 				&& BCrypt.checkpw(userAndPass[1], (String) search.getHits()
 						.getAt(0).getSource().get("pass"));
@@ -193,17 +205,42 @@ public class Application extends Controller {
 		return new String[] { "unauthorized", "" };
 	}
 
-	private static Result processQuery(String q, String t) {
+	private static Result processQuery(String q, String t, String location) {
 		BoolQueryBuilder query = QueryBuilders.boolQuery().must(
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
 			query = query.must(typeQuery(t));
-		SearchResponse response = search(query);
+		SearchResponse response = search(DATA_INDEX, query, location);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
-			hits.add(hit.getSourceAsString());
+			hits.add(withoutGeo(hit.getSourceAsString()));
 		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
-		return ok(Json.parse(jsonString));
+		return withCallback(Json.parse(jsonString));
+	}
+
+	private static Status withCallback(JsonNode json) {
+		/* JSONP callback support for remote server calls with JavaScript: */
+		final String[] callback = request() == null
+				|| request().queryString() == null ? null : request()
+				.queryString().get("callback");
+		return callback != null ? ok(String.format("%s(%s)", callback[0], json))
+				: ok(json);
+	}
+
+	private static String withoutGeo(String sourceAsString) {
+		try {
+			// JSON-LD compact, always an object (resulting in a map)
+			@SuppressWarnings("unchecked")
+			Map<String, Object> json = (Map<String, Object>) JSONUtils
+					.fromString(sourceAsString);
+			json.remove("location");
+			return JSONUtils.toString(json);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sourceAsString;
 	}
 
 	private static BoolQueryBuilder typeQuery(String t) {
@@ -215,13 +252,30 @@ public class Application extends Controller {
 		return query;
 	}
 
-	private static SearchResponse search(final QueryBuilder queryBuilder) {
-		SearchRequestBuilder requestBuilder = client.prepareSearch(INDEX)
+	private static SearchResponse search(String index,
+			QueryBuilder queryBuilder, String location) {
+		SearchRequestBuilder requestBuilder = client.prepareSearch(index)
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 				.setQuery(queryBuilder);
-		SearchResponse response = requestBuilder.setFrom(0).setSize(50)
+		if (!location.trim().isEmpty())
+			requestBuilder = requestBuilder.setFilter(locationFilter(location));
+		Logger.debug("Request:\n" + requestBuilder);
+		SearchResponse response = requestBuilder.setFrom(0).setSize(500)
 				.setExplain(false).execute().actionGet();
+		Logger.debug("Response:\n" + response);
 		return response;
+	}
+
+	private static FilterBuilder locationFilter(String location) {
+		GeoPolygonFilterBuilder filter = FilterBuilders
+				.geoPolygonFilter("oer-type.location");
+		String[] points = location.split(" ");
+		for (String point : points) {
+			String[] latLon = point.split(",");
+			filter = filter.addPoint(Double.parseDouble(latLon[0].trim()),
+					Double.parseDouble(latLon[1].trim()));
+		}
+		return filter;
 	}
 
 	private static String responseInfo(IndexResponse r) {
