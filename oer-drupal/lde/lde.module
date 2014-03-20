@@ -98,7 +98,7 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#default_value' => 'Submit',
-    '#weight' => '100',
+    '#weight' => '1000',
   );
   return $form;
 }

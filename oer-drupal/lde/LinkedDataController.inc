@@ -42,11 +42,15 @@ class LinkedDataController extends EntityAPIController {
   public function load($uris = array(), $conditions = array()) {
     $cached_entities = $this->cacheGet($uris, $conditions);
     $entities = array();
-    foreach ($uris as $uri) {
+    foreach ($uris as $url_encoded_uri) {
+      $uri = urldecode(urldecode($url_encoded_uri));
       if (array_key_exists($uri, $cached_entities)) {
         $entities[$uri] = $cached_entities[$uri];
       } else {
-        $entities[$uri] = $this->get($uri);
+        $entity = entity_create(LDE_ENTITY_TYPE, array(
+          'uri' => $uri,
+        ));
+        $entities[$uri] = $this->get($entity);
         $this->cacheSet(array($uri => $entities[$uri]));
       }
     }

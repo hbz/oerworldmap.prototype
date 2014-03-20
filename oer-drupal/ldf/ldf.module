@@ -111,7 +111,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
         $triggering_element = $form_state['triggering_element']['#name'];
         $event = explode('|', $triggering_element);
         array_shift($event);
-        $on_entity = array_shift($event);
+        $on_entity = base64_decode(array_shift($event));
         $on_field = array_shift($event);
         $action = array_shift($event);
         $with_param = $event;
@@ -206,7 +206,8 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
 
       }
 
-      $action_button = "ldf_field_widget|{$entity->identifier()}|{$field_name}";
+      $encoded_uri = base64_encode($entity->identifier());
+      $action_button = "ldf_field_widget|{$encoded_uri}|{$field_name}";
 
       // Fieldset for link elements
       $element['ldf_field_widget'] = array(
