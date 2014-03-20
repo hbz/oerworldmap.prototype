@@ -30,6 +30,7 @@ import org.elasticsearch.search.SearchHit;
 import org.mindrot.jbcrypt.BCrypt;
 
 import play.Logger;
+import play.api.http.MediaRange;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -75,7 +76,7 @@ public class Application extends Controller {
 	/* no javadoc for elements */
 	public static enum Serialization {/* @formatter:off */
 			JSON_LD(Lang.JSONLD, Arrays.asList("application/json", "application/ld+json")),
-			RDF_XML(Lang.RDFXML, Arrays.asList("application/rdf+xml", "text/xml", "application/xml")),
+			RDF_XML(Lang.RDFXML, Arrays.asList("application/rdf+xml")),
 			N_TRIPLE(Lang.NTRIPLES, Arrays.asList("text/plain")),
 			N3(Lang.N3, Arrays.asList("text/rdf+n3", "text/n3")),
 			TURTLE(Lang.TURTLE, Arrays.asList("application/x-turtle", "text/turtle"));/* @formatter:on */
@@ -129,7 +130,7 @@ public class Application extends Controller {
 			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
 			String r = response.isExists() ? response.getSourceAsString() : "";
-			return withCallback(Json.parse("[" + postprocess(r) + "]"));
+			return response(Json.parse("[" + withoutLocation(r) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -213,29 +214,70 @@ public class Application extends Controller {
 		SearchResponse response = search(DATA_INDEX, query, location);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
-			hits.add(postprocess(hit.getSourceAsString()));
+			hits.add(withoutLocation(hit.getSourceAsString()));
 		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
-		return withCallback(Json.parse(jsonString));
+		return response(Json.parse(jsonString));
 	}
 
-	private static Status withCallback(JsonNode json) {
+	private static Status response(JsonNode json) {
 		/* JSONP callback support for remote server calls with JavaScript: */
 		final String[] callback = request() == null
 				|| request().queryString() == null ? null : request()
 				.queryString().get("callback");
-		return callback != null ? ok(String.format("%s(%s)", callback[0], json))
-				: ok(json);
+		String negotiatedContent = negotiateContent(json);
+		final Status notAcceptable = status(406,
+				"Not acceptable: unsupported content type requested\n");
+		if (invalidAcceptHeader() || negotiatedContent == null)
+			return notAcceptable;
+		return callback != null ? ok(String.format("%s(%s)", callback[0],
+				negotiatedContent)) : ok(negotiatedContent);
 	}
 
-	private static String postprocess(String sourceAsString) {
+	private static String negotiateContent(JsonNode json) {
+		for (MediaRange mediaRange : request().acceptedTypes())
+			for (Serialization serialization : Serialization.values())
+				for (String mimeType : serialization.getTypes())
+					if (mediaRange.accepts(mimeType)) {
+						if (serialization.format.equals(Lang.JSONLD))
+							return withRemoteContext(json.toString());
+						Logger.debug("Matching mime {}, converting JSON to {}",
+								mimeType, serialization.format);
+						return NtToEs.jsonLdToRdf(json, serialization.format);
+					}
+		return null;
+	}
+
+	private static String withRemoteContext(String string) {
+		try {
+			// JSON-LD compact, always an object (resulting in a map)
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> maps = (List<Map<String, Object>>) JSONUtils
+					.fromString(string);
+			for (Map<String, Object> map : maps) {
+				map.put("@context", routes.Assets.at("data/context.json")
+						.absoluteURL(request()));
+			}
+			return JSONUtils.toString(maps);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return string;
+	}
+
+	private static boolean invalidAcceptHeader() {
+		if (request() == null)
+			return true;
+		final String acceptHeader = request().getHeader("Accept");
+		return (acceptHeader == null || acceptHeader.trim().isEmpty());
+	}
+
+	private static String withoutLocation(String sourceAsString) {
 		try {
 			// JSON-LD compact, always an object (resulting in a map)
 			@SuppressWarnings("unchecked")
 			Map<String, Object> json = (Map<String, Object>) JSONUtils
 					.fromString(sourceAsString);
 			json.remove("location");
-			json.put("@context", routes.Assets.at("data/context.json")
-					.absoluteURL(request()));
 			return JSONUtils.toString(json);
 		} catch (JsonParseException e) {
 			e.printStackTrace();

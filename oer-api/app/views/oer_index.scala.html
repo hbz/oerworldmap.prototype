@@ -23,6 +23,9 @@
         <dd>
         @for(query <- queries) { <a href="@query">@query</a><br/> }
         </dd>
+        <dt>Accept</dt>
+        <dd>Set the <code>Accept</code> header to the desired content type (see supported types below). <br/>
+        Sample: <code>curl -H "Accept: text/plain" "http://staging.api.lobid.org/oer/1f4269a9-0103-4d9f-913c-5f127a5dab88"</code></dd>
     </dt>
     <h2>Write</h2>
     <dl>

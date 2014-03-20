@@ -147,6 +147,18 @@ public class NtToEs {
 		return compact(stringWriter.toString());
 	}
 
+	static String jsonLdToRdf(JsonNode data, Lang lang) {
+		StringWriter stringWriter = new StringWriter();
+		Model model = ModelFactory.createDefaultModel();
+		for (JsonNode jsonNode : data) {
+			InputStream in = new ByteArrayInputStream(jsonNode.toString()
+					.getBytes(Charsets.UTF_8));
+			RDFDataMgr.read(model, in, Lang.JSONLD);
+		}
+		RDFDataMgr.write(stringWriter, model, lang);
+		return stringWriter.toString();
+	}
+
 	private static String compact(String json) {
 		try {
 			Object contextJson = JSONUtils.fromURL(context());
