@@ -1,4 +1,5 @@
 {
+  "@context" : {
     "description" : "http://schema.org/description",
     "descriptionLink" : {
       "@id" : "http://schema.org/description",
@@ -29,3 +30,4 @@
       "@type" : "@id"
     }
   }
+}
