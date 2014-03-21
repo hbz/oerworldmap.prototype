@@ -298,8 +298,10 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
           foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {
             $rdf_mapping = rdf_mapping_load(LDE_ENTITY_TYPE, $bundle_name);
             foreach ($rdf_mapping['rdftype'] as $rdf_type) {
+              //FIXME: How can such a statement exist for a literal
+              //value? Bug in LibRDF?
               $rdf_type_stmt = new LibRDF_Statement($value, $RDF->type, new LibRDF_URINode($rdf_type));
-              if ($rdf_model->hasStatement($rdf_type_stmt)) {
+              if ($rdf_model->hasStatement($rdf_type_stmt) && ($value instanceof LibRDF_URINode)) {
                 $embedded_entity = entity_create(LDE_ENTITY_TYPE,
                   array('uri' => $value->getValue())
                 );

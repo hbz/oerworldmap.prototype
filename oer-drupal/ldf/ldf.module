@@ -418,9 +418,6 @@ function ldf_embed_entities($items, $entity_cache = array(), $form_state = array
     // Fieldset for single embedded entity
     $elements[$delta] = array(
       '#type' => 'fieldset',
-      '#attributes' => array(
-        'class' => array('collapsible', 'collapsed'),
-      ),
     );
 
     // Check if fully loaded entity is available
@@ -435,6 +432,9 @@ function ldf_embed_entities($items, $entity_cache = array(), $form_state = array
       $elements[$delta] += array(
         '#title' => entity_label($embedded_entity->entityType(), $embedded_entity),
         'entity' => entity_view($embedded_entity->entityType(), array($embedded_entity)),
+        '#attributes' => array(
+          'class' => array('collapsible', 'collapsed'),
+        ),
       );
     } else if ('link' == $mode) {
       // Add hidden input as preparation for rendering entity via JS
@@ -443,6 +443,9 @@ function ldf_embed_entities($items, $entity_cache = array(), $form_state = array
         'entity' => array(
           '#type' => 'hidden',
           '#value' => $item['value'],
+        ),
+        '#attributes' => array(
+          'class' => array('collapsible', 'collapsed'),
         ),
       );
       $elements[$delta]['#attributes']['class'][] = 'ldf_field_type';
@@ -473,7 +476,10 @@ function ldf_embed_entities($items, $entity_cache = array(), $form_state = array
       );
       $elements[$delta] += array(
         '#title' => entity_label($embedded_entity->entityType(), $embedded_entity),
-        'entity' => $inline_form
+        'entity' => $inline_form,
+        '#attributes' => array(
+          'class' => array('collapsible'),
+        ),
       );
     }
     //TODO: allow editing of embedded entities load via JS

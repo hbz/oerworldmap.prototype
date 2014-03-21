@@ -68,12 +68,12 @@ class LinkedDataEntityFieldQuery extends EntityFieldQuery {
 
     $http_options = array(
       'method' => 'GET',
-      'headers' => array('Content-Type' => $resultFormat),
+      'headers' => array('Accept' => $resultFormat),
     );
     $http_response = lde_http_request($http_url, $http_options);
 
     if (200 != $http_response->code || !isset($http_response->data)) {
-      drupal_set_message("Unable to execute query", 'error');
+      drupal_set_message("Unable to execute query $http_url", 'error');
       return FALSE;
     }
 
