@@ -115,9 +115,9 @@ public class Application extends Controller {
 			return ok(oer_index.render(Arrays.asList(
 					// @formatter:off@
 					"/oer?q=\"Cape+Town\"",
-					"/oer?q=*&t=http://schema.org/CollegeOrUniversity",
-					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity",
-					"/oer?q=Africa&t=http://schema.org/CollegeOrUniversity,"
+					"/oer?q=*&t=http://schema.org/Organization",
+					"/oer?q=Africa&t=http://schema.org/Organization",
+					"/oer?q=Africa&t=http://schema.org/Organization,"
 					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
 					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
 					"/oer?q=\"Cape+Town\"&callback=callbackFunction")));
