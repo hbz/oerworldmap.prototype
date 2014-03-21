@@ -129,8 +129,8 @@ public class Application extends Controller {
 		try {
 			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
-			String r = response.isExists() ? response.getSourceAsString() : "";
-			return response(Json.parse("[" + withoutLocation(r) + "]"));
+			return !response.isExists() ? notFound() : response(Json.parse("["
+					+ withoutLocation(response.getSourceAsString()) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
