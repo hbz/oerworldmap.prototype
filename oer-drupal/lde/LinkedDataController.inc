@@ -1,8 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../lib/LibRDF/LibRDF/LibRDF.php';
-require_once __DIR__ . '/../lib/php-json-ld/jsonld.php';
-
 /**
  * A controller for linked data entities.
  *
@@ -190,22 +187,3 @@ class LinkedDataController extends EntityAPIController {
 
 }
 
-function lde_http_request($request_url, $http_options) {
-
-  $http_response = drupal_http_request($request_url, $http_options);
-
-  // FIXME: drupal_http_request does not follow 303s
-  if ((303 == $http_response->code) || (307 == $http_response->code)) {
-    $redirect_url = $http_response->headers['location'];
-    // Fix for relative redirect URLs
-    if ("/" == substr($redirect_url, 0, 1)) {
-      $parsed_url = parse_url($request_url);
-      $redirect_url = "{$parsed_url['scheme']}://{$parsed_url['host']}$redirect_url";
-    }
-    $request_url = $redirect_url;
-    $http_response = drupal_http_request($request_url, $http_options);
-  }
-
-  return $http_response;
-
-}
