@@ -200,7 +200,10 @@
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
-        owl:hasValue gn:P ] .
+        owl:hasValue gn:P ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :featureName ;
+        owl:cardinality "0" ] .
 
 :Country
     a owl:Class ;
@@ -208,7 +211,19 @@
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
-        owl:hasValue gn:A ] .
+        owl:hasValue gn:A ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :featureName ;
+        owl:cardinality "0" ] .
+
+:featureName
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property gn:name is used to indicate the name of a geonames feature."@en ;
+    rdfs:subPropertyOf gn:name ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Name"@en ;
+    rdfs:label "Name"@de ;
+    rdfs:range rdfs:Literal .
 
 <http://api.geonames.org/search>
     a ex:endpoint ;
