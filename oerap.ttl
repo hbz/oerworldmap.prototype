@@ -240,7 +240,7 @@
     ex:typeParam "t" ;
     ex:offsetParam "from" ;
     ex:limitParam "size" ;
-    ex:resultFormat "application/json" ;
+    ex:resultFormat "application/rdf+xml" ;
     ex:supplies :Organization , :Service , :Person , :Project .
 
 :type
