@@ -106,7 +106,15 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
           'handler_settings' => array(
             'target_bundles' => array(
               'Document' => array(
-                'lookup' => true,
+                'lookup' => array(
+                  'http://example.org/search' => array(
+                    'queryParam' => 'q',
+                    'limitParam' => 'maxRows',
+                    'offsetParam' => 'startRow',
+                    'resultFormat' => 'application/rdf+xml',
+                    'supplies' => array('Person', 'Document'),
+                  )
+                )
               ),
             ),
           ),
@@ -133,7 +141,15 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
           'handler_settings' => array(
             'target_bundles' => array(
               'Person' => array(
-                'lookup' => true,
+                'lookup' => array(
+                  'http://example.org/search' => array(
+                    'queryParam' => 'q',
+                    'limitParam' => 'maxRows',
+                    'offsetParam' => 'startRow',
+                    'resultFormat' => 'application/rdf+xml',
+                    'supplies' => array('Person', 'Document'),
+                  )
+                )
               ),
             ),
           ),
@@ -204,6 +220,19 @@ class ApplicationProfileTests extends PHPUnit_Framework_TestCase {
     $top_bundles = ApplicationProfile::get(TEST_LDE_TYPE)->getTopBundles();
     $expected = array('Person', 'Document');
     $this->assertEquals($expected, $top_bundles);
+  }
+
+  public function test_get_endpoints() {
+    //TODO: Implement test
+    $endpoints = ApplicationProfile::get(TEST_LDE_TYPE)->getEndpoints(
+    );
+  }
+
+  public function test_get_constraints() {
+    //TODO: Implement test
+    $constraints = ApplicationProfile::get(TEST_LDE_TYPE)->getConstraints(
+      'Locality'
+    );
   }
 
 }

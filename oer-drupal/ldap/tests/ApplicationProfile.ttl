@@ -5,6 +5,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/> .
 
 :ap
   a owl:Ontology .
@@ -81,3 +82,12 @@
 :ClassWithoutLabel
   a owl:Class ;
   rdfs:isDefinedBy :ap .
+
+ex:search
+    a ex:endpoint ;
+    ex:queryParam "q" ;
+    ex:offsetParam "startRow" ;
+    ex:limitParam "maxRows" ;
+    ex:resultFormat "application/rdf+xml" ;
+    ex:supplies :Person , :Document .
+

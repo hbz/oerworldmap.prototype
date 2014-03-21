@@ -22,6 +22,13 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
+  $items['oerworldmap/search'] = array(
+    'title' => 'Search',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('oerworldmap_search'),
+    'access callback' => true,
+  );
+
   $items['oerworldmap/add'] = array(
     'title' => 'Contribute to the OER World Map',
     'page callback' => 'oerworldmap',
@@ -65,7 +72,22 @@ function oerworldmap_menu() {
 }
 
 function oerworldmap() {
-  return array();
+  drupal_add_css(
+    'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css', 'external'
+  );
+  drupal_add_js(
+    'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js', 'external'
+  );
+  drupal_add_js(array('oerworldmap' => array(
+    'apiUrl' => variable_get('lde_api_host'),
+  )), 'setting');
+  drupal_add_js(
+    drupal_get_path('module', 'oerworldmap') . '/oerworldmap.js'
+  );
+  return array(
+    '#type' => 'markup',
+    '#markup' => '<div id="oerworldmap" style="height: 300px; width: 100%; border: 1px solid black;"></div>',
+  );
 }
 
 function oerworldmap_ap_update() {
@@ -73,6 +95,48 @@ function oerworldmap_ap_update() {
   $ap->update();
   drupal_set_message("Application profile reloaded");
   return array();
+}
+
+function oerworldmap_search($form, &$form_state) {
+
+  $form['#method'] = 'GET';
+
+  $search_form = array(
+    '#type' => 'textfield',
+    '#name' => 'term',
+  );
+
+  $search_button = array(
+    '#type' => 'submit',
+    '#name' => 'search',
+    '#default_value' => 'Search',
+  );
+
+  $form[] = $search_form;
+  $form[] = $search_button;
+
+  $term = isset($_GET['term']) ? $_GET['term'] : null;
+  if (!isset($term)) return $form;
+
+  $endpoint_uri = 'http://' . variable_get('lde_api_host') . '/oer';
+  $endpoints = ApplicationProfile::get(LDE_ENTITY_TYPE)->getEndpoints();
+  $endpoint_params = $endpoints[$endpoint_uri];
+  $query = new LinkedDataEntityFieldQuery();
+  $query->addMetadata('endpoint', $endpoint_uri);
+  $query->addMetadata('term', $term);
+  foreach ($endpoint_params as $param => $value) {
+    $query->addMetadata($param, $value);
+  }
+  $query->entityCondition('bundle', array('Organization', 'Service', 'Person', 'Project'));
+  $results = $query->execute();
+  if ($results) foreach ($results as $result) {
+    $view = entity_view(LDE_ENTITY_TYPE, array($result), 'full', null, false);
+    $view += array(
+      '#type' => 'fieldset'
+    );
+    $form[] = $view;
+  }
+  return $form;
 }
 
 function oerworldmap_resource_add($type) {

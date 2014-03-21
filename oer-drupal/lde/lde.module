@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . '/../lib/LibRDF/LibRDF/LibRDF.php';
+require_once __DIR__ . '/../lib/php-json-ld/jsonld.php';
+
 define('LDE_ENTITY_TYPE', 'lde');
 
 /**
@@ -98,7 +101,7 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#default_value' => 'Submit',
-    '#weight' => '100',
+    '#weight' => '1000',
   );
   return $form;
 }
@@ -110,7 +113,7 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
 function lde_form_submit($form, &$form_state) {
   $entity = $form['#entity'];
   field_attach_submit($entity->entityType(), $entity, $form, $form_state);
-  $entity->uri = lde_resource_uri();
+  $entity->uri = lde_resource_uri($entity);
   $form_state['redirect'] = $entity->uri();
   $inline_entities = array();
   if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
@@ -172,8 +175,16 @@ function lde_uuid_v4() {
   );
 }
 
-function lde_resource_uri() {
-  return "urn:uuid:" . lde_uuid_v4();
+function lde_resource_uri($entity = null) {
+  $top_level_bundles = ApplicationProfile::get(LDE_ENTITY_TYPE)->getTopBundles();
+  if (isset($entity) && isset($entity->type)
+      && in_array($entity->type, $top_level_bundles))
+  {
+    $uri = "http://lobid.org/oer/" . lde_uuid_v4() . '#!';
+  } else {
+    $uri = "urn:uuid:" . lde_uuid_v4();
+  }
+  return $uri;
 }
 
 /**
@@ -244,6 +255,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
   $rdf_model->loadStatementsFromString($rdf_parser, $rdf_string);
 
   // Find bundle and corresponding mapping based on rdf:type
+  $resource_type = false;
   $bundles = field_info_bundles(LDE_ENTITY_TYPE);
   foreach ($bundles as $bundle_name => $bundle) {
     $rdf_mapping = $bundle['rdf_mapping'];
@@ -254,11 +266,16 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
         $rdf_subject, $RDF->type, $rdf_class
       );
       if ($rdf_type_stmt->current()) {
+        $resource_type = $bundle_name;
         break 2;
       }
     }
   }
-  $entity->type = $bundle_name;
+
+  // RDF could not be mapped to a bundle
+  if (!$resource_type) return;
+
+  $entity->type = $resource_type;
   unset($rdf_mapping['rdftype']);
 
   // Add field data
@@ -281,8 +298,10 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
           foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {
             $rdf_mapping = rdf_mapping_load(LDE_ENTITY_TYPE, $bundle_name);
             foreach ($rdf_mapping['rdftype'] as $rdf_type) {
+              //FIXME: How can such a statement exist for a literal
+              //value? Bug in LibRDF?
               $rdf_type_stmt = new LibRDF_Statement($value, $RDF->type, new LibRDF_URINode($rdf_type));
-              if ($rdf_model->hasStatement($rdf_type_stmt)) {
+              if ($rdf_model->hasStatement($rdf_type_stmt) && ($value instanceof LibRDF_URINode)) {
                 $embedded_entity = entity_create(LDE_ENTITY_TYPE,
                   array('uri' => $value->getValue())
                 );
@@ -296,4 +315,24 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
     }
   }
   $entity->setEntityCache($embedded_entities);
+}
+
+function lde_http_request($request_url, $http_options) {
+
+  $http_response = drupal_http_request($request_url, $http_options);
+
+  // FIXME: drupal_http_request does not follow 303s
+  if ((303 == $http_response->code) || (307 == $http_response->code)) {
+    $redirect_url = $http_response->headers['location'];
+    // Fix for relative redirect URLs
+    if ("/" == substr($redirect_url, 0, 1)) {
+      $parsed_url = parse_url($request_url);
+      $redirect_url = "{$parsed_url['scheme']}://{$parsed_url['host']}$redirect_url";
+    }
+    $request_url = $redirect_url;
+    $http_response = drupal_http_request($request_url, $http_options);
+  }
+
+  return $http_response;
+
 }

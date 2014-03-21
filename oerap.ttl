@@ -1,7 +1,7 @@
 @prefix : <#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix ex: <http://exapmle.org/> .
+@prefix ex: <http://example.org/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
 @prefix oo: <http://purl.org/openorg/> .
@@ -200,7 +200,10 @@
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
-        owl:hasValue gn:P ] .
+        owl:hasValue gn:P ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :featureName ;
+        owl:cardinality "0" ] .
 
 :Country
     a owl:Class ;
@@ -208,7 +211,37 @@
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
-        owl:hasValue gn:A ] .
+        owl:hasValue gn:A ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :featureName ;
+        owl:cardinality "0" ] .
+
+:featureName
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property gn:name is used to indicate the name of a geonames feature."@en ;
+    rdfs:subPropertyOf gn:name ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Name"@en ;
+    rdfs:label "Name"@de ;
+    rdfs:range rdfs:Literal .
+
+<http://api.geonames.org/search>
+    a ex:endpoint ;
+    ex:queryParam "q" ;
+    ex:offsetParam "startRow" ;
+    ex:limitParam "maxRows" ;
+    ex:additionalParam "username=literarymachine" , "type=rdf";
+    ex:resultFormat "application/rdf+xml" ;
+    ex:supplies :Locality , :Country .
+
+<http://api.lobid.org/oer>
+    a ex:endpoint ;
+    ex:queryParam "q" ;
+    ex:typeParam "t" ;
+    ex:offsetParam "from" ;
+    ex:limitParam "size" ;
+    ex:resultFormat "application/rdf+xml" ;
+    ex:supplies :Organization , :Service , :Person , :Project .
 
 :type
     a owl:ObjectProperty ;
