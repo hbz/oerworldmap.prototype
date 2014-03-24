@@ -54,6 +54,7 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :member ;
+        rdfs:label "Staff" ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :memberOf ;
@@ -72,10 +73,15 @@
         owl:cardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :alternateName ;
+        rdfs:label "Nick name"@en ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :description ;
         owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :memberOf ;
+        rdfs:label "Organisation"@en ;
+        owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :url ;
         owl:minCardinality "0" ] ,
@@ -87,9 +93,6 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :geo ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
-        owl:onProperty :memberOf ;
         owl:minCardinality "0" ] .
 
 :Service
