@@ -1,0 +1,48 @@
+{
+   "features" : [
+      {
+         "properties" : {
+            "name" : "Kaplan University Online & Campus Learning"
+         },
+         "id" : 103,
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               -87.641185,
+               41.876835
+            ]
+         },
+         "type" : "Feature"
+       },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "type" : "Point",
+            "coordinates" : [
+               37.6232533,
+               55.7635019
+            ]
+         },
+         "id" : 445,
+         "properties" : {
+            "name" : "MOSCOW ARCHITECTURAL INSTITUTE"
+         }
+      },
+      {
+         "type" : "Feature",
+         "geometry" : {
+            "coordinates" : [
+               -73.1242854,
+               7.1321954
+            ],
+            "type" : "Point"
+         },
+         "id" : 67,
+         "properties" : {
+            "name" : "Universidad Industrial de Santander"
+         }
+      }
+   ],
+   "type" : "FeatureCollection"
+}
+

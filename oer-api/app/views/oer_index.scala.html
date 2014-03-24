@@ -1,0 +1,49 @@
+@* Copyright 2014 Fabian Steeg, hbz. Licensed under the Eclipse Public License 1.0 *@
+
+@(queries: List[String])
+
+@import play.api.libs.json.Json
+@import controllers.oer.Application.Serialization
+
+@oer_main("OER") {
+    <h1>hbz OER API prototype</h1>
+    <h2>Read</h2>
+    <dl>
+        <dt>Overview</dt>
+        <dd>The API supports two parameters: <code>q</code> and <code>t</code>. It serves JSON.</dd>
+        <dt><code>q</code> (required)<dt>
+        <dd>Query over all fields, supports <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"> elasticsearch query string syntax</a>.</dd>
+        <dt><code>t</code> (optional)</dt>
+        <dd>Filter results by the <code>@@type</code> field (pass multiple, comma-separated values for OR logic).</dd>
+        <dt><code>location</code> (optional)</dt>
+        <dd>Filter results by their location (pass multiple, space-separated "lon,lat" pairs for a <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html#_lat_lon_as_string_5">polygon filter</a>).</dd>
+        <dt><code>callback</code> (optional)</dt>
+        <dd>For JSONP requests.</dd>
+        <dt>Samples<dt>
+        <dd>
+        @for(query <- queries) { <a href="@query">@query</a><br/> }
+        </dd>
+        <dt>Accept</dt>
+        <dd>Set the <code>Accept</code> header to the desired content type (see supported types below). <br/>
+        Sample: <code>curl -H "Accept: text/plain" "http://staging.api.lobid.org/oer/1f4269a9-0103-4d9f-913c-5f127a5dab88"</code></dd>
+    </dt>
+    <h2>Write</h2>
+    <dl>
+        <dt>Overview</dt>
+        <dd>The API supports <code>PUT</code> requests with RDF bodies. Note: the write API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
+        <dt>id<dt>
+        <dd>Append the ID for your data to the request path, e.g. <code>PUT /oer/id123</code> for ID <code>id123</code>. You can <code>GET</code> the data the same way: <a href="/oer/id123">/oer/id123</a>.</dd>
+        <dt>body</dt>
+        <dd>The request body is expected to be valid RDF.</dd>
+        <dt>Content-Type</dt>
+        <dd>The <code>Content-Type</code> header must specify what is sent in the body (see supported types below).</dd>
+        <dt>Sample<dt>
+        <dd>
+        <code>curl -X PUT -H "Content-Type: text/plain" http://user:pass@@staging.api.lobid.org/oer/id123 -d '&lt;http://www.w3.org/2001/sw/RDFCore/ntriples/&gt; &lt;http://purl.org/dc/elements/1.1/creator&gt; "Dave Beckett" .'</code>
+        </dd>
+    </dt>
+    <h2>Content types</h2>
+    <dl>
+     @for(s <- Serialization.values()) { <dt>@s.name</dt> <dd>@s.getTypes</dd> }
+    </dl>
+}

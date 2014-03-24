@@ -1,0 +1,10 @@
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "    The language of education is Russian. The full course of studies lasts 6 years. But if you don’t have enough skills in Russian, Artistic and Technical Drawing, you’ll have to attend to a special Preparatory Course during one academic year before being accepted as a student." .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_02_26bac5aa7b867f6d9214ba43169a4649.jpg> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "    Having completed the full course of studies ( 6 years)  students are qualified as architects and get the Master’s Degree with the corresponding diploma. After 4 years students get the Bachelor’s Degree and diploma." .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/description> "Moscow Architectural Institute trains architects of wide-range specialization in Town- Planning, Architecture of Residental and Public Buildings, Architectural   Design,       Architecture of Industrial Buildings, Architecture of Agricultural Complexes, Theory and History of Architecture, Restoration of Architectural Monuments, Interior Architecture, Landscaping." .
+<http://oerworldmap.org/resource/ocw445> <http://purl.org/dc/elements/1.1/identifier> "445" .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/url> <http://www.marhi.ru> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/providesService> <http://www.open-marhi.ru/> .
+<http://oerworldmap.org/resource/ocw445> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/ns/org#hasMembership> <http://www.ocwconsortium.org/> .
+<http://oerworldmap.org/resource/ocw445> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversityTest2> .

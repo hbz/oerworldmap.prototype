@@ -1,0 +1,11 @@
+# this is a template that describes the ocwc itself
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04> <http://schema.org/addressLocality> <http://sws.geonames.org/4945283/> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04> <http://schema.org/addressCountry> <http://sws.geonames.org/6252001/> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04> <http://schema.org/postOfficeBoxNumber> "02464" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/org#OrganizationalCollaboration> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/address> <urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/description> "The OpenCourseWare Consortium is a worldwide community of hundreds of higher education institutions and associated organizations committed to advancing open education and its impact on global education. " .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/logo> "http://www.ocwconsortium.org/wp-content/themes/ocwc-mainsite/images/xlogo.png.pagespeed.ic.kzSPWsLJUE.jpg" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/name> "Open Courseware Consortium" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/url> <http://www.ocwconsortium.org/> .
