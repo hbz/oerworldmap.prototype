@@ -147,6 +147,7 @@ class ApplicationProfile {
   public function getBundles() {
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $EX = new LibRDF_NS('http://example.org/');
 
     $query_string = "
       SELECT ?uri WHERE {
@@ -180,9 +181,21 @@ class ApplicationProfile {
       } catch (LibRDF_LookupError $e) {
         // No label set, ignore
       }
-      if (isset($class['label'])) {
-        $bundle['label'] = $class['label']->getValue();
+      try {
+        $instance_label_list = $this->applicationProfileRDF->getTarget(
+          $class['uri'], $EX->labelProperties
+        );
+        $instance_label_fields = $this->applicationProfileRDF
+          ->getListAsArray($instance_label_list);
+        foreach ($instance_label_fields as $instance_label_field) {
+          $bundle['instance labels'][] = $this->getFieldName(
+            $instance_label_field
+          );
+        }
+      } catch (LibRDF_LookupError $e) {
+        // No instance label set, ignore
       }
+
       $bundles[$bundle_name] = $bundle;
     }
     return $bundles;

@@ -9,9 +9,8 @@
           $(element).after(throbber);
           entity_render_view('lde', encodeURIComponent(encodeURIComponent(link.value))).onload = function () {
             if (this.status == 200) {
-              console.log($(this.responseText));
               var entity_view = $(this.responseText);
-              $(element).text(link);
+              $(element).text($.trim(entity_view.children('h2').text()));
               $(link).replaceWith(entity_view);
               $(element).bind('click', function(event) {
                 Drupal.attachBehaviors(entity_view);
