@@ -25,9 +25,6 @@
     rdfs:isDefinedBy :ap ;
     rdfs:subClassOf schema:Organization ,
     [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
     [ a owl:Restriction ;
@@ -41,6 +38,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :address ;
@@ -98,9 +98,6 @@
     rdfs:isDefinedBy :ap ;
     rdfs:subClassOf schema:Service ,
     [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
     [ a owl:Restriction ;
@@ -114,6 +111,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :contact ;
@@ -133,9 +133,6 @@
     rdfs:isDefinedBy :ap ;
     rdfs:subClassOf foaf:Project ,
     [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
     [ a owl:Restriction ;
@@ -149,6 +146,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :contact ;
