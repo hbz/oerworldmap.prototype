@@ -93,7 +93,7 @@
 		<!-- /uuid and id handling for the adress bnode -->
 		<!-- geoData -->
 		<combine name="$[schema:]addressCountry" value="${a}">
-			<data source="country" name="a"/>
+			<data source="@geonamesId" name="a"/>
 			<data source="@addressId"/>
 		</combine>
 		<combine name="$[schema:]streetAddress" value="${a}">
@@ -102,10 +102,6 @@
 		</combine>
 		<combine name="$[schema:]postalCode" value="${a}">
 			<data source="postcode" name="a"/>
-			<data source="@addressId"/>
-		</combine>
-		<combine name="http://www.geonames.org/ontology#locatedIn" value="${a}">
-			<data source="@geonamesId" name="a"/>
 			<data source="@addressId"/>
 		</combine>
 		<data source="country_code" name="@country2GeonamesId">
