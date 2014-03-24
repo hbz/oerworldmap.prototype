@@ -90,8 +90,16 @@
 			</data>
 			<data source="@subjectUri"/>
 		</combine>
-		<combine name="$[schema:]logo" value="${a}">
-			<data source="logo_small_url" name="a"/>
+		<combine name="$[schema:]logo" value="${a}/${b}">
+			<data source="logo_small_url" name="a">
+				<regexp match="(.*)/" format="${1}"/>
+			</data>
+			<data source="logo_small_url" name="b">
+				<regexp match="(.*)/(.*)" format="${2}"/>
+				<urlencode></urlencode>
+				<!-- unfortunately at least the ocwc with id 404 has a mixed up URL encoding -->
+				<replace pattern="\+" with="%20"/>
+			</data>
 			<data source="@subjectUri"/>
 		</combine>
 		<combine name="$[schema:]providesService" value="${a}">
