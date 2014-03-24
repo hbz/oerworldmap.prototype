@@ -212,7 +212,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
       // Fieldset for link elements
       $element['ldf_field_widget'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Hinzufügen'),
+        '#title' => t('Add'),
         '#parents' => array(
           'ldf_field_widget', $entity->identifier(), $field_name
         ),
@@ -233,7 +233,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
           // Submit button for search
           $element['ldf_field_widget']['submit'] = array(
             '#type' => 'submit',
-            '#default_value' => t('Suchen'),
+            '#default_value' => t('Search'),
             '#name' => "$action_button|search",
             '#submit' => array('ldf_field_widget_update_value'),
             '#validate' => array('ldf_field_widget_validate_value'),
@@ -256,7 +256,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
               $element['ldf_field_widget']['option'][$i]['add'] = array(
                 '#type' => 'submit',
                 '#name' => "$action_button|add|$i",
-                '#default_value' => t('Hinzufügen'),
+                '#default_value' => t('Add'),
                 '#submit' => array('ldf_field_widget_update_value'),
                 '#validate' => array('ldf_field_widget_validate_value'),
               );
@@ -325,7 +325,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
           $element['data'][$i]['remove'] = array(
             '#type' => 'submit',
             '#name' => "$action_button|remove|$i",
-            '#default_value' => t('Entfernen'),
+            '#default_value' => t('Remove'),
             '#submit' => array('ldf_field_widget_update_value'),
             '#validate' => array('ldf_field_widget_validate_value'),
           );
