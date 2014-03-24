@@ -293,7 +293,7 @@
     rdfs:range rdfs:Literal .
 
 :url
-    a owl:DatatypeProperty ;
+    a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property schema:url is used to link to a homepage of a person, organization, project, or service."@en ;
     rdfs:subPropertyOf schema:url ;
     rdfs:isDefinedBy :ap ;
