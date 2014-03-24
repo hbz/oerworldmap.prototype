@@ -298,7 +298,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Website"@en ;
     rdfs:label "Webseite"@de ;
-    rdfs:range xsd:anyURI .
+    rdfs:range schema:WebPage .
 
 :email
     a owl:DatatypeProperty ;
