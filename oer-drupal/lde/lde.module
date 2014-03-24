@@ -113,7 +113,9 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
 function lde_form_submit($form, &$form_state) {
   $entity = $form['#entity'];
   field_attach_submit($entity->entityType(), $entity, $form, $form_state);
-  $entity->uri = lde_resource_uri($entity);
+  if (!isset($entity->uri) || $entity->uri == 'new') {
+    $entity->uri = lde_resource_uri($entity);
+  }
   $form_state['redirect'] = $entity->uri();
   $inline_entities = array();
   if (array_key_exists('inline', $form_state['values']['ldf_field_widget'])) {
