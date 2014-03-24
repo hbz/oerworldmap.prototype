@@ -23,7 +23,7 @@
 :Organization
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :name ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Organization ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -66,7 +66,7 @@
 :Person
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :name ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Person ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -98,7 +98,7 @@
 :Service
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :name ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Service ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -131,7 +131,7 @@
 :Project
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :name ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf foaf:Project ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -162,6 +162,7 @@
 :PostalAddress
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :streetAddress :postalCode ) ;
     rdfs:subClassOf schema:PostalAddress ,
     [ a owl:Restriction ;
         owl:onProperty :streetAddress ;
@@ -179,7 +180,7 @@
 :GeoCoordinates
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel ( :latitude :longitude ) ;
+    ex:labelProperties ( :latitude :longitude ) ;
     rdfs:subClassOf schema:GeoCoordinates ,
     [ a owl:Restriction ;
         owl:onProperty :latitude ;
@@ -196,7 +197,7 @@
 :Locality
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :featureName ;
+    ex:labelProperties ( :featureName ) ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
@@ -208,7 +209,7 @@
 :Country
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
-    ex:showAsLabel :featureName ;
+    ex:labelProperties ( :featureName ) ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
