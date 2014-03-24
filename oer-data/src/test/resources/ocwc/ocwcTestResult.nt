@@ -20,6 +20,15 @@
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/url> <http://www.marhi.ru> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc404" .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/description> "South African university" .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/UCT%20online%20logo%20_%20low%20res_7f3b3be1ecbd4e31763ff9ca6d9c6242.jpg> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/name> "University of Cape Town" .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/providesService> <http://opencontent.uct.ac.za/> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/url> <http://www.uct.ac.za/> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc67" .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/description> "La Universidad Industrial de Santander es una organización que tiene como propósito la formación de personas de alta calidad ética, política y profesional; la generación y adecuación de conocimientos; la conservación y reinterpretación de la cultura y la participación activa liderando procesos de cambio por el progreso y mejor calidad de vida de la comunidad. Orientan su misió³n los principios democrá¡ticos, la reflexió³n crítica, el ejercicio libre de la cátedra, el trabajo interdisciplinario y la relación con el mundo externo. Sustenta su trabajo en las cualidades humanas de las personas que la integran, en la capacidad laboral de sus empleados, en la excelencia académica de sus profesores y en el compromiso de la comunidad universitaria con los propósitos institucionales y la construcción de una cultura de vida." .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/geo> <urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> .
