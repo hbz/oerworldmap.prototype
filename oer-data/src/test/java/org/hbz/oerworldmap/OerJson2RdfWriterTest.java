@@ -50,6 +50,7 @@ public class OerJson2RdfWriterTest {
 	@Test
 	public void testFlow() {
 		try {
+			FileUtils.deleteQuietly(new File(TARGET_PATH));
 			transformDataInDirectory(OCWC_PATH + CONSORTIUM_MEMBERS);
 			transformDataInDirectory(OCWC_PATH + ORGANIZATION_ID);
 			transformDataInDirectory(OCWC_PATH + GEO_LIST);

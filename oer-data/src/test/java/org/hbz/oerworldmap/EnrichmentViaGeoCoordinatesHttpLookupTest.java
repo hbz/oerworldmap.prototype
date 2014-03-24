@@ -36,6 +36,7 @@ public class EnrichmentViaGeoCoordinatesHttpLookupTest {
 
 	@Test
 	public void transformDataInDirectory() throws URISyntaxException {
+		FileUtils.deleteQuietly(new File(TARGET_PATH));
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
