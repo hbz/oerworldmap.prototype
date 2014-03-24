@@ -23,6 +23,7 @@
 :Organization
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :name ;
     rdfs:subClassOf schema:Organization ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -64,6 +65,7 @@
 :Person
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :name ;
     rdfs:subClassOf schema:Person ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -96,6 +98,7 @@
 :Service
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :name ;
     rdfs:subClassOf schema:Service ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -131,6 +134,7 @@
 :Project
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :name ;
     rdfs:subClassOf foaf:Project ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
@@ -181,6 +185,7 @@
 :GeoCoordinates
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel ( :latitude :longitude ) ;
     rdfs:subClassOf schema:GeoCoordinates ,
     [ a owl:Restriction ;
         owl:onProperty :latitude ;
@@ -197,6 +202,7 @@
 :Locality
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :featureName ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
@@ -208,6 +214,7 @@
 :Country
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:showAsLabel :featureName ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
