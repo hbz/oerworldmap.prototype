@@ -536,7 +536,7 @@ class ApplicationProfile {
         }
         unset($installed_fields[$field['field_name']]);
       } catch (FieldException $e) {
-        drupal_set_message($e->getMessage(), 'error');
+        drupal_set_message($field['field_name'] . ':' . $e->getMessage(), 'error');
       }
     }
     // Delete remaining fields

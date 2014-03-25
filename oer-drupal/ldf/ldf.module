@@ -209,6 +209,42 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
       $encoded_uri = base64_encode($entity->identifier());
       $action_button = "ldf_field_widget|{$encoded_uri}|{$field_name}";
 
+      // List items
+      $inline_mode = 'link';
+      foreach ($target_bundles as $target_bundle => $allowed_actions) {
+        if (isset($allowed_actions['embed']) && !isset($allowed_actions['lookup'])) {
+          $inline_mode = 'edit';
+        }
+      }
+      $element['data'] = array(
+        '#parents' => array(
+          'ldf_field_widget', $field_name, 'data'
+        ),
+      );
+      $element['data'] += ldf_embed_entities(
+        $items, $entity_cache, $form_state, $inline_mode
+      );
+      foreach (array_keys($items) as $i) {
+        // Hidden inputs for values
+        $element[$i]['value'] = array(
+          '#type' => 'hidden',
+          '#value' => $items[$i]['value'],
+        );
+        if (!ldf_field_is_empty($items[$i], $field)) {
+          // Submit button to remove value
+          $element['data'][$i]['remove'] = array(
+            '#type' => 'submit',
+            '#name' => "$action_button|remove|$i",
+            '#default_value' => t('Remove'),
+            '#attributes' => array(
+              'class' => array('action-button'),
+            ),
+            '#submit' => array('ldf_field_widget_update_value'),
+            '#validate' => array('ldf_field_widget_validate_value'),
+          );
+        }
+      }
+
       // Fieldset for link elements
       $element['ldf_field_widget'] = array(
         '#type' => 'fieldset',
@@ -219,11 +255,21 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
         '#tree' => true,
       );
 
-      $inline_mode = 'link';
+      // Raw URL input when no target specified
+      if (empty($target_bundles)) {
+        $element['ldf_field_widget']['option'][0]['value'] = array(
+          '#type' => 'textfield',
+        );
+        $element['ldf_field_widget']['option'][0]['add'] = array(
+          '#type' => 'submit',
+          '#name' => "$action_button|add|0",
+          '#default_value' => t('Add'),
+          '#submit' => array('ldf_field_widget_update_value'),
+          '#validate' => array('ldf_field_widget_validate_value'),
+        );
+      }
+
       foreach ($target_bundles as $target_bundle => $allowed_actions) {
-        if (isset($allowed_actions['embed']) && !isset($allowed_actions['lookup'])) {
-          $inline_mode = 'edit';
-        }
         if (isset($allowed_actions['lookup'])) {
           // Textfield for search input
           $element['ldf_field_widget']['search'] = array(
@@ -297,41 +343,11 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
           }
         }
         // Inline create button
-        if (isset($allowed_actions['create'])) {
+        if (!isset($allowed_actions['lookup']) && isset($allowed_actions['create'])) {
           $element['ldf_field_widget']['create_inline'][$target_bundle] = array(
             '#type' => 'submit',
             '#name' => "$action_button|create_inline|$target_bundle",
             '#default_value' => t('Add new ' . $target_bundle),
-            '#submit' => array('ldf_field_widget_update_value'),
-            '#validate' => array('ldf_field_widget_validate_value'),
-          );
-        }
-      }
-
-      // List items
-      $element['data'] = array(
-        '#parents' => array(
-          'ldf_field_widget', $field_name, 'data'
-        ),
-      );
-      $element['data'] += ldf_embed_entities(
-        $items, $entity_cache, $form_state, $inline_mode
-      );
-      foreach (array_keys($items) as $i) {
-        // Hidden inputs for values
-        $element[$i]['value'] = array(
-          '#type' => 'hidden',
-          '#value' => $items[$i]['value'],
-        );
-        if (!ldf_field_is_empty($items[$i], $field)) {
-          // Submit button to remove value
-          $element['data'][$i]['remove'] = array(
-            '#type' => 'submit',
-            '#name' => "$action_button|remove|$i",
-            '#default_value' => t('Remove'),
-            '#attributes' => array(
-              'class' => array('action-button'),
-            ),
             '#submit' => array('ldf_field_widget_update_value'),
             '#validate' => array('ldf_field_widget_validate_value'),
           );

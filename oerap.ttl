@@ -189,11 +189,6 @@
         owl:onProperty :longitude ;
         owl:cardinality "1" ] .
 
-:Image
-    a owl:Class ;
-    rdfs:isDefinedBy :ap ;
-    rdfs:subClassOf foaf:Image .
-
 :Locality
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
@@ -264,7 +259,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Logo"@en ;
     rdfs:label "Logo"@de ;
-    rdfs:range :Image .
+    rdfs:range foaf:Image .
 
 :name
     a owl:DatatypeProperty ;
