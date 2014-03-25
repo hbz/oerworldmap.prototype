@@ -21,6 +21,10 @@
           };
         }
       });
+      $(context).find('input.action-button').each(function(i, element) {
+        var target = $(element).closest('fieldset').children('legend').children('span');
+        $(element).css('float', 'right').detach().appendTo(target);
+      });
     }
   };
 

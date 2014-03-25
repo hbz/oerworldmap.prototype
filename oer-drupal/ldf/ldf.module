@@ -257,6 +257,9 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
                 '#type' => 'submit',
                 '#name' => "$action_button|add|$i",
                 '#default_value' => t('Add'),
+                '#attributes' => array(
+                  'class' => array('action-button'),
+                ),
                 '#submit' => array('ldf_field_widget_update_value'),
                 '#validate' => array('ldf_field_widget_validate_value'),
               );
@@ -326,6 +329,9 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
             '#type' => 'submit',
             '#name' => "$action_button|remove|$i",
             '#default_value' => t('Remove'),
+            '#attributes' => array(
+              'class' => array('action-button'),
+            ),
             '#submit' => array('ldf_field_widget_update_value'),
             '#validate' => array('ldf_field_widget_validate_value'),
           );
