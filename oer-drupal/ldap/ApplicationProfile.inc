@@ -516,27 +516,63 @@ class ApplicationProfile {
    *
    */
   public function update() {
+
+    // Keep track of deletions
+    $batch_size = 0;
+
     // Update fields
+    $installed_fields = field_info_fields();
     foreach ($this->getFields() as $field) {
-      $op = (null == field_info_field($field['field_name']))
-        ? 'field_create_field' : 'field_update_field';
+      $installed_field = $installed_fields[$field['field_name']];
       try {
-        $op($field);
+        if ($installed_field && ($installed_field['type'] != $field['type'])) {
+          field_delete_field($field['field_name']);
+          $batch_size++;
+          field_create_field($field);
+        } else if ($installed_field) {
+          field_update_field($field);
+        } else {
+          field_create_field($field);
+        }
+        unset($installed_fields[$field['field_name']]);
       } catch (FieldException $e) {
         drupal_set_message($e->getMessage(), 'error');
       }
     }
+    // Delete remaining fields
+    foreach ($installed_fields as $removed_field) {
+      field_delete_field($removed_field['field_name']);
+      $batch_size++;
+    }
+
     // Update field instances
+    $installed_instances = field_info_instances(
+      $this->applicationProfileEntityType
+    );
     foreach ($this->getFieldInstances() as $field_instance) {
-      $op = (null == field_info_instance( $field_instance['entity_type'],
-             $field_instance['field_name'], $field_instance['bundle']))
+      $installed_instance = $installed_instances
+        [$field_instance['bundle']][$field_instance['field_name']];
+      $op = (null == $installed_instance)
         ? 'field_create_instance' : 'field_update_instance';
       try {
         $op($field_instance);
+        unset($installed_instances[$field_instance['bundle']]
+          [$field_instance['field_name']]);
       } catch (FieldException $e) {
         drupal_set_message($e->getMessage(), 'error');
       }
     }
+    // Delete remaining instances
+    foreach ($installed_instances as $bundle => $removed_instances) {
+      foreach ($removed_instances as $removed_instance) {
+        field_delete_instance($removed_instance);
+        $batch_size++;
+      }
+    }
+
+    // Clear deleted fields and instances
+    field_purge_batch($batch_size);
+
     // Update RDF mappings
     foreach ($this->getRdfMappings() as $rdf_mapping) {
       rdf_mapping_save($rdf_mapping);
