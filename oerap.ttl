@@ -259,6 +259,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Logo"@en ;
     rdfs:label "Logo"@de ;
+    ex:value ex:image ;
     rdfs:range foaf:Image .
 
 :name
@@ -295,6 +296,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Website"@en ;
     rdfs:label "Webseite"@de ;
+    ex:value ex:uri ;
     rdfs:range schema:WebPage .
 
 :email

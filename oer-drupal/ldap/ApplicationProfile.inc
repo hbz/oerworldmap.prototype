@@ -255,6 +255,7 @@ class ApplicationProfile {
   public function getFieldInstances() {
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $EX = new LibRDF_NS('http://example.org/');
 
     $query_string = "
       SELECT DISTINCT ?property, ?class WHERE {
@@ -293,6 +294,20 @@ class ApplicationProfile {
         $instance['label'] = $label->getValue();
       } catch (LibRDF_LookupError $e) {
         // No label set, ignore
+      }
+
+      // Set display style
+      try {
+        $display = $this->applicationProfileRDF->getTarget(
+          $defined_instance['property'], $EX->value
+        );
+        if ($display->isEqual($EX->uri)) {
+          $instance['display']['default']['type'] = 'ldf_field_format_link';
+        } else if ($display->isEqual($EX->image)) {
+          $instance['display']['default']['type'] = 'ldf_field_format_image';
+        }
+      } catch (LibRDF_LookupError $e) {
+        // No display settings, ignore
       }
 
       // Add target_bundles defined by rdfs:range of properties

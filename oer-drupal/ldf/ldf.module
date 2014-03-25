@@ -26,7 +26,7 @@ function ldf_field_info() {
       'label' => t('A linked data field'),
       'description' => t('This field holds the URI of a linked data resource'),
       'default_widget' => 'ldf_field_widget',
-      'default_formatter' => 'ldf_field_format',
+      'default_formatter' => 'ldf_field_format_embed',
       'property_type' => 'text',
     ),
   );
@@ -57,8 +57,18 @@ function ldf_field_widget_info() {
 function ldf_field_formatter_info() {
 
   return array(
-    'ldf_field_format' => array(
-      'label' => t('Linked Data Reference'),
+    'ldf_field_format_embed' => array(
+      'label' => t('Embedded Linked Data Reference'),
+      'field types' => array('ldf_field_type'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    'ldf_field_format_link' => array(
+      'label' => t('Linked Linked Data Reference'),
+      'field types' => array('ldf_field_type'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    'ldf_field_format_image' => array(
+      'label' => t('Image Reference'),
       'field types' => array('ldf_field_type'),
       'multiple values' => FIELD_BEHAVIOR_DEFAULT,
     ),
@@ -82,8 +92,24 @@ function ldf_field_is_empty($item, $field) {
 function ldf_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $elements = array();
   switch ($display['type']) {
-    case 'ldf_field_format':
+    case 'ldf_field_format_embed':
       $elements = ldf_embed_entities($items, $entity->getEntityCache(), array());
+      break;
+    case 'ldf_field_format_link':
+      foreach ($items as $item) {
+        $elements[] = array(
+          '#type' => 'item',
+          '#markup' => l($item['value'], $item['value']),
+        );
+      }
+      break;
+    case 'ldf_field_format_image':
+      foreach ($items as $item) {
+        $elements[] = array(
+          '#type' => 'item',
+          '#markup' => sprintf('<img src="%s" />', $item['value']),
+        );
+      }
       break;
   }
   return $elements;
