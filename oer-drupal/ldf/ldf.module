@@ -292,6 +292,9 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
         if (empty($target_bundles)) {
           $element['ldf_field_widget']['option'][0]['value'] = array(
             '#type' => 'textfield',
+            '#attributes' => array(
+              'class' => array('ldf-input'),
+            ),
           );
           $element['ldf_field_widget']['option'][0]['add'] = array(
             '#type' => 'submit',
@@ -308,6 +311,9 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
             $element['ldf_field_widget']['search'] = array(
               '#type' => 'textfield',
               '#default_value' => $term,
+              '#attributes' => array(
+                'class' => array('ldf-input'),
+              ),
             );
 
             // Submit button for search

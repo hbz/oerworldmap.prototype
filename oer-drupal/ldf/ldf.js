@@ -25,6 +25,17 @@
         var target = $(element).closest('fieldset').children('legend').children('span');
         $(element).css('float', 'right').detach().appendTo(target);
       });
+      $(context).find('input.ldf-input').each(function(i, element) {
+        var submit_button = $(element).parent().next('input[type="submit"]');
+        $(element).keypress(function (e) {
+          if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            submit_button.click();
+            return false;
+          } else {
+            return true;
+          }
+        });
+      });
     }
   };
 
