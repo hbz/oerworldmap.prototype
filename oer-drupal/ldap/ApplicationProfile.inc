@@ -328,18 +328,55 @@ class ApplicationProfile {
         }
       }
 
-      // Add target_bundles defined by owl:Restrictions on classes
+      // Add target_bundles and cardinalities defined
+      // by owl:Restrictions on classes
       $restrictions = $this->applicationProfileRDF->getSources(
         $OWL->onProperty, $defined_instance['property']
       );
+      $cardinality = 1;
+      $required = 1;
       foreach ($restrictions as $restriction) {
+        // Target Bundles
         $classLists = $this->applicationProfileRDF->getTargets(
           $restriction, $OWL->allValuesFrom
         );
         foreach ($classLists as $classList) {
           $allowed_values[] = $classList;
         }
+        // Cardinality
+        try {
+          $cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->cardinality
+          );
+          $cardinality = $cardinality_property->getValue();
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
+        try {
+          $min_cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->minCardinality
+          );
+          $min_cardinality = $min_cardinality_property->getValue();
+          if ($min_cardinality == 0) {
+            $required = 0;
+          }
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
+        try {
+          $max_cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->maxCardinality
+          );
+          $max_cardinality = $max_cardinality_property->getValue();
+          $cardinality = $max_cardinality;
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
       }
+
+      // Set cardinalities on instance level
+      $instance['settings']['handler_settings']['cardinality'] = $cardinality;
+      $instance['settings']['handler_settings']['required'] = $required;
 
       // Set target bundles
       foreach ($allowed_values as $allowed_value) {

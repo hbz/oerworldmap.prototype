@@ -128,7 +128,8 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
 
       // Get field configuration
       $field_name = $field['field_name'];
-      $field_cardinality = $field['cardinality'];
+      $field_cardinality = isset($instance['settings']['handler_settings']['cardinality'])
+        ? $instance['settings']['handler_settings']['cardinality'] : $field['cardinality'];
       $target_bundles = isset($instance['settings']['handler_settings']['target_bundles'])
         ? $instance['settings']['handler_settings']['target_bundles'] : array();
 
@@ -214,18 +215,12 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
 
         // Handle remove event - because of the way drupal works, the
         // value needs to be empty but still present in the array, i.e.
-        // unset($items[$i]) will not work! This is why we need to track
-        // the actual count of set values separately in order to properly
-        // handle cardinality limits.
-        $value_count = 0;
+        // unset($items[$i]) will not work!
         if ($action == 'remove' && isset($with_param[0])) {
           foreach (array_keys($items) as $i) {
             if ($i == $with_param[0]) {
               $form_state['values'][$field_name][LANGUAGE_NONE][$i]['value'] = '';
               $items[$i]['value'] = '';
-            }
-            if ($items[$i]['value'] != '') {
-              $value_count++;
             }
           }
         }
@@ -271,113 +266,122 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
         }
       }
 
-      // Fieldset for link elements
-      $element['ldf_field_widget'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Add'),
-        '#parents' => array(
-          'ldf_field_widget', $entity->identifier(), $field_name
-        ),
-        '#tree' => true,
-      );
-
-      // Raw URL input when no target specified
-      if (empty($target_bundles)) {
-        $element['ldf_field_widget']['option'][0]['value'] = array(
-          '#type' => 'textfield',
-        );
-        $element['ldf_field_widget']['option'][0]['add'] = array(
-          '#type' => 'submit',
-          '#name' => "$action_button|add|0",
-          '#default_value' => t('Add'),
-          '#submit' => array('ldf_field_widget_update_value'),
-          '#validate' => array('ldf_field_widget_validate_value'),
-        );
+      // Count actual, non-empty values
+      $value_count = 0;
+      foreach ($items as $item) {
+        if ($item['value'] != '') {
+          $value_count++;
+        }
       }
 
-      foreach ($target_bundles as $target_bundle => $allowed_actions) {
-        if (isset($allowed_actions['lookup'])) {
-          // Textfield for search input
-          $element['ldf_field_widget']['search'] = array(
+      // Enable add more only if max cardinality is not reached
+      if (($field_cardinality != FIELD_CARDINALITY_UNLIMITED)
+          && ($value_count < $field_cardinality)
+      ) {
+        // Fieldset for link elements
+        $element['ldf_field_widget'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Add'),
+          '#parents' => array(
+            'ldf_field_widget', $entity->identifier(), $field_name
+          ),
+          '#tree' => true,
+        );
+
+        // Raw URL input when no target specified
+        if (empty($target_bundles)) {
+          $element['ldf_field_widget']['option'][0]['value'] = array(
             '#type' => 'textfield',
           );
-
-          // Submit button for search
-          $element['ldf_field_widget']['submit'] = array(
+          $element['ldf_field_widget']['option'][0]['add'] = array(
             '#type' => 'submit',
-            '#default_value' => t('Search'),
-            '#name' => "$action_button|search",
+            '#name' => "$action_button|add|0",
+            '#default_value' => t('Add'),
             '#submit' => array('ldf_field_widget_update_value'),
             '#validate' => array('ldf_field_widget_validate_value'),
           );
+        }
 
-          // Search result listing
-          // Use option cache here!!!
-          $element['ldf_field_widget']['option'] = array();
-          if (isset($option_cache[$on_entity][$on_field])) {
-            $element['ldf_field_widget']['search']['#default_value'] = $term;
-            $options = $option_cache[$on_entity][$on_field];
-            $element['ldf_field_widget']['option'] += ldf_embed_entities(
-              $options, $entity_cache, $form_state
+        foreach ($target_bundles as $target_bundle => $allowed_actions) {
+          if (isset($allowed_actions['lookup'])) {
+            // Textfield for search input
+            $element['ldf_field_widget']['search'] = array(
+              '#type' => 'textfield',
             );
-            foreach ($options as $i => $option) {
-              $element['ldf_field_widget']['option'][$i]['value'] = array(
-                '#type' => 'hidden',
-                '#value' => $option->identifier(),
+
+            // Submit button for search
+            $element['ldf_field_widget']['submit'] = array(
+              '#type' => 'submit',
+              '#default_value' => t('Search'),
+              '#name' => "$action_button|search",
+              '#submit' => array('ldf_field_widget_update_value'),
+              '#validate' => array('ldf_field_widget_validate_value'),
+            );
+
+            // Search result listing
+            // Use option cache here!!!
+            $element['ldf_field_widget']['option'] = array();
+            if (isset($option_cache[$on_entity][$on_field])) {
+              $element['ldf_field_widget']['search']['#default_value'] = $term;
+              $options = $option_cache[$on_entity][$on_field];
+              $element['ldf_field_widget']['option'] += ldf_embed_entities(
+                $options, $entity_cache, $form_state
               );
-              $element['ldf_field_widget']['option'][$i]['add'] = array(
-                '#type' => 'submit',
-                '#name' => "$action_button|add|$i",
-                '#default_value' => t('Add'),
-                '#attributes' => array(
-                  'class' => array('action-button'),
-                ),
-                '#submit' => array('ldf_field_widget_update_value'),
-                '#validate' => array('ldf_field_widget_validate_value'),
-              );
-              if (($field_cardinality != FIELD_CARDINALITY_UNLIMITED)
-                  && ($value_count >= $field_cardinality)
-              ) {
-                $element['ldf_field_widget']['option'][$i]['add']['#disabled'] = TRUE;
+              foreach ($options as $i => $option) {
+                $element['ldf_field_widget']['option'][$i]['value'] = array(
+                  '#type' => 'hidden',
+                  '#value' => $option->identifier(),
+                );
+                $element['ldf_field_widget']['option'][$i]['add'] = array(
+                  '#type' => 'submit',
+                  '#name' => "$action_button|add|$i",
+                  '#default_value' => t('Add'),
+                  '#attributes' => array(
+                    'class' => array('action-button'),
+                  ),
+                  '#submit' => array('ldf_field_widget_update_value'),
+                  '#validate' => array('ldf_field_widget_validate_value'),
+                );
+              }
+
+              // Paging
+              $next_page = (count($matches) < 10) ? FALSE : $page + 1;
+              $prev_page = ($page < 1) ? FALSE : $page - 1;
+
+              if ($prev_page === 0 || $prev_page) {
+                // Submit button for previous page
+                $element['ldf_field_widget']['prev_page'] = array(
+                  '#type' => 'submit',
+                  '#default_value' => t('<'),
+                  '#name' => "$action_button|search|$prev_page",
+                  '#submit' => array('ldf_field_widget_update_value'),
+                  '#validate' => array('ldf_field_widget_validate_value'),
+                );
+              }
+              if ($next_page) {
+                // Submit button for next page
+                $element['ldf_field_widget']['next_page'] = array(
+                  '#type' => 'submit',
+                  '#default_value' => t('>'),
+                  '#name' => "$action_button|search|$next_page",
+                  '#submit' => array('ldf_field_widget_update_value'),
+                  '#validate' => array('ldf_field_widget_validate_value'),
+                );
               }
             }
-
-            // Paging
-            $next_page = (count($matches) < 10) ? FALSE : $page + 1;
-            $prev_page = ($page < 1) ? FALSE : $page - 1;
-
-            if ($prev_page === 0 || $prev_page) {
-              // Submit button for previous page
-              $element['ldf_field_widget']['prev_page'] = array(
-                '#type' => 'submit',
-                '#default_value' => t('<'),
-                '#name' => "$action_button|search|$prev_page",
-                '#submit' => array('ldf_field_widget_update_value'),
-                '#validate' => array('ldf_field_widget_validate_value'),
-              );
-            }
-            if ($next_page) {
-              // Submit button for next page
-              $element['ldf_field_widget']['next_page'] = array(
-                '#type' => 'submit',
-                '#default_value' => t('>'),
-                '#name' => "$action_button|search|$next_page",
-                '#submit' => array('ldf_field_widget_update_value'),
-                '#validate' => array('ldf_field_widget_validate_value'),
-              );
-            }
+          }
+          // Inline create button
+          if (!isset($allowed_actions['lookup']) && isset($allowed_actions['create'])) {
+            $element['ldf_field_widget']['create_inline'][$target_bundle] = array(
+              '#type' => 'submit',
+              '#name' => "$action_button|create_inline|$target_bundle",
+              '#default_value' => t('Add new ' . $target_bundle),
+              '#submit' => array('ldf_field_widget_update_value'),
+              '#validate' => array('ldf_field_widget_validate_value'),
+            );
           }
         }
-        // Inline create button
-        if (!isset($allowed_actions['lookup']) && isset($allowed_actions['create'])) {
-          $element['ldf_field_widget']['create_inline'][$target_bundle] = array(
-            '#type' => 'submit',
-            '#name' => "$action_button|create_inline|$target_bundle",
-            '#default_value' => t('Add new ' . $target_bundle),
-            '#submit' => array('ldf_field_widget_update_value'),
-            '#validate' => array('ldf_field_widget_validate_value'),
-          );
-        }
+
       }
 
 
