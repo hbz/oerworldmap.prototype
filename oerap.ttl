@@ -293,7 +293,7 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Description"@en ;
     rdfs:label "Beschreibung"@de ;
-    rdfs:range rdfs:Literal .
+    rdfs:range rdf:HTML .
 
 :url
     a owl:ObjectProperty ;
