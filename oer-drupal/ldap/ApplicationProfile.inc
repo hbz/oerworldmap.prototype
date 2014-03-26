@@ -76,6 +76,7 @@ class ApplicationProfile {
    * @return array The fields defined in the application profile
    */
   public function getFields() {
+    $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
 
@@ -93,9 +94,22 @@ class ApplicationProfile {
       $field = array(
         'field_name' => $this->getFieldName($property['uri']),
       );
-      $field['type'] = $property['type']->isEqual($OWL->ObjectProperty)
-        ? $this->applicationProfileReferenceFieldType : 'text';
-      // TODO: handle cardinalities on instance level
+      if ($property['type']->isEqual($OWL->DatatypeProperty)) {
+        try {
+          $range = $this->applicationProfileRDF->getTarget(
+            $property['uri'], $RDFS->range
+          );
+          if ($range->isEqual($RDF->HTML)) {
+            $field['type'] = 'text_long';
+          } else {
+            $field['type'] = 'text';
+          }
+        } catch (LibRDF_LookupError $e) {
+          $field['type'] = 'text';
+        }
+      } else {
+        $field['type'] = $this->applicationProfileReferenceFieldType;
+      }
       $field['cardinality'] = $property['type']->isEqual($OWL->ObjectProperty)
         ? FIELD_CARDINALITY_UNLIMITED : 1;
       $fields[] = $field;
