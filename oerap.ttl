@@ -122,9 +122,6 @@
         owl:onProperty :contact ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
-        owl:onProperty :license ;
-        owl:minCardinality "1" ] ,
-    [ a owl:Restriction ;
         owl:onProperty :provider ;
         owl:minCardinality "0" ] .
 
@@ -375,14 +372,6 @@
     rdfs:label "Ort"@de ;
     rdfs:domain :PostalAddress ;
     rdfs:range :Country .
-
-:license
-    a owl:ObjectProperty ;
-    rdfs:comment "In the context of this application profile the property dct:license is used to link a service to the license the service's contents are licensed under."@en ;
-    rdfs:subPropertyOf dct:license ;
-    rdfs:isDefinedBy :ap ;
-    rdfs:label "License"@en ;
-    rdfs:label "Lizenz"@de .
 
 :geo
     a owl:ObjectProperty ;
