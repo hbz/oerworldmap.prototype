@@ -41,6 +41,9 @@
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
+        owl:onProperty :telephone ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
         owl:onProperty :logo ;
         owl:minCardinality "0" ;
         owl:maxCardinality "1" ] ,
@@ -89,6 +92,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :telephone ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :address ;
@@ -147,6 +153,13 @@
     [ a owl:Restriction ;
         owl:onProperty :url ;
         owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :startDate ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :endDate ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
@@ -319,6 +332,15 @@
       )
     ] .
 
+:telephone
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:telephone is used to indicate the telephone number of an organization or a person."@en ;
+    rdfs:subPropertyOf schema:telephone ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Telephone"@en ;
+    rdfs:label "Telefon"@de ;
+    rdfs:range rdfs:Literal .
+
 :contact
     a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property oo:contact is used to link a project or service to a contact person within the OER map data."@en ;
@@ -478,3 +500,21 @@
     rdfs:label "Funding Organization"@en ;
     rdfs:label "Gefördert von"@de ;
     rdfs:range :Organization .
+
+:startDate
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:startDate is used to indicate the start date of a project using the xsd:gYearMonth datatype."@en ;
+    rdfs:subPropertyOf schema:startDate ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Start date"@en ;
+    rdfs:label "Beginn"@de ;
+    rdfs:range xsd:gYearMonth .
+
+:endDate
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:endDate is used to indicate the end date of a project using the xsd:gYearMonth datatype."@en ;
+    rdfs:subPropertyOf schema:endDate ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "End date"@en ;
+    rdfs:label "Ende"@de ;
+    rdfs:range xsd:gYearMonth .
