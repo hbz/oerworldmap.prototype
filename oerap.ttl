@@ -41,6 +41,9 @@
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
+        owl:onProperty :telephone ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
         owl:onProperty :logo ;
         owl:minCardinality "0" ;
         owl:maxCardinality "1" ] ,
@@ -89,6 +92,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :email ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :telephone ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :address ;
@@ -320,6 +326,15 @@
         ]
       )
     ] .
+
+:telephone
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:telephone is used to indicate the telephone number of an organization or a person."@en ;
+    rdfs:subPropertyOf schema:telephone ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Telephone"@en ;
+    rdfs:label "Telefon"@de ;
+    rdfs:range rdfs:Literal .
 
 :contact
     a owl:ObjectProperty ;
