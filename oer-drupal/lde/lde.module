@@ -249,6 +249,12 @@ function lde_configuration_form($form, &$form_state) {
  */
 function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
 
+  /**
+   * Prevent endless loops
+   */
+  static $processed = array();
+  $processed[] = $entity->identifier();
+
   $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 
   $rdf_subject = new LibRDF_URINode($entity->identifier());
@@ -307,8 +313,10 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
                 $embedded_entity = entity_create(LDE_ENTITY_TYPE,
                   array('uri' => $value->getValue())
                 );
-                lde_from_rdf($embedded_entity, $rdf_string, $format);
-                $embedded_entities[$value->getValue()] = $embedded_entity;
+                if (!in_array($embedded_entity->identifier(), $processed)) {
+                  lde_from_rdf($embedded_entity, $rdf_string, $format);
+                  $embedded_entities[$value->getValue()] = $embedded_entity;
+                }
               }
             }
           }
