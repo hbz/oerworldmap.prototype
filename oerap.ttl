@@ -42,10 +42,12 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :address ;
-        owl:minCardinality "0" ] ,
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :geo ;
         owl:cardinality "1" ] ,
@@ -90,10 +92,12 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :address ;
-        owl:minCardinality "0" ] ,
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :geo ;
-        owl:minCardinality "0" ] .
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] .
 
 :Service
     a owl:Class ;
@@ -117,7 +121,8 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :contact ;
         owl:minCardinality "0" ] ,
@@ -147,7 +152,8 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :contact ;
         owl:minCardinality "0" ] ,
@@ -200,7 +206,7 @@
         owl:hasValue gn:P ] ,
     [ a owl:Restriction ;
         owl:onProperty :featureName ;
-        owl:cardinality "0" ] .
+        owl:minCardinality "0" ] .
 
 :Country
     a owl:Class ;
@@ -212,7 +218,7 @@
         owl:hasValue gn:A ] ,
     [ a owl:Restriction ;
         owl:onProperty :featureName ;
-        owl:cardinality "0" ] .
+        owl:minCardinality "0" ] .
 
 :featureName
     a owl:DatatypeProperty ;
