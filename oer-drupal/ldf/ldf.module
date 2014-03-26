@@ -275,8 +275,8 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
       }
 
       // Enable add more only if max cardinality is not reached
-      if (($field_cardinality != FIELD_CARDINALITY_UNLIMITED)
-          && ($value_count < $field_cardinality)
+      if (($field_cardinality == FIELD_CARDINALITY_UNLIMITED)
+          || ($value_count < $field_cardinality)
       ) {
         // Fieldset for link elements
         $element['ldf_field_widget'] = array(
@@ -307,6 +307,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
             // Textfield for search input
             $element['ldf_field_widget']['search'] = array(
               '#type' => 'textfield',
+              '#default_value' => $term,
             );
 
             // Submit button for search
@@ -322,8 +323,11 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
             // Use option cache here!!!
             $element['ldf_field_widget']['option'] = array();
             if (isset($option_cache[$on_entity][$on_field])) {
-              $element['ldf_field_widget']['search']['#default_value'] = $term;
               $options = $option_cache[$on_entity][$on_field];
+              if (empty($options)) {
+                $element['ldf_field_widget']['search']['#description'] =
+                  "Your search returned no results";
+              }
               $element['ldf_field_widget']['option'] += ldf_embed_entities(
                 $options, $entity_cache, $form_state
               );
@@ -384,7 +388,6 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
 
       }
 
-
       $form['#action'] = '#focus';
 
       break;
@@ -400,6 +403,7 @@ function ldf_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
  *
  */
 function ldf_field_widget_update_value($form, &$form_state) {
+  unset($form_state['input']['ldf_field_widget']);
   $form_state['rebuild'] = true;
 }
 

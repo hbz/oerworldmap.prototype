@@ -151,6 +151,7 @@ function oerworldmap_resource_view($entity) {
 }
 
 function oerworldmap_resource_edit($entity) {
+  drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
   return entity_form(LDE_ENTITY_TYPE, $entity);
 }
 

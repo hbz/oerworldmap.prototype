@@ -347,7 +347,7 @@ class ApplicationProfile {
       $restrictions = $this->applicationProfileRDF->getSources(
         $OWL->onProperty, $defined_instance['property']
       );
-      $cardinality = 1;
+      $cardinality = FIELD_CARDINALITY_UNLIMITED;
       $required = 1;
       foreach ($restrictions as $restriction) {
         // Target Bundles
