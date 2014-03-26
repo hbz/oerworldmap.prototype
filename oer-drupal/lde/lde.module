@@ -124,7 +124,12 @@ function lde_form_submit($form, &$form_state) {
     }
   }
   $entity->setEntityCache($inline_entities);
-  entity_save($entity->entityType(), $entity);
+  if (!entity_save($entity->entityType(), $entity)) {
+    drupal_set_message(
+      'A problem occured trying to save your entry', 'error'
+    );
+    $form_state['rebuild'] = true;
+  }
 }
 
 /**

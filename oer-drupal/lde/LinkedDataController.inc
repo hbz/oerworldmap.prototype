@@ -27,7 +27,7 @@ class LinkedDataController extends EntityAPIController {
    */
   public function save($entity, DatabaseTransaction $transaction = NULL)
   {
-    $this->put($entity);
+    return $this->put($entity);
   }
 
   /**
@@ -144,6 +144,11 @@ class LinkedDataController extends EntityAPIController {
     $http_user = variable_get('lde_api_user');
     $http_pass = variable_get('lde_api_password');
     $http_url = $entity->identifier();
+
+    if (!$http_user || !$http_pass) {
+      drupal_set_message('Please provide username and password in the configuration');
+      return false;
+    }
 
     $http_options = array(
       'method' => 'PUT',
