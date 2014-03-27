@@ -6,6 +6,7 @@
 GET     /oer                        controllers.oer.Application.query(q?="",t?="",location?="")
 GET     /oer/:id                    controllers.oer.Application.get(id)
 PUT     /oer/:id                    controllers.oer.Application.put(id)
+DELETE  /oer/:id                    controllers.oer.Application.delete(id)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /oer/*file                  controllers.oer.Assets.at(path="/public", file)

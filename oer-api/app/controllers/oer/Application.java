@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.jena.riot.Lang;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -152,6 +153,23 @@ public class Application extends Controller {
 			return unauthorized("Not authorized to write data!\n");
 		String requestBody = new String(rawBody.asBytes(), Charsets.UTF_8);
 		return processRequest(id, authHeader, requestBody, contentType);
+	}
+
+	public static Result delete(String id) {
+		String authHeader = request().getHeader(AUTHORIZATION);
+		if (authHeader == null || authHeader.isEmpty())
+			return badRequest("Authorization required to delete data!\n");
+		if (!authorized(authHeader))
+			return unauthorized("Not authorized to delete data!\n");
+		try {
+			DeleteResponse response = client
+					.prepareDelete(DATA_INDEX, DATA_TYPE, id).execute()
+					.actionGet();
+			return response.isNotFound() ? notFound() : ok("Deleted " + id);
+		} catch (Exception x) {
+			x.printStackTrace();
+			return internalServerError(x.getMessage());
+		}
 	}
 
 	private static Result processRequest(String id, String auth,

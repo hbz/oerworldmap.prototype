@@ -42,6 +42,17 @@
         <code>curl -X PUT -H "Content-Type: text/plain" http://user:pass@@staging.api.lobid.org/oer/id123 -d '&lt;http://www.w3.org/2001/sw/RDFCore/ntriples/&gt; &lt;http://purl.org/dc/elements/1.1/creator&gt; "Dave Beckett" .'</code>
         </dd>
     </dt>
+    <h2>Delete</h2>
+    <dl>
+        <dt>Overview</dt>
+        <dd>The API supports <code>DELETE</code> requests. Note: the delete API requires authorization. Replace <code>user</code> and <code>pass</code> in the sample below with your credentials.</dd>
+        <dt>id<dt>
+        <dd>Append the ID for the data to be deleted to the request path, e.g. <code>DELETE /oer/id123</code> to delete data with ID <code>id123</code>.</dd>
+        <dt>Sample<dt>
+        <dd>
+        <code>curl -X DELETE http://user:pass@@staging.api.lobid.org/oer/id123</code>
+        </dd>
+    </dt>
     <h2>Content types</h2>
     <dl>
      @for(s <- Serialization.values()) { <dt>@s.name</dt> <dd>@s.getTypes</dd> }

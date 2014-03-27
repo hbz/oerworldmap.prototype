@@ -9,6 +9,7 @@ import static play.mvc.Http.Status.BAD_REQUEST;
 import static play.mvc.Http.Status.OK;
 import static play.mvc.Http.Status.UNAUTHORIZED;
 import static play.mvc.Http.Status.UNSUPPORTED_MEDIA_TYPE;
+import static play.mvc.Http.Status.NOT_FOUND;
 import static play.test.Helpers.callAction;
 import static play.test.Helpers.contentAsString;
 import static play.test.Helpers.contentType;
@@ -36,6 +37,8 @@ import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
 import com.google.common.io.CharStreams;
 
+import controllers.oer.routes.*;
+
 /**
  * 
  * Simple (JUnit) tests that can call all parts of a play app. If you are
@@ -44,6 +47,9 @@ import com.google.common.io.CharStreams;
  */
 public class ApplicationTest extends IndexTestsHarness {
 
+	private static final String BODY = "<http://www.w3.org/2001/sw/RDFCore/ntriples/> "
+			+ "<http://purl.org/dc/elements/1.1/creator> "
+			+ "\"Dave Beckett\" .";
 	private static final HandlerRef PUT_HANDLER = controllers.oer.routes.ref.Application
 			.put("abc123");
 	private static final FakeRequest FAKE_REQUEST = fakeRequest().withHeader(
@@ -165,15 +171,34 @@ public class ApplicationTest extends IndexTestsHarness {
 
 	@Test
 	public void put_successNtriples() {
-		String body = "<http://www.w3.org/2001/sw/RDFCore/ntriples/> "
-				+ "<http://purl.org/dc/elements/1.1/creator> "
-				+ "\"Dave Beckett\" .";
 		FakeRequest request = FAKE_REQUEST
 				.withHeader(AUTHORIZATION, authString("user", "pass"))
-				.withRawBody(body.getBytes(Charsets.UTF_8))
+				.withRawBody(BODY.getBytes(Charsets.UTF_8))
 				.withHeader(CONTENT_TYPE, "text/plain");
 		Result result = callAction(PUT_HANDLER, request);
 		assertThat(status(result)).isEqualTo(OK);
+	}
+
+	@Test
+	public void delete() {
+		FakeRequest request = fakeRequest()
+				.withHeader(AUTHORIZATION, authString("user", "pass"))
+				.withRawBody(BODY.getBytes(Charsets.UTF_8))
+				.withHeader(CONTENT_TYPE, "text/plain");
+		assertThat(status(callAction(ref.Application.put("abc123"), request)))
+				.isEqualTo(OK);
+		assertThat(
+				status(callAction(ref.Application.get("abc123"), FAKE_REQUEST)))
+				.isEqualTo(OK);
+		assertThat(
+				status(callAction(ref.Application.delete("123abc"), request)))
+				.isEqualTo(NOT_FOUND);
+		assertThat(
+				status(callAction(ref.Application.delete("abc123"), request)))
+				.isEqualTo(OK);
+		assertThat(
+				status(callAction(ref.Application.get("abc123"), FAKE_REQUEST)))
+				.isEqualTo(NOT_FOUND);
 	}
 
 	private final static String ENDPOINT = "oer?q=*";
