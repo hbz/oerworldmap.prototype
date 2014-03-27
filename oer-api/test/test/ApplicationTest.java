@@ -61,7 +61,7 @@ public class ApplicationTest extends IndexTestsHarness {
 				controllers.oer.routes.ref.Application.query("*", "", ""),
 				FAKE_REQUEST);
 		assertThat(status(result)).isEqualTo(OK);
-		assertThat(Json.parse(contentAsString(result)).size()).isEqualTo(2);
+		assertThat(Json.parse(contentAsString(result)).size()).isGreaterThan(1);
 	}
 
 	@Test
@@ -280,6 +280,24 @@ public class ApplicationTest extends IndexTestsHarness {
 						"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"));
 			}
 		});
+	}
+
+	@Test
+	public void query_ResponseContentTypeIsJson() throws JsonParseException, IOException {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.query("*", "", ""),
+				FAKE_REQUEST);
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(contentType(result)).isEqualTo("application/json");
+	}
+
+	@Test
+	public void get_ResponseContentTypeIsJson() throws JsonParseException, IOException {
+		Result result = callAction(
+				controllers.oer.routes.ref.Application.get("103"),
+				FAKE_REQUEST);
+		assertThat(status(result)).isEqualTo(OK);
+		assertThat(contentType(result)).isEqualTo("application/json");
 	}
 
 	static String call(final String request, final String contentType) {
