@@ -7,8 +7,9 @@
         if (link) {
           var throbber = $('<div class="ajax-progress"><div class="throbber">&nbsp;</div></div>')
           $(element).after(throbber);
-          entity_render_view('lde', encodeURIComponent(encodeURIComponent(link.value))).onload = function () {
-            if (this.status == 200) {
+          var encoded_uri = encodeURIComponent(encodeURIComponent(link.value));
+          entity_render_view('lde', encoded_uri).onload = function () {
+            if (this.status == 200 && this.responseText) {
               var entity_view = $(this.responseText);
               $(element).text($.trim(entity_view.children('h2').text()));
               $(link).replaceWith(entity_view);

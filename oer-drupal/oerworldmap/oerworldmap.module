@@ -45,6 +45,12 @@ function oerworldmap_menu() {
     );
   }
 
+  $items['oerworldmap/proxy'] = array(
+    'page callback' => 'oerworldmap_resource_proxy',
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  );
+
   $items['oerworldmap/resource/%lde'] = array(
     'title callback' => 'entity_label',
     'title arguments' => array(LDE_ENTITY_TYPE, 2),
@@ -72,6 +78,12 @@ function oerworldmap_menu() {
 }
 
 function oerworldmap() {
+  drupal_add_js(
+    drupal_get_path('module', 'oerworldmap') . '/jquery.rdfquery.core-1.0.js'
+  );
+  drupal_add_js(
+    'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js', 'external'
+  );
   drupal_add_css(
     'http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css', 'external'
   );
@@ -80,9 +92,17 @@ function oerworldmap() {
   );
   drupal_add_js(array('oerworldmap' => array(
     'apiUrl' => variable_get('lde_api_host'),
+    'proxyUrl' => base_path() . 'oerworldmap/proxy?uri='
   )), 'setting');
   drupal_add_js(
     drupal_get_path('module', 'oerworldmap') . '/oerworldmap.js'
+  );
+  drupal_add_library('system', 'drupal.collapse');
+  drupal_add_js(array('ldf' => array(
+    'basePath' => base_path() . drupal_get_path('module', 'ldf')
+  )), 'setting');
+  drupal_add_js(
+    drupal_get_path('module', 'ldf') . '/ldf.js'
   );
   return array(
     '#type' => 'markup',
@@ -153,6 +173,28 @@ function oerworldmap_resource_view($entity) {
 function oerworldmap_resource_edit($entity) {
   drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
   return entity_form(LDE_ENTITY_TYPE, $entity);
+}
+
+function oerworldmap_resource_proxy() {
+
+  $http_url = $_GET['uri'];
+  $file_name = 'public://' . base64_encode($http_url);
+
+  // Cache
+  if (!file_exists($file_name)) {
+    $http_options = array(
+      'method' => 'GET',
+      'headers' => array('Accept' => 'application/rdf+xml'),
+    );
+    $http_response = lde_http_request($http_url, $http_options);
+    if (200 != $http_response->code) {
+      return false;
+    }
+    file_put_contents($file_name, $http_response->data);
+  }
+
+  echo file_get_contents($file_name);
+
 }
 
 function oerworldmap_form_lde_form_alter(&$form, &$form_state, $form_id) {
