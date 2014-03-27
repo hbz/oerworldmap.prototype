@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.riot.Lang;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
@@ -242,25 +243,32 @@ public class Application extends Controller {
 		final String[] callback = request() == null
 				|| request().queryString() == null ? null : request()
 				.queryString().get("callback");
-		String negotiatedContent = negotiateContent(json);
+		Pair<String, Lang> negotiatedContent = negotiateContent(json);
 		final Status notAcceptable = status(406,
 				"Not acceptable: unsupported content type requested\n");
 		if (invalidAcceptHeader() || negotiatedContent == null)
 			return notAcceptable;
-		return callback != null ? ok(String.format("%s(%s)", callback[0],
-				negotiatedContent)) : ok(negotiatedContent);
+		if (callback != null)
+			return ok(String.format("%s(%s)", callback[0],
+					negotiatedContent.getLeft()));
+		if (negotiatedContent.getRight().equals(Lang.JSONLD))
+			return ok(Json.parse(negotiatedContent.getLeft()));
+		return ok(negotiatedContent.getLeft());
 	}
 
-	private static String negotiateContent(JsonNode json) {
+	private static Pair<String, Lang> negotiateContent(JsonNode json) {
 		for (MediaRange mediaRange : request().acceptedTypes())
 			for (Serialization serialization : Serialization.values())
 				for (String mimeType : serialization.getTypes())
 					if (mediaRange.accepts(mimeType)) {
 						if (serialization.format.equals(Lang.JSONLD))
-							return withRemoteContext(json.toString());
+							return Pair.of(withRemoteContext(json.toString()),
+									Lang.JSONLD);
 						Logger.debug("Matching mime {}, converting JSON to {}",
 								mimeType, serialization.format);
-						return NtToEs.jsonLdToRdf(json, serialization.format);
+						return Pair.of(
+								NtToEs.jsonLdToRdf(json, serialization.format),
+								serialization.format);
 					}
 		return null;
 	}
