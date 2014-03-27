@@ -86,7 +86,7 @@ function oerworldmap() {
   );
   return array(
     '#type' => 'markup',
-    '#markup' => '<div id="oerworldmap" style="height: 300px; width: 100%; border: 1px solid black;"></div>',
+    '#markup' => '<div id="oerworldmap" style="height: 400px; width: 100%; border: 1px solid black;"></div>',
   );
 }
 
