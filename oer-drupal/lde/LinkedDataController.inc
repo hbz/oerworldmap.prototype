@@ -47,8 +47,10 @@ class LinkedDataController extends EntityAPIController {
         $entity = entity_create(LDE_ENTITY_TYPE, array(
           'uri' => $uri,
         ));
-        $entities[$uri] = $this->get($entity);
-        $this->cacheSet(array($uri => $entities[$uri]));
+        if ($this->get($entity)) {
+          $entities[$uri] = $entity;
+          $this->cacheSet(array($uri => $entities[$uri]));
+        }
       }
     }
     return $entities;
@@ -186,8 +188,7 @@ class LinkedDataController extends EntityAPIController {
       drupal_set_message("Unable to GET $http_url", 'error');
       return false;
     }
-    lde_from_rdf($entity, $http_response->data, 'rdfxml');
-    return $entity;
+    return lde_from_rdf($entity, $http_response->data, 'rdfxml');
   }
 
 }

@@ -286,7 +286,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
   }
 
   // RDF could not be mapped to a bundle
-  if (!$resource_type) return;
+  if (!$resource_type) return false;
 
   $entity->type = $resource_type;
   unset($rdf_mapping['rdftype']);
@@ -319,8 +319,9 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
                   array('uri' => $value->getValue())
                 );
                 if (!in_array($embedded_entity->identifier(), $processed)) {
-                  lde_from_rdf($embedded_entity, $rdf_string, $format);
+                  if (lde_from_rdf($embedded_entity, $rdf_string, $format)) {
                   $embedded_entities[$value->getValue()] = $embedded_entity;
+                  }
                 }
               }
             }
@@ -330,6 +331,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
     }
   }
   $entity->setEntityCache($embedded_entities);
+  return true;
 }
 
 function lde_http_request($request_url, $http_options) {
