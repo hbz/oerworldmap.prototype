@@ -103,6 +103,12 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
     '#default_value' => 'Submit',
     '#weight' => '1000',
   );
+  $form['delete'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+    '#submit' => array('lde_form_submit_delete'),
+    '#weight' => 2000,
+  );
   return $form;
 }
 
@@ -124,7 +130,20 @@ function lde_form_submit($form, &$form_state) {
     }
   }
   $entity->setEntityCache($inline_entities);
-  entity_save($entity->entityType(), $entity);
+  if (!entity_save($entity->entityType(), $entity)) {
+    drupal_set_message(
+      'A problem occured trying to save your entry', 'error'
+    );
+    $form_state['rebuild'] = true;
+  }
+}
+
+function lde_form_submit_delete($form , &$form_state) {
+  $entity = $form['#entity'];
+  drupal_set_message(t('Resource %id has been deleted',
+    array('%id' => $entity->identifier()))
+  );
+  $form_state['redirect'] = '/oerworldmap';
 }
 
 /**
@@ -249,6 +268,12 @@ function lde_configuration_form($form, &$form_state) {
  */
 function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
 
+  /**
+   * Prevent endless loops
+   */
+  static $processed = array();
+  $processed[] = $entity->identifier();
+
   $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 
   $rdf_subject = new LibRDF_URINode($entity->identifier());
@@ -275,7 +300,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
   }
 
   // RDF could not be mapped to a bundle
-  if (!$resource_type) return;
+  if (!$resource_type) return false;
 
   $entity->type = $resource_type;
   unset($rdf_mapping['rdftype']);
@@ -307,8 +332,11 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
                 $embedded_entity = entity_create(LDE_ENTITY_TYPE,
                   array('uri' => $value->getValue())
                 );
-                lde_from_rdf($embedded_entity, $rdf_string, $format);
-                $embedded_entities[$value->getValue()] = $embedded_entity;
+                if (!in_array($embedded_entity->identifier(), $processed)) {
+                  if (lde_from_rdf($embedded_entity, $rdf_string, $format)) {
+                  $embedded_entities[$value->getValue()] = $embedded_entity;
+                  }
+                }
               }
             }
           }
@@ -317,6 +345,7 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
     }
   }
   $entity->setEntityCache($embedded_entities);
+  return true;
 }
 
 function lde_http_request($request_url, $http_options) {

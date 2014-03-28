@@ -76,6 +76,7 @@ class ApplicationProfile {
    * @return array The fields defined in the application profile
    */
   public function getFields() {
+    $RDF = new LibRDF_NS('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
 
@@ -93,9 +94,22 @@ class ApplicationProfile {
       $field = array(
         'field_name' => $this->getFieldName($property['uri']),
       );
-      $field['type'] = $property['type']->isEqual($OWL->ObjectProperty)
-        ? $this->applicationProfileReferenceFieldType : 'text';
-      // TODO: handle cardinalities on instance level
+      if ($property['type']->isEqual($OWL->DatatypeProperty)) {
+        try {
+          $range = $this->applicationProfileRDF->getTarget(
+            $property['uri'], $RDFS->range
+          );
+          if ($range->isEqual($RDF->HTML)) {
+            $field['type'] = 'text_long';
+          } else {
+            $field['type'] = 'text';
+          }
+        } catch (LibRDF_LookupError $e) {
+          $field['type'] = 'text';
+        }
+      } else {
+        $field['type'] = $this->applicationProfileReferenceFieldType;
+      }
       $field['cardinality'] = $property['type']->isEqual($OWL->ObjectProperty)
         ? FIELD_CARDINALITY_UNLIMITED : 1;
       $fields[] = $field;
@@ -255,6 +269,7 @@ class ApplicationProfile {
   public function getFieldInstances() {
     $RDFS = new LibRDF_NS('http://www.w3.org/2000/01/rdf-schema#');
     $OWL = new LibRDF_NS('http://www.w3.org/2002/07/owl#');
+    $EX = new LibRDF_NS('http://example.org/');
 
     $query_string = "
       SELECT DISTINCT ?property, ?class WHERE {
@@ -295,6 +310,20 @@ class ApplicationProfile {
         // No label set, ignore
       }
 
+      // Set display style
+      try {
+        $display = $this->applicationProfileRDF->getTarget(
+          $defined_instance['property'], $EX->value
+        );
+        if ($display->isEqual($EX->uri)) {
+          $instance['display']['default']['type'] = 'ldf_field_format_link';
+        } else if ($display->isEqual($EX->image)) {
+          $instance['display']['default']['type'] = 'ldf_field_format_image';
+        }
+      } catch (LibRDF_LookupError $e) {
+        // No display settings, ignore
+      }
+
       // Add target_bundles defined by rdfs:range of properties
       $ranges = $this->applicationProfileRDF->getTargets(
         $defined_instance['property'], $RDFS->range
@@ -313,18 +342,55 @@ class ApplicationProfile {
         }
       }
 
-      // Add target_bundles defined by owl:Restrictions on classes
+      // Add target_bundles and cardinalities defined
+      // by owl:Restrictions on classes
       $restrictions = $this->applicationProfileRDF->getSources(
         $OWL->onProperty, $defined_instance['property']
       );
+      $cardinality = FIELD_CARDINALITY_UNLIMITED;
+      $required = 1;
       foreach ($restrictions as $restriction) {
+        // Target Bundles
         $classLists = $this->applicationProfileRDF->getTargets(
           $restriction, $OWL->allValuesFrom
         );
         foreach ($classLists as $classList) {
           $allowed_values[] = $classList;
         }
+        // Cardinality
+        try {
+          $cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->cardinality
+          );
+          $cardinality = $cardinality_property->getValue();
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
+        try {
+          $min_cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->minCardinality
+          );
+          $min_cardinality = $min_cardinality_property->getValue();
+          if ($min_cardinality == 0) {
+            $required = 0;
+          }
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
+        try {
+          $max_cardinality_property = $this->applicationProfileRDF->getTarget(
+            $restriction, $OWL->maxCardinality
+          );
+          $max_cardinality = $max_cardinality_property->getValue();
+          $cardinality = $max_cardinality;
+        } catch (LibRDF_LookupError $e) {
+          // No cardinality set, ignore
+        }
       }
+
+      // Set cardinalities on instance level
+      $instance['settings']['handler_settings']['cardinality'] = $cardinality;
+      $instance['settings']['handler_settings']['required'] = $required;
 
       // Set target bundles
       foreach ($allowed_values as $allowed_value) {
@@ -516,27 +582,63 @@ class ApplicationProfile {
    *
    */
   public function update() {
+
+    // Keep track of deletions
+    $batch_size = 0;
+
     // Update fields
+    $installed_fields = field_info_fields();
     foreach ($this->getFields() as $field) {
-      $op = (null == field_info_field($field['field_name']))
-        ? 'field_create_field' : 'field_update_field';
+      $installed_field = $installed_fields[$field['field_name']];
       try {
-        $op($field);
+        if ($installed_field && ($installed_field['type'] != $field['type'])) {
+          field_delete_field($field['field_name']);
+          $batch_size++;
+          field_create_field($field);
+        } else if ($installed_field) {
+          field_update_field($field);
+        } else {
+          field_create_field($field);
+        }
+        unset($installed_fields[$field['field_name']]);
       } catch (FieldException $e) {
-        drupal_set_message($e->getMessage(), 'error');
+        drupal_set_message($field['field_name'] . ':' . $e->getMessage(), 'error');
       }
     }
+    // Delete remaining fields
+    foreach ($installed_fields as $removed_field) {
+      field_delete_field($removed_field['field_name']);
+      $batch_size++;
+    }
+
     // Update field instances
+    $installed_instances = field_info_instances(
+      $this->applicationProfileEntityType
+    );
     foreach ($this->getFieldInstances() as $field_instance) {
-      $op = (null == field_info_instance( $field_instance['entity_type'],
-             $field_instance['field_name'], $field_instance['bundle']))
+      $installed_instance = $installed_instances
+        [$field_instance['bundle']][$field_instance['field_name']];
+      $op = (null == $installed_instance)
         ? 'field_create_instance' : 'field_update_instance';
       try {
         $op($field_instance);
+        unset($installed_instances[$field_instance['bundle']]
+          [$field_instance['field_name']]);
       } catch (FieldException $e) {
         drupal_set_message($e->getMessage(), 'error');
       }
     }
+    // Delete remaining instances
+    foreach ($installed_instances as $bundle => $removed_instances) {
+      foreach ($removed_instances as $removed_instance) {
+        field_delete_instance($removed_instance);
+        $batch_size++;
+      }
+    }
+
+    // Clear deleted fields and instances
+    field_purge_batch($batch_size);
+
     // Update RDF mappings
     foreach ($this->getRdfMappings() as $rdf_mapping) {
       rdf_mapping_save($rdf_mapping);

@@ -7,11 +7,11 @@
         if (link) {
           var throbber = $('<div class="ajax-progress"><div class="throbber">&nbsp;</div></div>')
           $(element).after(throbber);
-          entity_render_view('lde', encodeURIComponent(encodeURIComponent(link.value))).onload = function () {
-            if (this.status == 200) {
-              console.log($(this.responseText));
+          var encoded_uri = encodeURIComponent(encodeURIComponent(link.value));
+          entity_render_view('lde', encoded_uri).onload = function () {
+            if (this.status == 200 && this.responseText) {
               var entity_view = $(this.responseText);
-              $(element).text(link);
+              $(element).text($.trim(entity_view.children('h2').text()));
               $(link).replaceWith(entity_view);
               $(element).bind('click', function(event) {
                 Drupal.attachBehaviors(entity_view);
@@ -21,6 +21,21 @@
             throbber.remove();
           };
         }
+      });
+      $(context).find('input.action-button').each(function(i, element) {
+        var target = $(element).closest('fieldset').children('legend').children('span');
+        $(element).css('float', 'right').detach().appendTo(target);
+      });
+      $(context).find('input.ldf-input').each(function(i, element) {
+        var submit_button = $(element).parent().next('input[type="submit"]');
+        $(element).keypress(function (e) {
+          if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            submit_button.click();
+            return false;
+          } else {
+            return true;
+          }
+        });
       });
     }
   };

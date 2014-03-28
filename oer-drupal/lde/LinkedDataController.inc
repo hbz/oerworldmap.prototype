@@ -27,7 +27,7 @@ class LinkedDataController extends EntityAPIController {
    */
   public function save($entity, DatabaseTransaction $transaction = NULL)
   {
-    $this->put($entity);
+    return $this->put($entity);
   }
 
   /**
@@ -47,11 +47,30 @@ class LinkedDataController extends EntityAPIController {
         $entity = entity_create(LDE_ENTITY_TYPE, array(
           'uri' => $uri,
         ));
-        $entities[$uri] = $this->get($entity);
-        $this->cacheSet(array($uri => $entities[$uri]));
+        if ($this->get($entity)) {
+          $entities[$uri] = $entity;
+          $this->cacheSet(array($uri => $entities[$uri]));
+        }
       }
     }
     return $entities;
+  }
+
+  /**
+   * Delete LinkedDataEntities from the API
+   *
+   * @param  array                $uris  The URIs of the entities to delete
+   * @param  DatabaseTransaction  $transaction Optional, defaults to NULL. 
+   */
+  public function delete($uris, DatabaseTransaction $transaction = NULL) {
+    foreach ($uris as $url_encoded_uri) {
+      $uri = urldecode(urldecode($url_encoded_uri));
+      $entity = entity_create(LDE_ENTITY_TYPE, array(
+        'uri' => $uri,
+      ));
+      $status = $this->del($entity);
+    }
+    return $status;
   }
 
   /**
@@ -145,6 +164,11 @@ class LinkedDataController extends EntityAPIController {
     $http_pass = variable_get('lde_api_password');
     $http_url = $entity->identifier();
 
+    if (!$http_user || !$http_pass) {
+      drupal_set_message('Please provide username and password in the configuration');
+      return false;
+    }
+
     $http_options = array(
       'method' => 'PUT',
       'headers' => array(
@@ -167,7 +191,7 @@ class LinkedDataController extends EntityAPIController {
   /**
    * Send GET request to API
    *
-   * @param  string $uri The URI of the entity
+   * @param  LinkedDataEntity $entity The entity
    * @return LinkedDataEntity The unserialized entity
    */
   protected function get($entity) {
@@ -181,8 +205,39 @@ class LinkedDataController extends EntityAPIController {
       drupal_set_message("Unable to GET $http_url", 'error');
       return false;
     }
-    lde_from_rdf($entity, $http_response->data, 'rdfxml');
-    return $entity;
+    return lde_from_rdf($entity, $http_response->data, 'rdfxml');
+  }
+
+  /**
+   * Send DELETE request to API
+   *
+   * @param  LinkedDataEntity  $entity The entity
+   */
+  protected function del($entity) {
+
+    $http_user = variable_get('lde_api_user');
+    $http_pass = variable_get('lde_api_password');
+    $http_url = $entity->identifier();
+
+    if (!$http_user || !$http_pass) {
+      drupal_set_message('Please provide username and password in the configuration');
+      return false;
+    }
+
+    $http_url = $entity->identifier();
+    $http_options = array(
+      'method' => 'DELETE',
+      'headers' => array(
+        'Authorization' => 'Basic' .  base64_encode("{$http_user}:{$http_pass}"),
+      ),
+    );
+
+    $http_response = lde_http_request($http_url, $http_options);
+    if (200 != $http_response->code) {
+      drupal_set_message("Unable to DELETE $http_url", 'error');
+      return false;
+    }
+    return true;
   }
 
 }
