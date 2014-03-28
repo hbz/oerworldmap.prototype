@@ -140,6 +140,7 @@ function lde_form_submit($form, &$form_state) {
 
 function lde_form_submit_delete($form , &$form_state) {
   $entity = $form['#entity'];
+  lde_delete($entity);
   drupal_set_message(t('Resource %id has been deleted',
     array('%id' => $entity->identifier()))
   );
