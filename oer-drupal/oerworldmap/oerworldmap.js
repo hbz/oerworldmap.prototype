@@ -1,9 +1,7 @@
 (function($) {
-  String.prototype.endsWith = function(suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
-  };
   $(document).ready(function() {
     var map = L.map('oerworldmap').setView([0, 0], 1);
+    var user_lang = navigator.language || navigator.userLanguage;
 
     var type_facets = {
       'http://schema.org/Organization' : 'Organization',
@@ -12,6 +10,8 @@
       'http://schema.org/Project' : 'Project'
     };
     var country_facets = {};
+    var markers = [];
+    var proxy_url = Drupal.settings.oerworldmap.proxyUrl;
 
     var bounding_box = [
       map.getBounds().getNorth() + ',' + map.getBounds().getWest(),
@@ -19,7 +19,8 @@
       map.getBounds().getSouth() + ',' + map.getBounds().getEast(),
       map.getBounds().getSouth() + ',' + map.getBounds().getWest()
     ].join('+');
-    var requestUrl = "http://"
+
+    var request_url = "http://"
       + Drupal.settings.oerworldmap.apiUrl
       + "/oer?q=*"
       + "&location="
@@ -79,12 +80,10 @@
         return control;
     }
 
-    var proxy_url = Drupal.settings.oerworldmap.proxyUrl;
-    var markers = [];
-    $.getJSON(requestUrl , function(result) {
+    $.getJSON(request_url , function(result) {
       $.each(result, function(i, match) {
         var marker = L.marker();
-        var popup = L.popup({'maxHeight': 500, 'maxWidth': 400, 'autoPan': false});
+        var popup = L.popup({'maxHeight': 500, 'maxWidth': 400});
         marker.bindPopup(popup);
         if (match['@graph']) $.each(match['@graph'], function (j, resource) {
           if (resource.latitude && resource.longitude) {
@@ -107,18 +106,24 @@
             //available
             var country_uri = resource['addressCountry'][0] + '/';
             if (!(country_uri in country_facets)) {
+              var label;
               $.get(proxy_url + country_uri, function(result) {
                 parser = new DOMParser();
                 data = parser.parseFromString( result, "text/xml" );
                 var rdf = $.rdf().load(data, {});
                 rdf.prefix('gn', 'http://www.geonames.org/ontology#');
                 rdf.where('<' + country_uri + '> gn:officialName ?name').each(function() {
-                  // Default labels have no language tag
-                  if (this.name.lang == undefined) {
-                    $('span:contains("' + country_uri + '")').text(this.name.value.toString());
-                    country_facets[country_uri] = this.name.value.toString();
+                  if (this.name.lang == user_lang) {
+                    label = this.name.value.substring(1, this.name.value.length - 1);
+                    return false;
+                  } else if (this.name.lang == undefined) {
+                    label = this.name.value.toString();
+                  } else if (!label) {
+                    label = this.name.value.toString();
                   }
                 });
+                $('span:contains("' + country_uri + '")').text(label);
+                country_facets[country_uri] = label;
               });
               country_facets[country_uri] = country_uri;
             }
