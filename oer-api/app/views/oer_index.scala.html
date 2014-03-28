@@ -19,6 +19,8 @@
         <dd>Filter results by their location (pass multiple, space-separated "lon,lat" pairs for a <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html#_lat_lon_as_string_5">polygon filter</a>).</dd>
         <dt><code>callback</code> (optional)</dt>
         <dd>For JSONP requests.</dd>
+        <dt><code>from</code> and <code>size</code> (optional)</dt>
+        <dd>Limit the result set size, for paging through the entire result set. Defaults: <code>from=0</code> and <code>size=50</code></dd>
         <dt>Samples<dt>
         <dd>
         @for(query <- queries) { <a href="@query">@query</a><br/> }

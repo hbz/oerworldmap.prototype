@@ -122,7 +122,8 @@ public class Application extends Controller {
 					"/oer?q=Africa&t=http://schema.org/Organization,"
 					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
 					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
-					"/oer?q=\"Cape+Town\"&callback=callbackFunction")));
+					"/oer?q=\"Cape+Town\"&callback=callbackFunction",
+					"/oer?q=University&from=0&size=5")));
 					// @formatter:on@
 		return processQuery(q, t, location);
 	}
@@ -280,8 +281,7 @@ public class Application extends Controller {
 			List<Map<String, Object>> maps = (List<Map<String, Object>>) JSONUtils
 					.fromString(string);
 			for (Map<String, Object> map : maps) {
-				map.put("@context", routes.Assets.at("data/context.json")
-						.absoluteURL(request()));
+				map.put("@context", "http://api.lobid.org/oer/data/context.json");
 			}
 			return JSONUtils.toString(maps);
 		} catch (IOException e) {
@@ -330,10 +330,25 @@ public class Application extends Controller {
 		if (!location.trim().isEmpty())
 			requestBuilder = requestBuilder.setFilter(locationFilter(location));
 		Logger.debug("Request:\n" + requestBuilder);
-		SearchResponse response = requestBuilder.setFrom(0).setSize(500)
-				.setExplain(false).execute().actionGet();
+		SearchResponse response = requestBuilder.setFrom(get("from", 0))
+				.setSize(get("size", 50)).setExplain(false).execute()
+				.actionGet();
 		Logger.debug("Response:\n" + response);
 		return response;
+	}
+
+	private static int get(String parameterName, int defaultValue) {
+		final String[] params = request() == null
+				|| request().queryString() == null ? null : request()
+				.queryString().get(parameterName);
+		if (params != null)
+			try {
+				return Integer.parseInt(params[0]);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return defaultValue;
+			}
+		return defaultValue;
 	}
 
 	private static FilterBuilder locationFilter(String location) {
