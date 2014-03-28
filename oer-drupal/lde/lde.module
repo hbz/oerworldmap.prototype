@@ -103,6 +103,12 @@ function lde_form($form, &$form_state, $entity, $entity_type) {
     '#default_value' => 'Submit',
     '#weight' => '1000',
   );
+  $form['delete'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+    '#submit' => array('lde_form_submit_delete'),
+    '#weight' => 2000,
+  );
   return $form;
 }
 
@@ -130,6 +136,14 @@ function lde_form_submit($form, &$form_state) {
     );
     $form_state['rebuild'] = true;
   }
+}
+
+function lde_form_submit_delete($form , &$form_state) {
+  $entity = $form['#entity'];
+  drupal_set_message(t('Resource %id has been deleted',
+    array('%id' => $entity->identifier()))
+  );
+  $form_state['redirect'] = '/oerworldmap';
 }
 
 /**

@@ -136,7 +136,7 @@ function oerworldmap_search($form, &$form_state) {
   $form[] = $search_button;
 
   $term = isset($_GET['term']) ? $_GET['term'] : null;
-  if (!isset($term)) return $form;
+  if (!isset($term) || '' == $term) return $form;
 
   $endpoint_uri = 'http://' . variable_get('lde_api_host') . '/oer';
   $endpoints = ApplicationProfile::get(LDE_ENTITY_TYPE)->getEndpoints();
