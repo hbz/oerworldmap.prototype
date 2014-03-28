@@ -281,8 +281,7 @@ public class Application extends Controller {
 			List<Map<String, Object>> maps = (List<Map<String, Object>>) JSONUtils
 					.fromString(string);
 			for (Map<String, Object> map : maps) {
-				map.put("@context", routes.Assets.at("data/context.json")
-						.absoluteURL(request()));
+				map.put("@context", "http://api.lobid.org/oer/data/context.json");
 			}
 			return JSONUtils.toString(maps);
 		} catch (IOException e) {
