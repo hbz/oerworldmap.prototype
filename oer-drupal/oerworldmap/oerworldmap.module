@@ -156,6 +156,24 @@ function oerworldmap_search($form, &$form_state) {
     );
     $form[] = $view;
   }
+
+  // Pagination
+  $page = pager_find_page();
+  $prev_link = l('<<', 'oerworldmap/search', array('query' => array(
+    'page' => $page - 1,
+    'term' => $term,
+  )));
+  $next_link = l('>>', 'oerworldmap/search', array('query' => array(
+    'page' => $page + 1,
+    'term' => $term,
+  )));
+  $pager = ($page > 0) ? "$prev_link $next_link" : $next_link;
+
+  $form[] = array(
+    '#type' => 'item',
+    '#markup' => $pager,
+  );
+
   return $form;
 }
 
