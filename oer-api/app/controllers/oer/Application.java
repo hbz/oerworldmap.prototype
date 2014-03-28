@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.riot.Lang;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -129,8 +131,8 @@ public class Application extends Controller {
 		try {
 			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
 					.execute().actionGet();
-			String r = response.isExists() ? response.getSourceAsString() : "";
-			return response(Json.parse("[" + withoutLocation(r) + "]"));
+			return !response.isExists() ? notFound() : response(Json.parse("["
+					+ withoutLocation(response.getSourceAsString()) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -152,6 +154,23 @@ public class Application extends Controller {
 			return unauthorized("Not authorized to write data!\n");
 		String requestBody = new String(rawBody.asBytes(), Charsets.UTF_8);
 		return processRequest(id, authHeader, requestBody, contentType);
+	}
+
+	public static Result delete(String id) {
+		String authHeader = request().getHeader(AUTHORIZATION);
+		if (authHeader == null || authHeader.isEmpty())
+			return badRequest("Authorization required to delete data!\n");
+		if (!authorized(authHeader))
+			return unauthorized("Not authorized to delete data!\n");
+		try {
+			DeleteResponse response = client
+					.prepareDelete(DATA_INDEX, DATA_TYPE, id).execute()
+					.actionGet();
+			return response.isNotFound() ? notFound() : ok("Deleted " + id);
+		} catch (Exception x) {
+			x.printStackTrace();
+			return internalServerError(x.getMessage());
+		}
 	}
 
 	private static Result processRequest(String id, String auth,
@@ -224,25 +243,32 @@ public class Application extends Controller {
 		final String[] callback = request() == null
 				|| request().queryString() == null ? null : request()
 				.queryString().get("callback");
-		String negotiatedContent = negotiateContent(json);
+		Pair<String, Lang> negotiatedContent = negotiateContent(json);
 		final Status notAcceptable = status(406,
 				"Not acceptable: unsupported content type requested\n");
 		if (invalidAcceptHeader() || negotiatedContent == null)
 			return notAcceptable;
-		return callback != null ? ok(String.format("%s(%s)", callback[0],
-				negotiatedContent)) : ok(negotiatedContent);
+		if (callback != null)
+			return ok(String.format("%s(%s)", callback[0],
+					negotiatedContent.getLeft()));
+		if (negotiatedContent.getRight().equals(Lang.JSONLD))
+			return ok(Json.parse(negotiatedContent.getLeft()));
+		return ok(negotiatedContent.getLeft());
 	}
 
-	private static String negotiateContent(JsonNode json) {
+	private static Pair<String, Lang> negotiateContent(JsonNode json) {
 		for (MediaRange mediaRange : request().acceptedTypes())
 			for (Serialization serialization : Serialization.values())
 				for (String mimeType : serialization.getTypes())
 					if (mediaRange.accepts(mimeType)) {
 						if (serialization.format.equals(Lang.JSONLD))
-							return withRemoteContext(json.toString());
+							return Pair.of(withRemoteContext(json.toString()),
+									Lang.JSONLD);
 						Logger.debug("Matching mime {}, converting JSON to {}",
 								mimeType, serialization.format);
-						return NtToEs.jsonLdToRdf(json, serialization.format);
+						return Pair.of(
+								NtToEs.jsonLdToRdf(json, serialization.format),
+								serialization.format);
 					}
 		return null;
 	}

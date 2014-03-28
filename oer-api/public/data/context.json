@@ -1,8 +1,35 @@
 {
   "@context" : {
+    "logo" : {
+      "@id" : "http://schema.org/logo",
+      "@type" : "@id"
+    },
+    "name" : "http://schema.org/name",
+    "alternateName" : "http://schema.org/alternateName",
     "description" : "http://schema.org/description",
     "descriptionLink" : {
       "@id" : "http://schema.org/description",
+      "@type" : "@id"
+    },
+    "url" : {
+      "@id" : "http://schema.org/url",
+      "@type" : "@id"
+    },
+    "email" : "http://schema.org/email",
+    "telephone" : "http://schema.org/telephone",
+    "contact" : "http://purl.org/openorg/contact",
+    "address" : {
+      "@id" : "http://schema.org/address",
+      "@type" : "@id"
+    },
+    "streetAddress" : "http://schema.org/streetAddress",
+    "postalCode" : "http://schema.org/postalCode",
+    "addressLocality" : {
+      "@id" : "http://schema.org/addressLocality",
+      "@type" : "@id"
+    },
+    "addressCountry" : {
+      "@id" : "http://schema.org/addressCountry",
       "@type" : "@id"
     },
     "geo" : {
@@ -15,19 +42,33 @@
     },
     "identifier" : "http://purl.org/dc/elements/1.1/identifier",
     "latitude" : "http://schema.org/latitude",
-    "logo" : {
-      "@id" : "http://schema.org/logo",
+    "longitude" : "http://schema.org/longitude",
+    "sameAs" : {
+      "@id" : "http://schema.org/sameAs",
       "@type" : "@id"
     },
-    "longitude" : "http://schema.org/longitude",
-    "name" : "http://schema.org/name",
+    "member" : {
+      "@id" : "http://schema.org/member",
+      "@type" : "@id"
+    },
+    "memberOf" : {
+      "@id" : "http://schema.org/memberOf",
+      "@type" : "@id"
+    },
     "providesService" : {
       "@id" : "http://schema.org/providesService",
       "@type" : "@id"
     },
-    "url" : {
-      "@id" : "http://schema.org/url",
+    "provider" : {
+      "@id" : "http://schema.org/provider",
       "@type" : "@id"
-    }
+    },
+    "funder" : {
+    "@id" : "http://id.loc.gov/vocabulary/relators/fnd",
+    "@type" : "@id"
+    },
+    "startDate" : "http://schema.org/startDate",
+    "endDate" : "http://schema.org/endDate"
   }
 }
+
