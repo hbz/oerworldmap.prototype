@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,15 +59,17 @@ public class NtToEs {
 	public static void main(String... args) throws ElasticSearchException,
 			FileNotFoundException, IOException {
 		if (args.length != 1 && args.length != 2) {
-			System.err.println("Pass the root directory to crawl. "
+			System.out.println("Pass the root directory to crawl. "
 					+ "Will recursively gather all content from *.nt "
 					+ "files with identical names, convert these to "
-					+ "compact JSON-LD and index it in ES."
-					+ "If a second argument is passed it is processed"
-					+ "as a TSV file that maps file names (w/o"
-					+ "extensions) to IDs to be used for ES. Else the"
+					+ "compact JSON-LD and index it in ES. "
+					+ "If a second argument is passed it is processed "
+					+ "as a TSV file that maps file names (w/o "
+					+ "extensions) to IDs to be used for ES. Else the "
 					+ "file names are used (w/o extensions) are used.");
-			System.exit(-1);
+			args = new String[] { "../oer-data/tmp/ocwc",
+					"../oer-data/src/main/resources/internalId2uuid.tsv" };
+			System.out.println("Using defaults: " + Arrays.asList(args));
 		}
 		TripleCrawler crawler = new TripleCrawler();
 		Files.walkFileTree(Paths.get(args[0]), crawler);
