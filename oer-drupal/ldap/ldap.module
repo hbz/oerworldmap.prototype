@@ -1,5 +1,34 @@
 <?php
 
+
+/**
+ * Implements hook_menu().
+ */
+function ldap_menu() {
+
+  $items = array();
+
+  $items['admin/config/ldap'] = array(
+    'title' => 'Application Profile',
+    'description' => 'Settings for the Application Profile module',
+    'position' => 'left',
+    'weight' => -100,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/ldap/update'] = array(
+    'title' => 'Reload application profile',
+    'description' => 'Reload bundles, fields and field instances from the application profile',
+    'page callback' => 'ldap_update',
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+
+}
+
 /**
  * Implements hook_entity_info_alter
  *
@@ -13,3 +42,12 @@ function ldap_entity_info_alter(&$entity_info) {
     $entity_info[$entity_type]['bundles'] = $ap->getBundles();
   }
 }
+
+function ldap_update() {
+  foreach (ApplicationProfile::getAll() as $entity_type => $ap) {
+    $ap->update();
+    drupal_set_message("Application profile reloaded");
+  }
+  return array();
+}
+

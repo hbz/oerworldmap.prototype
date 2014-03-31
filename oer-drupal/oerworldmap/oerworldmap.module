@@ -16,12 +16,6 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
-  $items['oerworldmap/update'] = array(
-    'title' => 'Reload application profile',
-    'page callback' => 'oerworldmap_ap_update',
-    'access callback' => true,
-  );
-
   $items['oerworldmap/search'] = array(
     'title' => 'Search',
     'page callback' => 'drupal_get_form',
@@ -108,13 +102,6 @@ function oerworldmap() {
     '#type' => 'markup',
     '#markup' => '<div id="oerworldmap" style="height: 400px; width: 100%; border: 1px solid black;"></div>',
   );
-}
-
-function oerworldmap_ap_update() {
-  $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
-  $ap->update();
-  drupal_set_message("Application profile reloaded");
-  return array();
 }
 
 function oerworldmap_search($form, &$form_state) {
