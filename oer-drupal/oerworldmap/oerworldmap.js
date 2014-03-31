@@ -6,9 +6,8 @@
     var type_facets = {
       'http://schema.org/Organization' : 'Organization',
       'http://schema.org/Person' : 'Person',
-      'http://schema.org/Service' : 'Service',
-      'http://schema.org/Project' : 'Project'
     };
+
     var country_facets = {};
     var markers = [];
     var proxy_url = Drupal.settings.oerworldmap.proxyUrl;
@@ -25,6 +24,7 @@
       + "/oer?q=*"
       + "&location="
       + bounding_box
+      + "&size=1000"
       + "&callback=?";
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,19 +35,18 @@
     var buildControl = function (map) {
         var control = $('<form />');
 
-        var type_filter = $('<ul />');
-        type_filter.prepend($('<h3>Types</h3>'));
+        var type_filter = $('<fieldset><legend>Types</legend></fieldset>').append($('<ul />'));
         $.each(type_facets, function (uri, label) {
           var checkbox = $('<input type="checkbox" />').val(uri).bind('click', apply_filters);
-          type_filter.append($('<label><span>' + label + '</span></label>').prepend(checkbox));
+          type_filter.append($('<label><span style="padding-left: 0.5em;">' + label + '</span></label>').prepend(checkbox));
         });
         control.append(type_filter);
 
-        var country_filter = $('<ul style="columns: 3; -webkit-columns: 3; -moz-columns: 3;" />');
-        country_filter.prepend($('<h3>Countries</h3>'));
+        var country_filter = $('<fieldset><legend>Countries</legend></fieldset>')
+          .append($('<ul />'));
         $.each(country_facets, function (uri, label) {
           var checkbox = $('<input type="checkbox" />').val(uri).bind('click', apply_filters);
-          country_filter.append($('<label><span>' + label + '</span></label>').prepend(checkbox));
+          country_filter.append($('<label><span style="padding-left: 0.5em;">' + label + '</span></label>').prepend(checkbox));
         });
         control.append(country_filter);
 
@@ -80,6 +79,13 @@
         return control;
     }
 
+    var organizationIcon = new L.Icon({
+      iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-organization.png'
+    });
+    var personIcon = new L.Icon({
+      iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-person.png'
+    });
+
     $.getJSON(request_url , function(result) {
       $.each(result, function(i, match) {
         var marker = L.marker();
@@ -90,6 +96,11 @@
             var coordinates = new L.LatLng(resource.latitude[0], resource.longitude[0]);
             marker.setLatLng(coordinates);
           } else if (resource['@type'] in type_facets) {
+            if (resource['@type'] == "http://schema.org/Person") {
+              marker.setIcon(personIcon);
+            } else {
+              marker.setIcon(organizationIcon);
+            }
             marker.on('click', function(e) {
               entity_render_view('lde', encodeURIComponent(encodeURIComponent(resource['@id']))).onload = function () {
                 if (this.status == 200) {

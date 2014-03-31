@@ -23,12 +23,6 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
-  $items['oerworldmap/add'] = array(
-    'title' => 'Contribute to the OER World Map',
-    'page callback' => 'oerworldmap',
-    'access callback' => true,
-  );
-
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
   foreach ($ap->getTopBundles() as $bundle) {
     $items["oerworldmap/add/$bundle"] = array(
@@ -86,6 +80,7 @@ function oerworldmap() {
   );
   drupal_add_js(array('oerworldmap' => array(
     'apiUrl' => variable_get('lde_api_host'),
+    'basePath' => base_path() . drupal_get_path('module', 'oerworldmap'),
     'proxyUrl' => base_path() . 'oerworldmap/proxy?uri='
   )), 'setting');
   drupal_add_js(

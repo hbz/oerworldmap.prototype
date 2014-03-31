@@ -107,7 +107,7 @@ function ldf_field_formatter_view($entity_type, $entity, $field, $instance, $lan
       foreach ($items as $item) {
         $elements[] = array(
           '#type' => 'item',
-          '#markup' => sprintf('<img src="%s" />', $item['value']),
+          '#markup' => sprintf('<img src="%s" style="max-width: 200px" />', $item['value']),
         );
       }
       break;
