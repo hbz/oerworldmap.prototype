@@ -31,7 +31,7 @@
 		<data source="@doIdLookup" name="@idLookup">
 			<lookup in="internalId2uuidMap"/>
 		</data>
-		<!-- set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<!-- set the ID's of the thing (@subjectUri) and the metadata of that thing (@serviceSubjectAboutUri) -->
 		<combine name="@subjectAboutUri" value="$[oer:]${subject}">
 			<data source="@id" name="subject">
 				<regexp match=".*"/>
@@ -43,7 +43,7 @@
 			<data source="@subjectAboutUri" name="subjectUri"/>
 		</combine>
 		<data source="@subjectUri" name="~rdf:subject"/>
-		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
+		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@serviceSubjectAboutUri) -->
 		<!-- /uuid and id handling -->
 		<combine name="http://purl.org/dc/elements/1.1/identifier" value="ocwc${idInternal}">
 			<data source="id" name="idInternal"/>
@@ -91,6 +91,7 @@
 			<data source="@subjectUri"/>
 		</combine>
 		<combine name="$[schema:]logo" value="${a}/${b}">
+			<data source="@subjectUri"/>
 			<data source="logo_small_url" name="a">
 				<regexp match="(.*)/" format="${1}"/>
 			</data>
@@ -100,14 +101,60 @@
 				<!-- unfortunately at least the ocwc with id 404 has a mixed up URL encoding -->
 				<replace pattern="\+" with="%20"/>
 			</data>
-			<data source="@subjectUri"/>
 		</combine>
-		<combine name="$[schema:]providesService" value="${a}">
+		<!-- services -->
+		<combine name="@serviceUrl" value="${a}" flushWith="record">
 			<data source="ocw_website" name="a">
 				<regexp match=".+"/>
 			</data>
-			<data source="@subjectUri"/>
 		</combine>
+		<combine name="@serviceUrlTmp" value="${a}">
+			<data source="@serviceUrl" name="a">
+				<regexp match=".+"/>
+			</data>
+		</combine>
+		<!-- generated ID -->
+		<combine name="@idServiceUrl" value="${idGenerated}">
+			<if>
+				<none>
+					<data source="@idServiceLookup">
+						<regexp match=".+"/>
+					</data>
+				</none>
+			</if>
+			<data source="@serviceUrl" name="idGenerated">
+				<generate-uuid/>
+			</data>
+		</combine>
+		<!-- lookuped ID -->
+		<data source="@idServiceLookup" name="@idServiceUrl">
+			<regexp match=".+"/>
+		</data>
+		<combine name="@doIdServiceLookup" value="${idServiceLookup}">
+			<data source="@serviceUrl" name="idServiceLookup">
+				<regexp match="(.*)" format="${1}"/>
+			</data>
+		</combine>
+		<data source="@doIdServiceLookup" name="@idServiceLookup">
+			<lookup in="internalId2uuidMap"/>
+		</data>
+		<!-- set the ID's of the thing (@serviceSubjectUri) and the metadata of that thing (@serviceSubjectAboutUri) -->
+		<combine name="@serviceSubjectAboutUri" value="$[oer:]${subject}">
+			<data source="@idServiceUrl" name="subject">
+				<regexp match=".*"/>
+			</data>
+		</combine>
+		<combine name="@serviceSubjectUri" value="${serviceSubjectUri}#!">
+			<data source="@serviceSubjectAboutUri" name="serviceSubjectUri"/>
+		</combine>
+		<combine name="$[schema:]providesService" value="${a}">
+			<data source="@serviceSubjectUri" name="a">
+				<regexp match=".+"/>
+			</data>
+		</combine>
+		<!-- /set the ID's of the thing (@serviceSubjectUri) and the metadata of that thing (@serviceSubjectAboutUri) -->
+		<!-- /uuid and id handling for the main oer -->
+		<!-- /services -->
 		<!-- geoLocation -->
 		<combine name="@geoUuid" value="urn:uuid:${uuid}">
 			<if>

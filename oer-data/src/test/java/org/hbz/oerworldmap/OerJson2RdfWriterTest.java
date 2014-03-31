@@ -17,6 +17,7 @@ import org.lobid.lodmill.AbstractIngestTests;
  */
 @SuppressWarnings("javadoc")
 public class OerJson2RdfWriterTest {
+	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
 	private static final String GEO_LIST = "small/geoList";
 	private static final String ORGANIZATION_ID = "small/organizationId";
 	private static final String CONSORTIUM_MEMBERS = "small/consortiumMembers";
@@ -29,17 +30,20 @@ public class OerJson2RdfWriterTest {
 	public void testFlow() {
 		try {
 			FileUtils.deleteQuietly(new File(TARGET_PATH));
-			Transform.dataInDirectory(TARGET_PATH, OCWC_PATH
-					+ CONSORTIUM_MEMBERS);
-			Transform.dataInDirectory(TARGET_PATH, OCWC_PATH + ORGANIZATION_ID);
-			Transform.dataInDirectory(TARGET_PATH, OCWC_PATH + GEO_LIST);
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
+					OCWC_PATH + CONSORTIUM_MEMBERS);
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
+					OCWC_PATH + ORGANIZATION_ID);
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
+					OCWC_PATH + GEO_LIST);
+			Transform.dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH,
+					OCWC_PATH + ORGANIZATION_ID);
 			File testFile;
-			testFile = AbstractIngestTests
-					.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
-							TARGET_PATH + OCWC_PATH + TEST_FILENAME);
-			AbstractIngestTests.compareFilesDefaultingBNodes(testFile,
-					new File(Thread.currentThread().getContextClassLoader()
-							.getResource(OCWC_PATH + TEST_FILENAME).toURI()));
+			testFile = AbstractIngestTests.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
+					TARGET_PATH + OCWC_PATH + TEST_FILENAME);
+			AbstractIngestTests.compareFilesDefaultingBNodes(testFile, new File(Thread
+					.currentThread().getContextClassLoader().getResource(OCWC_PATH + TEST_FILENAME)
+					.toURI()));
 			FileUtils.deleteDirectory(new File(TARGET_PATH));
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();

@@ -29,33 +29,35 @@ public class Transform {
 	private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
 	private static final String OCWC_PATH = "ocwc/";
 	private static final String TARGET_PATH = "tmp/";
+	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
 
-	public static void main(String[] args) throws URISyntaxException,
-			IOException {
+	public static void main(String[] args) throws URISyntaxException, IOException {
 		FileUtils.deleteQuietly(new File(TARGET_PATH));
-		dataInDirectory(TARGET_PATH, OCWC_PATH + CONSORTIUM_MEMBERS);
-		dataInDirectory(TARGET_PATH, OCWC_PATH + ORGANIZATION_ID);
-		dataInDirectory(TARGET_PATH, OCWC_PATH + GEO_LIST);
+		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
+				+ CONSORTIUM_MEMBERS);
+		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
+				+ ORGANIZATION_ID);
+		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH + GEO_LIST);
+		dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH, OCWC_PATH
+				+ ORGANIZATION_ID);
+
 		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", "tmp/");
-		Files.copy(new File(
-				"doc/scripts/additionalDataOcwcItself.ntriple.template"),
-				new File(TARGET_PATH + OCWC_PATH, "ocwc.nt"));
+		Files.copy(new File("doc/scripts/additionalDataOcwcItself.ntriple.template"), new File(
+				TARGET_PATH + OCWC_PATH, "ocwc.nt"));
 	}
 
-	static void dataInDirectory(String targetPath, final String pathToDirectory)
+	static void dataInDirectory(String morphFile, String targetPath, final String pathToDirectory)
 			throws URISyntaxException {
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
-		final Metamorph morph = new Metamorph(Thread.currentThread()
-				.getContextClassLoader()
-				.getResource("morph-ocwConsortiumMembers-to-rdf.xml").getFile());
+		final Metamorph morph = new Metamorph(Thread.currentThread().getContextClassLoader()
+				.getResource(morphFile).getFile());
 		final PipeEncodeTriples encoder = new PipeEncodeTriples();
 		encoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2model = new Triples2RdfModel();
 		triple2model.setInput("N-TRIPLE");
-		final RdfModelFileWriter writer = createOerWriter(targetPath
-				+ pathToDirectory);
+		final RdfModelFileWriter writer = createOerWriter(targetPath + pathToDirectory);
 		final StreamTee streamTee = new StreamTee();
 		final Stats stats = new Stats();
 		streamTee.addReceiver(stats);
@@ -64,9 +66,8 @@ public class Transform {
 		opener.setReceiver(jsonDecoder);
 		jsonDecoder.setReceiver(morph).setReceiver(streamTee);
 		dirReader.setReceiver(opener);
-		dirReader.process((new File(Thread.currentThread()
-				.getContextClassLoader().getResource(pathToDirectory).toURI()))
-				.getAbsolutePath());
+		dirReader.process((new File(Thread.currentThread().getContextClassLoader()
+				.getResource(pathToDirectory).toURI())).getAbsolutePath());
 		opener.closeStream();
 
 	}
@@ -82,24 +83,20 @@ public class Transform {
 		return writer;
 	}
 
-	static void geoWithHttpLookup(String ocwcGeoSource, String ocwcGeoTarget,
-			String targetPath) throws URISyntaxException {
+	static void geoWithHttpLookup(String ocwcGeoSource, String ocwcGeoTarget, String targetPath)
+			throws URISyntaxException {
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
 		final JsonDecoder jsonDecoder1 = new JsonDecoder();
-		final Metamorph morphGeo = new Metamorph(Thread.currentThread()
-				.getContextClassLoader()
-				.getResource("morph-ocwConsortiumMembers-buildGeoOsmUrl.xml")
-				.getFile());
-		final Metamorph morphOSM = new Metamorph(Thread.currentThread()
-				.getContextClassLoader()
+		final Metamorph morphGeo = new Metamorph(Thread.currentThread().getContextClassLoader()
+				.getResource("morph-ocwConsortiumMembers-buildGeoOsmUrl.xml").getFile());
+		final Metamorph morphOSM = new Metamorph(Thread.currentThread().getContextClassLoader()
 				.getResource("morph-ocwConsortiumMembers-osm.xml").getFile());
 		final PipeEncodeTriples geoEncoder = new PipeEncodeTriples();
 		geoEncoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2modelGeo = new Triples2RdfModel();
-		final RdfModelFileWriter geoWriter = createWriter(targetPath
-				+ ocwcGeoTarget);
+		final RdfModelFileWriter geoWriter = createWriter(targetPath + ocwcGeoTarget);
 		final StreamTee streamTee = new StreamTee();
 		final Stats stats = new Stats();
 		streamTee.addReceiver(stats);
@@ -115,9 +112,8 @@ public class Transform {
 		opener.setReceiver(jsonDecoder);
 		jsonDecoder.setReceiver(morphGeo).setReceiver(streamTee);
 		dirReader.setReceiver(opener);
-		dirReader.process((new File(Thread.currentThread()
-				.getContextClassLoader().getResource(ocwcGeoSource).toURI()))
-				.getAbsolutePath());
+		dirReader.process((new File(Thread.currentThread().getContextClassLoader()
+				.getResource(ocwcGeoSource).toURI())).getAbsolutePath());
 		opener.closeStream();
 	}
 
