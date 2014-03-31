@@ -66,6 +66,7 @@ function oerworldmap_menu() {
 }
 
 function oerworldmap() {
+  drupal_set_title('');
   drupal_add_js(
     drupal_get_path('module', 'oerworldmap') . '/jquery.rdfquery.core-1.0.js'
   );
@@ -103,33 +104,54 @@ function oerworldmap_search($form, &$form_state) {
 
   $form['#method'] = 'GET';
 
+  $term = isset($_GET['term']) ? $_GET['term'] : null;
+  $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+
   $search_form = array(
     '#type' => 'textfield',
-    '#name' => 'term',
+    '#default_value' => isset($term) ? $term : '',
   );
 
   $search_button = array(
     '#type' => 'submit',
-    '#name' => 'search',
     '#default_value' => 'Search',
   );
 
-  $form[] = $search_form;
-  $form[] = $search_button;
+  $type_filter = array(
+    '#type' => 'checkboxes',
+    '#options' => array(
+      'Organization' => 'Organization',
+      'Person' => 'Person',
+      'Service' => 'Service',
+      'Project' => 'Project',
+    ),
+    '#title' => t('Restrict results to these types'),
+    '#default_value' => isset($filter) ? array_keys($filter) : array(),
+  );
 
-  $term = isset($_GET['term']) ? $_GET['term'] : null;
+  $form['term'] = $search_form;
+  $form['submit'] = $search_button;
+  $form['filter'] = $type_filter;
+
   if (!isset($term) || '' == $term) return $form;
 
   $endpoint_uri = 'http://' . variable_get('lde_api_host') . '/oer';
   $endpoints = ApplicationProfile::get(LDE_ENTITY_TYPE)->getEndpoints();
   $endpoint_params = $endpoints[$endpoint_uri];
+
   $query = new LinkedDataEntityFieldQuery();
   $query->addMetadata('endpoint', $endpoint_uri);
   $query->addMetadata('term', $term);
   foreach ($endpoint_params as $param => $value) {
     $query->addMetadata($param, $value);
   }
-  $query->entityCondition('bundle', array('Organization', 'Service', 'Person', 'Project'));
+
+  if (isset($filter)) {
+    $query->entityCondition('bundle', array_keys($filter));
+  } else {
+    $query->entityCondition('bundle', array('Organization', 'Service', 'Person', 'Project'));
+  }
+
   $results = $query->execute();
   if ($results) foreach ($results as $result) {
     $view = entity_view(LDE_ENTITY_TYPE, array($result), 'full', null, false);

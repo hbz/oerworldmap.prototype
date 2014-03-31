@@ -102,6 +102,7 @@
               marker.setIcon(organizationIcon);
             }
             marker.on('click', function(e) {
+              popup.setContent('<div class="ajax-progress"><div class="throbber">&nbsp;</div></div>');
               entity_render_view('lde', encodeURIComponent(encodeURIComponent(resource['@id']))).onload = function () {
                 if (this.status == 200) {
                   var entity_view = $(this.responseText);
