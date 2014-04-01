@@ -66,7 +66,7 @@ public class NtToEs {
 					+ "If a second argument is passed it is processed "
 					+ "as a TSV file that maps file names (w/o "
 					+ "extensions) to IDs to be used for ES. Else the "
-					+ "file names are used (w/o extensions) are used.");
+					+ "file names (w/o extensions) are used.");
 			args = new String[] { "../oer-data/tmp/ocwc",
 					"../oer-data/src/main/resources/internalId2uuid.tsv" };
 			System.out.println("Using defaults: " + Arrays.asList(args));
@@ -112,7 +112,7 @@ public class NtToEs {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			try {
 				String id = e.getKey().split("\\.")[0];
-				indexData(idMap.isEmpty() ? id : idMap.get(id),
+				indexData(idMap.isEmpty() || idMap.get(id)==null ? id : idMap.get(id),
 						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES));
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
