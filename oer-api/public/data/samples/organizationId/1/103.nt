@@ -1,7 +1,9 @@
-<http://oerworldmap.org/resource/ocw103> <http://purl.org/dc/elements/1.1/identifier> "103" .
-<http://oerworldmap.org/resource/ocw103> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
-<http://oerworldmap.org/resource/ocw103> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CollegeOrUniversityTest1> .
-<http://oerworldmap.org/resource/ocw103> <http://schema.org/url> <http://portal.kaplan.edu/> .
-<http://oerworldmap.org/resource/ocw103> <http://schema.org/providesService> <http://ocw.kaplan.edu/> .
-<http://oerworldmap.org/resource/ocw103> <http://schema.org/description> "Kaplan Higher Education is a group of institutions, including Kaplan University,  that offer career-oriented certificate and degree programs designed to provide students with the skills necessary to qualify them for employment in the fields of criminal justice, health care, business, education, financial planning, information technology, legal studies, fashion, design, and several others. Each of the individual schools is separately accredited by one of several national or regional accrediting agencies approved by the U.S. Department of Education." .
-<http://oerworldmap.org/resource/ocw103> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/url> <http://portal.kaplan.edu/> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/description> "Kaplan Higher Education is a group of institutions, including Kaplan University,  that offer career-oriented certificate and degree programs designed to provide students with the skills necessary to qualify them for employment in the fields of criminal justice, health care, business, education, financial planning, information technology, legal studies, fashion, design, and several others. Each of the individual schools is separately accredited by one of several national or regional accrediting agencies approved by the U.S. Department of Education." .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/providesService> <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
