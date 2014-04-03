@@ -317,10 +317,16 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
       $rdf_predicate = new LibRDF_URINode($predicate);
       $is_rel = (isset($field_mapping['type']) && $field_mapping['type'] == 'rel');
       foreach ($rdf_model->getTargets($rdf_subject, $rdf_predicate) as $value) {
-        if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
-          $wrapper->{$field_name} = $value->getValue();
+        if ($value instanceof LibRDF_LiteralNode) {
+          // Fix escaped unicode characters such as \u00E4
+          $raw_value = json_decode('"'.$value->getValue().'"');
         } else {
-          $wrapper->{$field_name}[] = $value->getValue();
+          $raw_value = $value->getValue();
+        }
+        if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
+          $wrapper->{$field_name} = $raw_value;
+        } else {
+          $wrapper->{$field_name}[] = $raw_value;
         }
         if ($is_rel && isset($field_info_instance['settings']['handler_settings']['target_bundles'])) {
           foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {
