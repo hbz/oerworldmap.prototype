@@ -128,10 +128,18 @@
                   if (this.name.lang == user_lang) {
                     label = this.name.value.substring(1, this.name.value.length - 1);
                     return false;
-                  } else if (this.name.lang == undefined) {
-                    label = this.name.value.toString();
-                  } else if (!label) {
-                    label = this.name.value.toString();
+                  }
+                });
+                if (!label) rdf.where('<' + country_uri + '> gn:alternateName ?name').each(function() {
+                  if (this.name.lang == user_lang) {
+                    label = this.name.value.substring(1, this.name.value.length - 1);
+                    return false;
+                  }
+                });
+                if (!label) rdf.where('<' + country_uri + '> gn:officialName ?name').each(function() {
+                  if (this.name.lang == undefined) {
+                    label = this.name.value;
+                    return false;
                   }
                 });
                 $('span:contains("' + country_uri + '")').text(label);
