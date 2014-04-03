@@ -23,10 +23,8 @@
 :Organization
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Organization ,
-    [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
@@ -43,8 +41,16 @@
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
-        owl:onProperty :address ;
+        owl:onProperty :telephone ;
         owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :address ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :geo ;
         owl:cardinality "1" ] ,
@@ -53,6 +59,7 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :member ;
+        rdfs:label "Staff" ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :memberOf ;
@@ -64,16 +71,22 @@
 :Person
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Person ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :alternateName ;
+        rdfs:label "Nick name"@en ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :description ;
         owl:minCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :memberOf ;
+        rdfs:label "Organisation"@en ;
+        owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :url ;
         owl:minCardinality "0" ] ,
@@ -81,25 +94,22 @@
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
-        owl:onProperty :address ;
+        owl:onProperty :telephone ;
         owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :address ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :geo ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
-        owl:onProperty :sameAs ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
-        owl:onProperty :memberOf ;
-        owl:minCardinality "0" ] .
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] .
 
 :Service
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf schema:Service ,
-    [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
@@ -116,13 +126,11 @@
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
+    [ a owl:Restriction ;
         owl:onProperty :contact ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
-        owl:onProperty :license ;
-        owl:minCardinality "1" ] ,
-    [ a owl:Restriction ;
-        owl:onProperty :sameAs ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :provider ;
@@ -131,10 +139,8 @@
 :Project
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :name ) ;
     rdfs:subClassOf foaf:Project ,
-    [ a owl:Restriction ;
-        owl:onProperty :logo ;
-        owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :name ;
         owl:cardinality "1" ] ,
@@ -148,22 +154,34 @@
         owl:onProperty :url ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
+        owl:onProperty :startDate ;
+        owl:cardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :endDate ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
+    [ a owl:Restriction ;
         owl:onProperty :email ;
         owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :logo ;
+        owl:minCardinality "0" ;
+        owl:maxCardinality "1" ] ,
     [ a owl:Restriction ;
         owl:onProperty :contact ;
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
-        owl:onProperty :sameAs ;
-        owl:minCardinality "0" ] ,
-    [ a owl:Restriction ;
         owl:onProperty :member ;
         owl:allValuesFrom :Person ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :funder ;
         owl:minCardinality "0" ] .
 
 :PostalAddress
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :streetAddress :postalCode ) ;
     rdfs:subClassOf schema:PostalAddress ,
     [ a owl:Restriction ;
         owl:onProperty :streetAddress ;
@@ -181,6 +199,7 @@
 :GeoCoordinates
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :latitude :longitude ) ;
     rdfs:subClassOf schema:GeoCoordinates ,
     [ a owl:Restriction ;
         owl:onProperty :latitude ;
@@ -189,32 +208,29 @@
         owl:onProperty :longitude ;
         owl:cardinality "1" ] .
 
-:Image
-    a owl:Class ;
-    rdfs:isDefinedBy :ap ;
-    rdfs:subClassOf foaf:Image .
-
 :Locality
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :featureName ) ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
         owl:hasValue gn:P ] ,
     [ a owl:Restriction ;
         owl:onProperty :featureName ;
-        owl:cardinality "0" ] .
+        owl:minCardinality "0" ] .
 
 :Country
     a owl:Class ;
     rdfs:isDefinedBy :ap ;
+    ex:labelProperties ( :featureName ) ;
     rdfs:subClassOf gn:Feature ,
     [ a owl:Restriction ;
         owl:onProperty gn:featureClass ;
         owl:hasValue gn:A ] ,
     [ a owl:Restriction ;
         owl:onProperty :featureName ;
-        owl:cardinality "0" ] .
+        owl:minCardinality "0" ] .
 
 :featureName
     a owl:DatatypeProperty ;
@@ -262,7 +278,8 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Logo"@en ;
     rdfs:label "Logo"@de ;
-    rdfs:range :Image .
+    ex:value ex:image ;
+    rdfs:range foaf:Image .
 
 :name
     a owl:DatatypeProperty ;
@@ -289,16 +306,17 @@
     rdfs:isDefinedBy :ap ;
     rdfs:label "Description"@en ;
     rdfs:label "Beschreibung"@de ;
-    rdfs:range rdfs:Literal .
+    rdfs:range rdf:HTML .
 
 :url
-    a owl:DatatypeProperty ;
+    a owl:ObjectProperty ;
     rdfs:comment "In the context of this application profile the property schema:url is used to link to a homepage of a person, organization, project, or service."@en ;
     rdfs:subPropertyOf schema:url ;
     rdfs:isDefinedBy :ap ;
     rdfs:label "Website"@en ;
     rdfs:label "Webseite"@de ;
-    rdfs:range xsd:anyURI .
+    ex:value ex:uri ;
+    rdfs:range schema:WebPage .
 
 :email
     a owl:DatatypeProperty ;
@@ -316,6 +334,15 @@
         ]
       )
     ] .
+
+:telephone
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:telephone is used to indicate the telephone number of an organization or a person."@en ;
+    rdfs:subPropertyOf schema:telephone ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Telephone"@en ;
+    rdfs:label "Telefon"@de ;
+    rdfs:range rdfs:Literal .
 
 :contact
     a owl:ObjectProperty ;
@@ -374,14 +401,6 @@
     rdfs:label "Ort"@de ;
     rdfs:domain :PostalAddress ;
     rdfs:range :Country .
-
-:license
-    a owl:ObjectProperty ;
-    rdfs:comment "In the context of this application profile the property dct:license is used to link a service to the license the service's contents are licensed under."@en ;
-    rdfs:subPropertyOf dct:license ;
-    rdfs:isDefinedBy :ap ;
-    rdfs:label "License"@en ;
-    rdfs:label "Lizenz"@de .
 
 :geo
     a owl:ObjectProperty ;
@@ -484,3 +503,21 @@
     rdfs:label "Funding Organization"@en ;
     rdfs:label "Gefördert von"@de ;
     rdfs:range :Organization .
+
+:startDate
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:startDate is used to indicate the start date of a project using the xsd:gYearMonth datatype."@en ;
+    rdfs:subPropertyOf schema:startDate ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Start date"@en ;
+    rdfs:label "Beginn"@de ;
+    rdfs:range xsd:gYearMonth .
+
+:endDate
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property schema:endDate is used to indicate the end date of a project using the xsd:gYearMonth datatype."@en ;
+    rdfs:subPropertyOf schema:endDate ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "End date"@en ;
+    rdfs:label "Ende"@de ;
+    rdfs:range xsd:gYearMonth .

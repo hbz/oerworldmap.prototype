@@ -116,8 +116,9 @@ class LinkedDataEntityFieldQuery extends EntityFieldQuery {
       $entity = entity_create(LDE_ENTITY_TYPE, array(
         'uri' => $uri,
       ));
-      lde_from_rdf($entity, "$result_rdf", 'rdfxml');
-      $entities[$uri] = $entity;
+      if (lde_from_rdf($entity, "$result_rdf", 'rdfxml')) {
+        $entities[$uri] = $entity;
+      }
     }
 
     return $entities;
