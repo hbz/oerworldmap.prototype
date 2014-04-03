@@ -189,7 +189,12 @@ function oerworldmap_resource_add($type) {
 }
 
 function oerworldmap_resource_view($entity) {
-  return entity_view(LDE_ENTITY_TYPE, array($entity));
+  $view = entity_view(LDE_ENTITY_TYPE, array($entity));
+  $view['source'] = array(
+    '#type' => 'item',
+    '#markup' => l('View Source', $entity->identifier()),
+  );
+  return $view;
 }
 
 function oerworldmap_resource_edit($entity) {
