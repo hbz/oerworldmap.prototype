@@ -16,11 +16,20 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
+  $items['oerworldmap/view'] = array(
+    'title' => 'OER World Map',
+    'page callback' => 'oerworldmap',
+    'access callback' => true,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+
   $items['oerworldmap/search'] = array(
     'title' => 'Search',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('oerworldmap_search'),
     'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
   );
 
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
@@ -30,6 +39,7 @@ function oerworldmap_menu() {
       'page callback' => 'oerworldmap_resource_add',
       'page arguments' => array($bundle),
       'access callback' => true,
+      'type' => MENU_LOCAL_TASK,
     );
   }
 
@@ -37,28 +47,6 @@ function oerworldmap_menu() {
     'page callback' => 'oerworldmap_resource_proxy',
     'access callback' => true,
     'type' => MENU_CALLBACK,
-  );
-
-  $items['oerworldmap/resource/%lde'] = array(
-    'title callback' => 'entity_label',
-    'title arguments' => array(LDE_ENTITY_TYPE, 2),
-    'page callback' => 'oerworldmap_resource_view',
-    'page arguments' => array(2),
-    'access callback' => true,
-  );
-
-  $items['oerworldmap/resource/%lde/view'] = array(
-    'title' => 'View',
-    'weight' => -10,
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-
-  $items['oerworldmap/resource/%lde/edit'] = array(
-    'title' => 'Edit',
-    'page callback' => 'oerworldmap_resource_edit',
-    'page arguments' => array(2),
-    'access callback' => true,
-    'type' => MENU_LOCAL_TASK,
   );
 
   return $items;
@@ -96,7 +84,7 @@ function oerworldmap() {
   );
   return array(
     '#type' => 'markup',
-    '#markup' => '<div id="oerworldmap" style="height: 400px; width: 100%; border: 1px solid black;"></div>',
+    '#markup' => '<div id="oerworldmap" style="height: 500px; width: 100%;"></div>',
   );
 }
 
@@ -185,20 +173,6 @@ function oerworldmap_resource_add($type) {
   $entity = entity_get_controller(LDE_ENTITY_TYPE)->create(
     array('type' => $type, 'uri' => 'new')
   );
-  return entity_form(LDE_ENTITY_TYPE, $entity);
-}
-
-function oerworldmap_resource_view($entity) {
-  $view = entity_view(LDE_ENTITY_TYPE, array($entity));
-  $view['source'] = array(
-    '#type' => 'item',
-    '#markup' => l('View Source', $entity->identifier()),
-  );
-  return $view;
-}
-
-function oerworldmap_resource_edit($entity) {
-  drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
   return entity_form(LDE_ENTITY_TYPE, $entity);
 }
 

@@ -1,6 +1,6 @@
 (function($) {
   $(document).ready(function() {
-    var map = L.map('oerworldmap').setView([0, 0], 1);
+    var map = L.map('oerworldmap').setView([0, 0], 2);
     var user_lang = navigator.language || navigator.userLanguage;
 
     var type_facets = {

@@ -52,7 +52,7 @@ class LinkedDataEntity extends Entity {
    */
   public function defaultUri() {
     return array(
-      'path' => 'oerworldmap/resource/' .
+      'path' => 'resource/' .
         urlencode(urlencode($this->identifier()))
     );
   }

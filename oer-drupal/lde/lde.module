@@ -37,7 +37,9 @@ function lde_entity_info() {
  *
  */
 function lde_menu() {
+
   $items = array();
+
   $items['admin/config/lde'] = array(
     'title' => 'Linked Data Entities',
     'description' => 'Settings for the Linked Data Entities module',
@@ -48,6 +50,7 @@ function lde_menu() {
     'file' => 'system.admin.inc',
     'file path' => drupal_get_path('module', 'system'),
   );
+
   $items['admin/config/lde/storage'] = array(
     'title' => 'Linked Data Storage',
     'description' => 'API Authentification',
@@ -55,7 +58,31 @@ function lde_menu() {
     'page arguments' => array('lde_configuration_form'),
     'access arguments' => array('administer site configuration'),
   );
+
+  $items['resource/%lde'] = array(
+    'title callback' => 'entity_label',
+    'title arguments' => array(LDE_ENTITY_TYPE, 1),
+    'page callback' => 'lde_resource_view',
+    'page arguments' => array(1),
+    'access callback' => true,
+  );
+
+  $items['resource/%lde/view'] = array(
+    'title' => 'View',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['resource/%lde/edit'] = array(
+    'title' => 'Edit',
+    'page callback' => 'lde_resource_edit',
+    'page arguments' => array(1),
+    'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
+
 }
 
 /**
@@ -195,6 +222,20 @@ function lde_uuid_v4() {
     mt_rand(0, 0x3fff) | 0x8000,
     mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
   );
+}
+
+function lde_resource_view($entity) {
+  $view = entity_view(LDE_ENTITY_TYPE, array($entity));
+  $view['source'] = array(
+    '#type' => 'item',
+    '#markup' => l('View Source', $entity->identifier()),
+  );
+  return $view;
+}
+
+function lde_resource_edit($entity) {
+  drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
+  return entity_form(LDE_ENTITY_TYPE, $entity);
 }
 
 function lde_resource_uri($entity = null) {
