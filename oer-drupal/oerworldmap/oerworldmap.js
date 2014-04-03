@@ -22,8 +22,8 @@
     var request_url = "http://"
       + Drupal.settings.oerworldmap.apiUrl
       + "/oer?q=*"
-      + "&location="
-      + bounding_box
+      + "&t=http://schema.org/Person,http://schema.org/Organization"
+      + "&location=" + bounding_box
       + "&size=1000"
       + "&callback=?";
 
@@ -79,10 +79,16 @@
         return control;
     }
 
-    var organizationIcon = new L.Icon({
+    var OerIcon = L.Icon.extend({
+      options: {
+          iconSize:     [36, 46],
+          iconAnchor:   [18, 46],
+      }
+    });
+    var organizationIcon = new OerIcon({
       iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-organization.png'
     });
-    var personIcon = new L.Icon({
+    var personIcon = new OerIcon({
       iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-person.png'
     });
 
@@ -114,9 +120,7 @@
             });
             marker.oer_type = resource['@type'];
           } else if (resource['addressCountry']) {
-            //FIXME: hardcoded trailing slash until proper uri is
-            //available
-            var country_uri = resource['addressCountry'][0] + '/';
+            var country_uri = resource['addressCountry'][0];
             if (!(country_uri in country_facets)) {
               var label;
               $.get(proxy_url + country_uri, function(result) {
