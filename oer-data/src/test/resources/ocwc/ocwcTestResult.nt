@@ -4,10 +4,20 @@
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/KU_logo_383406799ff2ad6da98d628c69920aec.jpg> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
-<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/providesService> <http://ocw.kaplan.edu/> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/providesService> <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/url> <http://portal.kaplan.edu/> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
+<http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> <http://purl.org/dc/elements/1.1/identifier> "33590ded-0907-45e2-bcd0-aaaee9dc2911" .
+<http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> <http://schema.org/provider> <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> .
+<http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> <http://schema.org/url> <http://opencontent.uct.ac.za/> .
+<http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> .
+<http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://purl.org/dc/elements/1.1/identifier> "3982e33f-800c-4086-acab-4e2e58c9791c" .
+<http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://schema.org/provider> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
+<http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://schema.org/url> <http://ocw.uis.edu.co> .
+<http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc445" .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/description> "    Having completed the full course of studies ( 6 years)  students are qualified as architects and get the Master’s Degree with the corresponding diploma. After 4 years students get the Bachelor’s Degree and diploma." .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/description> "Moscow Architectural Institute trains architects of wide-range specialization in Town- Planning, Architecture of Residental and Public Buildings, Architectural   Design,       Architecture of Industrial Buildings, Architecture of Agricultural Complexes, Theory and History of Architecture, Restoration of Architectural Monuments, Interior Architecture, Landscaping." .
@@ -16,7 +26,7 @@
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_02_26bac5aa7b867f6d9214ba43169a4649.jpg> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/name> "MOSCOW ARCHITECTURAL INSTITUTE" .
-<http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/providesService> <http://www.open-marhi.ru/> .
+<http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/providesService> <http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/url> <http://www.marhi.ru> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> .
@@ -25,7 +35,7 @@
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/UCT%20online%20logo%20_%20low%20res_7f3b3be1ecbd4e31763ff9ca6d9c6242.jpg> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/name> "University of Cape Town" .
-<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/providesService> <http://opencontent.uct.ac.za/> .
+<http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/providesService> <http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/url> <http://www.uct.ac.za/> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> .
@@ -35,10 +45,20 @@
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/logo_uis_72_aee2e67f89f0d93c7dd6bc77dce7dd14.jpg> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/name> "Universidad Industrial de Santander" .
-<http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/providesService> <http://ocw.uis.edu.co> .
+<http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/providesService> <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/url> <https://www.uis.edu.co> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
+<http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://purl.org/dc/elements/1.1/identifier> "ed161df2-e107-416c-9e21-e311fa012c6d" .
+<http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://schema.org/provider> <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
+<http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://schema.org/url> <http://ocw.kaplan.edu/> .
+<http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> .
+<http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> <http://purl.org/dc/elements/1.1/identifier> "f11a7e34-ba57-4a58-ad3f-5efbd26d38d7" .
+<http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> <http://schema.org/provider> <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> .
+<http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> <http://schema.org/url> <http://www.open-marhi.ru/> .
+<http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/f11a7e34-ba57-4a58-ad3f-5efbd26d38d7#!> .
 <urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://schema.org/latitude> "41.876835" .
 <urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://schema.org/longitude> "-87.641185" .
 <urn:uuid:1db28953-385b-4c72-873c-4d4a44969a1e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
