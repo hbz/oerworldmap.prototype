@@ -66,6 +66,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :providesService ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :identifier ;
         owl:minCardinality "0" ] .
 
 :Person
@@ -103,7 +106,10 @@
     [ a owl:Restriction ;
         owl:onProperty :geo ;
         owl:minCardinality "0" ;
-        owl:maxCardinality "1" ] .
+        owl:maxCardinality "1" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :identifier ;
+        owl:minCardinality "0" ] .
 
 :Service
     a owl:Class ;
@@ -134,6 +140,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :provider ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :identifier ;
         owl:minCardinality "0" ] .
 
 :Project
@@ -176,6 +185,9 @@
         owl:minCardinality "0" ] ,
     [ a owl:Restriction ;
         owl:onProperty :funder ;
+        owl:minCardinality "0" ] ,
+    [ a owl:Restriction ;
+        owl:onProperty :identifier ;
         owl:minCardinality "0" ] .
 
 :PostalAddress
@@ -521,3 +533,12 @@
     rdfs:label "End date"@en ;
     rdfs:label "Ende"@de ;
     rdfs:range xsd:gYearMonth .
+
+:identifier
+    a owl:DatatypeProperty ;
+    rdfs:comment "In the context of this application profile the property dct:identifier is used to indicate an identifier used in some context for this resource."@en ;
+    rdfs:subPropertyOf dct:identifier ;
+    rdfs:isDefinedBy :ap ;
+    rdfs:label "Identifier"@en ;
+    rdfs:range rdfs:Literal .
+
