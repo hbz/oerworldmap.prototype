@@ -10,6 +10,6 @@ done
 sort -u ocw_neu.nt.tmp > ocw_neu.nt
 rm ocw_neu.nt.tmp
 echo "old vs. new"
-#diff ../../src/test/resources/ocwc/ocwcTestResult.nt ocw_neu.nt
-diff ../../src/test/resources/ocwc/geoOsmTestResult.nt ocw_neu.nt
+diff ../../src/test/resources/ocwc/ocwcTestResult.nt ocw_neu.nt
+#diff ../../src/test/resources/ocwc/geoOsmTestResult.nt ocw_neu.nt
 echo "Copy the data to the test set: $ cp ocw_neu.nt ../../src/test/resources/ocwc/[ocwcTestResult.nt,geoOsmTestResult.nt(depending on the data produced)]; rm ocw_neu.nt"

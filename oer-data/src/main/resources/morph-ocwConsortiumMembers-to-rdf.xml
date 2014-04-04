@@ -85,9 +85,7 @@
 			<data source="@subjectUri"/>
 		</combine>
 		<combine name="$[schema:]description" value="${a}">
-			<data source="description" name="a">
-				<regexp match=".+"/>
-			</data>
+			<data source="description" name="a"/>
 			<data source="@subjectUri"/>
 		</combine>
 		<combine name="$[schema:]logo" value="${a}/${b}">
