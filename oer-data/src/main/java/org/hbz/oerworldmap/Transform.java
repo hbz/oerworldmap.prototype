@@ -25,10 +25,10 @@ import com.google.common.io.Files;
 public class Transform {
 
 	private static final String GEO_LIST = "geoList";
-	private static final String ORGANIZATION_ID = "organizationId";
+	static final String ORGANIZATION_ID = "organizationId";
 	private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
-	private static final String OCWC_PATH = "ocwc/";
-	private static final String TARGET_PATH = "tmp/";
+	static final String OCWC_PATH = "ocwc/";
+	static final String TARGET_PATH = "tmp/";
 	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
@@ -40,7 +40,7 @@ public class Transform {
 		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH + GEO_LIST);
 		dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH, OCWC_PATH
 				+ ORGANIZATION_ID);
-
+		BuildMembershipReziprocally.main();
 		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", "tmp/");
 		Files.copy(new File("doc/scripts/additionalDataOcwcItself.ntriple.template"), new File(
 				TARGET_PATH + OCWC_PATH, "ocwc.nt"));

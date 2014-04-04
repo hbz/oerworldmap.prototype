@@ -38,6 +38,7 @@ public class OerJson2RdfWriterTest {
 					OCWC_PATH + GEO_LIST);
 			Transform.dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH,
 					OCWC_PATH + ORGANIZATION_ID);
+			BuildMembershipReziprocally.main("tmp/ocwc/small/");
 			File testFile;
 			testFile = AbstractIngestTests.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
 					TARGET_PATH + OCWC_PATH + TEST_FILENAME);

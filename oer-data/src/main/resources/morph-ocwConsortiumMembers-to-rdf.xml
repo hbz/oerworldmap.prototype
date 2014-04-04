@@ -75,9 +75,12 @@
 			</data> <data source="@subjectUri"/> </combine> <combine name="http://www.w3.org/ns/org#hasMembership" 
 			value="${a}"> <data source="associate_consortium" name="a"> <regexp match=".+"/> </data> <data 
 			source="@subjectUri"/> </combine> -->
-		<!--maybe later? <combine name="$[schema:]memberOf" value="${a}"> <data source="associate_consortium" 
-			name="a"> <regexp match="(.*)" format="$[oer:]ocw${1}"/> </data> <data source="@subjectUri"/> 
-			</combine> -->
+		<combine name="$[schema:]memberOf" value="$[oer:]${a}#!">
+			<data source="associate_consortium" name="a" >
+				<lookup in="internalId2uuidMap"/>
+			</data>
+			<data source="@subjectUri"/>
+		</combine>
 		<combine name="$[schema:]url" value="${a}">
 			<data source="main_website" name="a">
 				<regexp match=".+"/>
