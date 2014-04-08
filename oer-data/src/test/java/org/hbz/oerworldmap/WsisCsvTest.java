@@ -21,8 +21,9 @@ import org.lobid.lodmill.PipeEncodeTriples;
 public final class WsisCsvTest extends AbstractIngestTests {
 
 	public WsisCsvTest() {
-		super("src/test/resources/wsis/test-input.csv", "morphWsisCsv2ld.xml",
-				"default_morph-stats.xml", new CsvReader(","));
+		super("src/test/resources/wsis/test-input.tsv",
+				"wsis/morphWsisCsv2ld.xml", "wsis/morphWsisCsv2ld.xml",
+				new CsvReader("\t"));
 	}
 
 	@Test
@@ -33,10 +34,5 @@ public final class WsisCsvTest extends AbstractIngestTests {
 	@Test
 	public void testStatistics() throws IOException { // NOPMD
 		super.stats("mapping.textile");
-	}
-
-	@Test
-	public void testDot() { // NOPMD
-		super.dot("zdb-isil-file_test.dot");
 	}
 }

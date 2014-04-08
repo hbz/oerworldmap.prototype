@@ -78,30 +78,34 @@
 				<regexp match="P" />
 			</data>
 		</combine>
-		<combine name="$[schema:]url" value="${a}">
-			<data source="5" name="a">
+		<combine name="$[schema:]url" value="${url}">
+			<data source="5" name="url">
 				<regexp match=".+" />
 			</data>
 			<data source="@subjectUri" />
 		</combine>
-		<combine name="$[schema:]description" value="${a}">
-			<data source="description" name="a" />
+		<combine name="$[schema:]description" value="${description}">
+			<data source="4" name="description" />
 			<data source="@subjectUri" />
 		</combine>
-		<combine name="$[schema:]logo" value="${a}/${b}">
+		<combine name="$[schema:]email" value="${email}">
+			<data source="6" name="email">
+			<regexp match=".+" />
+			</data>
 			<data source="@subjectUri" />
-			<data source="logo_small_url" name="a">
-				<regexp match="(.*)/" format="${1}" />
-			</data>
-			<data source="logo_small_url" name="b">
-				<regexp match="(.*)/(.*)" format="${2}" />
-				<urlencode></urlencode>
-				<!-- unfortunately at least the ocwc with id 404 has a mixed up URL encoding -->
-				<replace pattern="\+" with="%20" />
-			</data>
 		</combine>
-		<!-- services -->
-		<combine name="@serviceUrl" value="${a}" flushWith="record">
+		<combine name="@person" value="${person}">
+			<data source="12" name="person">
+<!--  			<split delimiter=","/> -->
+			</data>
+			<data source="@subjectUri" />
+		</combine>
+		<combine name="$[schema:]streetAddress" value="${a}">
+		<data source="@person" name="a">
+	    </data>
+		</combine>
+		<!-- contact -->
+		<combine name="@contactUrl" value="${a}" flushWith="record">
 			<data source="ocw_website" name="a">
 				<regexp match=".+" />
 			</data>
