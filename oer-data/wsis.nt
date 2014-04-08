@@ -1,0 +1,30 @@
+<http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2#!> <http://schema.org/name> "Free Knowledge Institute" .
+<http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673135" .
+<http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/2553a557-17d4-4696-9124-94c3225905e2#!> .
+
+<http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92#!> <http://schema.org/name> "AMAQUEN" .
+<http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673106" .
+<http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/eb3bb005-fd28-4d3d-ac00-d1c93b472b92#!> .
+
+<http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Project> .
+<http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a#!> <http://schema.org/name> "BerLin project" .
+<http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673118" .
+<http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/65f5614b-46a0-4fdc-9bec-d07bf6d4a90a#!> .
+
+<http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517#!> <http://schema.org/name> "ABED" .
+<http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673094" .
+<http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/b53d6dcb-5ac2-4b83-8e54-24b9c1bf6517#!> .
+
+<http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f#!> .
+<http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f#!> <http://schema.org/name> "Kyoto-U OpenCourseWare" .
+<http://lobid.org/oer/a4a2d0e5-9dd6-47eb-926c-091b0d77018f#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673214" .
+
