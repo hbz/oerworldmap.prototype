@@ -73,12 +73,14 @@ public class NtToEs {
 		}
 		TripleCrawler crawler = new TripleCrawler();
 		Files.walkFileTree(Paths.get(args[0]), crawler);
-		String config = CharStreams.toString(new FileReader(CONFIG));
-		System.err.println("Config:\n" + config);
-		createIndex(config);
+		createIndex(config(), INDEX);
 		if (args.length == 2)
 			initMap(args[1]);
 		process(crawler.data);
+	}
+
+	static String config() throws IOException, FileNotFoundException {
+		return CharStreams.toString(new FileReader(CONFIG));
 	}
 
 	private static final class TripleCrawler extends SimpleFileVisitor<Path> {
@@ -102,10 +104,11 @@ public class NtToEs {
 		}
 	}
 
-	private static void createIndex(String config) {
+	static void createIndex(String config, String index) {
+		System.err.println("Config:\n" + config);
 		IndicesAdminClient admin = Application.client.admin().indices();
-		if (!admin.prepareExists(INDEX).execute().actionGet().isExists())
-			admin.prepareCreate(INDEX).setSource(config).execute().actionGet();
+		if (!admin.prepareExists(index).execute().actionGet().isExists())
+			admin.prepareCreate(index).setSource(config).execute().actionGet();
 	}
 
 	private static void process(Map<String, StringBuilder> map) {
@@ -113,7 +116,7 @@ public class NtToEs {
 			try {
 				String id = e.getKey().split("\\.")[0];
 				indexData(idMap.isEmpty() || idMap.get(id)==null ? id : idMap.get(id),
-						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES));
+						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES), INDEX, TYPE);
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
 						e.getKey(), x.getMessage());
@@ -133,8 +136,8 @@ public class NtToEs {
 		}
 	}
 
-	private static void indexData(String id, String data) {
-		IndexResponse r = Application.client.prepareIndex(INDEX, TYPE, id)
+	static void indexData(String id, String data, String index, String type) {
+		IndexResponse r = Application.client.prepareIndex(index, type, id)
 				.setSource(data).execute().actionGet();
 		System.out.printf(
 				"Indexed into index %s, type %s, id %s, version %s: %s\n",
@@ -162,7 +165,7 @@ public class NtToEs {
 		return stringWriter.toString();
 	}
 
-	private static String compact(String json) {
+	static String compact(String json) {
 		try {
 			Object contextJson = JSONUtils.fromURL(context());
 			JsonLdOptions options = new JsonLdOptions();

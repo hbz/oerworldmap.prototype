@@ -26,6 +26,20 @@
           "type" : "geo_point"
         }
       }
+    },
+    "geonames-type":{
+      "date_detection":false,
+      "numeric_detection":false,
+      "properties":{
+        "@graph.@type":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "@graph.@id":{
+          "type":"string",
+          "index":"not_analyzed"
+        }
+      }
     }
   }
 }
