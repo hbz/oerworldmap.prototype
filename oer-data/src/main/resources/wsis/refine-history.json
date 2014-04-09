@@ -1,0 +1,501 @@
+[
+  {
+    "op": "core/column-split",
+    "description": "Split column Initiative Contact by separator",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "\",\"",
+    "regex": false,
+    "maxColumns": 0
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 1 using expression grel:value.replace(\"[{\\\"salutation\\\":\\\"\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 1",
+    "expression": "grel:value.replace(\"[{\\\"salutation\\\":\\\"\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column Initiative Contact 1",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 1",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Mr",
+          "Mr.",
+          "M.R."
+        ],
+        "to": "Mr."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Dr",
+          "Dr.",
+          "dr"
+        ],
+        "to": "Dr."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "",
+          "[]"
+        ],
+        "to": ""
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Ms",
+          "Ms."
+        ],
+        "to": "Ms."
+      }
+    ]
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 2 using expression grel:value.replace(\"first_name\\\":\\\"\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 2",
+    "expression": "grel:value.replace(\"first_name\\\":\\\"\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 3 using expression grel:value.replace(\"last_name\\\":\\\"\",\"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 3",
+    "expression": "grel:value.replace(\"last_name\\\":\\\"\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 4 using expression grel:value.replace(\"job_title\\\":\\\"\",\"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 4",
+    "expression": "grel:value.replace(\"job_title\\\":\\\"\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 5 using expression grel:value.replace(\"email\\\":\\\"\",\"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 5",
+    "expression": "grel:value.replace(\"email\\\":\\\"\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 6 using expression grel:value.replace(\"organization\\\":\\\"\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 6",
+    "expression": "grel:value.replace(\"organization\\\":\\\"\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 7 using expression grel:value.replace(\"website\\\":\\\"\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 7",
+    "expression": "grel:value.replace(\"website\\\":\\\"\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 7 using expression value.unescape('html')",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 7",
+    "expression": "value.unescape('html')",
+    "onError": "keep-original",
+    "repeat": true,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 8 using expression grel:value.replace(\"street_address\\\":\\\"\",\"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 8",
+    "expression": "grel:value.replace(\"street_address\\\":\\\"\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 9 using expression grel:value.replace(\"city\\\":\\\"\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 9",
+    "expression": "grel:value.replace(\"city\\\":\\\"\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Initiative Contact 10 using expression grel:value.replace(\"country\\\":\\\"\",\"\").replace(\"\\\"}]\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Initiative Contact 10",
+    "expression": "grel:value.replace(\"country\\\":\\\"\",\"\").replace(\"\\\"}]\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 2 to Given Name",
+    "oldColumnName": "Initiative Contact 2",
+    "newColumnName": "Given Name"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 3 to Familiy Name",
+    "oldColumnName": "Initiative Contact 3",
+    "newColumnName": "Familiy Name"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 4 to Role",
+    "oldColumnName": "Initiative Contact 4",
+    "newColumnName": "Role"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 5 to email",
+    "oldColumnName": "Initiative Contact 5",
+    "newColumnName": "email"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 6 to org",
+    "oldColumnName": "Initiative Contact 6",
+    "newColumnName": "org"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 7 to contact url",
+    "oldColumnName": "Initiative Contact 7",
+    "newColumnName": "contact url"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 8 to streetAddress",
+    "oldColumnName": "Initiative Contact 8",
+    "newColumnName": "streetAddress"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 9 to city",
+    "oldColumnName": "Initiative Contact 9",
+    "newColumnName": "city"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Initiative Contact 10 to country",
+    "oldColumnName": "Initiative Contact 10",
+    "newColumnName": "country"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Given Name to givenName",
+    "oldColumnName": "Given Name",
+    "newColumnName": "givenName"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Familiy Name to familiyName",
+    "oldColumnName": "Familiy Name",
+    "newColumnName": "familiyName"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column givenName using expression grel:cell.value + \" \" + cells[\"familiyName\"].value",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "isBlank(value)",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "Given Name",
+          "omitBlank": false,
+          "columnName": "Given Name",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ]
+        },
+        {
+          "invert": false,
+          "expression": "isBlank(value)",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "Familiy Name",
+          "omitBlank": false,
+          "columnName": "Familiy Name",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "givenName",
+    "expression": "grel:cell.value + \" \" + cells[\"familiyName\"].value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column givenName to name",
+    "oldColumnName": "givenName",
+    "newColumnName": "name"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column familiyName",
+    "columnName": "familiyName"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Role using expression grel:value + \", \" + cells[\"org\"].value",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "isBlank(value)",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "Given Name",
+          "omitBlank": false,
+          "columnName": "Given Name",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ]
+        },
+        {
+          "invert": false,
+          "expression": "isBlank(value)",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "Familiy Name",
+          "omitBlank": false,
+          "columnName": "Familiy Name",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Role",
+    "expression": "grel:value + \", \" + cells[\"org\"].value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Role to description",
+    "oldColumnName": "Role",
+    "newColumnName": "description"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column org",
+    "columnName": "org"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column lobid ID to sameAs",
+    "oldColumnName": "lobid ID",
+    "newColumnName": "sameAs"
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "Add",
+          "omitBlank": false,
+          "columnName": "Add",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "n",
+                "l": "n"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column Type of Initiative",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Type of Initiative",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "C"
+        ],
+        "to": "schema:Organization"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column Type of Initiative",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Type of Initiative",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "P"
+        ],
+        "to": "foaf:Project"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column Type of Initiative",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Type of Initiative",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "R"
+        ],
+        "to": "schema:Service"
+      }
+    ]
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Add",
+    "columnName": "Add"
+  }
+]
