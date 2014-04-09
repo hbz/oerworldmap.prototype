@@ -121,6 +121,7 @@ public class Application extends Controller {
 					"/oer?q=\"http\\://www.oerafrica.org\""
 					+ "&t=http://schema.org/Organization,http://schema.org/Service",
 					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
+					"/oer?q=*&location=germany",
 					"/oer?q=\"Cape+Town\"&callback=callbackFunction",
 					"/oer?q=University&from=0&size=5")));
 					// @formatter:on@
@@ -359,6 +360,14 @@ public class Application extends Controller {
 	}
 
 	private static FilterBuilder locationFilter(String location) {
+		if (location.matches(".*\\d+.*"))
+			return polygonFilter(location);
+		else
+			return FilterBuilders.hasParentFilter("geonames-type",
+					QueryBuilders.queryString(location).field("_all"));
+	}
+
+	private static FilterBuilder polygonFilter(String location) {
 		GeoPolygonFilterBuilder filter = FilterBuilders
 				.geoPolygonFilter("oer-type.location");
 		String[] points = location.split(" ");
