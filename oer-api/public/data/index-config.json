@@ -13,6 +13,9 @@
     "oer-type":{
       "date_detection":false,
       "numeric_detection":false,
+      "_parent":{
+        "type":"geonames-type"
+      },
       "properties":{
         "@graph.@type":{
           "type":"string",

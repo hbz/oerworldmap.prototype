@@ -22,6 +22,7 @@ public class Geonames {
 
 	private static final String DATA = "public/data/countriesGeonamesId.txt";
 	private static final String WS = "http://www.geonames.org/%s/about.rdf";
+	private static final String ID = "http://sws.geonames.org/%s/";
 	private static final String TYPE = "geonames-type";
 	private static final String INDEX = "geonames-201404091450";
 
@@ -31,7 +32,7 @@ public class Geonames {
 			while (scanner.hasNextLine()) {
 				String geonamesId = scanner.nextLine().trim();
 				String jsonLd = convertToJsonLd(geonamesId);
-				index(geonamesId, jsonLd);
+				index(String.format(ID, geonamesId), jsonLd);
 				Thread.sleep(1000);
 			}
 		}
@@ -52,6 +53,6 @@ public class Geonames {
 	private static void index(String geonamesId, String jsonLd)
 			throws FileNotFoundException, IOException {
 		NtToEs.createIndex(NtToEs.config(), INDEX);
-		NtToEs.indexData(geonamesId, jsonLd, INDEX, TYPE);
+		NtToEs.indexData(geonamesId, jsonLd, INDEX, TYPE, null);
 	}
 }

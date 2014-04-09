@@ -26,6 +26,7 @@ import java.util.Scanner;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.IndicesAdminClient;
 
@@ -105,24 +106,35 @@ public class NtToEs {
 	}
 
 	static void createIndex(String config, String index) {
-		System.err.println("Config:\n" + config);
 		IndicesAdminClient admin = Application.client.admin().indices();
-		if (!admin.prepareExists(index).execute().actionGet().isExists())
+		if (!admin.prepareExists(index).execute().actionGet().isExists()) {
+			System.err.println("Creating index with config:\n" + config);
 			admin.prepareCreate(index).setSource(config).execute().actionGet();
+		}
 	}
 
 	private static void process(Map<String, StringBuilder> map) {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			try {
 				String id = e.getKey().split("\\.")[0];
-				indexData(idMap.isEmpty() || idMap.get(id)==null ? id : idMap.get(id),
-						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES), INDEX, TYPE);
+				String jsonLd = rdfToJsonLd(e.getValue().toString(),
+						Lang.NTRIPLES);
+				String parent = findParent(jsonLd);
+				indexData(
+						idMap.isEmpty() || idMap.get(id) == null ? id
+								: idMap.get(id), jsonLd, INDEX, TYPE, parent);
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
 						e.getKey(), x.getMessage());
 				x.printStackTrace();
 			}
 		}
+	}
+
+	static String findParent(String jsonLd) {
+		JsonNode value = Json.parse(jsonLd).findValue("addressCountry");
+		return value != null && value.isArray() /* else in context */
+		? value.get(0).asText().trim() : "http://sws.geonames.org/";
 	}
 
 	private static void initMap(String mapFile) {
@@ -136,9 +148,13 @@ public class NtToEs {
 		}
 	}
 
-	static void indexData(String id, String data, String index, String type) {
-		IndexResponse r = Application.client.prepareIndex(index, type, id)
-				.setSource(data).execute().actionGet();
+	static void indexData(String id, String data, String index, String type,
+			String parent) {
+		IndexRequestBuilder builder = Application.client.prepareIndex(index,
+				type, id).setSource(data);
+		if (parent != null)
+			builder = builder.setParent(parent);
+		IndexResponse r = builder.execute().actionGet();
 		System.out.printf(
 				"Indexed into index %s, type %s, id %s, version %s: %s\n",
 				r.getIndex(), r.getType(), r.getId(), r.getVersion(), data);

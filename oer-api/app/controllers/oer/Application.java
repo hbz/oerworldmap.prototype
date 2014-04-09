@@ -12,7 +12,6 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.riot.Lang;
 import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -119,8 +118,8 @@ public class Application extends Controller {
 					"/oer?q=\"Cape+Town\"",
 					"/oer?q=*&t=http://schema.org/Organization",
 					"/oer?q=Africa&t=http://schema.org/Organization",
-					"/oer?q=Africa&t=http://schema.org/Organization,"
-					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
+					"/oer?q=\"http\\://www.oerafrica.org\""
+					+ "&t=http://schema.org/Organization,http://schema.org/Service",
 					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
 					"/oer?q=\"Cape+Town\"&callback=callbackFunction",
 					"/oer?q=University&from=0&size=5")));
@@ -130,10 +129,15 @@ public class Application extends Controller {
 
 	public static Result get(String id) {
 		try {
-			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
-					.execute().actionGet();
-			return !response.isExists() ? notFound() : response(Json.parse("["
-					+ withoutLocation(response.getSourceAsString()) + "]"));
+			String value = id.startsWith("http://") ? id : String.format(
+					"http://lobid.org/oer/%s#!", id);
+			MatchQueryBuilder query = QueryBuilders.matchQuery("@graph.@id",
+					value);
+			SearchResponse response = search(DATA_INDEX, query, "");
+			boolean found = response.getHits().getTotalHits() > 0;
+			return !found ? notFound() : response(Json.parse("["
+					+ withoutLocation(response.getHits().getAt(0)
+							.getSourceAsString()) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -192,11 +196,13 @@ public class Application extends Controller {
 		try {
 			String jsonLd = NtToEs.rdfToJsonLd(requestBody,
 					serialization.format);
-			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
-					userAndPass(authHeader)[0], jsonLd);
+			String parent = NtToEs.findParent(jsonLd);
+			Logger.info(
+					"Storing under ID '{}' and parent '{}' data from user '{}': {}",
+					id, parent, userAndPass(authHeader)[0], jsonLd);
 			return ok(responseInfo(client
 					.prepareIndex(DATA_INDEX, DATA_TYPE, id).setSource(jsonLd)
-					.execute().actionGet()));
+					.setParent(parent).execute().actionGet()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -281,7 +287,8 @@ public class Application extends Controller {
 			List<Map<String, Object>> maps = (List<Map<String, Object>>) JSONUtils
 					.fromString(string);
 			for (Map<String, Object> map : maps) {
-				map.put("@context", "http://api.lobid.org/oer/data/context.json");
+				map.put("@context",
+						"http://api.lobid.org/oer/data/context.json");
 			}
 			return JSONUtils.toString(maps);
 		} catch (IOException e) {

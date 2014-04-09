@@ -23,6 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 
+import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -180,24 +181,28 @@ public class ApplicationTest extends IndexTestsHarness {
 	}
 
 	@Test
-	public void delete() {
+	public void delete() throws InterruptedException {
 		FakeRequest request = fakeRequest()
 				.withHeader(AUTHORIZATION, authString("user", "pass"))
 				.withRawBody(BODY.getBytes(Charsets.UTF_8))
 				.withHeader(CONTENT_TYPE, "text/plain");
-		assertThat(status(callAction(ref.Application.put("abc123"), request)))
+		String internalId = "abc123";
+		String dataId = "http://www.w3.org/2001/sw/RDFCore/ntriples/";
+		assertThat(status(callAction(ref.Application.put(internalId), request)))
 				.isEqualTo(OK);
+		client.admin().indices().refresh(new RefreshRequest()).actionGet();
 		assertThat(
-				status(callAction(ref.Application.get("abc123"), FAKE_REQUEST)))
+				status(callAction(ref.Application.get(dataId), FAKE_REQUEST)))
 				.isEqualTo(OK);
 		assertThat(
 				status(callAction(ref.Application.delete("123abc"), request)))
 				.isEqualTo(NOT_FOUND);
 		assertThat(
-				status(callAction(ref.Application.delete("abc123"), request)))
+				status(callAction(ref.Application.delete(internalId), request)))
 				.isEqualTo(OK);
+		client.admin().indices().refresh(new RefreshRequest()).actionGet();
 		assertThat(
-				status(callAction(ref.Application.get("abc123"), FAKE_REQUEST)))
+				status(callAction(ref.Application.get(dataId), FAKE_REQUEST)))
 				.isEqualTo(NOT_FOUND);
 	}
 
@@ -283,7 +288,8 @@ public class ApplicationTest extends IndexTestsHarness {
 	}
 
 	@Test
-	public void query_ResponseContentTypeIsJson() throws JsonParseException, IOException {
+	public void query_ResponseContentTypeIsJson() throws JsonParseException,
+			IOException {
 		Result result = callAction(
 				controllers.oer.routes.ref.Application.query("*", "", ""),
 				FAKE_REQUEST);
@@ -292,9 +298,11 @@ public class ApplicationTest extends IndexTestsHarness {
 	}
 
 	@Test
-	public void get_ResponseContentTypeIsJson() throws JsonParseException, IOException {
+	public void get_ResponseContentTypeIsJson() throws JsonParseException,
+			IOException {
 		Result result = callAction(
-				controllers.oer.routes.ref.Application.get("103"),
+				controllers.oer.routes.ref.Application
+						.get("597c5e89-8488-43b8-b476-846082c86c8a"),
 				FAKE_REQUEST);
 		assertThat(status(result)).isEqualTo(OK);
 		assertThat(contentType(result)).isEqualTo("application/json");
