@@ -50,46 +50,46 @@
 		<!-- /uuid and id handling -->
 		<combine name="http://purl.org/dc/elements/1.1/identifier"
 			value="wsis${idInternal}">
-			<data source="2" name="idInternal" />
+			<data source="1" name="idInternal" />
 			<data source="@subjectUri" />
 		</combine>
 		<combine name="$[schema:]name" value="${name}">
-			<data source="3" name="name" />
+			<data source="2" name="name" />
 			<data source="@subjectUri" />
 		</combine>
 		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 			value="$[schema:]Organization">
 			<data source="@subjectUri" />
-			<data source="8">
-				<regexp match="C" />
+			<data source="7">
+				<regexp match="schema:Organization" />
 			</data>
 		</combine>
 		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 			value="$[schema:]Service">
 			<data source="@subjectUri" />
-			<data source="8">
-				<regexp match="R" />
+			<data source="7">
+				<regexp match="schema:Service" />
 			</data>
 		</combine>
 		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 			value="$[foaf:]Project">
 			<data source="@subjectUri" />
-			<data source="8">
-				<regexp match="P" />
+			<data source="7">
+				<regexp match="foaf:Project" />
 			</data>
 		</combine>
 		<combine name="$[schema:]url" value="${url}">
-			<data source="5" name="url">
+			<data source="4" name="url">
 				<regexp match=".+" />
 			</data>
 			<data source="@subjectUri" />
 		</combine>
 		<combine name="$[schema:]description" value="${description}">
-			<data source="4" name="description" />
+			<data source="3" name="description" />
 			<data source="@subjectUri" />
 		</combine>
 		<combine name="$[schema:]email" value="${email}">
-			<data source="6" name="email">
+			<data source="5" name="email">
 			<regexp match=".+" />
 			</data>
 			<data source="@subjectUri" />

@@ -21,9 +21,9 @@ import org.lobid.lodmill.PipeEncodeTriples;
 public final class WsisCsvTest extends AbstractIngestTests {
 
 	public WsisCsvTest() {
-		super("src/test/resources/wsis/test-input.tsv",
-				"wsis/morphWsisCsv2ld.xml", "wsis/morphWsisCsv2ld.xml",
-				new CsvReader("\t"));
+		super("src/main/resources/wsis/wsis-initiative-data.tsv",
+				"wsis/morph-WsisInitiativesCsv2ld.xml",
+				"wsis/morph-WsisInitiativesCsv2ld.xml", new CsvReader("\t"));
 	}
 
 	@Test
