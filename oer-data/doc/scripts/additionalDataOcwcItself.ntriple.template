@@ -1,7 +1,7 @@
 # this is a template that describes the ocwc itself
 <urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://schema.org/addressLocality> <http://sws.geonames.org/4945283/> .
 <urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://schema.org/addressCountry> <http://sws.geonames.org/6252001/> .
-<urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Address> .
+<urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/org#OrganizationalCollaboration> .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/address> <urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> .
