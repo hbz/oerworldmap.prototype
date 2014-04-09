@@ -96,13 +96,15 @@
 		</combine>
 		<combine name="@person" value="${person}">
 			<data source="12" name="person">
-<!--  			<split delimiter=","/> -->
+			<split delimiter=","/> 
 			</data>
-			<data source="@subjectUri" />
 		</combine>
-		<combine name="$[schema:]streetAddress" value="${a}">
+		<combine name="$[schema:]city" value="${a}">
 		<data source="@person" name="a">
+		<regexp match="^..city..:..(.*).." format="${1}"/> 
 	    </data>
+		<data source="@subjectUri" />
+			
 		</combine>
 		<!-- contact -->
 		<combine name="@contactUrl" value="${a}" flushWith="record">
