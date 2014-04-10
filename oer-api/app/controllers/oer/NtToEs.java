@@ -53,7 +53,7 @@ public class NtToEs {
 
 	static final String CONFIG = "public/data/index-config.json";
 	static final String CONTEXT = "public/data/context.json";
-	static final String TYPE = "oer-type";
+	static final String TYPE = Application.DATA_TYPE;
 	static final String INDEX = Application.DATA_INDEX;
 	static final Map<String, String> idMap = new HashMap<String, String>();
 

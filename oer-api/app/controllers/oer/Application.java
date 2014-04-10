@@ -49,7 +49,7 @@ import com.google.common.io.BaseEncoding;
 public class Application extends Controller {
 
 	public static final String DATA_INDEX = "oer-data";
-	private static final String DATA_TYPE = "oer-type";
+	static final String DATA_TYPE = "oer-type";
 	public static final String USER_INDEX = "oer-users";
 	private static final String USER_TYPE = "user-type";
 
@@ -134,7 +134,7 @@ public class Application extends Controller {
 					"http://lobid.org/oer/%s#!", id);
 			MatchQueryBuilder query = QueryBuilders.matchQuery("@graph.@id",
 					value);
-			SearchResponse response = search(DATA_INDEX, query, "");
+			SearchResponse response = search(DATA_INDEX, query, "", DATA_TYPE);
 			boolean found = response.getHits().getTotalHits() > 0;
 			return !found ? notFound() : response(Json.parse("["
 					+ withoutLocation(response.getHits().getAt(0)
@@ -216,7 +216,8 @@ public class Application extends Controller {
 	private static boolean authorized(String authHeader) {
 		String[] userAndPass = userAndPass(authHeader);
 		SearchResponse search = search(USER_INDEX,
-				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "");
+				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "",
+				USER_TYPE);
 		return search.getHits().getTotalHits() == 1
 				&& BCrypt.checkpw(userAndPass[1], (String) search.getHits()
 						.getAt(0).getSource().get("pass"));
@@ -238,7 +239,7 @@ public class Application extends Controller {
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
 			query = query.must(typeQuery(t));
-		SearchResponse response = search(DATA_INDEX, query, location);
+		SearchResponse response = search(DATA_INDEX, query, location, DATA_TYPE);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
 			hits.add(withoutLocation(hit.getSourceAsString()));
@@ -325,16 +326,16 @@ public class Application extends Controller {
 		final String[] types = t.split(",");
 		BoolQueryBuilder query = QueryBuilders.boolQuery();
 		for (String type : types)
-			query = query.should(QueryBuilders.matchQuery("@type", type)
+			query = query.should(QueryBuilders.matchQuery("@graph.@type", type)
 					.operator(MatchQueryBuilder.Operator.AND));
 		return query;
 	}
 
 	private static SearchResponse search(String index,
-			QueryBuilder queryBuilder, String location) {
+			QueryBuilder queryBuilder, String location, String type) {
 		SearchRequestBuilder requestBuilder = client.prepareSearch(index)
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				.setQuery(queryBuilder);
+				.setQuery(queryBuilder).setTypes(type);
 		if (!location.trim().isEmpty())
 			requestBuilder = requestBuilder.setFilter(locationFilter(location));
 		Logger.debug("Request:\n" + requestBuilder);

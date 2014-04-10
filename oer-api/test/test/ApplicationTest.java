@@ -247,11 +247,8 @@ public class ApplicationTest extends IndexTestsHarness {
 		running(TEST_SERVER, new Runnable() {
 			@Override
 			public void run() {
-				final String turtle = call(ENDPOINT, "text/turtle");
-				final String n3 = call(ENDPOINT, "text/n3"); // NOPMD
-				/* turtle is a subset of n3 for RDF */
-				assertThat(n3).isNotEmpty();
-				assertThat(n3).isNotEmpty().isEqualTo(turtle);
+				final String response = call(ENDPOINT, "text/n3"); // NOPMD
+				assertThat(response).isNotEmpty().contains("      a       ");
 			}
 		});
 	}
