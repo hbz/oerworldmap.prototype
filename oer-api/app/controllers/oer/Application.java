@@ -235,6 +235,18 @@ public class Application extends Controller {
 	}
 
 	private static Result processQuery(String q, String t, String location) {
+		List<String> hits = hits(q, t, location);
+		if (location.isEmpty())
+			hits.addAll(useQueryTermAsLocation(q, t));
+		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
+		return response(Json.parse(jsonString));
+	}
+
+	private static List<String> useQueryTermAsLocation(String q, String t) {
+		return hits("*", t, q);
+	}
+
+	private static List<String> hits(String q, String t, String location) {
 		BoolQueryBuilder query = QueryBuilders.boolQuery().must(
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
@@ -243,8 +255,7 @@ public class Application extends Controller {
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
 			hits.add(withoutLocation(hit.getSourceAsString()));
-		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
-		return response(Json.parse(jsonString));
+		return hits;
 	}
 
 	private static Status response(JsonNode json) {
