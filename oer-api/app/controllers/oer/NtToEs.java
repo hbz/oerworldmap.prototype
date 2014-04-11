@@ -25,7 +25,8 @@ import java.util.Scanner;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.IndicesAdminClient;
 
@@ -52,11 +53,11 @@ public class NtToEs {
 
 	static final String CONFIG = "public/data/index-config.json";
 	static final String CONTEXT = "public/data/context.json";
-	static final String TYPE = "oer-type";
+	static final String TYPE = Application.DATA_TYPE;
 	static final String INDEX = Application.DATA_INDEX;
 	static final Map<String, String> idMap = new HashMap<String, String>();
 
-	public static void main(String... args) throws ElasticSearchException,
+	public static void main(String... args) throws ElasticsearchException,
 			FileNotFoundException, IOException {
 		if (args.length != 1 && args.length != 2) {
 			System.out.println("Pass the root directory to crawl. "
@@ -73,12 +74,14 @@ public class NtToEs {
 		}
 		TripleCrawler crawler = new TripleCrawler();
 		Files.walkFileTree(Paths.get(args[0]), crawler);
-		String config = CharStreams.toString(new FileReader(CONFIG));
-		System.err.println("Config:\n" + config);
-		createIndex(config);
+		createIndex(config(), INDEX);
 		if (args.length == 2)
 			initMap(args[1]);
 		process(crawler.data);
+	}
+
+	static String config() throws IOException, FileNotFoundException {
+		return CharStreams.toString(new FileReader(CONFIG));
 	}
 
 	private static final class TripleCrawler extends SimpleFileVisitor<Path> {
@@ -102,24 +105,36 @@ public class NtToEs {
 		}
 	}
 
-	private static void createIndex(String config) {
+	static void createIndex(String config, String index) {
 		IndicesAdminClient admin = Application.client.admin().indices();
-		if (!admin.prepareExists(INDEX).execute().actionGet().isExists())
-			admin.prepareCreate(INDEX).setSource(config).execute().actionGet();
+		if (!admin.prepareExists(index).execute().actionGet().isExists()) {
+			System.err.println("Creating index with config:\n" + config);
+			admin.prepareCreate(index).setSource(config).execute().actionGet();
+		}
 	}
 
 	private static void process(Map<String, StringBuilder> map) {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			try {
 				String id = e.getKey().split("\\.")[0];
-				indexData(idMap.isEmpty() || idMap.get(id)==null ? id : idMap.get(id),
-						rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES));
+				String jsonLd = rdfToJsonLd(e.getValue().toString(),
+						Lang.NTRIPLES);
+				String parent = findParent(jsonLd);
+				indexData(
+						idMap.isEmpty() || idMap.get(id) == null ? id
+								: idMap.get(id), jsonLd, INDEX, TYPE, parent);
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
 						e.getKey(), x.getMessage());
 				x.printStackTrace();
 			}
 		}
+	}
+
+	static String findParent(String jsonLd) {
+		JsonNode value = Json.parse(jsonLd).findValue("addressCountry");
+		return value != null && value.isArray() /* else in context */
+		? value.get(0).asText().trim() : "http://sws.geonames.org/";
 	}
 
 	private static void initMap(String mapFile) {
@@ -133,9 +148,13 @@ public class NtToEs {
 		}
 	}
 
-	private static void indexData(String id, String data) {
-		IndexResponse r = Application.client.prepareIndex(INDEX, TYPE, id)
-				.setSource(data).execute().actionGet();
+	static void indexData(String id, String data, String index, String type,
+			String parent) {
+		IndexRequestBuilder builder = Application.client.prepareIndex(index,
+				type, id).setSource(data);
+		if (parent != null)
+			builder = builder.setParent(parent);
+		IndexResponse r = builder.execute().actionGet();
 		System.out.printf(
 				"Indexed into index %s, type %s, id %s, version %s: %s\n",
 				r.getIndex(), r.getType(), r.getId(), r.getVersion(), data);
@@ -162,7 +181,7 @@ public class NtToEs {
 		return stringWriter.toString();
 	}
 
-	private static String compact(String json) {
+	static String compact(String json) {
 		try {
 			Object contextJson = JSONUtils.fromURL(context());
 			JsonLdOptions options = new JsonLdOptions();
