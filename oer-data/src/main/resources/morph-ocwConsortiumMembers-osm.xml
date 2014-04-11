@@ -92,7 +92,7 @@
 		</combine>
 		<!-- /uuid and id handling for the adress bnode -->
 		<!-- geoData -->
-		<combine name="$[schema:]addressCountry" value="${a}/">
+		<combine name="$[schema:]addressCountry" value="${a}">
 			<data source="@geonamesId" name="a"/>
 			<data source="@addressId"/>
 		</combine>
