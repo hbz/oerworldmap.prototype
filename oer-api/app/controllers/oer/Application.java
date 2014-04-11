@@ -12,7 +12,6 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.riot.Lang;
 import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -50,15 +49,15 @@ import com.google.common.io.BaseEncoding;
 public class Application extends Controller {
 
 	public static final String DATA_INDEX = "oer-data";
-	private static final String DATA_TYPE = "oer-type";
+	static final String DATA_TYPE = "oer-type";
 	public static final String USER_INDEX = "oer-users";
 	private static final String USER_TYPE = "user-type";
 
 	final static Client productionClient = new TransportClient(
 			ImmutableSettings.settingsBuilder()
-					.put("cluster.name", "quaoar-test").build())
+					.put("cluster.name", "aither").build())
 			.addTransportAddress(new InetSocketTransportAddress(
-					"193.30.112.171", 9300));
+					"193.30.112.84", 9300));
 	static Client client = productionClient;
 
 	/**
@@ -119,9 +118,10 @@ public class Application extends Controller {
 					"/oer?q=\"Cape+Town\"",
 					"/oer?q=*&t=http://schema.org/Organization",
 					"/oer?q=Africa&t=http://schema.org/Organization",
-					"/oer?q=Africa&t=http://schema.org/Organization,"
-					+ "http://www.w3.org/ns/org#OrganizationalCollaboration",
+					"/oer?q=\"http\\://www.oerafrica.org\""
+					+ "&t=http://schema.org/Organization,http://schema.org/Service",
 					"/oer?q=*&location=40.8,-86.6+40.8,-88.6+42.8,-88.6+42.8,-86.6",
+					"/oer?q=*&location=germany",
 					"/oer?q=\"Cape+Town\"&callback=callbackFunction",
 					"/oer?q=University&from=0&size=5")));
 					// @formatter:on@
@@ -130,10 +130,15 @@ public class Application extends Controller {
 
 	public static Result get(String id) {
 		try {
-			GetResponse response = client.prepareGet(DATA_INDEX, DATA_TYPE, id)
-					.execute().actionGet();
-			return !response.isExists() ? notFound() : response(Json.parse("["
-					+ withoutLocation(response.getSourceAsString()) + "]"));
+			String value = id.startsWith("http://") ? id : String.format(
+					"http://lobid.org/oer/%s#!", id);
+			MatchQueryBuilder query = QueryBuilders.matchQuery("@graph.@id",
+					value);
+			SearchResponse response = search(DATA_INDEX, query, "", DATA_TYPE);
+			boolean found = response.getHits().getTotalHits() > 0;
+			return !found ? notFound() : response(Json.parse("["
+					+ withoutLocation(response.getHits().getAt(0)
+							.getSourceAsString()) + "]"));
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -167,7 +172,7 @@ public class Application extends Controller {
 			DeleteResponse response = client
 					.prepareDelete(DATA_INDEX, DATA_TYPE, id).execute()
 					.actionGet();
-			return response.isNotFound() ? notFound() : ok("Deleted " + id);
+			return !response.isFound() ? notFound() : ok("Deleted " + id);
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -192,11 +197,13 @@ public class Application extends Controller {
 		try {
 			String jsonLd = NtToEs.rdfToJsonLd(requestBody,
 					serialization.format);
-			Logger.info("Storing under ID '{}' data from user '{}': {}", id,
-					userAndPass(authHeader)[0], jsonLd);
+			String parent = NtToEs.findParent(jsonLd);
+			Logger.info(
+					"Storing under ID '{}' and parent '{}' data from user '{}': {}",
+					id, parent, userAndPass(authHeader)[0], jsonLd);
 			return ok(responseInfo(client
 					.prepareIndex(DATA_INDEX, DATA_TYPE, id).setSource(jsonLd)
-					.execute().actionGet()));
+					.setParent(parent).execute().actionGet()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message = String.format(
@@ -209,7 +216,8 @@ public class Application extends Controller {
 	private static boolean authorized(String authHeader) {
 		String[] userAndPass = userAndPass(authHeader);
 		SearchResponse search = search(USER_INDEX,
-				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "");
+				QueryBuilders.idsQuery(USER_TYPE).ids(userAndPass[0]), "",
+				USER_TYPE);
 		return search.getHits().getTotalHits() == 1
 				&& BCrypt.checkpw(userAndPass[1], (String) search.getHits()
 						.getAt(0).getSource().get("pass"));
@@ -227,16 +235,27 @@ public class Application extends Controller {
 	}
 
 	private static Result processQuery(String q, String t, String location) {
+		List<String> hits = hits(q, t, location);
+		if (location.isEmpty())
+			hits.addAll(useQueryTermAsLocation(q, t));
+		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
+		return response(Json.parse(jsonString));
+	}
+
+	private static List<String> useQueryTermAsLocation(String q, String t) {
+		return hits("*", t, q);
+	}
+
+	private static List<String> hits(String q, String t, String location) {
 		BoolQueryBuilder query = QueryBuilders.boolQuery().must(
 				QueryBuilders.queryString(q).field("_all"));
 		if (!t.trim().isEmpty())
 			query = query.must(typeQuery(t));
-		SearchResponse response = search(DATA_INDEX, query, location);
+		SearchResponse response = search(DATA_INDEX, query, location, DATA_TYPE);
 		List<String> hits = new ArrayList<String>();
 		for (SearchHit hit : response.getHits())
 			hits.add(withoutLocation(hit.getSourceAsString()));
-		String jsonString = "[" + Joiner.on(",").join(hits) + "]";
-		return response(Json.parse(jsonString));
+		return hits;
 	}
 
 	private static Status response(JsonNode json) {
@@ -281,7 +300,8 @@ public class Application extends Controller {
 			List<Map<String, Object>> maps = (List<Map<String, Object>>) JSONUtils
 					.fromString(string);
 			for (Map<String, Object> map : maps) {
-				map.put("@context", "http://api.lobid.org/oer/data/context.json");
+				map.put("@context",
+						"http://api.lobid.org/oer/data/context.json");
 			}
 			return JSONUtils.toString(maps);
 		} catch (IOException e) {
@@ -317,18 +337,18 @@ public class Application extends Controller {
 		final String[] types = t.split(",");
 		BoolQueryBuilder query = QueryBuilders.boolQuery();
 		for (String type : types)
-			query = query.should(QueryBuilders.matchQuery("@type", type)
+			query = query.should(QueryBuilders.matchQuery("@graph.@type", type)
 					.operator(MatchQueryBuilder.Operator.AND));
 		return query;
 	}
 
 	private static SearchResponse search(String index,
-			QueryBuilder queryBuilder, String location) {
+			QueryBuilder queryBuilder, String location, String type) {
 		SearchRequestBuilder requestBuilder = client.prepareSearch(index)
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				.setQuery(queryBuilder);
+				.setQuery(queryBuilder).setTypes(type);
 		if (!location.trim().isEmpty())
-			requestBuilder = requestBuilder.setFilter(locationFilter(location));
+			requestBuilder = requestBuilder.setPostFilter(locationFilter(location));
 		Logger.debug("Request:\n" + requestBuilder);
 		SearchResponse response = requestBuilder.setFrom(get("from", 0))
 				.setSize(get("size", 50)).setExplain(false).execute()
@@ -352,6 +372,14 @@ public class Application extends Controller {
 	}
 
 	private static FilterBuilder locationFilter(String location) {
+		if (location.matches(".*\\d+.*"))
+			return polygonFilter(location);
+		else
+			return FilterBuilders.hasParentFilter("geonames-type",
+					QueryBuilders.queryString(location).field("_all"));
+	}
+
+	private static FilterBuilder polygonFilter(String location) {
 		GeoPolygonFilterBuilder filter = FilterBuilders
 				.geoPolygonFilter("oer-type.location");
 		String[] points = location.split(" ");
