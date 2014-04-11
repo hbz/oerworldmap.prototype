@@ -1,0 +1,56 @@
+{
+  "initiatives" : [
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673093",
+      "schema:name" : "Aalto University School of Economics",
+      "schema:description" : null,
+      "schema:url" : "http://econ.aalto.fi/en/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : "Runeberginkatu 14-16",
+      "schema:locality" : "Helsinki",
+      "Schema:country" : "FI"
+    },
+    {
+      "Schema:sameAs" : "http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!",
+      "dc:identifier" : "673094",
+      "schema:name" : "ABED",
+      "schema:description" : "Association for Distance learning in Brazil",
+      "schema:url" : "http://www2.abed.org.br",
+      "schema:email" : "abed@abed.org.br",
+      "Scope of the Initiative" : "National",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "São Paulo",
+      "Schema:country" : "BR"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673095",
+      "schema:name" : "Academic Earth",
+      "schema:description" : "An attractive, easy-to-use site that for users to find, interact with, and learn from full video courses and lectures from the world’s leading scholars.",
+      "schema:url" : "http://academicearth.org/",
+      "schema:email" : "hello@academicearth.org",
+      "Scope of the Initiative" : "Global",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : "450 9th Street",
+      "schema:locality" : "San Francisco, CA",
+      "Schema:country" : "US"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673097",
+      "schema:name" : "Acharya Narendra Dev College (University of Dehli)",
+      "schema:description" : "Acharya Narendra Dev College was established in 1991 as a constituent college of University of Delhi and is fully funded by Government of NCT, Delhi",
+      "schema:url" : "http://andcollege.du.ac.in",
+      "schema:email" : "principalandc@gmail.com",
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : "Govindpuri, Kalkaji",
+      "schema:locality" : "110019 New Dehli",
+      "Schema:country" : "IN"
+    }
+  ]
+}
