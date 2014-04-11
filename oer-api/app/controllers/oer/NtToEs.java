@@ -68,15 +68,15 @@ public class NtToEs {
 					+ "as a TSV file that maps file names (w/o "
 					+ "extensions) to IDs to be used for ES. Else the "
 					+ "file names (w/o extensions) are used.");
-			args = new String[] { "../oer-data/tmp/ocwc",
+			args = new String[] { "../oer-data/tmp",
 					"../oer-data/src/main/resources/internalId2uuid.tsv" };
 			System.out.println("Using defaults: " + Arrays.asList(args));
 		}
+		if (args.length == 2)
+			initMap(args[1]);
 		TripleCrawler crawler = new TripleCrawler();
 		Files.walkFileTree(Paths.get(args[0]), crawler);
 		createIndex(config(), INDEX);
-		if (args.length == 2)
-			initMap(args[1]);
 		process(crawler.data);
 	}
 
@@ -93,7 +93,8 @@ public class NtToEs {
 			if (path.toString().endsWith(".nt")) {
 				String content = com.google.common.io.Files.toString(
 						path.toFile(), Charsets.UTF_8);
-				collectContent(path.getFileName().toString(), content);
+				String key = path.getFileName().toString();
+				collectContent(uuidForFileName(key), content);
 			}
 			return FileVisitResult.CONTINUE;
 		}
@@ -115,20 +116,24 @@ public class NtToEs {
 
 	private static void process(Map<String, StringBuilder> map) {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
+			String mapKey = e.getKey();
 			try {
-				String id = e.getKey().split("\\.")[0];
 				String jsonLd = rdfToJsonLd(e.getValue().toString(),
 						Lang.NTRIPLES);
 				String parent = findParent(jsonLd);
-				indexData(
-						idMap.isEmpty() || idMap.get(id) == null ? id
-								: idMap.get(id), jsonLd, INDEX, TYPE, parent);
+				String key = uuidForFileName(mapKey);
+				indexData(key, jsonLd, INDEX, TYPE, parent);
 			} catch (Exception x) {
 				System.err.printf("Could not process file %s due to %s\n",
-						e.getKey(), x.getMessage());
+						mapKey, x.getMessage());
 				x.printStackTrace();
 			}
 		}
+	}
+
+	private static String uuidForFileName(String fileName) {
+		String id = fileName.split("\\.")[0];
+		return idMap.isEmpty() || idMap.get(id) == null ? id : idMap.get(id);
 	}
 
 	static String findParent(String jsonLd) {
