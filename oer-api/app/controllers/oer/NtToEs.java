@@ -25,7 +25,7 @@ import java.util.Scanner;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.IndicesAdminClient;
@@ -57,7 +57,7 @@ public class NtToEs {
 	static final String INDEX = Application.DATA_INDEX;
 	static final Map<String, String> idMap = new HashMap<String, String>();
 
-	public static void main(String... args) throws ElasticSearchException,
+	public static void main(String... args) throws ElasticsearchException,
 			FileNotFoundException, IOException {
 		if (args.length != 1 && args.length != 2) {
 			System.out.println("Pass the root directory to crawl. "

@@ -55,9 +55,9 @@ public class Application extends Controller {
 
 	final static Client productionClient = new TransportClient(
 			ImmutableSettings.settingsBuilder()
-					.put("cluster.name", "quaoar-test").build())
+					.put("cluster.name", "aither").build())
 			.addTransportAddress(new InetSocketTransportAddress(
-					"193.30.112.171", 9300));
+					"193.30.112.84", 9300));
 	static Client client = productionClient;
 
 	/**
@@ -172,7 +172,7 @@ public class Application extends Controller {
 			DeleteResponse response = client
 					.prepareDelete(DATA_INDEX, DATA_TYPE, id).execute()
 					.actionGet();
-			return response.isNotFound() ? notFound() : ok("Deleted " + id);
+			return !response.isFound() ? notFound() : ok("Deleted " + id);
 		} catch (Exception x) {
 			x.printStackTrace();
 			return internalServerError(x.getMessage());
@@ -348,7 +348,7 @@ public class Application extends Controller {
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 				.setQuery(queryBuilder).setTypes(type);
 		if (!location.trim().isEmpty())
-			requestBuilder = requestBuilder.setFilter(locationFilter(location));
+			requestBuilder = requestBuilder.setPostFilter(locationFilter(location));
 		Logger.debug("Request:\n" + requestBuilder);
 		SearchResponse response = requestBuilder.setFrom(get("from", 0))
 				.setSize(get("size", 50)).setExplain(false).execute()
