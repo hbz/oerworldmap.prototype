@@ -36,7 +36,8 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 	private static final String JSON_CALLBACK = "json_callback";
 	private JsonParser jsonParser;
 	private static final Logger LOG = LoggerFactory.getLogger(JsonDecoder.class);
-	private static boolean STARTED;
+	private boolean STARTED;
+	private boolean JSONP;
 
 	private void handleValue(final JsonToken currentToken, final String key) throws IOException,
 			JsonParseException {
@@ -53,7 +54,7 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 
 	@Override
 	public void process(final Reader reader) {
-		JsonDecoder.STARTED = false;
+		STARTED = false;
 		JsonDecoder.LOG.debug("############################ New");
 		// necessary if it is JSONP
 		String text;
@@ -73,21 +74,22 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 				JsonDecoder.LOG.debug("key=" + JsonDecoder.JSON_CALLBACK + " value="
 						+ callbackString);
 				getReceiver().startRecord("");
-				JsonDecoder.STARTED = true;
+				STARTED = true;
+				JSONP = true;
 				getReceiver().literal(JsonDecoder.JSON_CALLBACK, callbackString);
 				JsonDecoder.LOG.debug("Text=" + text);
 				currentToken = this.jsonParser.nextToken();
 			}
-
 			while (JsonToken.START_OBJECT != currentToken) {
 				this.jsonParser.nextToken();
 			}
+
 			String key = null;
 			while (currentToken != null) {
 				if (JsonToken.START_OBJECT == currentToken) {
-					if (!JsonDecoder.STARTED) {
+					if (!STARTED) {
 						getReceiver().startRecord("");
-						JsonDecoder.STARTED = true;
+						STARTED = true;
 					}
 					currentToken = this.jsonParser.nextToken();
 					while (currentToken != null) {
@@ -95,21 +97,28 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 							key = this.jsonParser.getCurrentName();
 						}
 						if (JsonToken.START_ARRAY == currentToken) {
-							currentToken = this.jsonParser.nextToken();
-							// treat objects in arrays as new objects
-							if (JsonToken.START_OBJECT == currentToken) {
-								break;
-							}
-							// values of arrays are submitted with an index so
-							// you can handle
-							// semantics in the morph
-							int i = 0;
-							while (JsonToken.END_ARRAY != currentToken) {
-								final String value = this.jsonParser.getText();
-								JsonDecoder.LOG.debug("key=" + key + i + " valueArray=" + value);
-								getReceiver().literal(key + i, value);
+							if (this.JSONP) {
 								currentToken = this.jsonParser.nextToken();
-								i++;
+								currentToken = this.jsonParser.nextToken();
+							} else {
+								currentToken = this.jsonParser.nextToken();
+								// treat objects in arrays as new objects
+								if (JsonToken.START_OBJECT == currentToken) {
+									break;
+								}
+								// values of arrays are submitted with an index
+								// so
+								// you can handle
+								// semantics in the morph
+								int i = 0;
+								while (JsonToken.END_ARRAY != currentToken) {
+									final String value = this.jsonParser.getText();
+									JsonDecoder.LOG
+											.debug("key=" + key + i + " valueArray=" + value);
+									getReceiver().literal(key + i, value);
+									currentToken = this.jsonParser.nextToken();
+									i++;
+								}
 							}
 						}
 						if (JsonToken.START_OBJECT == currentToken) {
@@ -119,17 +128,27 @@ public final class JsonDecoder extends DefaultObjectPipe<Reader, StreamReceiver>
 						} else {
 							handleValue(currentToken, key);
 						}
-						currentToken = this.jsonParser.nextToken();
+						try {
+							currentToken = this.jsonParser.nextToken();
+						} catch (JsonParseException jpe) {
+							LOG.info(
+									"JsonParseException happens at the end of an non JSON object, e.g. if it is JSONP",
+									jpe.getMessage());
+							currentToken = null;
+							break;
+						}
 					}
 				}
 				JsonDecoder.LOG.debug("############################ End");
-				if (JsonDecoder.STARTED) {
+				if (STARTED) {
 					getReceiver().endRecord();
-					JsonDecoder.STARTED = false;
+					STARTED = false;
+
 				}
 			}
 		} catch (final IOException e) {
 			throw new MetafactureException(e);
+
 		}
 	}
 }

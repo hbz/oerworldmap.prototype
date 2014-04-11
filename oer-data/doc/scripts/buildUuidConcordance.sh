@@ -12,10 +12,24 @@
 CONCORDANCE_FILE_TMP="../../src/main/resources/internalId2uuid.tmp"
 CONCORDANCE_FILE="../../src/main/resources/internalId2uuid.tsv"
 
-# 1. internalId -> uuid
-grep '1.1/identifier' ocw*.nt | sed -e 's#.*oer/\(.*\)\#!> <http://purl.org/dc/elements/1.1/identifier> "\(.*\)".*#\2\t\1#'  >  $CONCORDANCE_FILE_TMP
+# 1. internalWsisAddressId -> uuid
+rm $CONCORDANCE_FILE_TMP
+for i in $(ls ../../tmp/wsis/wsis-initiative-data.json/w/*); do
+  uuid=$(grep "schema.org/address>" $i | cut -d ' ' -f3 | sed -e 's#.*:.*:\(.*\)>#\t\1#')
+  echo "$(basename $i | cut -d '.' -f 1)Address$uuid" >> $CONCORDANCE_FILE_TMP
+done
 exit
-# 2. internalIdAddress -> uuid
+sort -u $CONCORDANCE_FILE_TMP > $CONCORDANCE_FILE
+exit
+
+# 1. internalWsisId -> uuid
+grep '1.1/identifier' ../../tmp/oerWorldmapTestResult.nt | sed -e 's#.*oer/\(.*\)\#!> <http://purl.org/dc/elements/1.1/identifier> "\(.*\)".*#\2\t\1#'  >  $CONCORDANCE_FILE_TMP
+sort -u $CONCORDANCE_FILE_TMP >> $CONCORDANCE_FILE
+exit
+# 1. internalOcwcId -> uuid
+grep '1.1/identifier' ocw*.nt | sed -e 's#.*oer/\(.*\)\#!> <http://purl.org/dc/elements/1.1/identifier> "\(.*\)".*#\2\t\1#'  >>  $CONCORDANCE_FILE_TMP
+
+# 2. internalOcwcIdAddress -> uuid
 for i in $(ls ../../tmp/geo/ocwc/geoList/o/ocwc*); do
   uuid=$(grep "schema.org/address>" $i | cut -d ' ' -f3 | sed -e 's#.*:.*:\(.*\)>#\t\1#')
   echo "$(basename $i | cut -d '.' -f 1)Address$uuid" >> $CONCORDANCE_FILE_TMP

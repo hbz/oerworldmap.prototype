@@ -8,7 +8,7 @@
 	<rules>
 		<!-- uuid and id handling for the main oer -->
 		<data source="json_callback" name="@internalId">
-			<regexp match="callbackIntegerWrap(.*)" format="ocwc${1}"/>
+			<regexp match="callbackIntegerWrap(.*)" format="wsis${1}"/>
 		</data>
 		<!-- generated ID -->
 		<combine name="@id" value="${idGenerated}">
@@ -50,7 +50,7 @@
 		<data source="@internalId" name="http://purl.org/dc/elements/1.1/identifier"/>
 		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
 		<!-- /uuid and id handling for the main oer -->
-		<!-- uuid and id handling for the address node -->
+	<!-- uuid and id handling for the address node -->
 		<!-- set new URI -->
 		<data source="@id" name="@internalAdressId">
 			<regexp match="(.*)" format="${1}Address"/>  <!-- this does not make anything! -->
@@ -91,32 +91,30 @@
 			<data source="@addressId"/>
 		</combine>
 		<!-- /uuid and id handling for the adress bnode -->
-		<!-- geoData -->
-		<combine name="$[schema:]addressCountry" value="${a}/">
-			<data source="@geonamesId" name="a"/>
+		
+		<combine name="$[schema:]longitude" value="${long}">
+			
+				<data source="@subjectUri"/>
+			<data source="lng" name="long"/>
+		</combine>
+		<combine name="$[schema:]latitude" value="${lat}">
+			
+			<data source="@subjectUri"/>
+			<data source="lat" name="lat"/>
+		</combine>
+	 	<combine name="$[schema:]addressLocality" value="http://sws.geonames.org/${a}/">
 			<data source="@addressId"/>
-		</combine>
-		<combine name="$[schema:]streetAddress" value="${a}">
-			<data source="road" name="a"/>
-			<data source="@addressId"/>
-		</combine>
-		<combine name="$[schema:]postalCode" value="${a}">
-			<data source="postcode" name="a"/>
-			<data source="@addressId"/>
-		</combine>
-		<data source="country_code" name="@country2GeonamesId">
-			<case to="upper"/>
-			<lookup in="country2GeonamesIdMap"/>
-		</data>
-		<combine name="@geonamesId" value="http://sws.geonames.org/${countryId}/">
-			<data source="@country2GeonamesId" name="countryId"/>
-		</combine>
-		<!-- /geoData -->
-		<!-- unset new URI not necessary -->
+			<data source="geonameId" name="a"/>
+		</combine>  
+
+		<!-- /geoLocation -->
+		<!-- ####################### -->
+		<!-- ############### statistics -->
+		<!-- ####################### -->
+		<data source="_else"/>
 	</rules>
 	<maps>
-		<!-- tsv of iso31661a country codes to geoname ID's -->
-		<filemap name="country2GeonamesIdMap" files="countryIso31661alpha2ToGeonamesId.tsv"/>
+		<!-- tsv of concordance uuid<=>internalID -->
 		<filemap name="internalId2uuidMap" files="internalId2uuid.tsv"/>
 	</maps>
 </metamorph>

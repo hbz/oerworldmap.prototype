@@ -1,0 +1,21 @@
+<urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> <http://schema.org/streetAddress> "Calle 16" .
+<urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> <http://schema.org/postalCode> "68001" .
+<urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> <http://schema.org/addressCountry> <http://sws.geonames.org/3686110//> .
+<http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
+<http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc67" .
+<http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/address> <urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/address> <urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> .
+<urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> <http://schema.org/streetAddress> "West Van Buren Street" .
+<urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> <http://schema.org/postalCode> "60661" .
+<urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> <http://schema.org/addressCountry> <http://sws.geonames.org/6252001//> .
+<http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
+<http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> .
+<http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc445" .
+<http://lobid.org/oer/597c5e89-8488-43b8-b476-846082c86c8a#!> <http://schema.org/address> <urn:uuid:25f995cf-1580-4536-9d73-7604fabb186a> .
+<urn:uuid:25f995cf-1580-4536-9d73-7604fabb186a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:25f995cf-1580-4536-9d73-7604fabb186a> <http://schema.org/streetAddress> "улица Рождественка" .
+<urn:uuid:25f995cf-1580-4536-9d73-7604fabb186a> <http://schema.org/postalCode> "127051" .
+<urn:uuid:25f995cf-1580-4536-9d73-7604fabb186a> <http://schema.org/addressCountry> <http://sws.geonames.org/2017370//> .

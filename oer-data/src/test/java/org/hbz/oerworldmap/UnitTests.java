@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
  * @author Pascal Christoph (dr0i)
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ OerJson2RdfWriterTest.class, EnrichmentViaGeoCoordinatesHttpLookupTest.class })
+@Suite.SuiteClasses({ OerJson2RdfWriterTest.class, EnrichOcwcAndWsisViaHttpLookupTest.class })
 public final class UnitTests {
 	/* Suite class, groups tests via annotation above */
 }
