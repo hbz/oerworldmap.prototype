@@ -106,7 +106,6 @@
 			<if>
 				<none>
 					<data source="@sameAs"/>
-					
 				</none>
 			</if>
 			<data source="@addressId"/>
@@ -214,6 +213,7 @@
 			<if>
 				<none>
 					<data source="@sameAs"/>
+					<data source="@addressId"/>
 				</none>
 			</if>
 			<data source="schema:url" name="url"/>

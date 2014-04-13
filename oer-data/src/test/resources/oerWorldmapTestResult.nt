@@ -115,7 +115,6 @@
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/providesService> <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> .
 <urn:uuid:66d21000-50c4-407e-b1f6-86353e1d107f#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
 <urn:uuid:66d21000-50c4-407e-b1f6-86353e1d107f#!> <http://schema.org/streetAddress> "Runeberginkatu 14-16" .
-<urn:uuid:66d21000-50c4-407e-b1f6-86353e1d107f#!> <http://schema.org/url> <http://econ.aalto.fi/en/> .
 <http://lobid.org/oer/35b40690-2a4a-4957-97e2-dab457edb642#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/d3006cfd-f1c7-40de-b7a3-b7959c0d208b#!> .
 <http://lobid.org/oer/35b40690-2a4a-4957-97e2-dab457edb642#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673093" .
 <http://lobid.org/oer/35b40690-2a4a-4957-97e2-dab457edb642#!> <http://schema.org/name> "Aalto University School of Economics" .
@@ -129,7 +128,6 @@
 <http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/description> "Association for Distance learning in Brazil" .
 <http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/email> "abed@abed.org.br" .
 <urn:uuid:1e8d421c-7e23-4542-ae16-a69611c89296#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
-<urn:uuid:1e8d421c-7e23-4542-ae16-a69611c89296#!> <http://schema.org/url> <http://academicearth.org/> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/722e4359-2212-4201-adbf-9babd1c6b13e#!> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673095" .
@@ -147,7 +145,6 @@
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://schema.org/email> "principalandc@gmail.com" .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://schema.org/address> <urn:uuid:764929e1-d46f-4955-a9e3-0919bd53b9b4#!> .
 <urn:uuid:764929e1-d46f-4955-a9e3-0919bd53b9b4#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
-<urn:uuid:764929e1-d46f-4955-a9e3-0919bd53b9b4#!> <http://schema.org/url> <http://andcollege.du.ac.in> .
 <http://lobid.org/oer/d3006cfd-f1c7-40de-b7a3-b7959c0d208b> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/d3006cfd-f1c7-40de-b7a3-b7959c0d208b#!> .
 <http://lobid.org/oer/d3006cfd-f1c7-40de-b7a3-b7959c0d208b#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
 <http://lobid.org/oer/d3006cfd-f1c7-40de-b7a3-b7959c0d208b#!> <http://purl.org/dc/elements/1.1/identifier> "wsisPerson673093" .
