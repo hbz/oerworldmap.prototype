@@ -32,24 +32,28 @@ public class OerJson2RdfWriterTest {
 	public void testFlow() {
 		try {
 			FileUtils.deleteQuietly(new File(TARGET_PATH));
-			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
-					Transform.OCWC_PATH + CONSORTIUM_MEMBERS);
-			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
-					Transform.OCWC_PATH + ORGANIZATION_ID);
-			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH,
-					Transform.OCWC_PATH + GEO_LIST);
-			Transform.dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH,
-					Transform.OCWC_PATH + ORGANIZATION_ID);
-			Transform.dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml", TARGET_PATH,
-					Transform.WSIS_PATH + WSIS_PATH_TEST_SOURCE);
-			Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH,
-					Transform.WSIS_PATH + "small/wsis-person-data.json");
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML,
+					TARGET_PATH, Transform.OCWC_PATH + CONSORTIUM_MEMBERS);
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML,
+					TARGET_PATH, Transform.OCWC_PATH + ORGANIZATION_ID);
+			Transform.dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML,
+					TARGET_PATH, Transform.OCWC_PATH + GEO_LIST);
+			Transform.dataInDirectory(
+					"morph-ocwConsortiumMembersServices-to-rdf.xml",
+					TARGET_PATH, Transform.OCWC_PATH + ORGANIZATION_ID);
+			Transform.dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml",
+					TARGET_PATH, Transform.WSIS_PATH + WSIS_PATH_TEST_SOURCE);
+			Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml",
+					TARGET_PATH, Transform.WSIS_PATH
+							+ "small/wsis-person-data.json");
 			BuildMembershipReziprocally.main("tmp/ocwc/small/");
 			File testFile;
-			testFile = AbstractIngestTests.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
-					TARGET_PATH + TEST_FILENAME);
-			AbstractIngestTests.compareFilesDefaultingBNodes(testFile, new File(Thread
-					.currentThread().getContextClassLoader().getResource(TEST_FILENAME).toURI()));
+			testFile = AbstractIngestTests
+					.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
+							TARGET_PATH + TEST_FILENAME);
+			AbstractIngestTests.compareFilesDefaultingBNodes(testFile,
+					new File(Thread.currentThread().getContextClassLoader()
+							.getResource(TEST_FILENAME).toURI()));
 			// FileUtils.deleteDirectory(new File(TARGET_PATH));
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
