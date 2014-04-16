@@ -81,8 +81,8 @@
 
     var OerIcon = L.Icon.extend({
       options: {
-          iconSize:     [36, 46],
-          iconAnchor:   [18, 46],
+          iconSize:     [26, 33],
+          iconAnchor:   [13, 33],
       }
     });
     var organizationIcon = new OerIcon({
