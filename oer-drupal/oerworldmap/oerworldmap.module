@@ -154,10 +154,12 @@ function oerworldmap_search($form, &$form_state) {
   $prev_link = l('<<', 'oerworldmap/search', array('query' => array(
     'page' => $page - 1,
     'term' => $term,
+    'filter' => $filter,
   )));
   $next_link = l('>>', 'oerworldmap/search', array('query' => array(
     'page' => $page + 1,
     'term' => $term,
+    'filter' => $filter,
   )));
   $pager = ($page > 0) ? "$prev_link $next_link" : $next_link;
 
