@@ -32,6 +32,13 @@ function oerworldmap_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
+  $items['oerworldmap/about'] = array(
+    'title' => 'About',
+    'page callback' => 'oerworldmap_about',
+    'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
   foreach ($ap->getTopBundles() as $bundle) {
     $items["oerworldmap/add/$bundle"] = array(
@@ -169,6 +176,10 @@ function oerworldmap_search($form, &$form_state) {
   );
 
   return $form;
+}
+
+function oerworldmap_about() {
+  return array();
 }
 
 function oerworldmap_resource_add($type) {
