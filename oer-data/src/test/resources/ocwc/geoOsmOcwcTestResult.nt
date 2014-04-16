@@ -5,6 +5,13 @@
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc67" .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/address> <urn:uuid:c0b7176c-c051-46d3-9a9a-4e652ae0fe7f> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> .
+<urn:uuid:b18de30b-2914-4df8-a3d6-3b3aa4d305cc> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:b18de30b-2914-4df8-a3d6-3b3aa4d305cc> <http://schema.org/streetAddress> "Champ Drive" .
+<urn:uuid:b18de30b-2914-4df8-a3d6-3b3aa4d305cc> <http://schema.org/postalCode> "84321" .
+<urn:uuid:b18de30b-2914-4df8-a3d6-3b3aa4d305cc> <http://schema.org/addressCountry> <http://sws.geonames.org/6252001/> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc369" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/address> <urn:uuid:b18de30b-2914-4df8-a3d6-3b3aa4d305cc> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/address> <urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> .
 <urn:uuid:8f41f72f-28a3-46b5-b672-b1e2773f3b8b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .

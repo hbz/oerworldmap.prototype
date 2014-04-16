@@ -97,6 +97,15 @@
 <urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
 <urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/longitude> "-73.1242854" .
 <urn:uuid:8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://schema.org/latitude> "7.1321954" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> .
+<urn:uuid:909fcf11-6755-44c0-9ee6-324242b5fcda> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<urn:uuid:909fcf11-6755-44c0-9ee6-324242b5fcda> <http://schema.org/longitude> "-111.8157639" .
+<urn:uuid:909fcf11-6755-44c0-9ee6-324242b5fcda> <http://schema.org/latitude> "41.7408463" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/name> "Utah State University" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/geo> <urn:uuid:909fcf11-6755-44c0-9ee6-324242b5fcda> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc369" .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/name> "Kaplan University Online & Campus Learning" .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
@@ -135,6 +144,11 @@
 <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://schema.org/provider> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
 <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> <http://purl.org/dc/elements/1.1/identifier> "3982e33f-800c-4086-acab-4e2e58c9791c" .
 <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/3982e33f-800c-4086-acab-4e2e58c9791c#!> .
+<http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> .
+<http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> <http://schema.org/url> <http://labspace.open.ac.uk/UV> .
+<http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> <http://schema.org/provider> <http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> .
+<http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> <http://purl.org/dc/elements/1.1/identifier> "7288a5f3-3056-425f-af04-acf8fe23b67a" .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/8275f9a9-4ac7-4ab2-a606-d0bfbbde7401#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
@@ -154,6 +168,15 @@
 <http://lobid.org/oer/4c4abae9-80f5-46e5-8713-0986fe37e79f#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_Meital_2f090a0bcf0b4ef6642fd33be5b4b493.gif> .
 <http://lobid.org/oer/4c4abae9-80f5-46e5-8713-0986fe37e79f#!> <http://schema.org/providesService> <http://lobid.org/oer/aabb7170-405b-47e1-8ca3-9832907e331b#!> .
 <http://lobid.org/oer/4c4abae9-80f5-46e5-8713-0986fe37e79f> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/4c4abae9-80f5-46e5-8713-0986fe37e79f#!> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc369" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/name> "Universidade do Sul de Santa Catarina (UNISUL)" .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/url> <http://www.unisul.br> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/description> "UNISUL, the University of Southern Santa Catarina, is a non-profit university with multiple campuses in the state of Santa Catarina, Brazil. It is a regional, community university, juridically private and philanthropy-oriented. Unisul's Mission: To provide innovative and creative education and management in the processes of teaching, research and extension so as to fully enable citizens, through continuing education, to contribute to the creation of a humane society in permanent harmony with the advancements of science and technology." .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_Unisul_web_1333cc59c1b2ab98aca5304b9ed2491d.png> .
+<http://lobid.org/oer/909fcf11-6755-44c0-9ee6-324242b5fcda#!> <http://schema.org/providesService> <http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
 <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc103" .
@@ -181,6 +204,15 @@
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/UCT%20online%20logo%20_%20low%20res_7f3b3be1ecbd4e31763ff9ca6d9c6242.jpg> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> <http://schema.org/providesService> <http://lobid.org/oer/33590ded-0907-45e2-bcd0-aaaee9dc2911#!> .
 <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/7eee69cb-a218-4bbe-b6c3-5bb0c75cf4ad#!> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/memberOf> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://purl.org/dc/elements/1.1/identifier> "ocwc371" .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/name> "Universidade do Sul de Santa Catarina (UNISUL)" .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/url> <http://www.unisul.br> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/description> "UNISUL, the University of Southern Santa Catarina, is a non-profit university with multiple campuses in the state of Santa Catarina, Brazil. It is a regional, community university, juridically private and philanthropy-oriented. Unisul's Mission: To provide innovative and creative education and management in the processes of teaching, research and extension so as to fully enable citizens, through continuing education, to contribute to the creation of a humane society in permanent harmony with the advancements of science and technology." .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/logo> <http://www.ocwconsortium.org/media/logos/Logo_Unisul_web_1333cc59c1b2ab98aca5304b9ed2491d.png> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/providesService> <http://lobid.org/oer/7288a5f3-3056-425f-af04-acf8fe23b67a#!> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> .
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> .
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://schema.org/url> <http://ocw.kaplan.edu/> .
