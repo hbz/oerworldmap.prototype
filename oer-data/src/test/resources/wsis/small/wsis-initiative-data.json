@@ -2,6 +2,32 @@
   "initiatives" : [
     {
       "Schema:sameAs" : null,
+      "dc:identifier" : "673128",
+      "schema:name" : "Fern Universitat in Hagen",
+      "schema:description" : "Distant learning Project",
+      "schema:url" : "http://www.fernuni-hagen.de/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Hagen",
+      "Schema:country" : "DE"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673135",
+      "schema:name" : "Free Knowledge Institute",
+      "schema:description" : "The Free Knowledge Institute believes that by promoting the use of free knowledge in the fields of Technology, Education, Culture and Science  more individuals and organisations will profit from the benefits of sharing knowledge.",
+      "schema:url" : "http://freeknowledge.eu/",
+      "schema:email" : "access@freeknowledge.eu",
+      "Scope of the Initiative" : "Institutional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : "Cruquiuskade 219",
+      "schema:locality" : "Amsterdam",
+      "Schema:country" : "NL"
+    },
+    {
+      "Schema:sameAs" : null,
       "dc:identifier" : "673093",
       "schema:name" : "Aalto University School of Economics",
       "schema:description" : null,
