@@ -10,4 +10,9 @@
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/name> "Open Courseware Consortium" .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/url> <http://www.ocwconsortium.org/> .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/alternateName> "OCWC" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/geo> <urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/longitude> "-71.20922" .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/latitude> "42.33704" .
+
 
