@@ -3,7 +3,6 @@
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673275" .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/name> "Open CourseWare Consortium" .
 <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/description> "The OpenCourseWare Consortium is a collaboration of higher education institutions and associated organizations from around the world creating a broad and deep body od open educational content using a shared model.A collaboration of more than 100 higher ed" .
-<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/address> <urn:uuid:d13c18fc-7d41-44fa-9df4-fdca961f4c33#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/fa403475-3cb8-419b-84eb-f40a5e2d1ce6#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673097" .
@@ -28,7 +27,6 @@
 <http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/name> "ABED" .
 <http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/description> "Association for Distance learning in Brazil" .
 <http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/email> "abed@abed.org.br" .
-<http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://schema.org/address> <urn:uuid:97d03431-dbf6-4db8-a320-eb80010a9ca9#!> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/722e4359-2212-4201-adbf-9babd1c6b13e#!> .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673095" .
