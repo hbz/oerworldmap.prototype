@@ -162,7 +162,7 @@
 				<regexp match=".*"/>
 			</data>
 		</combine>
-		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" value="$[schema:]geoCoordinates">
+		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" value="$[schema:]GeoCoordinates">
 			<data source="@geoId"/>
 			<data source="@lat"/>
 		</combine>
