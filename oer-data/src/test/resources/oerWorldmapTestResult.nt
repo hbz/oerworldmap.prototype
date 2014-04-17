@@ -64,6 +64,12 @@
 <http://lobid.org/oer/74e58001-ec75-4437-bdad-2e849c571c92#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
 <http://lobid.org/oer/74e58001-ec75-4437-bdad-2e849c571c92#!> <http://schema.org/url> <http://www.fernuni-hagen.de/> .
 <http://lobid.org/oer/74e58001-ec75-4437-bdad-2e849c571c92> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/74e58001-ec75-4437-bdad-2e849c571c92#!> .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673202" .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> <http://schema.org/name> "INTERACTIC Project" .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Project> .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> <http://schema.org/description> "INTERACTIC is a community of 1700 teachers. INTERACTIC is organized by twenty nine interest groups where teachers share links, learning objects and reflect on practice." .
+<http://lobid.org/oer/5024577d-fa4e-41b3-a5fe-d6fa4c3f479f#!> <http://schema.org/url> <http://interactic.ning.com/> .
 <http://lobid.org/oer/9ced1992-b531-4047-a307-05643d85404d#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
 <http://lobid.org/oer/9ced1992-b531-4047-a307-05643d85404d#!> <http://purl.org/dc/elements/1.1/identifier> "wsisPerson673094" .
 <http://lobid.org/oer/9ced1992-b531-4047-a307-05643d85404d#!> <http://schema.org/name> "Frederic M. Litto" .

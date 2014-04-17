@@ -1,5 +1,18 @@
 {
 "initiatives" : [
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673202",
+      "schema:name" : "INTERACTIC Project",
+      "schema:description" : "INTERACTIC is a community of 1700 teachers. INTERACTIC is organized by twenty nine interest groups where teachers share links, learning objects and reflect on practice.",
+      "schema:url" : "http://interactic.ning.com/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "foaf:Project",
+      "schema:streetAddress" : null,
+      "schema:locality" : null,
+      "Schema:country" : "PT"
+    },
       {
       "Schema:sameAs" : "http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!",
       "dc:identifier" : "673352",

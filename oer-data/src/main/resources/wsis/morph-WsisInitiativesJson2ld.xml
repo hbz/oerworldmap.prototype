@@ -82,6 +82,7 @@
 				<none>
 					<data source="@typeService"/>
 					<data source="@sameAs"/>
+					<data source="@typeProject"/>
 				</none>
 			</if>
 			<data source="@addressId" name="addressId"/>
@@ -107,6 +108,7 @@
 				<none>
 					<data source="@typeService"/>
 					<data source="@sameAs"/>
+					<data source="@typeProject"/>
 				</none>
 			</if>
 			<data source="@addressId" name="subject">
@@ -119,6 +121,7 @@
 				<none>
 					<data source="@typeService"/>
 					<data source="@sameAs"/>
+					<data source="@typeProject"/>
 				</none>
 			</if>
 			<data source="@rdfSubjectAddress"/>
@@ -151,6 +154,7 @@
 				<none>
 					<data source="@sameAs"/>
 					<data source="@typeService"/>
+					<data source="@typeProject"/>
 				</none>
 			</if>
 			<data source="@geonamesIdTmp" name="a"/>
@@ -160,6 +164,7 @@
 				<none>
 					<data source="@typeService"/>
 					<data source="@sameAs"/>
+					<data source="@typeProject"/>
 				</none>
 			</if>
 			<data source="@addressId"/>
@@ -217,12 +222,13 @@
 			</data>
 		</combine>
 		<data source="@typeService" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
-		<combine name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" value="$[foaf:]Project">
+		<combine name="@typeProject" value="$[foaf:]Project">
 			<data source="@subjectUri"/>
 			<data source="rdf:type">
 				<regexp match="foaf:Project"/>
 			</data>
 		</combine>
+		<data source="@typeProject" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
 		<!-- /type -->
 		<combine name="@sameAs" value="${uuid}">
 			<data source="Schema:sameAs" name="uuid">
