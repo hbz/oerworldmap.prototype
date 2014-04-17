@@ -11,6 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.lobid.lodmill.AbstractIngestTests;
 
+import com.google.common.io.Files;
+
 /**
  * @author Pascal Christoph (dr0i)
  * 
@@ -45,6 +47,8 @@ public class OerJson2RdfWriterTest {
 			Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH,
 					Transform.WSIS_PATH + "small/wsis-person-data.json");
 			BuildMembershipReziprocally.main("tmp/ocwc/small/");
+			Files.copy(new File("doc/scripts/additionalDataOcwcItself.ntriple.template"), new File(
+					TARGET_PATH + Transform.OCWC_PATH, "ocwc.nt"));
 			File testFile;
 			testFile = AbstractIngestTests.concatenateGeneratedFilesIntoOneFile(TARGET_PATH,
 					TARGET_PATH + TEST_FILENAME);
