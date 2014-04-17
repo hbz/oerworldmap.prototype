@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="1">
+	<rules>	<!-- geoLocation -->
+		<!-- JSONP musn't start with a number so we use a string as prefix -->
+		<combine name="url"
+			value="http://api.geonames.org/search?name=${placename}&amp;username=dr0i&amp;maxRows=1&amp;type=json&amp;callback=callbackIntegerWrap${id}&amp;cities=cities15000"
+			>
+			<data source="schema:locality" name="placename">
+				<urlencode/>
+				</data>
+			<data source="@doGeoLookup"/>
+			<data source="dc:identifier" name="id"/>
+		</combine>
+		<!-- type -->
+		<data source="rdf:type" name="@doGeoLookup">
+			<regexp match="schema:Organization"/>
+		</data>
+		<data source="rdf:type" name="@doGeoLookup">
+			<regexp match="foaf:Project"/>
+		</data>
+		<!-- /type -->
+		<!-- /geoLocation -->
+	</rules>
+</metamorph>

@@ -30,9 +30,13 @@ public class Transform {
 	static final String OCWC_PATH = "ocwc/";
 	static final String TARGET_PATH = "tmp/";
 	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
+	static final String MORPH_OCWC_BUILD_URL = "morph-ocwConsortiumMembers-buildGeoOsmUrl.xml";
+	static final String MORPH_OCWC_LOOKUP = "morph-ocwConsortiumMembers-osm.xml";
+	final static String WSIS_PATH = "wsis/";
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		FileUtils.deleteQuietly(new File(TARGET_PATH));
+		// ocwc:
 		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
 				+ CONSORTIUM_MEMBERS);
 		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
@@ -41,7 +45,16 @@ public class Transform {
 		dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH, OCWC_PATH
 				+ ORGANIZATION_ID);
 		BuildMembershipReziprocally.main();
-		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", "tmp/");
+		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", "tmp/", MORPH_OCWC_BUILD_URL,
+				MORPH_OCWC_LOOKUP);
+		// wsis:
+		Transform.dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml", TARGET_PATH, WSIS_PATH
+				+ "wsis-initiative-data.json");
+		Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH, WSIS_PATH
+				+ "wsis-person-data.json");
+		geoWithHttpLookup(WSIS_PATH + "wsis-initiative-data.json", "wsis/geo", "tmp/", WSIS_PATH
+				+ "morph-WsisInitiativesJson2GeonamesUrl.xml", WSIS_PATH
+				+ "morph-wsis-geonames-lookup.xml");
 		Files.copy(new File("doc/scripts/additionalDataOcwcItself.ntriple.template"), new File(
 				TARGET_PATH + OCWC_PATH, "ocwc.nt"));
 	}
@@ -83,16 +96,16 @@ public class Transform {
 		return writer;
 	}
 
-	static void geoWithHttpLookup(String ocwcGeoSource, String ocwcGeoTarget, String targetPath)
-			throws URISyntaxException {
+	static void geoWithHttpLookup(String ocwcGeoSource, String ocwcGeoTarget, String targetPath,
+			String morphBuildUrl, String morphLookupResult) throws URISyntaxException {
 		final DirReader dirReader = new DirReader();
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
 		final JsonDecoder jsonDecoder1 = new JsonDecoder();
 		final Metamorph morphGeo = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource("morph-ocwConsortiumMembers-buildGeoOsmUrl.xml").getFile());
+				.getResource(morphBuildUrl).getFile());
 		final Metamorph morphOSM = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource("morph-ocwConsortiumMembers-osm.xml").getFile());
+				.getResource(morphLookupResult).getFile());
 		final PipeEncodeTriples geoEncoder = new PipeEncodeTriples();
 		geoEncoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2modelGeo = new Triples2RdfModel();

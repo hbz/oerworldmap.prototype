@@ -1,0 +1,26 @@
+{
+  "persons" : [
+    {
+      "contactFor" : "673093",
+      "schema:name" : "Alona Chmilewsky",
+      "schema:description" : "Director, Aalto University, School of Economics",
+      "schema:email" : "alona.chmilewsky@gmail.com",
+      "schema:country" : "FI"
+    },
+    {
+      "contactFor" : "673094",
+      "schema:name" : "Frederic M. Litto",
+      "schema:description" : "President, Association of Distance learning",
+      "schema:email" : "frmlitto@terra.com.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673095",
+      "schema:name" : "Richard Ludlow",
+      "schema:description" : "CEO, Association",
+      "schema:email" : "media@academicearth.org",
+      "schema:country" : "US"
+    }
+  ]
+}
+

@@ -1,0 +1,1782 @@
+{
+  "persons" : [
+    {
+      "contactFor" : "673093",
+      "schema:name" : "Alona Chmilewsky",
+      "schema:description" : "Director, Aalto University, School of Economics",
+      "schema:email" : "alona.chmilewsky@gmail.com",
+      "schema:country" : "FI"
+    },
+    {
+      "contactFor" : "673094",
+      "schema:name" : "Frederic M. Litto",
+      "schema:description" : "President, Association of Distance learning",
+      "schema:email" : "frmlitto@terra.com.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673095",
+      "schema:name" : "Richard Ludlow",
+      "schema:description" : "CEO, Association",
+      "schema:email" : "media@academicearth.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673097",
+      "schema:name" : "Savithri Singh",
+      "schema:description" : "Principal, Indian University",
+      "schema:email" : "principalandc@gmail.com",
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673098",
+      "schema:name" : "Hans Voss",
+      "schema:description" : "Policy Associate, Achieve",
+      "schema:email" : "hvoss@achieve.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673099",
+      "schema:name" : "Stephan Thieringe",
+      "schema:description" : "CEO, Private Initiative",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673100",
+      "schema:name" : "Stuart Laing",
+      "schema:description" : "Director ADM, Brighton University, with Cumbria University and the UK University of Creative Arts - UK",
+      "schema:email" : "s.i.laing@brighton.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673101",
+      "schema:name" : "Philip Greenspun",
+      "schema:description" : "Director, ArsDigita Foundation",
+      "schema:email" : "philg@mit.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673102",
+      "schema:name" : "Bakary Diallo",
+      "schema:description" : "Director, African Initiative",
+      "schema:email" : "bdiallo@avu.org",
+      "schema:country" : "KE"
+    },
+    {
+      "contactFor" : "673103",
+      "schema:name" : "Vassilis Protonotarios",
+      "schema:description" : "Project Manager, Greece",
+      "schema:email" : "vprot@aua.gr",
+      "schema:country" : "GR"
+    },
+    {
+      "contactFor" : "673105",
+      "schema:name" : "John Casey",
+      "schema:description" : "ALTO Project Manager, University of Arts, London",
+      "schema:email" : "j.casey@arts.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673106",
+      "schema:name" : "Abdennasser Naji",
+      "schema:description" : "President, Morocco",
+      "schema:email" : "amaquen@amaquen.org",
+      "schema:country" : "MA"
+    },
+    {
+      "contactFor" : "673108",
+      "schema:name" : "Erik Duval",
+      "schema:description" : "Manager, Ariadne Foundation",
+      "schema:email" : "erik.duval@cs.kuleuven.be",
+      "schema:country" : "BE"
+    },
+    {
+      "contactFor" : "673109",
+      "schema:name" : "Field Rickards",
+      "schema:description" : "Chair, University of Melbourne",
+      "schema:email" : "f.rickards@unimelb.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673110",
+      "schema:name" : "Jorge Fernandez",
+      "schema:description" : "President, Venezuelan Initiative",
+      "schema:email" : null,
+      "schema:country" : "VE"
+    },
+    {
+      "contactFor" : "673111",
+      "schema:name" : "Olugbemiro Jegede",
+      "schema:description" : "Secretary General, Association of African Universities",
+      "schema:email" : "jegedeo@gmail.com",
+      "schema:country" : "GH"
+    },
+    {
+      "contactFor" : "673112",
+      "schema:name" : "Kyriakos Kouveliotis",
+      "schema:description" : "President, A University of Athens Initiative",
+      "schema:email" : "info@cie.gr",
+      "schema:country" : "GR"
+    },
+    {
+      "contactFor" : "673113",
+      "schema:name" : "Leena Vainio",
+      "schema:description" : "CEO, HAMK University of Applied Sciences",
+      "schema:email" : "leena.vainio@hamk.fi",
+      "schema:country" : "FI"
+    },
+    {
+      "contactFor" : "673114",
+      "schema:name" : "Abel Maharramov",
+      "schema:description" : ", Azerbaijan University",
+      "schema:email" : "info@aztu.edu.az",
+      "schema:country" : "AZ"
+    },
+    {
+      "contactFor" : "673115",
+      "schema:name" : "Bazlur Rahman",
+      "schema:description" : "Chief Executive Officer, Government regulated NGO",
+      "schema:email" : "ceo@bnnrc.net",
+      "schema:country" : "BD"
+    },
+    {
+      "contactFor" : "673117",
+      "schema:name" : "Paul Stacey",
+      "schema:description" : "Director of Communications, Academic and Stakeholder Relations, Canada",
+      "schema:email" : "pstacey@bccampus.ca",
+      "schema:country" : "CA"
+    },
+    {
+      "contactFor" : "673118",
+      "schema:name" : "Andy Beggan",
+      "schema:description" : "Associate Manager, Nottingham University - UK",
+      "schema:email" : "andy.beggan@nottingham.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673119",
+      "schema:name" : "Katherine Clarke",
+      "schema:description" : "Academic Advisor to the Center, Leeds University and 11 other HE partners including - UK",
+      "schema:email" : "k.a.clark@leeds.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673121",
+      "schema:name" : "Carine Bossu",
+      "schema:description" : "Project Manager, Australian Initiative",
+      "schema:email" : "cbossu3@une.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673122",
+      "schema:name" : "Karel Lubyen",
+      "schema:description" : "Rector, Regional University",
+      "schema:email" : "info@tudelft.nl",
+      "schema:country" : "NL"
+    },
+    {
+      "contactFor" : "673124",
+      "schema:name" : "Kaye Howe",
+      "schema:description" : "Director NSDL, American Universities: Villanova and Virginia Tech, Penn State and New Jersey College",
+      "schema:email" : "info@edu-sharing.net",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673125",
+      "schema:name" : "Laura Quilter",
+      "schema:description" : "Professor, NYU School of Law",
+      "schema:email" : "lquilter@lquilter.net",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673126",
+      "schema:name" : "Lucifer Chu",
+      "schema:description" : "Founder, Fantasy Foundation of Culture &amp; Arts",
+      "schema:email" : "lucifer.chu@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673127",
+      "schema:name" : "Biran O'Hagan",
+      "schema:description" : "Digital Media Specialist, Columbia University",
+      "schema:email" : "bohagan@columbia.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673128",
+      "schema:name" : "Helmut Hoyer",
+      "schema:description" : "Rector, Fern Universit\\u00e4t in Hagen",
+      "schema:email" : "rektorbuero@fernuni-hagen.de",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673129",
+      "schema:name" : "Leslie Fletcher",
+      "schema:description" : "Project Manager for FETLAR, Liverpool John Moores University and 11 other partners including Anglia Ruskin University, Coventry, Kingston, Leeds, Newcatle and Nottingham Trent Universities - UK",
+      "schema:email" : "L.R.Fletcher@ljmu.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673130",
+      "schema:name" : "Alexssandra Manaia",
+      "schema:description" : "Project Manager, Brazilian School of FE",
+      "schema:email" : "alexssandra.manaia@fgv.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673131",
+      "schema:name" : "Mark Horner",
+      "schema:description" : "Founder, South African Initiative",
+      "schema:email" : "mark.horner@shuttleworthfoundation.org",
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673132",
+      "schema:name" : "Jutta Treviranus",
+      "schema:description" : "Director, Ontario College of Art &amp; Design",
+      "schema:email" : "jtreviranus@faculty.ocad.ca",
+      "schema:country" : "CA"
+    },
+    {
+      "contactFor" : "673134",
+      "schema:name" : "Steve FOERSTER",
+      "schema:description" : "President, New World University",
+      "schema:email" : "steve.foerster@newworld.ac",
+      "schema:country" : "DM"
+    },
+    {
+      "contactFor" : "673135",
+      "schema:name" : "Wouter Tebbens",
+      "schema:description" : "CEO, Consortium of Thinkers",
+      "schema:email" : "wouter@freeknowledge.eu",
+      "schema:country" : "NL"
+    },
+    {
+      "contactFor" : "673136",
+      "schema:name" : "David Heiserman",
+      "schema:description" : "Designated agent, Us Initiative",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673137",
+      "schema:name" : "Jennifer Mccomas",
+      "schema:description" : "Educator from the University of Minnesota, US Initiative",
+      "schema:email" : "jmccomas@umn.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673138",
+      "schema:name" : "Hoang Ngoc Lan",
+      "schema:description" : "Academic Affairs Manager, University of Economics, Ho Chi Minh City and the Harvard Kennedy School",
+      "schema:email" : "lanhn@fetp.vnn.vn",
+      "schema:country" : "VN"
+    },
+    {
+      "contactFor" : "673142",
+      "schema:name" : "Cutler Cleveland",
+      "schema:description" : "Founder, US National Science Foundation",
+      "schema:email" : "cutler@bu.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673143",
+      "schema:name" : "Stephen Downes",
+      "schema:description" : "Director, Stephen Downes",
+      "schema:email" : "stephen@downes.ca",
+      "schema:country" : "CA"
+    },
+    {
+      "contactFor" : "673144",
+      "schema:name" : "Stuart Weibel",
+      "schema:description" : "Director",
+      "schema:email" : null,
+      "schema:country" : "SG"
+    },
+    {
+      "contactFor" : "673147",
+      "schema:name" : "Bernd Simon",
+      "schema:description" : "Leading Contributor, Vienna University",
+      "schema:email" : "bernd.simon@wu.ac.at",
+      "schema:country" : "AT"
+    },
+    {
+      "contactFor" : "673148",
+      "schema:name" : "Ian Goulter",
+      "schema:description" : "Vice Chancellor and President of Charles Sturt University, Chairman of ESA, Established in 2010 through the merger of Curriculum Corporation and Education.au, Education Services Australia is a national, not-for-profit company owned by all Australian education ministers.",
+      "schema:email" : "igoulter@csu.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673149",
+      "schema:name" : "Diana Olinger",
+      "schema:description" : "President and CEO, American Initiative",
+      "schema:email" : "doblinger@educause.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673151",
+      "schema:name" : "Tim Rees",
+      "schema:description" : "International Manager of the Open Polytechnic, Open Polytechnic of New Zealand",
+      "schema:email" : "tim.rees@openpolytechnic.ac.nz",
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "673153",
+      "schema:name" : "Andy Carvin",
+      "schema:description" : "Creator, The Benton Foundation",
+      "schema:email" : "andycarvin@yahoo.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673154",
+      "schema:name" : "Roddy Macleod",
+      "schema:description" : "Senior Subject Librarian, -",
+      "schema:email" : "R.A.MacLeod@hw.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673155",
+      "schema:name" : "Rachel Kamga",
+      "schema:description" : "Research Fellow, -",
+      "schema:email" : "rachel.kamga@efrardwiki.org",
+      "schema:country" : "FR"
+    },
+    {
+      "contactFor" : "673156",
+      "schema:name" : "Karen Chappell",
+      "schema:description" : "Project Administrator, University of Iowa",
+      "schema:email" : "karen@widernet.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673158",
+      "schema:name" : "Olimpius Istrate",
+      "schema:description" : "Director, TEHNE- Centre for Innovation in Education",
+      "schema:email" : "olimpius.istrate@elearning.ro",
+      "schema:country" : "RO"
+    },
+    {
+      "contactFor" : "673159",
+      "schema:name" : "Damien Grenier",
+      "schema:description" : "Director, UCL - Universit\\u00e9 Catholique de Louvain",
+      "schema:email" : "damien.grenier@bretagne.ens-cachan.fr",
+      "schema:country" : "BE"
+    },
+    {
+      "contactFor" : "673161",
+      "schema:name" : "Marie Studer",
+      "schema:description" : "Learning and Education Director, Encyclopedia of Life, Encyclopedia of Life",
+      "schema:email" : "mstuder@eol.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673162",
+      "schema:name" : "Joe Tront",
+      "schema:description" : "ABET and Premier Award, University of Berkeley Initiative",
+      "schema:email" : "jgtront@vt.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673164",
+      "schema:name" : "Jorge Antonio Alfaro Rivera",
+      "schema:description" : "Director, University in Mexico",
+      "schema:email" : "jalfa21@gmail.com",
+      "schema:country" : "MX"
+    },
+    {
+      "contactFor" : "673165",
+      "schema:name" : "Linnar Viik",
+      "schema:description" : "Founder, Estonia",
+      "schema:email" : "linnar@www.ee",
+      "schema:country" : "EE"
+    },
+    {
+      "contactFor" : "673166",
+      "schema:name" : "Kim Kyong",
+      "schema:description" : null,
+      "schema:email" : "kimkyong@fhda.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673167",
+      "schema:name" : "Elena Shulman",
+      "schema:description" : "Digital Content Expert, European Schoolnet (EUN)",
+      "schema:email" : "elena.shulman@eun.org",
+      "schema:country" : "BE"
+    },
+    {
+      "contactFor" : "673168",
+      "schema:name" : "Bob Seleznik",
+      "schema:description" : "Director of the grahics center, Brown University Computer Graphics Research Group",
+      "schema:email" : "bcz@cs.brown.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673169",
+      "schema:name" : " Sunta",
+      "schema:description" : "Manager, -",
+      "schema:email" : "gdco-sunta@gedaref.com",
+      "schema:country" : "SD"
+    },
+    {
+      "contactFor" : "673171",
+      "schema:name" : "Tammy Salmon-Stephens",
+      "schema:description" : "GEODE Manager, Wisconsin UNIVERSITY",
+      "schema:email" : "salmont@uwplatt.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673172",
+      "schema:name" : "Philip Stebbing",
+      "schema:description" : "Director, -",
+      "schema:email" : "library@globalfocus.org.nz",
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "673173",
+      "schema:name" : "Marissa Drexel",
+      "schema:description" : "Associate Editor, University of Georgia",
+      "schema:email" : "drexel@uga.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673174",
+      "schema:name" : "Harbans Singh",
+      "schema:description" : "Founder, Global research foundation",
+      "schema:email" : "chairman@gvrfindia.com",
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673175",
+      "schema:name" : "Frans Van Assche",
+      "schema:description" : "Participator to GLOBE, A Global Consortium",
+      "schema:email" : "frans.van.assche@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673177",
+      "schema:name" : "Benjamin George",
+      "schema:description" : "Teacher, Indian Regional School",
+      "schema:email" : "benjamin@greenpointacademy.org",
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673179",
+      "schema:name" : "Sharon Dennis",
+      "schema:description" : "Manager, University of Utah, UCLA and the Unversity of Oklahoma",
+      "schema:email" : "sdennis@lib.med.utah.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673180",
+      "schema:name" : "Roy Zimmermann",
+      "schema:description" : "Manager, HED",
+      "schema:email" : "rzimmermann@hedprogram.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673181",
+      "schema:name" : "Ahrash Bissell",
+      "schema:description" : "Project Manager, Monterey Institute for Technology and Education",
+      "schema:email" : "ahrash.bissell@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673182",
+      "schema:name" : "Jim Vanides",
+      "schema:description" : "Manager, HP Office of Global Social Innovation",
+      "schema:email" : "jim.vanides@hp.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673183",
+      "schema:name" : "Kate Borthwick",
+      "schema:description" : "Academic Coordinator, Southampton, Warwick and Royal Holloway Universities with 12 other HE partners - UK",
+      "schema:email" : "llas@soton.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673188",
+      "schema:name" : "Karen Fraser",
+      "schema:description" : "Manager, Ulster University",
+      "schema:email" : "karenfraser112@gmail.com",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673189",
+      "schema:name" : "Jeff Horney",
+      "schema:description" : "Manager, University of Wisconsin",
+      "schema:email" : "horney@conted.uwex.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673191",
+      "schema:name" : "Don Holmes",
+      "schema:description" : "Chair, -",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673192",
+      "schema:name" : "Fun-Den WANG",
+      "schema:description" : "President of CORE, IET Foundation",
+      "schema:email" : "mqhuang@center.njtu.edu.cn",
+      "schema:country" : "CN"
+    },
+    {
+      "contactFor" : "673194",
+      "schema:name" : "David Ernst",
+      "schema:description" : "President, US Initiative",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673195",
+      "schema:name" : "Mangala Sunder Krishnan",
+      "schema:description" : "Professor, Indian Initiative based on an MIT model",
+      "schema:email" : "mangal@iitm.ac.in",
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673196",
+      "schema:name" : "B Kouninef",
+      "schema:description" : "Manager, Algerian Ministry Project",
+      "schema:email" : "bkouninef@ito.dz",
+      "schema:country" : "DZ"
+    },
+    {
+      "contactFor" : "673197",
+      "schema:name" : "Olimpius Istrate",
+      "schema:description" : "Director, Roumanian Initiative",
+      "schema:email" : "olimpius.istrate@tehne.ro",
+      "schema:country" : "RO"
+    },
+    {
+      "contactFor" : "673198",
+      "schema:name" : "Amee Godwin",
+      "schema:description" : "Director Strategic Initiatives, ISKME - US Teaching Association Initiative",
+      "schema:email" : "amee@iskme.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673199",
+      "schema:name" : "Raidar Jensen",
+      "schema:description" : "Director, State Operated E-Learning Center",
+      "schema:email" : "rjensen@uv.mx",
+      "schema:country" : "MX"
+    },
+    {
+      "contactFor" : "673200",
+      "schema:name" : "Priscila Gonsales",
+      "schema:description" : "Director, OER Brazil",
+      "schema:email" : "prigon@educadigital.org.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673201",
+      "schema:name" : "Mar\\u00eda Soledad Ram\\u00edrez Montoya",
+      "schema:description" : "Director, ITESM",
+      "schema:email" : "solramirez@itesm.mx",
+      "schema:country" : "MX"
+    },
+    {
+      "contactFor" : "673203",
+      "schema:name" : "Elena Getmanova",
+      "schema:description" : "Director, Individual initiative",
+      "schema:email" : "elge@mail.ru",
+      "schema:country" : "RU"
+    },
+    {
+      "contactFor" : "673205",
+      "schema:name" : "Gia Gaspard Taylor",
+      "schema:description" : "President, Trinidad and Tobago",
+      "schema:email" : "marabe@tstt.net.tt",
+      "schema:country" : "TT"
+    },
+    {
+      "contactFor" : "673206",
+      "schema:name" : "Rob Englebright",
+      "schema:description" : "Programme Manager, JISC",
+      "schema:email" : "r.englebright@jisc.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673207",
+      "schema:name" : "Ira Gooding",
+      "schema:description" : "Technology Center Manager with Sukon Kanchanaraksa, Johns Hopkins Bloomberg School of Public Health",
+      "schema:email" : "igooding@jhsph.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673208",
+      "schema:name" : "Barbara Braun",
+      "schema:description" : "Resource Manager, Universities of Mannheim and Heidelberg",
+      "schema:email" : "barbara.braun@medma.uni-heidelberg.de",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673212",
+      "schema:name" : "Alexandra Okada",
+      "schema:description" : "Technology Expert, Open University",
+      "schema:email" : "alexandra.okada@gmail.com",
+      "schema:country" : null
+    },
+    {
+      "contactFor" : "673214",
+      "schema:name" : "Hiroshi MATSUMOTO",
+      "schema:description" : "President, Kyoto University",
+      "schema:email" : "matsumot@kurasc.kyoto-u.ac.jp",
+      "schema:country" : "JP"
+    },
+    {
+      "contactFor" : "673217",
+      "schema:name" : "Eric Klopfer",
+      "schema:description" : "President, Learning Games Network",
+      "schema:email" : "klopfer@mit.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673218",
+      "schema:name" : "Elena Shulman",
+      "schema:description" : "Content Quality and Semantic Interoperability Expert, European Schoolnet\\/LRE",
+      "schema:email" : "elena.shulman@eun.org",
+      "schema:country" : "BE"
+    },
+    {
+      "contactFor" : "673219",
+      "schema:name" : "Ben Crowell",
+      "schema:description" : "Creator, Fullerton College",
+      "schema:email" : "crowell11@lightandmatter.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673221",
+      "schema:name" : "John Ottenhoff",
+      "schema:description" : "Director, Academic Commons",
+      "schema:email" : "jottenhoff@acm.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673222",
+      "schema:name" : "Michael Rappa",
+      "schema:description" : "Director, North Carolina State University",
+      "schema:email" : "michael_rappa@ncsu.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673224",
+      "schema:name" : "Hassan Ravari",
+      "schema:description" : "Director, Iranian University",
+      "schema:email" : "ravarih@mums.ac.ir",
+      "schema:country" : "IR"
+    },
+    {
+      "contactFor" : "673225",
+      "schema:name" : "Maria Droujkova",
+      "schema:description" : "Director, Natural Math",
+      "schema:email" : "droujkova@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673226",
+      "schema:name" : "Rhoshun Dhurbarrylall",
+      "schema:description" : "Associate Professor, -",
+      "schema:email" : "openuniversity@open.ac.mu",
+      "schema:country" : "MU"
+    },
+    {
+      "contactFor" : "673228",
+      "schema:name" : "Gerry Hanley",
+      "schema:description" : "Professor, California State University System",
+      "schema:email" : "ghanley@calstate.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673229",
+      "schema:name" : "Engin Kursun",
+      "schema:description" : "Research Assisstant, METU",
+      "schema:email" : "ekursun@metu.edu.tr",
+      "schema:country" : "TR"
+    },
+    {
+      "contactFor" : "673231",
+      "schema:name" : "Andy Blunden",
+      "schema:description" : "Editor, International Project",
+      "schema:email" : "andyb@marxists.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673232",
+      "schema:name" : "Elizabeth Murray",
+      "schema:description" : "Manager, MIT BLOSSOMS",
+      "schema:email" : "emurray@mit.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673233",
+      "schema:name" : "Yvonne Ng",
+      "schema:description" : "OCW External Outreach Manager, USA",
+      "schema:email" : "yng@mit.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673234",
+      "schema:name" : "Gary Lopez",
+      "schema:description" : "Manager, Monterrey TEC initiative",
+      "schema:email" : "glopez@montereyinstitute.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673235",
+      "schema:name" : "Charles Xie",
+      "schema:description" : "Creator, A Corcod Consortium Initiative",
+      "schema:email" : "charxie@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673236",
+      "schema:name" : "Ahrash Bissell",
+      "schema:description" : "Leader, -",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673237",
+      "schema:name" : "Helen Foster",
+      "schema:description" : "Moodle Community Manager, MOODLE",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673238",
+      "schema:name" : "Bas ten Holter",
+      "schema:description" : "Executive Director, MOODLE",
+      "schema:email" : "btenholter@moodlerooms.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673239",
+      "schema:name" : "Oleg Zabelin",
+      "schema:description" : "Prorector, Ministry of Education and Science of the Russian federation",
+      "schema:email" : "Zabelin.O@mfua.ru",
+      "schema:country" : "RU"
+    },
+    {
+      "contactFor" : "673240",
+      "schema:name" : "E.A. Draffan",
+      "schema:description" : "Project Manager, Learning Societies Lab",
+      "schema:email" : "ead@ecs.soton.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673241",
+      "schema:name" : "Arjan Hogenaar",
+      "schema:description" : "Community Manager, Dutch Scientific Ministery",
+      "schema:email" : "narcis@dans.knaw.nl",
+      "schema:country" : "NL"
+    },
+    {
+      "contactFor" : "673243",
+      "schema:name" : "M.S. Ananth",
+      "schema:description" : "Director, National Mission on Education through Information and Communication Technology (NMEICT)",
+      "schema:email" : "director@iitm.ac.in",
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673247",
+      "schema:name" : "Vikram Savkar",
+      "schema:description" : "Manager, Nature and Science Foundation",
+      "schema:email" : "v.savkar@us.nature.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673248",
+      "schema:name" : "Ann Marcus-Quinn",
+      "schema:description" : "Manager, EIRE the seven universities of Ireland working with all the institute for technologies in the country",
+      "schema:email" : "Ann.Marcus.Quinn@ul.ie",
+      "schema:country" : "IE"
+    },
+    {
+      "contactFor" : "673249",
+      "schema:name" : "Alice Agogino",
+      "schema:description" : "Manager, Berkeley University",
+      "schema:email" : "agogino@berkeley.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673251",
+      "schema:name" : "Rushton Hurley",
+      "schema:description" : "Trained Teacher, USA",
+      "schema:email" : "rushton@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673252",
+      "schema:name" : "Alastair Clark",
+      "schema:description" : "Director, UK",
+      "schema:email" : "alastair.clark@niace.org.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673253",
+      "schema:name" : "glen Moriarty",
+      "schema:description" : "CEO, Self- sustaining Learning Platform inspired by Carnegie Mellon",
+      "schema:email" : "glen@nixty.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673255",
+      "schema:name" : "Kaye howe",
+      "schema:description" : "Director, US National Science Foundation",
+      "schema:email" : "info@edu-sharing.net",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673257",
+      "schema:name" : "Edward Barry",
+      "schema:description" : "Vice-Chair, OCLC",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673258",
+      "schema:name" : "Meredith Nudo",
+      "schema:description" : "Writer, USA Universities",
+      "schema:email" : "mnudo@oedb.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673259",
+      "schema:name" : "John Dickens",
+      "schema:description" : "Center Director and Professor of Engineering Education, Loughborough University and other HE partners - UK",
+      "schema:email" : "john@engsc.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673260",
+      "schema:name" : "Catherine Ngugi",
+      "schema:description" : "Director, SAIDE",
+      "schema:email" : "catherine.ngugi@googlemail.com",
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673261",
+      "schema:name" : "Daniel B. Silva",
+      "schema:description" : "Director of the Digital House, Brazilian Repository",
+      "schema:email" : "reanetbr@gmail.com",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673263",
+      "schema:name" : "Wayne Mackintosh",
+      "schema:description" : "Professor, OER Foundation",
+      "schema:email" : "wayne@oerfoundation.org",
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "673264",
+      "schema:name" : "Carina Bossu",
+      "schema:description" : "Research Fellow, DEHub - University of New England",
+      "schema:email" : "cbossu3@une.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673267",
+      "schema:name" : "Sara Hennesey",
+      "schema:description" : "Partner, Cambridge University - UK",
+      "schema:email" : "sch30@cam.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673268",
+      "schema:name" : "Peter Hartley",
+      "schema:description" : "National Teaching Fellow Professor of Educational Development, Bradford University -UK",
+      "schema:email" : "p.hartley@bradford.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673270",
+      "schema:name" : "Pheo Martin",
+      "schema:description" : "Director, Realizing Educations Potential Institute",
+      "schema:email" : "pheo@realizingeducationspotential.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673271",
+      "schema:name" : "Lindsay Wood",
+      "schema:description" : "Project Manager, Newcastle University and 16 other partners in HE - UK",
+      "schema:email" : "lindsay@medev.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673272",
+      "schema:name" : "Grace Lin",
+      "schema:description" : "Manager, Creative Commons",
+      "schema:email" : "grace.mf.lin@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673274",
+      "schema:name" : "David Morris",
+      "schema:description" : "Project Manager, Coventry University - UK",
+      "schema:email" : "d.morris@coventry.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673275",
+      "schema:name" : "Mary Lou Forward",
+      "schema:description" : "Executive Director, OCWC",
+      "schema:email" : "mlforward@ocwconsortium.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673276",
+      "schema:name" : "Michael Rappa",
+      "schema:description" : "Manager, North Carolina State University",
+      "schema:email" : "michael_rappa@ncsu.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673279",
+      "schema:name" : "Tom Boyle",
+      "schema:description" : "Director of the Learning and Technology Institute, Ulster University and 5 other HE partners (Metropolitan University of London, Sheffield Hallam University, Portsmouth University, University of the West and Teeside University) - UK",
+      "schema:email" : "t.boyle@londonmet.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673281",
+      "schema:name" : "Taerim Lee",
+      "schema:description" : "Director, OUKorea",
+      "schema:email" : "trlee@knou.ac.kr",
+      "schema:country" : "KR"
+    },
+    {
+      "contactFor" : "673282",
+      "schema:name" : "Ulrich Tiedau",
+      "schema:description" : "Referral, University College, London and three other partners - UK",
+      "schema:email" : "u.tiedau@ucl.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673283",
+      "schema:name" : "Richard Rowe",
+      "schema:description" : "Manager, -",
+      "schema:email" : "richard.rowe@ole.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673284",
+      "schema:name" : "Silvia Adriana Tomescu",
+      "schema:description" : "Director, Romania",
+      "schema:email" : "silviatomescu@yahoo.co.uk",
+      "schema:country" : "RO"
+    },
+    {
+      "contactFor" : "673285",
+      "schema:name" : "Simon Buckingham Shum",
+      "schema:description" : "Senior Lecturer &amp; Assoc Director (Technology), Open University UK",
+      "schema:email" : "s.buckingham.shum@gmail.com",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673286",
+      "schema:name" : "Steve Stapleton",
+      "schema:description" : "Open Learning Support Officer, university of nottingham",
+      "schema:email" : "steven.stapleton@nottingham.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673288",
+      "schema:name" : "Phillip Long",
+      "schema:description" : "Professor, CEIT, University of Queensland",
+      "schema:email" : "longpd@uq.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673289",
+      "schema:name" : "Frances Ferreira",
+      "schema:description" : "Manager, Commonwealth of Learning, Open Schools",
+      "schema:email" : "Fferreira@col.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673290",
+      "schema:name" : "Melissa Hagemann",
+      "schema:description" : "Manager, Open Society Foundations",
+      "schema:email" : "mhagemann@sorosny.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673292",
+      "schema:name" : "Sanford Forte",
+      "schema:description" : "Founder, Math and Physics initiative",
+      "schema:email" : "sforte@opensourcetext.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673293",
+      "schema:name" : "Melissa highton",
+      "schema:description" : "Programme Director, podcasts@oucs.ox.ac.uk",
+      "schema:email" : "Programme Director",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673294",
+      "schema:name" : "Alex Disavoia",
+      "schema:description" : "Project Manager, University College Falmouth - UK",
+      "schema:email" : "alex.disavoia@falmouth.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673295",
+      "schema:name" : "Grace Lynch",
+      "schema:description" : "Director, -",
+      "schema:email" : "grace.lynch@open.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673296",
+      "schema:name" : "Patrick McAndrew",
+      "schema:description" : "Professor, Open University",
+      "schema:email" : "mcandrew.patrick@gmail.com",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673297",
+      "schema:name" : "Li Yanzhong",
+      "schema:description" : "Director, China",
+      "schema:email" : "xb@crtvu.edu.cn",
+      "schema:country" : "CN"
+    },
+    {
+      "contactFor" : "673298",
+      "schema:name" : "Atwi Suparman",
+      "schema:description" : "Rector, Indonesia Open University",
+      "schema:email" : "atwi@ut.ac.id",
+      "schema:country" : "ID"
+    },
+    {
+      "contactFor" : "673302",
+      "schema:name" : "Kaye Howe",
+      "schema:description" : "Director, National Science Foundation, Digital Libraries Project",
+      "schema:email" : "kaye@ucar.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673303",
+      "schema:name" : "Marc Jelitto",
+      "schema:description" : "Manager, -",
+      "schema:email" : "marc@evaluieren.de",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673304",
+      "schema:name" : "Jos Rickers",
+      "schema:description" : "Professor, Open University of the Netherlands",
+      "schema:email" : "jos.rikers@rcerm.eu",
+      "schema:country" : "NL"
+    },
+    {
+      "contactFor" : "673305",
+      "schema:name" : "Tom Browne",
+      "schema:description" : "Education Reasearch and Evaluation Advisor, Exeter University - UK",
+      "schema:email" : "T.J.Browne@exeter.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673306",
+      "schema:name" : "Simon Budgen",
+      "schema:description" : "Head of OpenLearn Commissioning, The Open University - UK",
+      "schema:email" : "simon.budgen@open.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673307",
+      "schema:name" : "Pawlowski Jan",
+      "schema:description" : "Professor, -",
+      "schema:email" : "jan.pawlowski@jyu.fi",
+      "schema:country" : "PL"
+    },
+    {
+      "contactFor" : "673308",
+      "schema:name" : "Mark Stiles",
+      "schema:description" : "Project Director, Staffordshire University UK",
+      "schema:email" : "m.j.stiles@staffs.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673310",
+      "schema:name" : "Jeanette Corson",
+      "schema:description" : "Director, The OER Foundation",
+      "schema:email" : "Jeanette.Corson@op.ac.nz",
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "673311",
+      "schema:name" : "Alejandro Armellini",
+      "schema:description" : "Senior Learning Designer, University of Leicester - UK",
+      "schema:email" : "alejandro.armellini@le.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673312",
+      "schema:name" : "Stephen Carson",
+      "schema:description" : "Manager, MIT",
+      "schema:email" : "scarson@mit.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673314",
+      "schema:name" : "Bernard Gambini",
+      "schema:description" : "Founder, Paris Institute of Technology",
+      "schema:email" : "gambini@enpc.fr",
+      "schema:country" : "FR"
+    },
+    {
+      "contactFor" : "673315",
+      "schema:name" : "Farideh Mashayekh",
+      "schema:description" : "Pedagogical Director, British Council Initiative",
+      "schema:email" : "f.mashayekh@pedagogy.ir.",
+      "schema:country" : "IR"
+    },
+    {
+      "contactFor" : "673318",
+      "schema:name" : "John Petroff",
+      "schema:description" : "Director, NYU School of Law",
+      "schema:email" : "petroff@peoi.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673319",
+      "schema:name" : "Margaret Sills",
+      "schema:description" : "PHORUS author, Kings College London and 16 other partners including Bournemouh University - UK",
+      "schema:email" : "Margaret.Sills@kcl.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673320",
+      "schema:name" : "Aileen Hammersley",
+      "schema:description" : "Director of Flexible and Partnership learning, University of Derby and three other HEIs - UK",
+      "schema:email" : "a.e.hammersley@derby.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673322",
+      "schema:name" : "Jim Kelly",
+      "schema:description" : "Director, -",
+      "schema:email" : "k-12math@sbcglobal.net",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673324",
+      "schema:name" : "Andrew Armentano",
+      "schema:description" : null,
+      "schema:email" : null,
+      "schema:country" : "QA"
+    },
+    {
+      "contactFor" : "673329",
+      "schema:name" : "Lorenzo Cantoni",
+      "schema:description" : "Prof. PhD, NewMinE Lab - Universit\\u00c3\\u00a0 della Svizzera italiana",
+      "schema:email" : "lorenzo.cantoni@usi.ch",
+      "schema:country" : "CH"
+    },
+    {
+      "contactFor" : "673330",
+      "schema:name" : "Wayne Mackintosh",
+      "schema:description" : "Advisory Board, New Zealand's Tertiary Education Commission's Innovation Development Fund (eCDF)",
+      "schema:email" : null,
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "673334",
+      "schema:name" : "jenny Glennie",
+      "schema:description" : "Manager",
+      "schema:email" : null,
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673335",
+      "schema:name" : "Ian Dolphin",
+      "schema:description" : "Director",
+      "schema:email" : "iandolphin@sakaifoundation.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673336",
+      "schema:name" : "Paulina Pannen",
+      "schema:description" : "Dean, Indonesian Teaching School",
+      "schema:email" : "ppanen@gmail.com",
+      "schema:country" : "ID"
+    },
+    {
+      "contactFor" : "673337",
+      "schema:name" : "Alana Harrington",
+      "schema:description" : "Progamme Director, Saylor Foundation",
+      "schema:email" : "alana.harrington@saylor.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673338",
+      "schema:name" : "Xiuli Zhang",
+      "schema:description" : "Director, -",
+      "schema:email" : "xiuli.zhuang@gmail.com",
+      "schema:country" : "CN"
+    },
+    {
+      "contactFor" : "673340",
+      "schema:name" : "Gebert Richter",
+      "schema:description" : "Founding Father, Technical University of Munich in Germany",
+      "schema:email" : "richter@ma.tum.de",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673341",
+      "schema:name" : "Dawn Hawkins",
+      "schema:description" : "Biostatician, Anglia Ruskin University -UK",
+      "schema:email" : "Dawn.Hawkins@anglia.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673342",
+      "schema:name" : "Freda Wolfenden",
+      "schema:description" : "Director, The Open University (TESSA)",
+      "schema:email" : "f.j.wolfenden@open.ac.uk",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673345",
+      "schema:name" : "Michael Fischer",
+      "schema:description" : "Project Manager, Germany",
+      "schema:email" : "m.fischer@world-lecture-project.org",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673346",
+      "schema:name" : "Judith Murray",
+      "schema:description" : "Vice-President Open Learning, TRU Open Learning",
+      "schema:email" : "Judithmurray@tru.ca",
+      "schema:country" : "CA"
+    },
+    {
+      "contactFor" : "673347",
+      "schema:name" : "Kenichi Iga",
+      "schema:description" : "The Tokyo Institute of Technology",
+      "schema:email" : null,
+      "schema:country" : "JP"
+    },
+    {
+      "contactFor" : "673349",
+      "schema:name" : "Clancy Marshall",
+      "schema:description" : "Director",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673350",
+      "schema:name" : "Abel Caine",
+      "schema:description" : "OER Programme Specialist, UNESCO",
+      "schema:email" : "a.caine@unesco.org",
+      "schema:country" : "FR"
+    },
+    {
+      "contactFor" : "673351",
+      "schema:name" : "Simon Thomson",
+      "schema:description" : "Project Manager, Leeds Metropolitan University - UK",
+      "schema:email" : "s.thomson@leedsmet.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673352",
+      "schema:name" : "Elisa Flemming Luz",
+      "schema:description" : "Professor, Southern University of Santa Catarina in Brazil",
+      "schema:email" : "flemming@iaccess.com.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673354",
+      "schema:name" : "Tomasz Janowski",
+      "schema:description" : null,
+      "schema:email" : "tj@iist.unu.edu",
+      "schema:country" : "PL"
+    },
+    {
+      "contactFor" : "673358",
+      "schema:name" : "Sergio Martinez",
+      "schema:description" : "Project Manager, -",
+      "schema:email" : "sergio.martinez@gestion.unican.es",
+      "schema:country" : "ES"
+    },
+    {
+      "contactFor" : "673360",
+      "schema:name" : "Nancy Per\\u00e9",
+      "schema:description" : "Director, Capital University",
+      "schema:email" : "nancy.pere@gmail.com",
+      "schema:country" : "UY"
+    },
+    {
+      "contactFor" : "673361",
+      "schema:name" : "juan Perez",
+      "schema:description" : "Director, Mexico",
+      "schema:email" : "juan@um.edu.mx",
+      "schema:country" : "MX"
+    },
+    {
+      "contactFor" : "673362",
+      "schema:name" : "Martin Aiello",
+      "schema:description" : "Director, Argentina",
+      "schema:email" : "aiellomartin@gmail.com",
+      "schema:country" : "AR"
+    },
+    {
+      "contactFor" : "673365",
+      "schema:name" : "Lourdes Torres",
+      "schema:description" : "Teacher, National Initiative",
+      "schema:email" : "lourdesco1@gmail.com",
+      "schema:country" : "VE"
+    },
+    {
+      "contactFor" : "673366",
+      "schema:name" : "Daniela Melar\\u00e9",
+      "schema:description" : "Professor, Open University of Lisbon",
+      "schema:email" : "dbarros@univ-ab.pt",
+      "schema:country" : "PT"
+    },
+    {
+      "contactFor" : "673367",
+      "schema:name" : "Agn\\u00e8s Vayreda Duran",
+      "schema:description" : "Director of Studies, University Online Catalonia",
+      "schema:email" : "avayreda@ooc.edu",
+      "schema:country" : "ES"
+    },
+    {
+      "contactFor" : "673368",
+      "schema:name" : "Heather Lares",
+      "schema:description" : "Manager, University of Arizona",
+      "schema:email" : "hlares@email.arizona.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673369",
+      "schema:name" : "Margaret Phillips",
+      "schema:description" : "Manager, California Digital Library",
+      "schema:email" : "mphillip@library.berkeley.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673371",
+      "schema:name" : "Cheryl Hodgekinson Williams",
+      "schema:description" : "OER former manager, UCT",
+      "schema:email" : "cheryl.hodgkinson-williams@uct.ac.za",
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673372",
+      "schema:name" : "Lorenzo Aretio",
+      "schema:description" : "Professor, Hispanic Expertise in the domain of e-learning",
+      "schema:email" : "lgaretio@edu.uned.es",
+      "schema:country" : "ES"
+    },
+    {
+      "contactFor" : "673373",
+      "schema:name" : "Ulf-Daniel Ehlers",
+      "schema:description" : "Professor, University",
+      "schema:email" : "ulf.ehlers@googlemail.com",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673374",
+      "schema:name" : "Christopher Yartey Akwaa-Mensah",
+      "schema:description" : "Registrar, Ghanaian Government, Ministry of Education, the African Library",
+      "schema:email" : null,
+      "schema:country" : "GH"
+    },
+    {
+      "contactFor" : "673375",
+      "schema:name" : "Grainn\\u00e9 Conole",
+      "schema:description" : "Professor, University of Leicester - UK",
+      "schema:email" : "grainne.conole@le.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673377",
+      "schema:name" : "Nick Allen",
+      "schema:description" : "Collegiate Professor, -",
+      "schema:email" : "Nallen@umuc.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673378",
+      "schema:name" : "Ted Hanss",
+      "schema:description" : "Director, University undertaking",
+      "schema:email" : "ted@umich.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673380",
+      "schema:name" : "Maggy Beukes Amiss",
+      "schema:description" : "Director, University of Namibia",
+      "schema:email" : "cmbeukes@unam.na",
+      "schema:country" : "NA"
+    },
+    {
+      "contactFor" : "673382",
+      "schema:name" : "Jean-Fran\\u00e7ois Cerisier",
+      "schema:description" : "Co-ordinator, EUROMIME",
+      "schema:email" : "cerisier@univ-poitiers.fr",
+      "schema:country" : "FR"
+    },
+    {
+      "contactFor" : "673383",
+      "schema:name" : "Phillip Long",
+      "schema:description" : "Research Fellow, Queensland University Initiative",
+      "schema:email" : "longpd@uq.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673384",
+      "schema:name" : "Jo\\u00e3o Grandino Rodas",
+      "schema:description" : "Rector, University of Sao Paolo",
+      "schema:email" : "gr@usp.br",
+      "schema:country" : "BR"
+    },
+    {
+      "contactFor" : "673385",
+      "schema:name" : "Juan de Pablo Pons",
+      "schema:description" : "Director, Spain",
+      "schema:email" : "jpablos@us.es",
+      "schema:country" : "ES"
+    },
+    {
+      "contactFor" : "673386",
+      "schema:name" : "Carlos Marcelo Garcia",
+      "schema:description" : "Director, Spanish University devoted to E-Learning Models",
+      "schema:email" : "marcelo@us.es",
+      "schema:country" : "ES"
+    },
+    {
+      "contactFor" : "673387",
+      "schema:name" : "J Diescho",
+      "schema:description" : "Director International Relations, University of South Africa",
+      "schema:email" : "diescj@unisa.ac.za",
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673389",
+      "schema:name" : "Gilly Salmon",
+      "schema:description" : "Director, University of Southern Queensland",
+      "schema:email" : "Gilly.Salmon@usq.edu.au",
+      "schema:country" : "AU"
+    },
+    {
+      "contactFor" : "673390",
+      "schema:name" : "Shai Reshef",
+      "schema:description" : null,
+      "schema:email" : "Shai@uopeople.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673391",
+      "schema:name" : "Hazel Simmons McDonald",
+      "schema:description" : "Dean, University of the West Indies",
+      "schema:email" : "principal@open.uwi.edu",
+      "schema:country" : "BB"
+    },
+    {
+      "contactFor" : "673392",
+      "schema:name" : "Derek Keats",
+      "schema:description" : "Director, -",
+      "schema:email" : "dkeats@uwc.ac.za",
+      "schema:country" : "ZA"
+    },
+    {
+      "contactFor" : "673394",
+      "schema:name" : "Mohamed Jemni",
+      "schema:description" : "Researcher, University of Tunis",
+      "schema:email" : "Mohamed.Jemni@fst.rnu.tn",
+      "schema:country" : "TN"
+    },
+    {
+      "contactFor" : "673396",
+      "schema:name" : "Hubert Berger",
+      "schema:description" : "Founder, University of Bourgogne",
+      "schema:email" : "hubert.berger@u-bourgogne.fr",
+      "schema:country" : "FR"
+    },
+    {
+      "contactFor" : "673397",
+      "schema:name" : "Arnel Valero",
+      "schema:description" : "Learning Team Manager, Nottingham University - UK",
+      "schema:email" : "arnsval@gmail.com",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673398",
+      "schema:name" : "Anthony Bloome",
+      "schema:description" : "Director, USAID",
+      "schema:email" : "abloome@usaid.gov",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673399",
+      "schema:name" : "Johnathan Darby",
+      "schema:description" : "Director, OU UK",
+      "schema:email" : "J.Darby@open.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673401",
+      "schema:name" : "Minh Do",
+      "schema:description" : "VOER Program Director, The Vietnam Foundation",
+      "schema:email" : "minhdo@vnfoundation.org",
+      "schema:country" : "VN"
+    },
+    {
+      "contactFor" : "673402",
+      "schema:name" : "Marilyn Tadros",
+      "schema:description" : "Director, -",
+      "schema:email" : "marlyn.tadros@theglobalexperts.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673403",
+      "schema:name" : "Mohammad Santally",
+      "schema:description" : "Director, University of Mauritius",
+      "schema:email" : "m.santally@uom.ac.mu",
+      "schema:country" : "MU"
+    },
+    {
+      "contactFor" : "673404",
+      "schema:name" : "Subra Suresh",
+      "schema:description" : "Director, US National Science Foundation and California State University",
+      "schema:email" : "ssuresh@nsf.gov",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673405",
+      "schema:name" : "Claudia Rico",
+      "schema:description" : "Director, MEXICO",
+      "schema:email" : "Claudia.Rico@redudg.udg.mx",
+      "schema:country" : "MX"
+    },
+    {
+      "contactFor" : "673406",
+      "schema:name" : "John Lesperance",
+      "schema:description" : "Director, Commonwealth of Learning",
+      "schema:email" : "jlesperance@col.org",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673407",
+      "schema:name" : "Nidhi Tyagi",
+      "schema:description" : "Professor, Aff. to M.J.P. Rohilkahdn University, Bareilly Approved By BCI, New Delhi",
+      "schema:email" : null,
+      "schema:country" : "IN"
+    },
+    {
+      "contactFor" : "673408",
+      "schema:name" : "Vincent Chung",
+      "schema:description" : "Professor, Wawasan Open University",
+      "schema:email" : "v1ncent8@hotmail.com",
+      "schema:country" : "MY"
+    },
+    {
+      "contactFor" : "673410",
+      "schema:name" : "Margaret Karosec",
+      "schema:description" : "Director, America",
+      "schema:email" : "mdkarosec@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673411",
+      "schema:name" : "Sue Gardner",
+      "schema:description" : "Executive Director, Wikimedia Foundation",
+      "schema:email" : "sgardner@wikimedia.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673412",
+      "schema:name" : "Jimmy Wales",
+      "schema:description" : ", Wikimedia Foundation Inc.",
+      "schema:email" : null,
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673413",
+      "schema:name" : "Peter Sloep",
+      "schema:description" : "Professor, Holland - whole Dutch educational system from schools to Universities",
+      "schema:email" : "peter.sloep@ou.nl",
+      "schema:country" : "NL"
+    },
+    {
+      "contactFor" : "673414",
+      "schema:name" : "Roberta Johnson",
+      "schema:description" : "Director, University of Colorado",
+      "schema:email" : "rmjohnsn@gmail.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673415",
+      "schema:name" : "Sally johnstone",
+      "schema:description" : "Vice-President, Winona State University",
+      "schema:email" : "rektorbuero@fernuni-hagen.de",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673416",
+      "schema:name" : "Mary Hansen",
+      "schema:description" : "Director, Wisconsin Technical College System (WTCS)",
+      "schema:email" : "delponte@fvtc.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673417",
+      "schema:name" : "Sabine Roehrig-Mahhou",
+      "schema:description" : "Director, WEI",
+      "schema:email" : "siegrist@rz.uni-leipzig.de",
+      "schema:country" : "DE"
+    },
+    {
+      "contactFor" : "673418",
+      "schema:name" : "George Michaels",
+      "schema:description" : "Executive Director, University of California",
+      "schema:email" : "michaels@id.ucsb.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673419",
+      "schema:name" : "Alistair McNaught",
+      "schema:description" : "Senior Advisor, University of Nottingham",
+      "schema:email" : "alistair@techdis.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673421",
+      "schema:name" : "Rollen Mukanda",
+      "schema:description" : "Executive Director, Goverment Initiative",
+      "schema:email" : "nwlg@zamnet.zm",
+      "schema:country" : "ZM"
+    },
+    {
+      "contactFor" : "673422",
+      "schema:name" : "Jim Fulton",
+      "schema:description" : "Chief Executive, Washington State University",
+      "schema:email" : "jim@zope.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673424",
+      "schema:name" : "Paul Fenn",
+      "schema:description" : "TRUE Collaborator, Nottingham University - UK",
+      "schema:email" : "Paul.Fenn@nottingham.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673425",
+      "schema:name" : "Susan D'Antoni",
+      "schema:description" : "Professor, Athabasca University",
+      "schema:email" : "susandantoni@gmail.com",
+      "schema:country" : "CA"
+    },
+    {
+      "contactFor" : "673427",
+      "schema:name" : "Sanford Morton",
+      "schema:description" : "Co-Founder and Chairman, A US Initiative",
+      "schema:email" : "smorton@pobox.com",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673428",
+      "schema:name" : "Jun Nakahara",
+      "schema:description" : "Manager, The Japan OCW Alliance",
+      "schema:email" : "jun@nakahara-lab.net",
+      "schema:country" : "JP"
+    },
+    {
+      "contactFor" : "673429",
+      "schema:name" : "Teemu Leinonen",
+      "schema:description" : null,
+      "schema:email" : "teemu.leinonen@aalto.fi",
+      "schema:country" : "FI"
+    },
+    {
+      "contactFor" : "673430",
+      "schema:name" : "Anthony Camilleri",
+      "schema:description" : "Consultant, EFQUEL",
+      "schema:email" : "anthony@camilleri.com",
+      "schema:country" : "SI"
+    },
+    {
+      "contactFor" : "673431",
+      "schema:name" : "Candace Thille",
+      "schema:description" : "Manager",
+      "schema:email" : "cthille@andrew.cmu.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673432",
+      "schema:name" : "Chris Crispin-Bailey",
+      "schema:description" : "Contributor, York University - UK",
+      "schema:email" : "chrisb@cs.york.ac.uk",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673433",
+      "schema:name" : "Pieter Kleymeer",
+      "schema:description" : "Team Manager, University of Michigan",
+      "schema:email" : "pkleymee@umich.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673435",
+      "schema:name" : "Richard Heller",
+      "schema:description" : "Coordinator, People's Open Access Education Initiative (Peoples-uni)",
+      "schema:email" : "rfheller@peoples-uni.org",
+      "schema:country" : "GB"
+    },
+    {
+      "contactFor" : "673436",
+      "schema:name" : "Kathy Perkins",
+      "schema:description" : "Director, PhET Interactive Simulations",
+      "schema:email" : "Katherine.Perkins@colorado.edu",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673437",
+      "schema:name" : "Lisa Petrides",
+      "schema:description" : "Coordinator, ISKME",
+      "schema:email" : "lisa@iskme.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "673438",
+      "schema:name" : "Wayne Mackintosh",
+      "schema:description" : "OERu Director, Wikimedia Foundation",
+      "schema:email" : "mackintosh.wayne@gmail.com",
+      "schema:country" : "NZ"
+    },
+    {
+      "contactFor" : "831166",
+      "schema:name" : "Janet Pinto",
+      "schema:description" : "Chief Academic Officer, Curriki",
+      "schema:email" : "jpinto@curriki.org",
+      "schema:country" : "US"
+    },
+    {
+      "contactFor" : "1438624",
+      "schema:name" : "Rola Tarek",
+      "schema:description" : "Tahrir Academy",
+      "schema:email" : "rola.tarek@tahriracademy.org",
+      "schema:country" : "not set"
+    },
+    {
+      "contactFor" : "1477293",
+      "schema:name" : "Cable Green",
+      "schema:description" : "Director of Global Learning, Creative Commons",
+      "schema:email" : "cable@creativecommons.org",
+      "schema:country" : "not set"
+    }
+  ]
+}

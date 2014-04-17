@@ -1,0 +1,121 @@
+{
+"initiatives" : [
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673202",
+      "schema:name" : "INTERACTIC Project",
+      "schema:description" : "INTERACTIC is a community of 1700 teachers. INTERACTIC is organized by twenty nine interest groups where teachers share links, learning objects and reflect on practice.",
+      "schema:url" : "http://interactic.ning.com/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "foaf:Project",
+      "schema:streetAddress" : null,
+      "schema:locality" : null,
+      "Schema:country" : "PT"
+    },
+      {
+      "Schema:sameAs" : "http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!",
+      "dc:identifier" : "673352",
+      "schema:name" : "Unisul Virtual",
+      "schema:description" : "UnisulVirtual is a private university located in the state of Santa Catarina in the south of Brazil. The motivation for UnisulVirtual to join the OER movement was to collaborate with the Open University (OU) of the United Kingdom in the provision of OER.",
+      "schema:url" : "http://www.unisul.br",
+      "schema:email" : "jucimara@unisul.br",
+      "Scope of the Initiative" : "National",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Catalina",
+      "Schema:country" : "BR"
+    },
+    {
+      "Schema:sameAs" : "http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!",
+      "dc:identifier" : "673275",
+      "schema:name" : "Open CourseWare Consortium",
+      "schema:description" : "The OpenCourseWare Consortium is a collaboration of higher education institutions and associated organizations from around the world creating a broad and deep body od open educational content using a shared model.A collaboration of more than 100 higher ed",
+      "schema:url" : "http://www.ocwconsortium.org/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Newton, MA",
+      "Schema:country" : "US"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673128",
+      "schema:name" : "Fern Universitat in Hagen",
+      "schema:description" : "Distant learning Project",
+      "schema:url" : "http://www.fernuni-hagen.de/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Hagen",
+      "Schema:country" : "DE"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673135",
+      "schema:name" : "Free Knowledge Institute",
+      "schema:description" : "The Free Knowledge Institute believes that by promoting the use of free knowledge in the fields of Technology, Education, Culture and Science  more individuals and organisations will profit from the benefits of sharing knowledge.",
+      "schema:url" : "http://freeknowledge.eu/",
+      "schema:email" : "access@freeknowledge.eu",
+      "Scope of the Initiative" : "Institutional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : "Cruquiuskade 219",
+      "schema:locality" : "Amsterdam",
+      "Schema:country" : "NL"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673093",
+      "schema:name" : "Aalto University School of Economics",
+      "schema:description" : null,
+      "schema:url" : "http://econ.aalto.fi/en/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : "Runeberginkatu 14-16",
+      "schema:locality" : "Helsinki",
+      "Schema:country" : "FI"
+    },
+    {
+      "Schema:sameAs" : "http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!",
+      "dc:identifier" : "673094",
+      "schema:name" : "ABED",
+      "schema:description" : "Association for Distance learning in Brazil",
+      "schema:url" : "http://www2.abed.org.br",
+      "schema:email" : "abed@abed.org.br",
+      "Scope of the Initiative" : "National",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "São Paulo",
+      "Schema:country" : "BR"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673095",
+      "schema:name" : "Academic Earth",
+      "schema:description" : "An attractive, easy-to-use site that for users to find, interact with, and learn from full video courses and lectures from the world’s leading scholars.",
+      "schema:url" : "http://academicearth.org/",
+      "schema:email" : "hello@academicearth.org",
+      "Scope of the Initiative" : "Global",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : "450 9th Street",
+      "schema:locality" : "San Francisco, CA",
+      "Schema:country" : "US"
+    },
+    {
+      "Schema:sameAs" : null,
+      "dc:identifier" : "673097",
+      "schema:name" : "Acharya Narendra Dev College (University of Dehli)",
+      "schema:description" : "Acharya Narendra Dev College was established in 1991 as a constituent college of University of Delhi and is fully funded by Government of NCT, Delhi",
+      "schema:url" : "http://andcollege.du.ac.in",
+      "schema:email" : "principalandc@gmail.com",
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : "Govindpuri, Kalkaji",
+      "schema:locality" : "110019 New Dehli",
+      "Schema:country" : "IN"
+    }
+  ]
+}

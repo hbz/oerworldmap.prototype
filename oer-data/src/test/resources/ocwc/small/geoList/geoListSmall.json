@@ -1,6 +1,20 @@
 {
    "features" : [
       {
+         "geometry" : {
+            "coordinates" : [
+               -111.8157639,
+               41.7408463
+            ],
+            "type" : "Point"
+         },
+         "type" : "Feature",
+         "properties" : {
+            "name" : "Utah State University"
+         },
+         "id" : 369
+      },
+      {
          "properties" : {
             "name" : "Kaplan University Online & Campus Learning"
          },
@@ -45,4 +59,3 @@
    ],
    "type" : "FeatureCollection"
 }
-

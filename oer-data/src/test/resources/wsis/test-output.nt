@@ -1,0 +1,61 @@
+<http://lobid.org/oer/$UUID1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/$UUID1> <http://purl.org/dc/terms/identifier> "wsis673135" .
+<http://lobid.org/oer/$UUID1> <http://schema.org/name> "Free Knowledge Institute" .
+<http://lobid.org/oer/$UUID1> <http://schema.org/description> "The Free Knowledge Institute believes that by promoting the use of free knowledge in the fields of Technology, Education, Culture and Science  more individuals and organisations will profit from the benefits of sharing knowledge." .
+<http://lobid.org/oer/$UUID1> <http://schema.org/url> <http://freeknowledge.eu/> .
+<http://lobid.org/oer/$UUID1> <http://schema.org/email> "access@freeknowledge.eu" .
+<http://lobid.org/oer/$UUID1> <http://purl.org/openorg/contact> <http://lobid.org/oer/$UUID2> .
+<http://lobid.org/oer/$UUID1> <http://schema.org/address> <urn:uuid:$UUID3> .
+<urn:uuid:$UUID3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:$UUID3> <http://schema.org/streetAddress> "Cruquiuskade 219" .
+<urn:uuid:$UUID3> <http://schema.org/addressLocality> <http://sws.geonames.org/2759794/> .
+<urn:uuid:$UUID3> <http://schema.org/addressCountry> <http://sws.geonames.org/2750405/> .
+<http://lobid.org/oer/$UUID2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://lobid.org/oer/$UUID2> <http://schema.org/name> "Wouter Tebbens" .
+<http://lobid.org/oer/$UUID2> <http://schema.org/description> "CEO, Consortium of Thinkers" .
+<http://lobid.org/oer/$UUID2> <http://schema.org/email> "wouter@freeknowledge.eu" .
+<http://lobid.org/oer/$UUID4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/$UUID4> <http://purl.org/dc/terms/identifier> "wsis673106" .
+<http://lobid.org/oer/$UUID4> <http://schema.org/name> "AMAQUEN" .
+<http://lobid.org/oer/$UUID4> <http://schema.org/description> "An association in French teaching and Learning." .
+<http://lobid.org/oer/$UUID4> <http://schema.org/url> <http://amaquen.org> .
+<http://lobid.org/oer/$UUID4> <http://schema.org/email> "amaquen@amaquen.org" .
+<http://lobid.org/oer/$UUID4> <http://purl.org/openorg/contact> <http://lobid.org/oer/$UUID5> .
+<http://lobid.org/oer/$UUID4> <http://schema.org/address> <urn:uuid:$UUID6> .
+<urn:uuid:$UUID6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:$UUID6> <http://schema.org/streetAddress> "Cruquiuskade 219" .
+<urn:uuid:$UUID6> <http://schema.org/addressLocality> <http://sws.geonames.org/2538475/> .
+<urn:uuid:$UUID6> <http://schema.org/addressCountry> <http://sws.geonames.org/2542007/> .
+<http://lobid.org/oer/$UUID5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://lobid.org/oer/$UUID5> <http://schema.org/name> "Abdennasser Naji" .
+<http://lobid.org/oer/$UUID5> <http://schema.org/description> "President, Morocco" .
+<http://lobid.org/oer/$UUID5> <http://schema.org/email> "amaquen@amaquen.org" .
+<http://lobid.org/oer/$UUID7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Project> .
+<http://lobid.org/oer/$UUID7> <http://purl.org/dc/terms/identifier> "wsis673118" .
+<http://lobid.org/oer/$UUID7> <http://schema.org/name> "BerLin project" .
+<http://lobid.org/oer/$UUID7> <http://schema.org/description> "Funded by HEFCE/JISC/HEA this project enhances and expands Nottingham\u2019s existing Open Educational Repository, u-Now, one of the first OERs in the UK and a member of the international Open Courseware Consortium. Through providing guidance and advice, BERLiN benefits the whole of the UK sector by disseminating our experiences, as well as the outcomes of the project itself which is aimed at exploring the issues raised in the wider take-up and development of an OER." .
+<http://lobid.org/oer/$UUID7> <http://schema.org/url> <http://unow.nottingham.ac.uk/berlin.html> .
+<http://lobid.org/oer/$UUID7> <http://schema.org/email> "amaquen@amaquen.org" .
+<http://lobid.org/oer/$UUID7> <http://purl.org/openorg/contact> <http://lobid.org/oer/$UUID8> .
+<http://lobid.org/oer/$UUID7> <http://schema.org/address> <urn:uuid:$UUID9> .
+<urn:uuid:$UUID9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<urn:uuid:$UUID9> <http://schema.org/streetAddress> "Cruquiuskade 219" .
+<urn:uuid:$UUID9> <http://schema.org/addressLocality> <http://sws.geonames.org/3333178/> .
+<urn:uuid:$UUID9> <http://schema.org/addressCountry> <http://sws.geonames.org/2635167/> .
+<http://lobid.org/oer/$UUID8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://lobid.org/oer/$UUID8> <http://schema.org/name> "Andy Beggan" .
+<http://lobid.org/oer/$UUID8> <http://schema.org/description> "Associate Manager, Nottingham University - UK" .
+<http://lobid.org/oer/$UUID8> <http://schema.org/email> "andy.beggan@nottingham.ac.uk" .
+<http://lobid.org/oer/$UUID10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://lobid.org/oer/$UUID10> <http://schema.org/name> "Frederic M. Litto" .
+<http://lobid.org/oer/$UUID10> <http://schema.org/description> "President, Association of Distance learning" .
+<http://lobid.org/oer/$UUID10> <http://schema.org/email> "frmlitto@terra.com.br" .
+<http://lobid.org/oer/227ea4ad-faa6-4fe1-958a-e677f0f4cd57#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/$UUID10> .
+<http://lobid.org/oer/65667483-8a3c-44ac-8e9a-c8f63b5ca71b#!> <http://schema.org/name> "Kyoto-U OpenCourseWare" .
+<http://lobid.org/oer/65667483-8a3c-44ac-8e9a-c8f63b5ca71b#!> <http://schema.org/description> "A member of the Japan OCW Alliance, Kyoto University OCW is a free and open publication of course materials in both Japanese and English. The goal of the OCW@KU Project is to transmit educational information from Kyoto University to the rest of the world." .
+<http://lobid.org/oer/65667483-8a3c-44ac-8e9a-c8f63b5ca71b#!> <http://schema.org/email> "secretariat@ceaie.edu.cn" .
+<http://lobid.org/oer/65667483-8a3c-44ac-8e9a-c8f63b5ca71b#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/$UUID11> .
+<http://lobid.org/oer/$UUID11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://lobid.org/oer/$UUID11> <http://schema.org/name> "Hiroshi MATSUMOTO" .
+<http://lobid.org/oer/$UUID11> <http://schema.org/description> "President, Kyoto University" .
+<http://lobid.org/oer/$UUID11> <http://schema.org/email> "matsumot@kurasc.kyoto-u.ac.jp" .

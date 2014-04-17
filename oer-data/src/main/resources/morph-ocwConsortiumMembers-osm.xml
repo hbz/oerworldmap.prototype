@@ -50,10 +50,10 @@
 		<data source="@internalId" name="http://purl.org/dc/elements/1.1/identifier"/>
 		<!-- /set the ID's of the thing (@subjectUri) and the metadata of that thing (@subjectAboutUri) -->
 		<!-- /uuid and id handling for the main oer -->
-		<!-- uuid and id handling for the adress bnode -->
+		<!-- uuid and id handling for the address node -->
 		<!-- set new URI -->
 		<data source="@id" name="@internalAdressId">
-			<regexp match="(.*)" format="${1}Adress"/> <!--kann weg? -->
+			<regexp match="(.*)" format="${1}Address"/>  <!-- this does not make anything! -->
 		</data>
 		<!-- generated ID -->
 		<combine name="@addressId" value="urn:uuid:${idGenerated}">
@@ -92,7 +92,7 @@
 		</combine>
 		<!-- /uuid and id handling for the adress bnode -->
 		<!-- geoData -->
-		<combine name="$[schema:]addressCountry" value="${a}/">
+		<combine name="$[schema:]addressCountry" value="${a}">
 			<data source="@geonamesId" name="a"/>
 			<data source="@addressId"/>
 		</combine>
@@ -108,7 +108,7 @@
 			<case to="upper"/>
 			<lookup in="country2GeonamesIdMap"/>
 		</data>
-		<combine name="@geonamesId" value="http://sws.geonames.org/${countryId}">
+		<combine name="@geonamesId" value="http://sws.geonames.org/${countryId}/">
 			<data source="@country2GeonamesId" name="countryId"/>
 		</combine>
 		<!-- /geoData -->
