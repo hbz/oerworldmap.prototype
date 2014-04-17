@@ -154,7 +154,7 @@
             marker.oer_country = country_uri;
           }
         });
-        if (marker.getLatLng()) {
+        if (marker.getLatLng() && marker.oer_type) {
           marker.addTo(map);
           markers.push(marker);
         }
