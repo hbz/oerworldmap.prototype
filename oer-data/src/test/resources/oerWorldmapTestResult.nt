@@ -1,3 +1,9 @@
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/f6600634-9bb6-4614-9a14-3fb89078c009#!> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673275" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/name> "Open CourseWare Consortium" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/description> "The OpenCourseWare Consortium is a collaboration of higher education institutions and associated organizations from around the world creating a broad and deep body od open educational content using a shared model.A collaboration of more than 100 higher ed" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/address> <urn:uuid:d13c18fc-7d41-44fa-9df4-fdca961f4c33#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/fa403475-3cb8-419b-84eb-f40a5e2d1ce6#!> .
 <http://lobid.org/oer/ca4fbd55-faad-402a-a353-0568f8542962#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673097" .
@@ -218,3 +224,19 @@
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://schema.org/url> <http://ocw.kaplan.edu/> .
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://schema.org/provider> <http://lobid.org/oer/1db28953-385b-4c72-873c-4d4a44969a1e#!> .
 <http://lobid.org/oer/ed161df2-e107-416c-9e21-e311fa012c6d#!> <http://purl.org/dc/elements/1.1/identifier> "ed161df2-e107-416c-9e21-e311fa012c6d" .
+# this is a template that describes the ocwc itself
+<urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://schema.org/addressLocality> <http://sws.geonames.org/4945283/> .
+<urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://schema.org/addressCountry> <http://sws.geonames.org/6252001/> .
+<urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PostalAddress> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/org#OrganizationalCollaboration> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/address> <urn:uuid:c4ba6670-b686-11e3-a5e2-0800200c9a66> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/description> "The OpenCourseWare Consortium is a worldwide community of hundreds of higher education institutions and associated organizations committed to advancing open education and its impact on global education. " .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/logo> <http://ocw.mit.edu/about/ocw-consortium/ocwconsortiumlogo.gif> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/name> "Open Courseware Consortium" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/url> <http://www.ocwconsortium.org/> .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/alternateName> "OCWC" .
+<http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/geo> <urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/GeoCoordinates> .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/longitude> "-71.20922" .
+<urn:uuid:88feda8d-73bc-4b26-84be-f39687c31a04#!> <http://schema.org/latitude> "42.33704" .

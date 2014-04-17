@@ -1,6 +1,19 @@
 {
   "initiatives" : [
     {
+      "Schema:sameAs" : "http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!",
+      "dc:identifier" : "673275",
+      "schema:name" : "Open CourseWare Consortium",
+      "schema:description" : "The OpenCourseWare Consortium is a collaboration of higher education institutions and associated organizations from around the world creating a broad and deep body od open educational content using a shared model.A collaboration of more than 100 higher ed",
+      "schema:url" : "http://www.ocwconsortium.org/",
+      "schema:email" : null,
+      "Scope of the Initiative" : "Regional",
+      "rdf:type" : "schema:Organization",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Newton, MA",
+      "Schema:country" : "US"
+    },
+    {
       "Schema:sameAs" : null,
       "dc:identifier" : "673128",
       "schema:name" : "Fern Universitat in Hagen",
