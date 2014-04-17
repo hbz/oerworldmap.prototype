@@ -35,6 +35,13 @@
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://schema.org/description> "An attractive, easy-to-use site that for users to find, interact with, and learn from full video courses and lectures from the world’s leading scholars." .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://schema.org/email> "hello@academicearth.org" .
 <http://lobid.org/oer/e55737ff-cf62-441c-9eb0-ac7ecdb3c77f#!> <http://schema.org/url> <http://academicearth.org/> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/fc2a68df-444d-4739-aeff-1e6febf0c864#!> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673352" .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/name> "Unisul Virtual" .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/description> "UnisulVirtual is a private university located in the state of Santa Catarina in the south of Brazil. The motivation for UnisulVirtual to join the OER movement was to collaborate with the Open University (OU) of the United Kingdom in the provision of OER." .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://schema.org/email> "jucimara@unisul.br" .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Service> .
+<http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!> .
 <http://lobid.org/oer/077a65e4-fcc7-4632-bc12-beeb0bf88cbc> <http://xmlns.com/foaf/0.1/primaryTopic> <http://lobid.org/oer/077a65e4-fcc7-4632-bc12-beeb0bf88cbc#!> .
 <http://lobid.org/oer/077a65e4-fcc7-4632-bc12-beeb0bf88cbc#!> <http://purl.org/openorg/contact> <http://lobid.org/oer/4a257b36-179f-4cc7-8243-7306da5d1eee#!> .
 <http://lobid.org/oer/077a65e4-fcc7-4632-bc12-beeb0bf88cbc#!> <http://purl.org/dc/elements/1.1/identifier> "wsis673135" .

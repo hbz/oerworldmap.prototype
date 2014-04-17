@@ -1,5 +1,18 @@
 {
-  "initiatives" : [
+"initiatives" : [
+      {
+      "Schema:sameAs" : "http://lobid.org/oer/b9d9e002-645e-4700-800a-b6f2b71bc004#!",
+      "dc:identifier" : "673352",
+      "schema:name" : "Unisul Virtual",
+      "schema:description" : "UnisulVirtual is a private university located in the state of Santa Catarina in the south of Brazil. The motivation for UnisulVirtual to join the OER movement was to collaborate with the Open University (OU) of the United Kingdom in the provision of OER.",
+      "schema:url" : "http://www.unisul.br",
+      "schema:email" : "jucimara@unisul.br",
+      "Scope of the Initiative" : "National",
+      "rdf:type" : "schema:Service",
+      "schema:streetAddress" : null,
+      "schema:locality" : "Catalina",
+      "Schema:country" : "BR"
+    },
     {
       "Schema:sameAs" : "http://lobid.org/oer/88feda8d-73bc-4b26-84be-f39687c31a04#!",
       "dc:identifier" : "673275",
