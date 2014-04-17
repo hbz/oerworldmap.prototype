@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Copyright 2014 Felix Ostrowski
+ *
+ * This file is part of lde.
+ *
+ * lde is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * lde is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with lde.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 require_once __DIR__ . '/../lib/LibRDF/LibRDF/LibRDF.php';
 require_once __DIR__ . '/../lib/php-json-ld/jsonld.php';
 
@@ -37,7 +56,9 @@ function lde_entity_info() {
  *
  */
 function lde_menu() {
+
   $items = array();
+
   $items['admin/config/lde'] = array(
     'title' => 'Linked Data Entities',
     'description' => 'Settings for the Linked Data Entities module',
@@ -48,6 +69,7 @@ function lde_menu() {
     'file' => 'system.admin.inc',
     'file path' => drupal_get_path('module', 'system'),
   );
+
   $items['admin/config/lde/storage'] = array(
     'title' => 'Linked Data Storage',
     'description' => 'API Authentification',
@@ -55,7 +77,31 @@ function lde_menu() {
     'page arguments' => array('lde_configuration_form'),
     'access arguments' => array('administer site configuration'),
   );
+
+  $items['resource/%lde'] = array(
+    'title callback' => 'entity_label',
+    'title arguments' => array(LDE_ENTITY_TYPE, 1),
+    'page callback' => 'lde_resource_view',
+    'page arguments' => array(1),
+    'access callback' => true,
+  );
+
+  $items['resource/%lde/view'] = array(
+    'title' => 'View',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['resource/%lde/edit'] = array(
+    'title' => 'Edit',
+    'page callback' => 'lde_resource_edit',
+    'page arguments' => array(1),
+    'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
+
 }
 
 /**
@@ -140,6 +186,7 @@ function lde_form_submit($form, &$form_state) {
 
 function lde_form_submit_delete($form , &$form_state) {
   $entity = $form['#entity'];
+  lde_delete($entity);
   drupal_set_message(t('Resource %id has been deleted',
     array('%id' => $entity->identifier()))
   );
@@ -194,6 +241,20 @@ function lde_uuid_v4() {
     mt_rand(0, 0x3fff) | 0x8000,
     mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
   );
+}
+
+function lde_resource_view($entity) {
+  $view = entity_view(LDE_ENTITY_TYPE, array($entity));
+  $view['source'] = array(
+    '#type' => 'item',
+    '#markup' => l('View Source', $entity->identifier()),
+  );
+  return $view;
+}
+
+function lde_resource_edit($entity) {
+  drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
+  return entity_form(LDE_ENTITY_TYPE, $entity);
 }
 
 function lde_resource_uri($entity = null) {
@@ -316,10 +377,16 @@ function lde_from_rdf($entity, $rdf_string, $format = 'rdfxml') {
       $rdf_predicate = new LibRDF_URINode($predicate);
       $is_rel = (isset($field_mapping['type']) && $field_mapping['type'] == 'rel');
       foreach ($rdf_model->getTargets($rdf_subject, $rdf_predicate) as $value) {
-        if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
-          $wrapper->{$field_name} = $value->getValue();
+        if ($value instanceof LibRDF_LiteralNode) {
+          // Fix escaped unicode characters such as \u00E4
+          $raw_value = json_decode('"'.$value->getValue().'"');
         } else {
-          $wrapper->{$field_name}[] = $value->getValue();
+          $raw_value = $value->getValue();
+        }
+        if ($wrapper->{$field_name} instanceOf EntityValueWrapper) {
+          $wrapper->{$field_name} = $raw_value;
+        } else {
+          $wrapper->{$field_name}[] = $raw_value;
         }
         if ($is_rel && isset($field_info_instance['settings']['handler_settings']['target_bundles'])) {
           foreach ($field_info_instance['settings']['handler_settings']['target_bundles'] as $bundle_name => $bundle) {

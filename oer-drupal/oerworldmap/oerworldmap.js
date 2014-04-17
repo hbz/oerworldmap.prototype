@@ -1,17 +1,35 @@
+/**
+ * Copyright 2014 Felix Ostrowski
+ *
+ * This file is part of oerworldmap.
+ *
+ * oerworldmap is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * oerworldmap is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with oerworldmap.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 (function($) {
-  String.prototype.endsWith = function(suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
-  };
   $(document).ready(function() {
-    var map = L.map('oerworldmap').setView([0, 0], 1);
+    var map = L.map('oerworldmap').setView([0, 0], 2);
+    var user_lang = navigator.language || navigator.userLanguage;
 
     var type_facets = {
       'http://schema.org/Organization' : 'Organization',
       'http://schema.org/Person' : 'Person',
-      'http://schema.org/Service' : 'Service',
-      'http://schema.org/Project' : 'Project'
     };
+
     var country_facets = {};
+    var markers = [];
+    var proxy_url = Drupal.settings.oerworldmap.proxyUrl;
 
     var bounding_box = [
       map.getBounds().getNorth() + ',' + map.getBounds().getWest(),
@@ -19,11 +37,13 @@
       map.getBounds().getSouth() + ',' + map.getBounds().getEast(),
       map.getBounds().getSouth() + ',' + map.getBounds().getWest()
     ].join('+');
-    var requestUrl = "http://"
+
+    var request_url = "http://"
       + Drupal.settings.oerworldmap.apiUrl
       + "/oer?q=*"
-      + "&location="
-      + bounding_box
+      + "&t=http://schema.org/Person,http://schema.org/Organization"
+      + "&location=" + bounding_box
+      + "&size=1000"
       + "&callback=?";
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -34,19 +54,18 @@
     var buildControl = function (map) {
         var control = $('<form />');
 
-        var type_filter = $('<ul />');
-        type_filter.prepend($('<h3>Types</h3>'));
+        var type_filter = $('<fieldset><legend>Types</legend></fieldset>').append($('<ul />'));
         $.each(type_facets, function (uri, label) {
           var checkbox = $('<input type="checkbox" />').val(uri).bind('click', apply_filters);
-          type_filter.append($('<label><span>' + label + '</span></label>').prepend(checkbox));
+          type_filter.append($('<label><span style="padding-left: 0.5em;">' + label + '</span></label>').prepend(checkbox));
         });
         control.append(type_filter);
 
-        var country_filter = $('<ul style="columns: 3; -webkit-columns: 3; -moz-columns: 3;" />');
-        country_filter.prepend($('<h3>Countries</h3>'));
+        var country_filter = $('<fieldset><legend>Countries</legend></fieldset>')
+          .append($('<ul />'));
         $.each(country_facets, function (uri, label) {
           var checkbox = $('<input type="checkbox" />').val(uri).bind('click', apply_filters);
-          country_filter.append($('<label><span>' + label + '</span></label>').prepend(checkbox));
+          country_filter.append($('<label><span style="padding-left: 0.5em;">' + label + '</span></label>').prepend(checkbox));
         });
         control.append(country_filter);
 
@@ -79,19 +98,36 @@
         return control;
     }
 
-    var proxy_url = Drupal.settings.oerworldmap.proxyUrl;
-    var markers = [];
-    $.getJSON(requestUrl , function(result) {
+    var OerIcon = L.Icon.extend({
+      options: {
+          iconSize:     [26, 33],
+          iconAnchor:   [13, 33],
+      }
+    });
+    var organizationIcon = new OerIcon({
+      iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-organization.png'
+    });
+    var personIcon = new OerIcon({
+      iconUrl: Drupal.settings.oerworldmap.basePath + '/img/marker-icon-person.png'
+    });
+
+    $.getJSON(request_url , function(result) {
       $.each(result, function(i, match) {
         var marker = L.marker();
-        var popup = L.popup({'maxHeight': 500, 'maxWidth': 400, 'autoPan': false});
+        var popup = L.popup({'maxHeight': 500, 'maxWidth': 400});
         marker.bindPopup(popup);
         if (match['@graph']) $.each(match['@graph'], function (j, resource) {
           if (resource.latitude && resource.longitude) {
             var coordinates = new L.LatLng(resource.latitude[0], resource.longitude[0]);
             marker.setLatLng(coordinates);
           } else if (resource['@type'] in type_facets) {
+            if (resource['@type'] == "http://schema.org/Person") {
+              marker.setIcon(personIcon);
+            } else {
+              marker.setIcon(organizationIcon);
+            }
             marker.on('click', function(e) {
+              popup.setContent('<div class="ajax-progress"><div class="throbber">&nbsp;</div></div>');
               entity_render_view('lde', encodeURIComponent(encodeURIComponent(resource['@id']))).onload = function () {
                 if (this.status == 200) {
                   var entity_view = $(this.responseText);
@@ -103,29 +139,41 @@
             });
             marker.oer_type = resource['@type'];
           } else if (resource['addressCountry']) {
-            //FIXME: hardcoded trailing slash until proper uri is
-            //available
-            var country_uri = resource['addressCountry'][0] + '/';
+            var country_uri = resource['addressCountry'][0];
             if (!(country_uri in country_facets)) {
+              var label;
               $.get(proxy_url + country_uri, function(result) {
                 parser = new DOMParser();
                 data = parser.parseFromString( result, "text/xml" );
                 var rdf = $.rdf().load(data, {});
                 rdf.prefix('gn', 'http://www.geonames.org/ontology#');
                 rdf.where('<' + country_uri + '> gn:officialName ?name').each(function() {
-                  // Default labels have no language tag
-                  if (this.name.lang == undefined) {
-                    $('span:contains("' + country_uri + '")').text(this.name.value.toString());
-                    country_facets[country_uri] = this.name.value.toString();
+                  if (this.name.lang == user_lang) {
+                    label = this.name.value.substring(1, this.name.value.length - 1);
+                    return false;
                   }
                 });
+                if (!label) rdf.where('<' + country_uri + '> gn:alternateName ?name').each(function() {
+                  if (this.name.lang == user_lang) {
+                    label = this.name.value.substring(1, this.name.value.length - 1);
+                    return false;
+                  }
+                });
+                if (!label) rdf.where('<' + country_uri + '> gn:officialName ?name').each(function() {
+                  if (this.name.lang == undefined) {
+                    label = this.name.value;
+                    return false;
+                  }
+                });
+                $('span:contains("' + country_uri + '")').text(label);
+                country_facets[country_uri] = label;
               });
               country_facets[country_uri] = country_uri;
             }
             marker.oer_country = country_uri;
           }
         });
-        if (marker.getLatLng()) {
+        if (marker.getLatLng() && marker.oer_type) {
           marker.addTo(map);
           markers.push(marker);
         }

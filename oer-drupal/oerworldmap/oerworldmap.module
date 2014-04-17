@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Copyright 2014 Felix Ostrowski
+ *
+ * This file is part of oerworldmap.
+ *
+ * oerworldmap is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * oerworldmap is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with oerworldmap.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 $ap_uri = 'file://' . __DIR__ .  '/../../oerap.ttl#ap';
 ApplicationProfile::add(
   $ap_uri, 'turtle', LDE_ENTITY_TYPE, 'ldf_field_type'
@@ -16,10 +35,12 @@ function oerworldmap_menu() {
     'access callback' => true,
   );
 
-  $items['oerworldmap/update'] = array(
-    'title' => 'Reload application profile',
-    'page callback' => 'oerworldmap_ap_update',
+  $items['oerworldmap/view'] = array(
+    'title' => 'OER World Map',
+    'page callback' => 'oerworldmap',
     'access callback' => true,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
   );
 
   $items['oerworldmap/search'] = array(
@@ -27,12 +48,14 @@ function oerworldmap_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('oerworldmap_search'),
     'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['oerworldmap/add'] = array(
-    'title' => 'Contribute to the OER World Map',
-    'page callback' => 'oerworldmap',
+  $items['oerworldmap/about'] = array(
+    'title' => 'About',
+    'page callback' => 'oerworldmap_about',
     'access callback' => true,
+    'type' => MENU_LOCAL_TASK,
   );
 
   $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
@@ -42,6 +65,7 @@ function oerworldmap_menu() {
       'page callback' => 'oerworldmap_resource_add',
       'page arguments' => array($bundle),
       'access callback' => true,
+      'type' => MENU_LOCAL_TASK,
     );
   }
 
@@ -51,33 +75,12 @@ function oerworldmap_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['oerworldmap/resource/%lde'] = array(
-    'title callback' => 'entity_label',
-    'title arguments' => array(LDE_ENTITY_TYPE, 2),
-    'page callback' => 'oerworldmap_resource_view',
-    'page arguments' => array(2),
-    'access callback' => true,
-  );
-
-  $items['oerworldmap/resource/%lde/view'] = array(
-    'title' => 'View',
-    'weight' => -10,
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-
-  $items['oerworldmap/resource/%lde/edit'] = array(
-    'title' => 'Edit',
-    'page callback' => 'oerworldmap_resource_edit',
-    'page arguments' => array(2),
-    'access callback' => true,
-    'type' => MENU_LOCAL_TASK,
-  );
-
   return $items;
 
 }
 
 function oerworldmap() {
+  drupal_set_title('');
   drupal_add_js(
     drupal_get_path('module', 'oerworldmap') . '/jquery.rdfquery.core-1.0.js'
   );
@@ -92,6 +95,7 @@ function oerworldmap() {
   );
   drupal_add_js(array('oerworldmap' => array(
     'apiUrl' => variable_get('lde_api_host'),
+    'basePath' => base_path() . drupal_get_path('module', 'oerworldmap'),
     'proxyUrl' => base_path() . 'oerworldmap/proxy?uri='
   )), 'setting');
   drupal_add_js(
@@ -106,48 +110,62 @@ function oerworldmap() {
   );
   return array(
     '#type' => 'markup',
-    '#markup' => '<div id="oerworldmap" style="height: 400px; width: 100%; border: 1px solid black;"></div>',
+    '#markup' => '<div id="oerworldmap" style="height: 500px; width: 100%;"></div>',
   );
-}
-
-function oerworldmap_ap_update() {
-  $ap = ApplicationProfile::get(LDE_ENTITY_TYPE);
-  $ap->update();
-  drupal_set_message("Application profile reloaded");
-  return array();
 }
 
 function oerworldmap_search($form, &$form_state) {
 
   $form['#method'] = 'GET';
 
+  $term = isset($_GET['term']) ? $_GET['term'] : null;
+  $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+
   $search_form = array(
     '#type' => 'textfield',
-    '#name' => 'term',
+    '#default_value' => isset($term) ? $term : '',
   );
 
   $search_button = array(
     '#type' => 'submit',
-    '#name' => 'search',
     '#default_value' => 'Search',
   );
 
-  $form[] = $search_form;
-  $form[] = $search_button;
+  $type_filter = array(
+    '#type' => 'checkboxes',
+    '#options' => array(
+      'Organization' => 'Organization',
+      'Person' => 'Person',
+      'Service' => 'Service',
+      'Project' => 'Project',
+    ),
+    '#title' => t('Restrict results to these types'),
+    '#default_value' => isset($filter) ? array_keys($filter) : array(),
+  );
 
-  $term = isset($_GET['term']) ? $_GET['term'] : null;
+  $form['term'] = $search_form;
+  $form['submit'] = $search_button;
+  $form['filter'] = $type_filter;
+
   if (!isset($term) || '' == $term) return $form;
 
   $endpoint_uri = 'http://' . variable_get('lde_api_host') . '/oer';
   $endpoints = ApplicationProfile::get(LDE_ENTITY_TYPE)->getEndpoints();
   $endpoint_params = $endpoints[$endpoint_uri];
+
   $query = new LinkedDataEntityFieldQuery();
   $query->addMetadata('endpoint', $endpoint_uri);
   $query->addMetadata('term', $term);
   foreach ($endpoint_params as $param => $value) {
     $query->addMetadata($param, $value);
   }
-  $query->entityCondition('bundle', array('Organization', 'Service', 'Person', 'Project'));
+
+  if (isset($filter)) {
+    $query->entityCondition('bundle', array_keys($filter));
+  } else {
+    $query->entityCondition('bundle', array('Organization', 'Service', 'Person', 'Project'));
+  }
+
   $results = $query->execute();
   if ($results) foreach ($results as $result) {
     $view = entity_view(LDE_ENTITY_TYPE, array($result), 'full', null, false);
@@ -156,22 +174,37 @@ function oerworldmap_search($form, &$form_state) {
     );
     $form[] = $view;
   }
+
+  // Pagination
+  $page = pager_find_page();
+  $prev_link = l('<<', 'oerworldmap/search', array('query' => array(
+    'page' => $page - 1,
+    'term' => $term,
+    'filter' => $filter,
+  )));
+  $next_link = l('>>', 'oerworldmap/search', array('query' => array(
+    'page' => $page + 1,
+    'term' => $term,
+    'filter' => $filter,
+  )));
+  $pager = ($page > 0) ? "$prev_link $next_link" : $next_link;
+
+  $form[] = array(
+    '#type' => 'item',
+    '#markup' => $pager,
+  );
+
   return $form;
+}
+
+function oerworldmap_about() {
+  return array();
 }
 
 function oerworldmap_resource_add($type) {
   $entity = entity_get_controller(LDE_ENTITY_TYPE)->create(
     array('type' => $type, 'uri' => 'new')
   );
-  return entity_form(LDE_ENTITY_TYPE, $entity);
-}
-
-function oerworldmap_resource_view($entity) {
-  return entity_view(LDE_ENTITY_TYPE, array($entity));
-}
-
-function oerworldmap_resource_edit($entity) {
-  drupal_set_title(entity_label(LDE_ENTITY_TYPE, $entity));
   return entity_form(LDE_ENTITY_TYPE, $entity);
 }
 
