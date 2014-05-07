@@ -1,6 +1,6 @@
 language: java
 env:
-  - PLAY_VERSION=2.2.1
+  - PLAY_VERSION=2.2.2
 jdk: oraclejdk7
 before_script:
   - wget http://downloads.typesafe.com/play/${PLAY_VERSION}/play-${PLAY_VERSION}.zip
