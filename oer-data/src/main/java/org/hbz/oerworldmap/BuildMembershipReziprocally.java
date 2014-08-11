@@ -1,4 +1,4 @@
-/* Copyright 2013 Pascal Christoph, hbz.
+/* Copyright 2013, 2014 Pascal Christoph, hbz.
  * Licensed under the Eclipse Public License 1.0 */
 
 package org.hbz.oerworldmap;
@@ -23,11 +23,13 @@ import java.util.Scanner;
 import org.apache.commons.io.IOUtils;
 
 /**
- * Adds some reziprocal data to consortia.
+ * Adds some reziprocal data to consortia. Used by {@link Transform}. Not to be
+ * confused with createOcwcDescription.sh which builds essential data describing
+ * OCWC itself.
  * 
  * @author Pascal Christoph (dr0i)
  */
-public class BuildMembershipReziprocally {
+abstract class BuildMembershipReziprocally {
 	static HashMap<String, String> concordance = new HashMap<String, String>();
 	Map<String, StringBuilder> data = new HashMap<String, StringBuilder>();
 	private static String memberOfPattern = "<http://schema.org/memberOf> <http://lobid.org/oer/";

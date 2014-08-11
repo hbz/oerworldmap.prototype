@@ -21,6 +21,8 @@ import com.google.common.io.Files;
 /**
  * Run as Java application to transform the full data. <br/>
  * Static methods are also used by the tests.
+ * 
+ * * @author Pascal Christoph (dr0i)
  */
 public class Transform {
 
@@ -28,13 +30,14 @@ public class Transform {
 	static final String ORGANIZATION_ID = "organizationId";
 	private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
 	static final String OCWC_PATH = "ocwc/";
-	static final String TARGET_PATH = "tmp/";
+	static final String TARGET_PATH = "output/";
 	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
 	static final String MORPH_OCWC_BUILD_URL = "morph-ocwConsortiumMembers-buildGeoOsmUrl.xml";
 	static final String MORPH_OCWC_LOOKUP = "morph-ocwConsortiumMembers-osm.xml";
 	final static String WSIS_PATH = "wsis/";
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
+		FileUtils.forceMkdir(new File(TARGET_PATH));
 		FileUtils.deleteQuietly(new File(TARGET_PATH));
 		// ocwc:
 		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
@@ -45,16 +48,16 @@ public class Transform {
 		dataInDirectory("morph-ocwConsortiumMembersServices-to-rdf.xml", TARGET_PATH, OCWC_PATH
 				+ ORGANIZATION_ID);
 		BuildMembershipReziprocally.main();
-		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", "tmp/", MORPH_OCWC_BUILD_URL,
+		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", TARGET_PATH, MORPH_OCWC_BUILD_URL,
 				MORPH_OCWC_LOOKUP);
 		// wsis:
 		Transform.dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml", TARGET_PATH, WSIS_PATH
 				+ "wsis-initiative-data.json");
 		Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH, WSIS_PATH
 				+ "wsis-person-data.json");
-		geoWithHttpLookup(WSIS_PATH + "wsis-initiative-data.json", "wsis/geo", "tmp/", WSIS_PATH
-				+ "morph-WsisInitiativesJson2GeonamesUrl.xml", WSIS_PATH
-				+ "morph-wsis-geonames-lookup.xml");
+		geoWithHttpLookup(WSIS_PATH + "wsis-initiative-data.json", "wsis/geo", TARGET_PATH,
+				WSIS_PATH + "morph-WsisInitiativesJson2GeonamesUrl.xml", WSIS_PATH
+						+ "morph-wsis-geonames-lookup.xml");
 		Files.copy(new File("doc/scripts/additionalDataOcwcItself.ntriple.template"), new File(
 				TARGET_PATH + OCWC_PATH, "ocwc.nt"));
 	}
