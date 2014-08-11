@@ -37,8 +37,8 @@ public class Transform {
 	final static String WSIS_PATH = "wsis/";
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		FileUtils.forceMkdir(new File(TARGET_PATH));
 		FileUtils.deleteQuietly(new File(TARGET_PATH));
+		FileUtils.forceMkdir(new File(TARGET_PATH));
 		// ocwc:
 		dataInDirectory(MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML, TARGET_PATH, OCWC_PATH
 				+ CONSORTIUM_MEMBERS);
