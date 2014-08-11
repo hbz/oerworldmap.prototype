@@ -243,7 +243,9 @@
 					<!-- <data source="@addressId"/> -->
 				</none>
 			</if>
-			<data source="schema:url" name="url"/>
+			<data source="schema:url" name="url">
+				<urlencode></urlencode>
+			</data>
 			<data source="@subjectUri"/>
 		</combine>
 		<combine name="$[schema:]description" value="${description}">
