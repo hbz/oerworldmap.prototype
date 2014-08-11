@@ -2,9 +2,9 @@
 # builds one ntriple file using all the single ntriple files
 # using e.g. for building the test file
 
-rm  ../../tmp/ocwc/ocwcTestResult.nt
+rm  ../../output/ocwc/ocwcTestResult.nt
 rm ocw_neu.nt
-for i in $(find ../../tmp/ocwc -name "*.nt"); do
+for i in $(find ../../output/ocwc -name "*.nt"); do
   cat $i >> ocw_neu.nt.tmp
 done
 sort -u ocw_neu.nt.tmp > ocw_neu.nt

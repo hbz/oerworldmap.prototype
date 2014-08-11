@@ -6,4 +6,4 @@ cp additionalDataOcwcItself.ntriple.template $PATH_MAIN_RESOURCES/additionalData
 # validation
 rapper -i ntriples $PATH_MAIN_RESOURCES/additionalData.nt
 
-cp  $PATH_MAIN_RESOURCES/additionalData.nt ../../tmp/ocwc/
+cp  $PATH_MAIN_RESOURCES/additionalData.nt ../../output/ocwc/
