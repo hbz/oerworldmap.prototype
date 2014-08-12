@@ -19,7 +19,7 @@ import org.lobid.lodmill.Triples2RdfModel;
 import com.google.common.io.Files;
 
 /**
- * Run as Java application to transform the full data. <br/>
+ * Run as Java application to transform ocwc and wsis data. <br/>
  * Static methods are also used by the tests.
  * 
  * * @author Pascal Christoph (dr0i)
@@ -28,10 +28,10 @@ public class Transform {
 
 	private static final String GEO_LIST = "geoList";
 	static final String ORGANIZATION_ID = "organizationId";
-	private static final String CONSORTIUM_MEMBERS = "consortiumMembers";
+	static final String CONSORTIUM_MEMBERS = "consortiumMembers";
 	static final String OCWC_PATH = "ocwc/";
 	static final String TARGET_PATH = "output/";
-	private static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
+	static final String MORPH_OCW_CONSORTIUM_MEMBERS_TO_RDF_XML = "morph-ocwConsortiumMembers-to-rdf.xml";
 	static final String MORPH_OCWC_BUILD_URL = "morph-ocwConsortiumMembers-buildGeoOsmUrl.xml";
 	static final String MORPH_OCWC_LOOKUP = "morph-ocwConsortiumMembers-osm.xml";
 	final static String WSIS_PATH = "wsis/";
@@ -51,9 +51,9 @@ public class Transform {
 		geoWithHttpLookup("ocwc/geoList", "ocwc/geo", TARGET_PATH, MORPH_OCWC_BUILD_URL,
 				MORPH_OCWC_LOOKUP);
 		// wsis:
-		Transform.dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml", TARGET_PATH, WSIS_PATH
+		dataInDirectory("wsis/morph-WsisInitiativesJson2ld.xml", TARGET_PATH, WSIS_PATH
 				+ "wsis-initiative-data.json");
-		Transform.dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH, WSIS_PATH
+		dataInDirectory("wsis/morph-wsisPersons-to-rdf.xml", TARGET_PATH, WSIS_PATH
 				+ "wsis-person-data.json");
 		geoWithHttpLookup(WSIS_PATH + "wsis-initiative-data.json", "wsis/geo", TARGET_PATH,
 				WSIS_PATH + "morph-WsisInitiativesJson2GeonamesUrl.xml", WSIS_PATH
@@ -68,7 +68,7 @@ public class Transform {
 		final FileOpener opener = new FileOpener();
 		final JsonDecoder jsonDecoder = new JsonDecoder();
 		final Metamorph morph = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource(morphFile).getFile());
+				.getResourceAsStream(morphFile));
 		final PipeEncodeTriples encoder = new PipeEncodeTriples();
 		encoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2model = new Triples2RdfModel();
@@ -82,8 +82,7 @@ public class Transform {
 		opener.setReceiver(jsonDecoder);
 		jsonDecoder.setReceiver(morph).setReceiver(streamTee);
 		dirReader.setReceiver(opener);
-		dirReader.process((new File(Thread.currentThread().getContextClassLoader()
-				.getResource(pathToDirectory).toURI())).getAbsolutePath());
+		dirReader.process("src/main/resources/" + pathToDirectory);
 		opener.closeStream();
 
 	}
@@ -106,9 +105,9 @@ public class Transform {
 		final JsonDecoder jsonDecoder = new JsonDecoder();
 		final JsonDecoder jsonDecoder1 = new JsonDecoder();
 		final Metamorph morphGeo = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource(morphBuildUrl).getFile());
+				.getResourceAsStream(morphBuildUrl));
 		final Metamorph morphOSM = new Metamorph(Thread.currentThread().getContextClassLoader()
-				.getResource(morphLookupResult).getFile());
+				.getResourceAsStream(morphLookupResult));
 		final PipeEncodeTriples geoEncoder = new PipeEncodeTriples();
 		geoEncoder.setStoreUrnAsUri("true");
 		final Triples2RdfModel triple2modelGeo = new Triples2RdfModel();
@@ -128,9 +127,7 @@ public class Transform {
 		opener.setReceiver(jsonDecoder);
 		jsonDecoder.setReceiver(morphGeo).setReceiver(streamTee);
 		dirReader.setReceiver(opener);
-		dirReader.process((new File(Thread.currentThread().getContextClassLoader()
-				.getResource(ocwcGeoSource).toURI())).getAbsolutePath());
-		opener.closeStream();
+		dirReader.process("src/main/resources/" + ocwcGeoSource);
 	}
 
 	private static RdfModelFileWriter createWriter(final String PATH) {
