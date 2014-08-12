@@ -1,6 +1,7 @@
 h1. Data transformation
 
-To install and index all the data, launch the "start script":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/doc/scripts/createDataAndIndexAll.sh.
+To install and index all the data, launch the "start script":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/doc/scripts/startCreateDataAndIndexAll.sh.
 
-If you are curious how some of the data looks like, take a look at the "output of the tests (*TestResult.nt)":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/resources/ocwc. However, there is is more to do (look at the start script mentioned at the top).
+If you are curious how some of the data looks like, take a look at the "output of the tests (*TestResult.nt)":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/resources/ocwc.
+
 The "java unit tests":https://github.com/hbz/oerworldmap/tree/master/oer-data/src/test/java shows how to transform most of the data.
