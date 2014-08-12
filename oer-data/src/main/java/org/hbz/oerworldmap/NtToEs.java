@@ -76,7 +76,7 @@ public class NtToEs {
 					+ "as a TSV file that maps file names (w/o "
 					+ "extensions) to IDs to be used for ES. Else the "
 					+ "file names (w/o extensions) are used.");
-			args = new String[] { "tmp", "src/main/resources/internalId2uuid.tsv" };
+			args = new String[] { "output", "src/main/resources/internalId2uuid.tsv" };
 			System.out.println("Using defaults: " + Arrays.asList(args));
 		}
 		if (args.length == 2)
