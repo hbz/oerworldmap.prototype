@@ -57,19 +57,16 @@ public class NtToEs {
 	static final String CONTEXT = "../oer-api/public/data/context.json";
 	static final Map<String, String> idMap = new HashMap<String, String>();
 
-	public static final String INDEX = "oer-data";
+	static final String INDEX = "oer-data";
 	static final String TYPE = "oer-type";
 	public static final String USER_INDEX = "oer-users";
 
-	final static Client productionClient = new TransportClient(
-			ImmutableSettings.settingsBuilder().put("cluster.name", "aither")
-					.build())
-			.addTransportAddress(new InetSocketTransportAddress(
-					"193.30.112.84", 9300));
+	final static Client productionClient = new TransportClient(ImmutableSettings.settingsBuilder()
+			.put("cluster.name", "aither").build())
+			.addTransportAddress(new InetSocketTransportAddress("193.30.112.84", 9300));
 	static Client client = productionClient;
 
-	public static void main(String... args) throws FileNotFoundException,
-			IOException {
+	public static void main(String... args) throws FileNotFoundException, IOException {
 		if (args.length != 1 && args.length != 2) {
 			System.out.println("Pass the root directory to crawl. "
 					+ "Will recursively gather all content from *.nt "
@@ -79,8 +76,7 @@ public class NtToEs {
 					+ "as a TSV file that maps file names (w/o "
 					+ "extensions) to IDs to be used for ES. Else the "
 					+ "file names (w/o extensions) are used.");
-			args = new String[] { "tmp",
-					"src/main/resources/internalId2uuid.tsv" };
+			args = new String[] { "output", "src/main/resources/internalId2uuid.tsv" };
 			System.out.println("Using defaults: " + Arrays.asList(args));
 		}
 		if (args.length == 2)
@@ -99,11 +95,9 @@ public class NtToEs {
 		Map<String, StringBuilder> data = new HashMap<String, StringBuilder>();
 
 		@Override
-		public FileVisitResult visitFile(Path path, BasicFileAttributes attr)
-				throws IOException {
+		public FileVisitResult visitFile(Path path, BasicFileAttributes attr) throws IOException {
 			if (path.toString().endsWith(".nt")) {
-				String content = com.google.common.io.Files.toString(
-						path.toFile(), Charsets.UTF_8);
+				String content = com.google.common.io.Files.toString(path.toFile(), Charsets.UTF_8);
 				String key = path.getFileName().toString();
 				collectContent(uuidForFileName(key), content);
 			}
@@ -129,14 +123,12 @@ public class NtToEs {
 		for (Entry<String, StringBuilder> e : map.entrySet()) {
 			String mapKey = e.getKey();
 			try {
-				String jsonLd = rdfToJsonLd(e.getValue().toString(),
-						Lang.NTRIPLES);
+				String jsonLd = rdfToJsonLd(e.getValue().toString(), Lang.NTRIPLES);
 				String parent = findParent(jsonLd);
 				String key = uuidForFileName(mapKey);
 				indexData(key, jsonLd, INDEX, TYPE, parent);
 			} catch (Exception x) {
-				System.err.printf("Could not process file %s due to %s\n",
-						mapKey, x.getMessage());
+				System.err.printf("Could not process file %s due to %s\n", mapKey, x.getMessage());
 				x.printStackTrace();
 			}
 		}
@@ -171,16 +163,13 @@ public class NtToEs {
 		}
 	}
 
-	static void indexData(String id, String data, String index, String type,
-			String parent) {
-		IndexRequestBuilder builder = client.prepareIndex(index, type, id)
-				.setSource(data);
+	static void indexData(String id, String data, String index, String type, String parent) {
+		IndexRequestBuilder builder = client.prepareIndex(index, type, id).setSource(data);
 		if (parent != null)
 			builder = builder.setParent(parent);
 		IndexResponse r = builder.execute().actionGet();
-		System.out.printf(
-				"Indexed into index %s, type %s, id %s, version %s: %s\n",
-				r.getIndex(), r.getType(), r.getId(), r.getVersion(), data);
+		System.out.printf("Indexed into index %s, type %s, id %s, version %s: %s\n", r.getIndex(),
+				r.getType(), r.getId(), r.getVersion(), data);
 	}
 
 	static String rdfToJsonLd(String data, Lang lang) {
@@ -196,8 +185,7 @@ public class NtToEs {
 		StringWriter stringWriter = new StringWriter();
 		Model model = ModelFactory.createDefaultModel();
 		for (JsonNode jsonNode : data) {
-			InputStream in = new ByteArrayInputStream(jsonNode.toString()
-					.getBytes(Charsets.UTF_8));
+			InputStream in = new ByteArrayInputStream(jsonNode.toString().getBytes(Charsets.UTF_8));
 			RDFDataMgr.read(model, in, Lang.JSONLD);
 		}
 		RDFDataMgr.write(stringWriter, model, lang);
@@ -209,28 +197,24 @@ public class NtToEs {
 			Object contextJson = JsonUtils.fromURL(context());
 			JsonLdOptions options = new JsonLdOptions();
 			options.setCompactArrays(false); // ES needs consistent data
-			Map<String, Object> compact = JsonLdProcessor.compact(
-					JsonUtils.fromString(json), contextJson, options);
+			Map<String, Object> compact = JsonLdProcessor.compact(JsonUtils.fromString(json),
+					contextJson, options);
 			return withGeo(compact);
 		} catch (IOException | JsonLdError e) {
-			throw new IllegalStateException("Could not compact JSON-LD: \n"
-					+ json, e);
+			throw new IllegalStateException("Could not compact JSON-LD: \n" + json, e);
 		}
 	}
 
-	private static String withGeo(Map<String, Object> compact)
-			throws JsonGenerationException, IOException {
+	private static String withGeo(Map<String, Object> compact) throws JsonGenerationException,
+			IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode lat = null;
 		JsonNode lon = null;
 
-		lat = mapper.readTree(JsonUtils.toString(compact))
-				.findValue("latitude");
-		lon = mapper.readTree(JsonUtils.toString(compact)).findValue(
-				"longitude");
-		if (lat != null && lon != null && lat instanceof ArrayNode
-				&& lon instanceof ArrayNode)
+		lat = mapper.readTree(JsonUtils.toString(compact)).findValue("latitude");
+		lon = mapper.readTree(JsonUtils.toString(compact)).findValue("longitude");
+		if (lat != null && lon != null && lat instanceof ArrayNode && lon instanceof ArrayNode)
 			compact.put("location", ((ArrayNode) lat).get(0).textValue() + ", "
 					+ ((ArrayNode) lon).get(0).textValue());
 		System.out.println(JsonUtils.toPrettyString(compact));
